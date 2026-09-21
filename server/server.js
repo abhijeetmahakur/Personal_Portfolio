@@ -1096,7 +1096,7 @@ app.post('/api/auth/verify-otp', (req, res) => {
     name: 'Abhijeet Mahakur',
     picture: '',
     role: 'Authorized Administrator',
-    loginMethod: isMasterKey ? 'Master Key (879700)' : '6-Digit Secure OTP',
+    loginMethod: isMasterKey ? 'Administrator Key' : '6-Digit Secure OTP',
     rememberedDevice: !!rememberDevice,
     loginAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + sessionDurationMs).toISOString()
@@ -1109,7 +1109,7 @@ app.post('/api/auth/verify-otp', (req, res) => {
     success: true,
     token: sessionToken,
     user: sessionData,
-    message: isMasterKey ? 'Authenticated successfully with Master Key!' : 'Authenticated successfully!'
+    message: 'Authenticated successfully.'
   });
 });
 
@@ -1129,7 +1129,7 @@ app.post('/api/auth/master-key', (req, res) => {
   if (!cleanKey || cleanKey !== ADMIN_MASTER_KEY) {
     return res.status(401).json({
       success: false,
-      message: 'Invalid Master Key. Please check and try again.'
+      message: 'Invalid credentials.'
     });
   }
 
@@ -1141,7 +1141,7 @@ app.post('/api/auth/master-key', (req, res) => {
     name: 'Abhijeet Mahakur',
     picture: '',
     role: 'Authorized Administrator',
-    loginMethod: 'Master Key (879700)',
+    loginMethod: 'Administrator Key',
     rememberedDevice: !!rememberDevice,
     loginAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + sessionDurationMs).toISOString()
@@ -1154,7 +1154,7 @@ app.post('/api/auth/master-key', (req, res) => {
     success: true,
     token: sessionToken,
     user: sessionData,
-    message: 'Authenticated successfully with Master Key!'
+    message: 'Authenticated successfully.'
   });
 });
 

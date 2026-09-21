@@ -265,18 +265,18 @@ function renderAuthScreen(initialError = '') {
 
         <div class="auth-divider"><span>OR</span></div>
 
-        <!-- METHOD 3: LOGIN WITH MASTER KEY -->
+        <!-- METHOD 3: ADMINISTRATOR ACCESS KEY -->
         <div class="auth-method-card" id="method-master-key-card">
           <div class="auth-method-header">
             <span class="auth-badge" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.3);">Method 3</span>
-            <h4>Login with Master Key</h4>
+            <h4>Administrator Access Key</h4>
           </div>
-          <p class="auth-method-info">Emergency bypass: Enter Master Key <strong>879700</strong> to instantly access Admin Studio.</p>
+          <p class="auth-method-info">Authorized access: Authenticate directly with your administrator security key.</p>
 
           <div class="admin-field" style="text-align: left; margin-bottom: 8px;">
-            <label class="admin-label">ADMINISTRATOR MASTER KEY</label>
+            <label class="admin-label">ADMINISTRATOR KEY</label>
             <div style="position: relative;">
-              <input type="password" id="auth-master-key" class="admin-input otp-code-input" placeholder="Enter Master Key (879700)" autocomplete="current-password" style="padding-right: 42px;" />
+              <input type="password" id="auth-master-key" class="admin-input" placeholder="Enter Administrator Key" autocomplete="current-password" style="padding-right: 42px;" />
               <button type="button" id="btn-toggle-master-key" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 1.1rem; line-height: 1;" title="Show/Hide Key">👁️</button>
             </div>
           </div>
@@ -287,7 +287,7 @@ function renderAuthScreen(initialError = '') {
           </div>
 
           <button type="button" class="btn-quick-login" id="btn-login-master-key" style="background: linear-gradient(135deg, #9333ea, #6366f1); border-color: rgba(168, 85, 247, 0.5);">
-            🔑 Login with Master Key
+            🔐 Authenticate with Key
           </button>
         </div>
       </div>
@@ -647,14 +647,14 @@ async function handleLoginMasterKey() {
   const btn = document.getElementById('btn-login-master-key');
 
   if (!key) {
-    showToast('Please enter the Master Key.', true);
+    showToast('Please enter your administrator key.', true);
     input?.focus();
     return;
   }
 
   btn.disabled = true;
   const originalHtml = btn.innerHTML;
-  btn.innerHTML = '<span>⚡ Verifying Master Key...</span>';
+  btn.innerHTML = '<span>⚡ Verifying credentials...</span>';
 
   try {
     let res = await fetch('/api/auth/master-key', {
@@ -687,16 +687,16 @@ async function handleLoginMasterKey() {
 
     if (data.success && data.token) {
       setStoredToken(data.token);
-      showToast('✓ Authenticated successfully with Master Key!');
+      showToast('Authenticated successfully as Administrator!');
       await loadAndRenderStudio();
     } else {
-      showToast(data.message || 'Invalid Master Key. Access denied.', true);
+      showToast(data.message || 'Invalid credentials.', true);
       btn.disabled = false;
       btn.innerHTML = originalHtml;
       input?.focus();
     }
   } catch (err) {
-    showToast('Error validating Master Key: ' + err.message, true);
+    showToast('Invalid credentials.', true);
     btn.disabled = false;
     btn.innerHTML = originalHtml;
   }
