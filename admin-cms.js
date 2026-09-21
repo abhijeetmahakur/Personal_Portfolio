@@ -464,6 +464,10 @@ function listenForOAuthMessages() {
   window.addEventListener('message', async (e) => {
     if (e.data && e.data.type === 'GOOGLE_AUTH_SUCCESS') {
       const { token, user } = e.data;
+      if (user && user.email && user.email.trim().toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+        showToast(`Access Denied: ${user.email} is not authorized. Access restricted exclusively to ${ADMIN_EMAIL}.`, true);
+        return;
+      }
       if (token) {
         setStoredToken(token);
         showToast(`Welcome back, ${user?.name || 'Abhijeet'}!`);

@@ -71,21 +71,19 @@ const RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL;
 const FRONTEND_ORIGIN = process.env.VITE_DEV_ORIGIN || 
   (RENDER_EXTERNAL_URL ? RENDER_EXTERNAL_URL : 
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:5173'));
-const AUTHORIZED_GMAIL = process.env.AUTHORIZED_ADMIN_EMAIL || 'abhijeetmahakur67@gmail.com';
-const PRIMARY_ADMIN_EMAIL = AUTHORIZED_GMAIL;
+const AUTHORIZED_GMAIL = 'abhijeetmahakur67@gmail.com';
+const PRIMARY_ADMIN_EMAIL = 'abhijeetmahakur67@gmail.com';
 const AUTHORIZED_ADMIN_PHONE = (process.env.AUTHORIZED_ADMIN_PHONE || '8797009790').replace(/\D/g, '').slice(-10);
 
-// Authorized administrator email whitelist
+// Authorized administrator email whitelist - EXCLUSIVELY abhijeetmahakur67@gmail.com
 const AUTHORIZED_ADMIN_EMAILS = [
-  AUTHORIZED_GMAIL.trim().toLowerCase(),
-  'abhijeetmahakur67@gmail.com',
-  'abhijeetmahakur69@gmail.com'
+  'abhijeetmahakur67@gmail.com'
 ];
 
-// Strict Whitelist: ONLY authorized emails are permitted to access the Admin Studio
+// Strict Whitelist: ONLY abhijeetmahakur67@gmail.com is permitted to access the Admin Studio
 function isAuthorizedAdminEmail(email) {
   if (!email || typeof email !== 'string') return false;
-  return AUTHORIZED_ADMIN_EMAILS.includes(email.trim().toLowerCase());
+  return email.trim().toLowerCase() === 'abhijeetmahakur67@gmail.com';
 }
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
@@ -127,10 +125,16 @@ function loadSessions() {
     try {
       const data = JSON.parse(fs.readFileSync(SESSIONS_FILE, 'utf8'));
       const now = Date.now();
+      let hasPurged = false;
       for (const [k, v] of Object.entries(data)) {
-        if (v && v.expiresAt && new Date(v.expiresAt).getTime() > now) {
+        if (v && v.expiresAt && new Date(v.expiresAt).getTime() > now && isAuthorizedAdminEmail(v.email)) {
           activeSessions.set(k, v);
+        } else {
+          hasPurged = true;
         }
+      }
+      if (hasPurged) {
+        saveSessions();
       }
       console.log(`[AUTH] Loaded ${activeSessions.size} active sessions from disk.`);
     } catch (e) {
@@ -635,7 +639,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
   const inputEmail = req.body && typeof req.body.email === 'string' ? req.body.email.trim().toLowerCase() : '';
   const normalizedEmail = inputEmail || authorizedPrimary;
 
-  // Strict Whitelist Enforcement: Ensure target is exclusively an authorized admin account
+  // Strict Whitelist Enforcement: Ensure target is exclusively abhijeetmahakur67@gmail.com
   if (!isAuthorizedAdminEmail(normalizedEmail)) {
     const store = getStore();
     if (!store.syncLogs) store.syncLogs = [];
@@ -643,14 +647,14 @@ app.post('/api/auth/send-otp', async (req, res) => {
       id: 'log-sec-otp-' + Date.now(),
       service: 'Security / OTP Auth',
       status: 'DENIED',
-      message: `Blocked OTP request for unauthorized email ${normalizedEmail}. Access restricted to authorized administrator accounts.`,
+      message: `Blocked OTP request for unauthorized email ${normalizedEmail}. Access restricted exclusively to abhijeetmahakur67@gmail.com.`,
       timestamp: new Date().toISOString()
     });
     saveStore(store);
 
     return res.status(403).json({
       success: false,
-      message: 'Access Denied — This account is not authorized for Admin access.'
+      message: 'Access Denied — Access is restricted exclusively to abhijeetmahakur67@gmail.com.'
     });
   }
 
@@ -997,7 +1001,7 @@ app.post('/api/auth/verify-otp', (req, res) => {
 
   const normalizedEmail = email.trim().toLowerCase();
 
-  // Strict Whitelist Enforcement
+  // Strict Whitelist Enforcement: Exclusively abhijeetmahakur67@gmail.com
   if (!isAuthorizedAdminEmail(normalizedEmail)) {
     const store = getStore();
     if (!store.syncLogs) store.syncLogs = [];
@@ -1005,14 +1009,14 @@ app.post('/api/auth/verify-otp', (req, res) => {
       id: 'log-sec-verify-' + Date.now(),
       service: 'Security / OTP Verify',
       status: 'DENIED',
-      message: `Blocked unauthorized OTP verification attempt for ${email}. Access restricted to authorized administrator accounts.`,
+      message: `Blocked unauthorized OTP verification attempt for ${email}. Access restricted exclusively to abhijeetmahakur67@gmail.com.`,
       timestamp: new Date().toISOString()
     });
     saveStore(store);
 
     return res.status(403).json({
       success: false,
-      message: 'Access Denied — This account is not authorized for Admin access.'
+      message: 'Access Denied — Access is restricted exclusively to abhijeetmahakur67@gmail.com.'
     });
   }
 
@@ -1226,14 +1230,14 @@ app.get('/api/auth/google/callback', async (req, res) => {
     }
 
     if (!email || !isAuthorizedAdminEmail(email)) {
-      const deniedMsg = 'Access Denied — Only authorized administrator accounts can access this area.';
+      const deniedMsg = `Access Denied — Only abhijeetmahakur67@gmail.com is authorized for Admin access. (${email || 'Unknown account'} was rejected)`;
       const store = getStore();
       if (!store.syncLogs) store.syncLogs = [];
       store.syncLogs.unshift({
         id: 'log-sec-' + Date.now(),
         service: 'Security / Google OAuth',
         status: 'DENIED',
-        message: `Blocked unauthorized Google login attempt from ${email || 'unknown'}. Access restricted to authorized administrator accounts.`,
+        message: `Blocked unauthorized Google login attempt from ${email || 'unknown'}. Access restricted exclusively to abhijeetmahakur67@gmail.com.`,
         timestamp: new Date().toISOString()
       });
       saveStore(store);
@@ -1246,15 +1250,15 @@ app.get('/api/auth/google/callback', async (req, res) => {
           <script>
             if (window.opener) {
               window.opener.postMessage({ type: 'GOOGLE_AUTH_ERROR', message: ${JSON.stringify(deniedMsg)} }, '*');
-              setTimeout(() => window.close(), 2500);
+              setTimeout(() => window.close(), 3000);
             } else {
               window.location.href = '${FRONTEND_ORIGIN}/portfolio/admin?auth_error=' + encodeURIComponent(${JSON.stringify(deniedMsg)});
             }
           </script>
           <div style="max-width:500px;margin:40px auto;padding:24px;border:1px solid rgba(239,68,68,0.3);border-radius:16px;background:rgba(239,68,68,0.05);">
             <h3 style="color:#ef4444;margin-bottom:8px;">Access Denied</h3>
-            <p style="color:#f87171;font-size:14px;">${deniedMsg}</p>
-            <p style="color:#94a3b8;font-size:12px;margin-top:16px;">Selected: <b>${email || 'Unknown account'}</b></p>
+            <p style="color:#f87171;font-size:14px;">Access is restricted exclusively to <strong>abhijeetmahakur67@gmail.com</strong>.</p>
+            <p style="color:#94a3b8;font-size:12px;margin-top:16px;">Selected Account: <b>${email || 'Unknown account'}</b></p>
           </div>
         </body>
         </html>
@@ -1415,14 +1419,14 @@ app.post('/api/auth/google', async (req, res) => {
         id: 'log-sec-' + Date.now(),
         service: 'Security / Auth',
         status: 'DENIED',
-        message: `Blocked unauthorized login attempt from ${email}. Access restricted to authorized administrator accounts.`,
+        message: `Blocked unauthorized login attempt from ${email}. Access restricted exclusively to abhijeetmahakur67@gmail.com.`,
         timestamp: new Date().toISOString()
       });
       saveStore(store);
 
       return res.status(403).json({
         success: false,
-        message: 'Access Denied — Only authorized administrator accounts can access this area.'
+        message: 'Access Denied — Access is restricted exclusively to abhijeetmahakur67@gmail.com.'
       });
     }
 

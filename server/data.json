@@ -826,6 +826,1280 @@
   },
   "syncLogs": [
     {
+      "id": "log-auth-1789977046505",
+      "service": "Admin Auth / OTP",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via 6-Digit OTP (30 days).",
+      "timestamp": "2026-09-21T07:50:46.505Z"
+    },
+    {
+      "id": "log-sec-1789977046488",
+      "service": "Security / Auth",
+      "status": "DENIED",
+      "message": "Blocked unauthorized login attempt from stranger@gmail.com. Access restricted exclusively to abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-21T07:50:46.488Z"
+    },
+    {
+      "id": "log-sec-1789977046473",
+      "service": "Security / Auth",
+      "status": "DENIED",
+      "message": "Blocked unauthorized login attempt from abhijeetmahakur69@gmail.com. Access restricted exclusively to abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-21T07:50:46.473Z"
+    },
+    {
+      "id": "log-sec-verify-1789977046461",
+      "service": "Security / OTP Verify",
+      "status": "DENIED",
+      "message": "Blocked unauthorized OTP verification attempt for abhijeetmahakur69@gmail.com. Access restricted exclusively to abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-21T07:50:46.461Z"
+    },
+    {
+      "id": "log-sec-otp-1789977046449",
+      "service": "Security / OTP Auth",
+      "status": "DENIED",
+      "message": "Blocked OTP request for unauthorized email abhijeetmahakur69@gmail.com. Access restricted exclusively to abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-21T07:50:46.449Z"
+    },
+    {
+      "id": "log-1789977044179",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:50:44.179Z"
+    },
+    {
+      "id": "log-1789977042840",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:50:42.840Z"
+    },
+    {
+      "id": "log-1789977042553",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:50:42.553Z"
+    },
+    {
+      "id": "log-1789977033635",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:50:33.635Z"
+    },
+    {
+      "id": "log-1789977033354",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:50:33.354Z"
+    },
+    {
+      "id": "log-1789977020632",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:50:20.632Z"
+    },
+    {
+      "id": "log-1789977004622",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:50:04.622Z"
+    },
+    {
+      "id": "log-1789976990387",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:49:50.387Z"
+    },
+    {
+      "id": "log-1789976960285",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:49:20.285Z"
+    },
+    {
+      "id": "log-1789976944703",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:49:04.703Z"
+    },
+    {
+      "id": "log-1789976930443",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:48:50.443Z"
+    },
+    {
+      "id": "log-1789976900462",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:48:20.462Z"
+    },
+    {
+      "id": "log-1789976884649",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:48:04.649Z"
+    },
+    {
+      "id": "log-1789976870316",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:47:50.316Z"
+    },
+    {
+      "id": "log-1789976840434",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:47:20.434Z"
+    },
+    {
+      "id": "log-1789976824676",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:47:04.676Z"
+    },
+    {
+      "id": "log-1789976810431",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:46:50.431Z"
+    },
+    {
+      "id": "log-1789976780447",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:46:20.447Z"
+    },
+    {
+      "id": "log-1789976764635",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:46:04.635Z"
+    },
+    {
+      "id": "log-1789976750400",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:45:50.400Z"
+    },
+    {
+      "id": "log-1789976720458",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:45:20.458Z"
+    },
+    {
+      "id": "log-1789976704633",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:45:04.633Z"
+    },
+    {
+      "id": "log-1789976690314",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:44:50.314Z"
+    },
+    {
+      "id": "log-1789976660368",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:44:20.368Z"
+    },
+    {
+      "id": "log-1789976645043",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:44:05.043Z"
+    },
+    {
+      "id": "log-1789976630442",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:43:50.442Z"
+    },
+    {
+      "id": "log-1789976600315",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:43:20.315Z"
+    },
+    {
+      "id": "log-1789976584713",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:43:04.713Z"
+    },
+    {
+      "id": "log-1789976570357",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:42:50.357Z"
+    },
+    {
+      "id": "log-1789976540393",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:42:20.393Z"
+    },
+    {
+      "id": "log-1789976524580",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:42:04.580Z"
+    },
+    {
+      "id": "log-1789976510292",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:41:50.292Z"
+    },
+    {
+      "id": "log-1789976480479",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:41:20.479Z"
+    },
+    {
+      "id": "log-1789976464628",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:41:04.628Z"
+    },
+    {
+      "id": "log-1789976450370",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:40:50.370Z"
+    },
+    {
+      "id": "log-1789976420336",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:40:20.336Z"
+    },
+    {
+      "id": "log-1789976404622",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:40:04.622Z"
+    },
+    {
+      "id": "log-1789976390452",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:39:50.452Z"
+    },
+    {
+      "id": "log-1789976360438",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:39:20.438Z"
+    },
+    {
+      "id": "log-1789976344630",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:39:04.630Z"
+    },
+    {
+      "id": "log-1789976330395",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:38:50.395Z"
+    },
+    {
+      "id": "log-1789976300449",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:38:20.449Z"
+    },
+    {
+      "id": "log-1789976284710",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:38:04.710Z"
+    },
+    {
+      "id": "log-1789976270370",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:37:50.370Z"
+    },
+    {
+      "id": "log-1789976240445",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:37:20.445Z"
+    },
+    {
+      "id": "log-1789976224629",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:37:04.629Z"
+    },
+    {
+      "id": "log-1789976210360",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:36:50.360Z"
+    },
+    {
+      "id": "log-1789976180366",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:36:20.366Z"
+    },
+    {
+      "id": "log-1789976164621",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:36:04.621Z"
+    },
+    {
+      "id": "log-1789976150324",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:35:50.324Z"
+    },
+    {
+      "id": "log-1789976120458",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:35:20.458Z"
+    },
+    {
+      "id": "log-1789976104577",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:35:04.577Z"
+    },
+    {
+      "id": "log-1789976090427",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:34:50.427Z"
+    },
+    {
+      "id": "log-1789976060536",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:34:20.536Z"
+    },
+    {
+      "id": "log-1789976044547",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:34:04.547Z"
+    },
+    {
+      "id": "log-1789976030316",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:33:50.316Z"
+    },
+    {
+      "id": "log-1789976000537",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:33:20.537Z"
+    },
+    {
+      "id": "log-1789975984603",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:33:04.603Z"
+    },
+    {
+      "id": "log-1789975970440",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:32:50.440Z"
+    },
+    {
+      "id": "log-1789975940403",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:32:20.403Z"
+    },
+    {
+      "id": "log-1789975924601",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:32:04.601Z"
+    },
+    {
+      "id": "log-1789975910371",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:31:50.371Z"
+    },
+    {
+      "id": "log-1789975880460",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:31:20.460Z"
+    },
+    {
+      "id": "log-1789975864537",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:31:04.537Z"
+    },
+    {
+      "id": "log-1789975850358",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:30:50.358Z"
+    },
+    {
+      "id": "log-1789975820398",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:30:20.398Z"
+    },
+    {
+      "id": "log-1789975804615",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:30:04.615Z"
+    },
+    {
+      "id": "log-1789975790394",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:29:50.394Z"
+    },
+    {
+      "id": "log-1789975760492",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:29:20.492Z"
+    },
+    {
+      "id": "log-1789975744520",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:29:04.520Z"
+    },
+    {
+      "id": "log-1789975730507",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:28:50.507Z"
+    },
+    {
+      "id": "log-1789975700461",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:28:20.461Z"
+    },
+    {
+      "id": "log-1789975684484",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:28:04.484Z"
+    },
+    {
+      "id": "log-1789975670459",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:27:50.459Z"
+    },
+    {
+      "id": "log-1789975640332",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:27:20.332Z"
+    },
+    {
+      "id": "log-1789975624554",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:27:04.554Z"
+    },
+    {
+      "id": "log-1789975610449",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:26:50.449Z"
+    },
+    {
+      "id": "log-1789975580480",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:26:20.480Z"
+    },
+    {
+      "id": "log-1789975564534",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:26:04.534Z"
+    },
+    {
+      "id": "log-1789975550513",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:25:50.513Z"
+    },
+    {
+      "id": "log-1789975520446",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:25:20.446Z"
+    },
+    {
+      "id": "log-1789975504526",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:25:04.526Z"
+    },
+    {
+      "id": "log-1789975490367",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:24:50.367Z"
+    },
+    {
+      "id": "log-1789975460380",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:24:20.380Z"
+    },
+    {
+      "id": "log-1789975444518",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:24:04.518Z"
+    },
+    {
+      "id": "log-1789975430332",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:23:50.332Z"
+    },
+    {
+      "id": "log-1789975400310",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:23:20.310Z"
+    },
+    {
+      "id": "log-1789975384502",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:23:04.502Z"
+    },
+    {
+      "id": "log-1789975370646",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:22:50.646Z"
+    },
+    {
+      "id": "log-1789975340331",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:22:20.331Z"
+    },
+    {
+      "id": "log-1789975324554",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:22:04.554Z"
+    },
+    {
+      "id": "log-1789975310385",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:21:50.385Z"
+    },
+    {
+      "id": "log-1789975280447",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:21:20.447Z"
+    },
+    {
+      "id": "log-1789975264477",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:21:04.477Z"
+    },
+    {
+      "id": "log-1789975250549",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:20:50.549Z"
+    },
+    {
+      "id": "log-1789975220401",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:20:20.401Z"
+    },
+    {
+      "id": "log-1789975204538",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:20:04.538Z"
+    },
+    {
+      "id": "log-1789975190500",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:19:50.500Z"
+    },
+    {
+      "id": "log-1789975160326",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:19:20.326Z"
+    },
+    {
+      "id": "log-1789975144505",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:19:04.505Z"
+    },
+    {
+      "id": "log-1789975130397",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:18:50.397Z"
+    },
+    {
+      "id": "log-1789975100447",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:18:20.447Z"
+    },
+    {
+      "id": "log-1789975084456",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:18:04.456Z"
+    },
+    {
+      "id": "log-1789975070419",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:17:50.419Z"
+    },
+    {
+      "id": "log-1789975040432",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:17:20.432Z"
+    },
+    {
+      "id": "log-1789975024514",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:17:04.514Z"
+    },
+    {
+      "id": "log-1789975010334",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:16:50.334Z"
+    },
+    {
+      "id": "log-1789974980413",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:16:20.413Z"
+    },
+    {
+      "id": "log-1789974964453",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:16:04.453Z"
+    },
+    {
+      "id": "log-1789974950461",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:15:50.461Z"
+    },
+    {
+      "id": "log-1789974920466",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:15:20.466Z"
+    },
+    {
+      "id": "log-1789974904642",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:15:04.642Z"
+    },
+    {
+      "id": "log-1789974890481",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:14:50.481Z"
+    },
+    {
+      "id": "log-1789974860391",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:14:20.391Z"
+    },
+    {
+      "id": "log-1789974844442",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:14:04.442Z"
+    },
+    {
+      "id": "log-1789974830419",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:13:50.419Z"
+    },
+    {
+      "id": "log-1789974800540",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:13:20.540Z"
+    },
+    {
+      "id": "log-1789974784413",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:13:04.413Z"
+    },
+    {
+      "id": "log-1789974770376",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:12:50.376Z"
+    },
+    {
+      "id": "log-1789974740474",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:12:20.474Z"
+    },
+    {
+      "id": "log-1789974724578",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:12:04.578Z"
+    },
+    {
+      "id": "log-1789974710421",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:11:50.421Z"
+    },
+    {
+      "id": "log-1789974680313",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:11:20.313Z"
+    },
+    {
+      "id": "log-1789974664434",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:11:04.434Z"
+    },
+    {
+      "id": "log-1789974650459",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:10:50.459Z"
+    },
+    {
+      "id": "log-1789974620330",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:10:20.330Z"
+    },
+    {
+      "id": "log-1789974604452",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:10:04.452Z"
+    },
+    {
+      "id": "log-1789974590355",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:09:50.355Z"
+    },
+    {
+      "id": "log-1789974560316",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:09:20.316Z"
+    },
+    {
+      "id": "log-1789974544422",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:09:04.422Z"
+    },
+    {
+      "id": "log-1789974532124",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:08:52.124Z"
+    },
+    {
+      "id": "log-1789974531853",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T07:08:51.853Z"
+    },
+    {
+      "id": "log-1789974508470",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:08:28.470Z"
+    },
+    {
+      "id": "log-1789974483887",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:08:03.887Z"
+    },
+    {
+      "id": "log-1789974478496",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:07:58.496Z"
+    },
+    {
+      "id": "log-1789974448466",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:07:28.466Z"
+    },
+    {
+      "id": "log-1789974423851",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:07:03.851Z"
+    },
+    {
+      "id": "log-1789974418480",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:06:58.480Z"
+    },
+    {
+      "id": "log-1789974388504",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:06:28.504Z"
+    },
+    {
+      "id": "log-1789974363867",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:06:03.867Z"
+    },
+    {
+      "id": "log-1789974358487",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:05:58.487Z"
+    },
+    {
+      "id": "log-1789974328457",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:05:28.457Z"
+    },
+    {
+      "id": "log-1789974303814",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:05:03.814Z"
+    },
+    {
+      "id": "log-1789974298484",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:04:58.484Z"
+    },
+    {
+      "id": "log-1789974268481",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:04:28.481Z"
+    },
+    {
+      "id": "log-1789974243842",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:04:03.842Z"
+    },
+    {
+      "id": "log-1789974238488",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:03:58.488Z"
+    },
+    {
+      "id": "log-1789974208463",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:03:28.463Z"
+    },
+    {
+      "id": "log-1789974183823",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:03:03.823Z"
+    },
+    {
+      "id": "log-1789974178484",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:02:58.484Z"
+    },
+    {
+      "id": "log-1789974148441",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:02:28.441Z"
+    },
+    {
+      "id": "log-1789974123791",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:02:03.791Z"
+    },
+    {
+      "id": "log-1789974118463",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:01:58.463Z"
+    },
+    {
+      "id": "log-1789974088520",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:01:28.520Z"
+    },
+    {
+      "id": "log-1789974063852",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:01:03.852Z"
+    },
+    {
+      "id": "log-1789974058449",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:00:58.449Z"
+    },
+    {
+      "id": "log-1789974028439",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:00:28.439Z"
+    },
+    {
+      "id": "log-1789974003813",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T07:00:03.813Z"
+    },
+    {
+      "id": "log-1789973999013",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-21T06:59:59.013Z"
+    },
+    {
+      "id": "log-1789973969003",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:59:29.003Z"
+    },
+    {
+      "id": "log-1789973944589",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:59:04.589Z"
+    },
+    {
+      "id": "log-1789973939071",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:58:59.071Z"
+    },
+    {
+      "id": "log-1789973909109",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:58:29.109Z"
+    },
+    {
+      "id": "log-1789973884216",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:58:04.216Z"
+    },
+    {
+      "id": "log-1789973879108",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:57:59.108Z"
+    },
+    {
+      "id": "log-1789973848943",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:57:28.943Z"
+    },
+    {
+      "id": "log-1789973824274",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:57:04.274Z"
+    },
+    {
+      "id": "log-1789973818887",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:56:58.887Z"
+    },
+    {
+      "id": "log-1789973789263",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:56:29.263Z"
+    },
+    {
+      "id": "log-1789973789010",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:56:29.010Z"
+    },
+    {
+      "id": "log-1789973764315",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:56:04.315Z"
+    },
+    {
+      "id": "log-1789973725925",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:55:25.925Z"
+    },
+    {
+      "id": "log-1789973725619",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:55:25.619Z"
+    },
+    {
+      "id": "log-1789973704357",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:55:04.357Z"
+    },
+    {
+      "id": "log-1789973697865",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:54:57.865Z"
+    },
+    {
+      "id": "log-1789973697554",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:54:57.554Z"
+    },
+    {
+      "id": "log-1789973644784",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:54:04.784Z"
+    },
+    {
       "id": "log-sec-verify-1789973600818",
       "service": "Security / OTP Verify",
       "status": "DENIED",
@@ -1858,7 +3132,7 @@
   "syncStatus": {
     "github": {
       "connected": true,
-      "lastSync": "2026-09-21T06:53:07.323Z",
+      "lastSync": "2026-09-21T07:50:44.179Z",
       "account": "abhijeetmahakur",
       "repoCount": 12,
       "status": "Active & Synchronized",
