@@ -33,6 +33,4 @@ services:
         sync: false
       - key: AUTHORIZED_ADMIN_PHONE
         sync: false
-      - key: ADMIN_MASTER_PIN
-        sync: false
 

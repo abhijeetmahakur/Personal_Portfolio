@@ -37,7 +37,7 @@ This repository houses the source code for **Abhijeet Mahakur's** personal portf
 - **Dynamic Data Hydration:** Instant live updates across all sections (Bio, Skills, Projects, Experience, Certificates) without rebuilding frontend assets.
 - **Dual-Layer Admin Authentication:**
   - **Google OAuth 2.0:** Single-sign-on restricted to authorized admin emails.
-  - **Passwordless OTP:** 6-digit one-time passcode delivered directly via Gmail SMTP pool, with fallback Master PIN protection.
+  - **Passwordless OTP:** 6-digit one-time passcode delivered directly via WhatsApp Bot or Gmail SMTP, secured with SHA-256 cryptographic salt and rate-limiting.
 - **Admin Dashboard:** Full CRUD management for projects, skills, certifications, and personal metadata.
 - **Newsletter & Contact Dispatch:** Automated contact inquiries and newsletter subscriptions with instant confirmation emails.
 
@@ -137,7 +137,6 @@ GOOGLE_REDIRECT_URI=http://localhost:3001/api/auth/google/callback
 # Email / OTP Delivery Configuration (Gmail App Password)
 GMAIL_USER=your_email@gmail.com
 GMAIL_APP_PASSWORD=your_gmail_app_password
-ADMIN_MASTER_PIN=000000
 ```
 
 > **Security Note:** Never commit your `.env` file to version control. It is protected by `.gitignore`.

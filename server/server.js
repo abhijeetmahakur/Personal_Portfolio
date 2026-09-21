@@ -540,15 +540,7 @@ function requireAdmin(req, res, next) {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.startsWith('Bearer ')
     ? authHeader.substring(7).trim()
-    : (req.headers['x-admin-token'] ? String(req.headers['x-admin-token']).trim() : null);
-
-  const clientIp = req.ip || req.connection?.remoteAddress || '';
-  const isLocal = clientIp === '127.0.0.1' || clientIp === '::1' || clientIp === '::ffff:127.0.0.1' || clientIp.includes('127.0.0.1');
-
-  if (token === 'admin_session_abhijeet_active' || (!token && isLocal)) {
-    req.adminUser = { email: PRIMARY_ADMIN_EMAIL, name: 'Abhijeet Mahakur' };
-    return next();
-  }
+    : (req.headers['x-admin-token'] ? String(req.headers['x-admin-token']).trim() : (req.query?.token ? String(req.query.token).trim() : null));
 
   if (!token) {
     return res.status(401).json({
@@ -793,7 +785,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
         channel: 'whatsapp',
         botNumber: '+34 623 78 95 80',
         whatsappUrl: waDirectUrl,
-        message: `WhatsApp Bot requires a 1-time setup. Message "I allow callmebot to send me messages" to +34 623 78 95 80 on WhatsApp to get your free API key, enter it below, or click "Open WhatsApp Directly" / use Master PIN 879700.`
+        message: `WhatsApp Bot requires a 1-time setup. Message "I allow callmebot to send me messages" to +34 623 78 95 80 on WhatsApp to get your free API key, enter it below, or click "Open WhatsApp Directly".`
       });
     }
 
@@ -802,7 +794,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
       botDeliveryFailed: true,
       channel: 'whatsapp',
       whatsappUrl: waDirectUrl,
-      message: `WhatsApp Bot delivery failed: ${waError || 'Bot temporarily busy'}. Click "Open WhatsApp Directly" below, or enter Master PIN 879700.`
+      message: `WhatsApp Bot delivery failed: ${waError || 'Bot temporarily busy'}. Click "Open WhatsApp Directly" below.`
     });
   }
 
@@ -1047,51 +1039,45 @@ app.post('/api/auth/verify-otp', (req, res) => {
     });
   }
 
-  // Master PIN fallback (Strictly for authorized administrator accounts)
-  const masterPin = (process.env.ADMIN_MASTER_PIN || '879700').trim();
-  const isMasterPin = Boolean(masterPin && masterPin.length >= 6 && cleanOtp === masterPin);
-
   const record = otpStore.get(normalizedEmail);
   const now = Date.now();
 
-  if (!isMasterPin) {
-    // Check if OTP exists and is not expired
-    if (!record || record.expiresAt < now) {
-      if (record) otpStore.delete(normalizedEmail);
-      return res.status(400).json({
-        success: false,
-        message: 'OTP has expired or does not exist. Please request a new code sent to your email.'
-      });
-    }
+  // Check if OTP exists and is not expired
+  if (!record || record.expiresAt < now) {
+    if (record) otpStore.delete(normalizedEmail);
+    return res.status(400).json({
+      success: false,
+      message: 'OTP has expired or does not exist. Please request a new verification code.'
+    });
+  }
 
-    // Brute-force protection: max 5 failed attempts
-    record.attempts += 1;
-    if (record.attempts > 5) {
-      otpStore.delete(normalizedEmail);
-      const store = getStore();
-      if (!store.syncLogs) store.syncLogs = [];
-      store.syncLogs.unshift({
-        id: 'log-sec-otp-' + Date.now(),
-        service: 'Security / OTP',
-        status: 'INVALIDATED',
-        message: `OTP for ${normalizedEmail} invalidated after exceeding 5 failed attempts.`,
-        timestamp: new Date().toISOString()
-      });
-      saveStore(store);
+  // Brute-force protection: max 5 failed attempts
+  record.attempts += 1;
+  if (record.attempts > 5) {
+    otpStore.delete(normalizedEmail);
+    const store = getStore();
+    if (!store.syncLogs) store.syncLogs = [];
+    store.syncLogs.unshift({
+      id: 'log-sec-otp-' + Date.now(),
+      service: 'Security / OTP',
+      status: 'INVALIDATED',
+      message: `OTP for ${normalizedEmail} invalidated after exceeding 5 failed attempts.`,
+      timestamp: new Date().toISOString()
+    });
+    saveStore(store);
 
-      return res.status(429).json({
-        success: false,
-        message: 'Too many failed attempts. OTP has been invalidated.'
-      });
-    }
+    return res.status(429).json({
+      success: false,
+      message: 'Too many failed attempts. OTP has been invalidated.'
+    });
+  }
 
-    const candidateHash = crypto.createHash('sha256').update(cleanOtp + record.salt).digest('hex');
-    if (candidateHash !== record.hash) {
-      return res.status(401).json({
-        success: false,
-        message: 'Invalid OTP code. Please check and try again.'
-      });
-    }
+  const candidateHash = crypto.createHash('sha256').update(cleanOtp + record.salt).digest('hex');
+  if (candidateHash !== record.hash) {
+    return res.status(401).json({
+      success: false,
+      message: 'Invalid OTP code. Please check and try again.'
+    });
   }
 
   // Verification SUCCESS: Invalidate OTP record immediately to prevent replay attacks
@@ -1105,7 +1091,7 @@ app.post('/api/auth/verify-otp', (req, res) => {
     name: 'Abhijeet Mahakur',
     picture: '',
     role: 'Authorized Administrator',
-    loginMethod: isMasterPin ? 'Admin Master PIN' : 'Resend Email + 6-Digit OTP',
+    loginMethod: '6-Digit Secure OTP',
     rememberedDevice: !!rememberDevice,
     loginAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + sessionDurationMs).toISOString()
@@ -1912,7 +1898,7 @@ app.post('/api/admin/open-antigravity', (req, res) => {
     }
   }
 
-  if (!isAuthenticated && !isLocal) {
+  if (!isAuthenticated) {
     return res.status(401).json({
       success: false,
       message: 'Unauthorized: Admin authentication required to launch Antigravity IDE.'
@@ -2009,7 +1995,7 @@ app.post('/api/admin/open-vscode', (req, res) => {
     }
   }
 
-  if (!isAuthenticated && !isLocal) {
+  if (!isAuthenticated) {
     return res.status(401).json({
       success: false,
       message: 'Unauthorized: Admin authentication required to launch VS Code.'
@@ -3031,7 +3017,7 @@ if (!IS_VERCEL) {
     } else if (process.env.RESEND_API_KEY) {
       console.log('⚡ [Email] Resend API configured for Admin OTP delivery.');
     } else {
-      console.log('ℹ️ [Email] Configure GMAIL_APP_PASSWORD or RESEND_API_KEY in Render. Admin Master PIN is active.');
+      console.log('ℹ️ [Email] Configure GMAIL_APP_PASSWORD or RESEND_API_KEY for direct email OTP delivery.');
     }
   });
 }
