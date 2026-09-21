@@ -773,13 +773,13 @@ app.post('/api/auth/send-otp', async (req, res) => {
     if (!callmebotKey && !twilioSid) {
       return res.status(500).json({
         success: false,
-        message: `Automated WhatsApp requires CALLMEBOT_API_KEY. Send "I allow callmebot to send me messages" to +34 644 44 47 70 on WhatsApp to get your free API key, or use Gmail OTP / Master PIN 879700.`
+        message: `Automated WhatsApp requires CALLMEBOT_API_KEY. Send "I allow callmebot to send me messages" to +34 644 44 47 70 on WhatsApp to get your free API key, or use Gmail OTP.`
       });
     }
 
     return res.status(500).json({
       success: false,
-      message: `Automated WhatsApp delivery failed: ${waError || 'Service error'}. Please use Gmail OTP or enter Master PIN 879700.`
+      message: `Automated WhatsApp delivery failed: ${waError || 'Service error'}. Please use Gmail OTP.`
     });
   }
 
@@ -789,7 +789,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
     if (!fast2smsKey) {
       return res.status(500).json({
         success: false,
-        message: 'SMS API is not configured. Please use WhatsApp or Gmail above, or enter Master PIN 879700.'
+        message: 'SMS API is not configured. Please use WhatsApp or Gmail OTP.'
       });
     }
 
@@ -834,13 +834,13 @@ app.post('/api/auth/send-otp', async (req, res) => {
         console.error('❌ [OTP] Fast2SMS error:', errorDetail);
         return res.status(500).json({
           success: false,
-          message: `SMS notice: ${errorDetail}. Fast2SMS requires min ₹100 recharge or website verification. Please use WhatsApp or Gmail above, or enter Master PIN 879700.`
+          message: `SMS notice: ${errorDetail}. Fast2SMS requires min ₹100 recharge or website verification. Please use WhatsApp or Gmail OTP.`
         });
       }
     } catch (smsErr) {
       return res.status(500).json({
         success: false,
-        message: `SMS dispatch error: ${smsErr.message}. Please use WhatsApp or Gmail above, or enter Master PIN 879700.`
+        message: `SMS dispatch error: ${smsErr.message}. Please use WhatsApp or Gmail OTP.`
       });
     }
   }
@@ -853,7 +853,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
     console.error('❌ [OTP] No email provider configured (GMAIL_APP_PASSWORD or RESEND_API_KEY).');
     return res.status(500).json({
       success: false,
-      message: 'Email service is not configured in Render. Please use WhatsApp above, configure RESEND_API_KEY in Render, or enter your Admin Master PIN.'
+      message: 'Email service is not configured. Please use WhatsApp OTP or configure RESEND_API_KEY.'
     });
   }
 
@@ -973,9 +973,9 @@ app.post('/api/auth/send-otp', async (req, res) => {
   const isTimeout = lastError && (lastError.includes('timeout') || lastError.includes('ETIMEDOUT') || lastError.includes('ESOCKETTIMEDOUT'));
   let failureMsg = `Email delivery failed: ${lastError || 'Unable to send OTP'}.`;
   if (IS_RENDER && isTimeout) {
-    failureMsg = `Email delivery timed out. On Render free tier, please use the WhatsApp tab above, add RESEND_API_KEY in Render, or enter Master PIN 879700.`;
+    failureMsg = `Email delivery timed out. On Render free tier, please use the WhatsApp tab above or add RESEND_API_KEY in Render.`;
   } else {
-    failureMsg += ' Please use the WhatsApp tab above, or enter Master PIN 879700.';
+    failureMsg += ' Please use the WhatsApp tab above.';
   }
 
   return res.status(500).json({

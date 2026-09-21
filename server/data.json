@@ -826,6 +826,48 @@
   },
   "syncLogs": [
     {
+      "id": "log-sec-verify-1789973600818",
+      "service": "Security / OTP Verify",
+      "status": "DENIED",
+      "message": "Blocked unauthorized OTP verification attempt for intruder@example.com. Access restricted to authorized administrator accounts.",
+      "timestamp": "2026-09-21T06:53:20.818Z"
+    },
+    {
+      "id": "log-auth-1789973597620",
+      "service": "Admin Auth / OTP",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via 6-Digit OTP (30 days).",
+      "timestamp": "2026-09-21T06:53:17.620Z"
+    },
+    {
+      "id": "log-1789973587323",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:53:07.323Z"
+    },
+    {
+      "id": "log-1789973550839",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:52:30.839Z"
+    },
+    {
+      "id": "log-1789973490837",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:51:30.837Z"
+    },
+    {
+      "id": "log-1789973433735",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-21T06:50:33.735Z"
+    },
+    {
       "id": "log-1789931048102",
       "service": "GitHub Auto-Sync",
       "status": "SUCCESS",
@@ -1816,7 +1858,7 @@
   "syncStatus": {
     "github": {
       "connected": true,
-      "lastSync": "2026-09-20T19:04:08.102Z",
+      "lastSync": "2026-09-21T06:53:07.323Z",
       "account": "abhijeetmahakur",
       "repoCount": 12,
       "status": "Active & Synchronized",

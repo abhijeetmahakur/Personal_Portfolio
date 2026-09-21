@@ -208,7 +208,6 @@ function renderAuthScreen(initialError = '') {
             <div class="admin-field" style="text-align: left;">
               <label class="admin-label">Enter 6-Digit Code</label>
               <input type="text" id="auth-otp-code" class="admin-input otp-code-input" placeholder="------" maxlength="6" autocomplete="one-time-code" />
-              <div class="otp-emergency-hint">💡 Instant login: Master PIN <code>879700</code> is always accepted.</div>
             </div>
 
             <div class="remember-device-row" style="margin-top: 8px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #94a3b8;">
