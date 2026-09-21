@@ -735,6 +735,86 @@
   letter-spacing: 0.08em;
 }
 
+.otp-channel-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 10px 0 12px 0;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.otp-tab {
+  flex: 1;
+  padding: 7px 10px;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.otp-tab:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.otp-tab.active {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: rgba(6, 182, 212, 0.4);
+  color: #38bdf8;
+  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.2);
+}
+
+.btn-whatsapp-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 11px 16px;
+  border-radius: 9px;
+  background: #25D366;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  box-sizing: border-box;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+  transition: all 0.2s ease;
+}
+
+.btn-whatsapp-open:hover {
+  background: #20ba5a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
+}
+
+.otp-emergency-hint {
+  font-size: 0.76rem;
+  color: #64748b;
+  margin-top: 6px;
+  line-height: 1.35;
+}
+
+.otp-emergency-hint code {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-weight: 700;
+}
+
 .btn-send-otp {
   width: 100%;
   padding: 11px 16px;

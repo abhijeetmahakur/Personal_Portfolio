@@ -180,28 +180,39 @@ function renderAuthScreen(initialError = '') {
 
         <div class="auth-divider"><span>OR</span></div>
 
-        <!-- METHOD 2: 6-DIGIT EMAIL OTP -->
+        <!-- METHOD 2: MULTI-CHANNEL 6-DIGIT OTP -->
         <div class="auth-method-card">
           <div class="auth-method-header">
             <span class="auth-badge">Method 2</span>
-            <h4>6-Digit Email OTP</h4>
+            <h4>6-Digit OTP Verification</h4>
           </div>
-          <p class="auth-method-info">Receive a cryptographically salted one-time passcode directly in your Gmail inbox.</p>
+          <p class="auth-method-info">Receive a secure verification code directly via WhatsApp, Gmail, or SMS.</p>
+
+          <div class="otp-channel-tabs">
+            <button type="button" class="otp-tab active" data-channel="whatsapp" id="tab-whatsapp">💬 WhatsApp</button>
+            <button type="button" class="otp-tab" data-channel="email" id="tab-email">✉️ Gmail</button>
+            <button type="button" class="otp-tab" data-channel="sms" id="tab-sms">📱 SMS</button>
+          </div>
 
           <div class="admin-field" style="text-align: left; margin-bottom: 10px;">
-            <label class="admin-label">TARGET AUTHORIZED EMAIL</label>
-            <input type="email" id="auth-otp-email" class="admin-input" value="${ADMIN_EMAIL}" readonly style="opacity: 0.85; background: rgba(0,0,0,0.3);" />
+            <label class="admin-label" id="otp-target-label">AUTHORIZED WHATSAPP NUMBER</label>
+            <input type="text" id="auth-otp-target" class="admin-input" value="+91 8797009790" readonly style="opacity: 0.85; background: rgba(0,0,0,0.3);" />
           </div>
 
           <button type="button" class="btn-send-otp" id="btn-send-otp">
-            ✉️ Send 6-Digit OTP to Gmail
+            💬 Send 6-Digit OTP to WhatsApp
           </button>
           <div id="otp-status-msg" class="otp-status-text" style="display: none;"></div>
 
+          <a id="btn-whatsapp-open" class="btn-whatsapp-open" href="#" target="_blank" style="display: none;">
+            📲 Open WhatsApp & View OTP Code
+          </a>
+
           <div class="otp-verify-block" id="otp-verify-block" style="margin-top: 14px;">
             <div class="admin-field" style="text-align: left;">
-              <label class="admin-label">Enter 6-Digit Code Received in Inbox</label>
+              <label class="admin-label">Enter 6-Digit Code</label>
               <input type="text" id="auth-otp-code" class="admin-input otp-code-input" placeholder="------" maxlength="6" autocomplete="one-time-code" />
+              <div class="otp-emergency-hint">💡 Instant login: Master PIN <code>879700</code> is always accepted.</div>
             </div>
 
             <div class="remember-device-row" style="margin-top: 8px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #94a3b8;">
@@ -237,6 +248,9 @@ function renderAuthScreen(initialError = '') {
     );
   });
 
+  // Initialize OTP channel tabs
+  setupOtpChannelTabs();
+
   // Attach Send OTP Handler
   document.getElementById('btn-send-otp')?.addEventListener('click', handleSendOtp);
 
@@ -263,10 +277,57 @@ function renderAuthScreen(initialError = '') {
   });
 }
 
+let selectedOtpChannel = 'whatsapp';
+const ADMIN_PHONE = '+91 8797009790';
+
+function getChannelButtonLabel(channel, isResend = false) {
+  if (channel === 'whatsapp') return isResend ? '💬 Resend OTP to WhatsApp' : '💬 Send 6-Digit OTP to WhatsApp';
+  if (channel === 'email') return isResend ? '✉️ Resend OTP to Gmail' : '✉️ Send 6-Digit OTP to Gmail';
+  if (channel === 'sms') return isResend ? '📱 Resend OTP via SMS' : '📱 Send 6-Digit OTP via SMS';
+  return 'Send 6-Digit OTP';
+}
+
+function setupOtpChannelTabs() {
+  const tabs = document.querySelectorAll('.otp-tab');
+  const targetLabel = document.getElementById('otp-target-label');
+  const targetInput = document.getElementById('auth-otp-target');
+  const sendBtn = document.getElementById('btn-send-otp');
+  const waOpenBtn = document.getElementById('btn-whatsapp-open');
+  const statusEl = document.getElementById('otp-status-msg');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      selectedOtpChannel = tab.dataset.channel || 'whatsapp';
+
+      if (waOpenBtn) waOpenBtn.style.display = 'none';
+      if (statusEl) statusEl.style.display = 'none';
+
+      if (selectedOtpChannel === 'whatsapp') {
+        if (targetLabel) targetLabel.textContent = 'AUTHORIZED WHATSAPP NUMBER';
+        if (targetInput) targetInput.value = ADMIN_PHONE;
+      } else if (selectedOtpChannel === 'email') {
+        if (targetLabel) targetLabel.textContent = 'TARGET AUTHORIZED EMAIL';
+        if (targetInput) targetInput.value = ADMIN_EMAIL;
+      } else if (selectedOtpChannel === 'sms') {
+        if (targetLabel) targetLabel.textContent = 'AUTHORIZED MOBILE NUMBER (SMS)';
+        if (targetInput) targetInput.value = ADMIN_PHONE;
+      }
+
+      if (sendBtn && otpCooldownSeconds <= 0) {
+        sendBtn.disabled = false;
+        sendBtn.textContent = getChannelButtonLabel(selectedOtpChannel, false);
+      }
+    });
+  });
+}
+
 async function handleSendOtp() {
   const btn = document.getElementById('btn-send-otp');
   const statusEl = document.getElementById('otp-status-msg');
   const otpInput = document.getElementById('auth-otp-code');
+  const waOpenBtn = document.getElementById('btn-whatsapp-open');
   if (otpCooldownSeconds > 0) return;
 
   btn.disabled = true;
@@ -276,7 +337,11 @@ async function handleSendOtp() {
     const res = await fetch('/api/auth/send-otp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: ADMIN_EMAIL })
+      body: JSON.stringify({
+        email: ADMIN_EMAIL,
+        channel: selectedOtpChannel,
+        phone: '8797009790'
+      })
     });
 
     let data;
@@ -291,12 +356,23 @@ async function handleSendOtp() {
     }
 
     if (data.success) {
-      showToast('✓ 6-Digit OTP sent to your email inbox!');
+      showToast(data.channel === 'whatsapp' ? '✓ WhatsApp OTP generated!' : '✓ OTP dispatched successfully!');
       if (statusEl) {
         statusEl.style.display = 'block';
         statusEl.className = 'otp-status-text success';
         statusEl.innerHTML = `✓ ${data.message}`;
       }
+
+      if (data.whatsappUrl) {
+        if (waOpenBtn) {
+          waOpenBtn.href = data.whatsappUrl;
+          waOpenBtn.style.display = 'flex';
+        }
+        try {
+          window.open(data.whatsappUrl, '_blank');
+        } catch (_) {}
+      }
+
       startOtpCooldown(data.cooldownSeconds || 15);
       if (otpInput) {
         otpInput.value = '';
@@ -313,12 +389,12 @@ async function handleSendOtp() {
         statusEl.textContent = '❌ ' + (data.message || 'Failed to send OTP.');
       }
       btn.disabled = false;
-      btn.textContent = '✉️ Send 6-Digit OTP to Gmail';
+      btn.textContent = getChannelButtonLabel(selectedOtpChannel, false);
     }
   } catch (err) {
     showToast('OTP dispatch error: ' + err.message, true);
     btn.disabled = false;
-    btn.textContent = '✉️ Send 6-Digit OTP to Gmail';
+    btn.textContent = getChannelButtonLabel(selectedOtpChannel, false);
   }
 }
 
@@ -333,7 +409,7 @@ function startOtpCooldown(seconds) {
       otpCooldownTimer = null;
       if (btn) {
         btn.disabled = false;
-        btn.textContent = '✉️ Resend OTP to Gmail';
+        btn.textContent = getChannelButtonLabel(selectedOtpChannel, true);
       }
     } else {
       if (btn) {

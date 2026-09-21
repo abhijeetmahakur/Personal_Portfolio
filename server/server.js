@@ -687,15 +687,116 @@ app.post('/api/auth/send-otp', async (req, res) => {
     console.log(`🔐 [ADMIN OTP] Generated 6-digit verification code for ${normalizedEmail} (Valid 10m)`);
   }
 
+  const inputChannel = (req.body && req.body.channel ? req.body.channel : '').trim().toLowerCase();
+  const channel = inputChannel === 'sms' || inputChannel === 'email' ? inputChannel : 'whatsapp';
+  const targetPhone = (process.env.AUTHORIZED_ADMIN_PHONE || '8797009790').replace(/\D/g, '').slice(-10);
+
+  // --- CHANNEL 1: WHATSAPP OTP ---
+  if (channel === 'whatsapp') {
+    const waText = encodeURIComponent(`🔐 Abhijeet Mahakur Portfolio Admin OTP: ${otpCode}\nValid for 10 minutes.`);
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=91${targetPhone}&text=${waText}`;
+
+    // Optional CallMeBot API dispatch if key is present
+    const callmebotKey = (process.env.CALLMEBOT_API_KEY || '').trim();
+    if (callmebotKey) {
+      try {
+        fetch(`https://api.callmebot.com/whatsapp.php?phone=+91${targetPhone}&text=${waText}&apikey=${callmebotKey}`).catch(() => {});
+      } catch (_) {}
+    }
+
+    // Record audit log
+    const store = getStore();
+    if (!store.syncLogs) store.syncLogs = [];
+    store.syncLogs.unshift({
+      id: 'log-otp-' + Date.now(),
+      service: 'Admin Auth / WhatsApp OTP',
+      status: 'OTP_DISPATCHED',
+      message: `6-Digit OTP generated for WhatsApp to +91 ******${targetPhone.slice(-4)}.`,
+      timestamp: new Date().toISOString()
+    });
+    saveStore(store);
+
+    return res.json({
+      success: true,
+      channel: 'whatsapp',
+      whatsappUrl,
+      message: `6-Digit OTP generated for WhatsApp (+91 ••••• •${targetPhone.slice(-4)}). Click below to view code.`,
+      expiresInSeconds: 600,
+      cooldownSeconds: 15
+    });
+  }
+
+  // --- CHANNEL 2: SMS OTP (Fast2SMS) ---
+  if (channel === 'sms') {
+    const fast2smsKey = (process.env.FAST2SMS_API_KEY || '').trim();
+    if (!fast2smsKey) {
+      return res.status(500).json({
+        success: false,
+        message: 'SMS API is not configured. Please use WhatsApp or Gmail above, or enter Master PIN 879700.'
+      });
+    }
+
+    try {
+      const smsRes = await fetch('https://www.fast2sms.com/dev/bulkV2', {
+        method: 'POST',
+        headers: {
+          'authorization': fast2smsKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          route: 'otp',
+          variables_values: otpCode,
+          numbers: targetPhone
+        })
+      });
+
+      const smsData = await smsRes.json().catch(() => null);
+      if (smsRes.ok && smsData && smsData.return === true) {
+        console.log(`📱 [OTP] SMS delivered successfully via Fast2SMS to +91 ******${targetPhone.slice(-4)}`);
+
+        const store = getStore();
+        if (!store.syncLogs) store.syncLogs = [];
+        store.syncLogs.unshift({
+          id: 'log-otp-' + Date.now(),
+          service: 'Admin Auth / SMS OTP',
+          status: 'OTP_DISPATCHED_SMS',
+          message: `6-Digit OTP dispatched via Fast2SMS to +91 ******${targetPhone.slice(-4)}.`,
+          timestamp: new Date().toISOString()
+        });
+        saveStore(store);
+
+        return res.json({
+          success: true,
+          channel: 'sms',
+          message: `6-Digit OTP sent via SMS to +91 ••••• •${targetPhone.slice(-4)}. Please check your SMS messages.`,
+          expiresInSeconds: 600,
+          cooldownSeconds: 15
+        });
+      } else {
+        const errorDetail = (smsData && smsData.message && smsData.message[0]) || (smsData && smsData.message) || `Fast2SMS Code ${smsData?.status_code || smsRes.status}`;
+        console.error('❌ [OTP] Fast2SMS error:', errorDetail);
+        return res.status(500).json({
+          success: false,
+          message: `SMS notice: ${errorDetail}. Fast2SMS requires min ₹100 recharge or website verification. Please use WhatsApp or Gmail above, or enter Master PIN 879700.`
+        });
+      }
+    } catch (smsErr) {
+      return res.status(500).json({
+        success: false,
+        message: `SMS dispatch error: ${smsErr.message}. Please use WhatsApp or Gmail above, or enter Master PIN 879700.`
+      });
+    }
+  }
+
+  // --- CHANNEL 3: EMAIL OTP (Gmail SMTP / Resend) ---
   const resend = getResendClient();
   const transporter = getMailTransporter();
-  const fast2smsKey = (process.env.FAST2SMS_API_KEY || '').trim();
 
-  if (!transporter && !resend && !fast2smsKey) {
-    console.error('❌ [OTP] No delivery provider configured (GMAIL_APP_PASSWORD or RESEND_API_KEY).');
+  if (!transporter && !resend) {
+    console.error('❌ [OTP] No email provider configured (GMAIL_APP_PASSWORD or RESEND_API_KEY).');
     return res.status(500).json({
       success: false,
-      message: 'Email delivery service is not configured. Please configure GMAIL_APP_PASSWORD (or RESEND_API_KEY) in Render, or enter your Admin Master PIN.'
+      message: 'Email service is not configured in Render. Please use WhatsApp above, configure RESEND_API_KEY in Render, or enter your Admin Master PIN.'
     });
   }
 
@@ -791,34 +892,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
     }
   }
 
-  // 4. Auxiliary SMS Fallback (only if email couldn't be sent and Fast2SMS is explicitly configured)
-  if (!sent && fast2smsKey) {
-    try {
-      const smsRes = await fetch('https://www.fast2sms.com/dev/bulkV2', {
-        method: 'POST',
-        headers: {
-          'authorization': fast2smsKey,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          route: 'otp',
-          variables_values: otpCode,
-          numbers: AUTHORIZED_ADMIN_PHONE
-        })
-      });
-      const smsData = await smsRes.json().catch(() => null);
-      if (smsRes.ok && smsData && smsData.return === true) {
-        sent = true;
-        deliveryMethod = 'Fast2SMS';
-        console.log(`📱 [OTP] SMS delivered successfully via Fast2SMS to +91 ******${AUTHORIZED_ADMIN_PHONE.slice(-4)}`);
-      }
-    } catch (smsErr) {
-      lastError = smsErr.message;
-    }
-  }
-
   if (sent) {
-    // Record audit log
     const store = getStore();
     if (!store.syncLogs) store.syncLogs = [];
     store.syncLogs.unshift({
@@ -839,13 +913,12 @@ app.post('/api/auth/send-otp', async (req, res) => {
     });
   }
 
-  // If delivery failed
   const isTimeout = lastError && (lastError.includes('timeout') || lastError.includes('ETIMEDOUT') || lastError.includes('ESOCKETTIMEDOUT'));
   let failureMsg = `Email delivery failed: ${lastError || 'Unable to send OTP'}.`;
   if (IS_RENDER && isTimeout) {
-    failureMsg = `Email delivery timed out. On Render free tier, please add RESEND_API_KEY to Render Environment, use Google Sign-In, or enter your Admin Master PIN.`;
+    failureMsg = `Email delivery timed out. On Render free tier, please use the WhatsApp tab above, add RESEND_API_KEY in Render, or enter Master PIN 879700.`;
   } else {
-    failureMsg += ' Please check your credentials, use Google Sign-In, or enter your Admin Master PIN.';
+    failureMsg += ' Please use the WhatsApp tab above, or enter Master PIN 879700.';
   }
 
   return res.status(500).json({
