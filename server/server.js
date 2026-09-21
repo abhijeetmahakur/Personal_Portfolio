@@ -642,20 +642,13 @@ function getMailTransporter() {
   return null;
 }
 
-// 1. Send 6-Digit Email OTP Endpoint (Direct Fast Dispatch to Gmail)
+// 1. Send 6-Digit Email OTP Endpoint (Resend HTTPS API)
 app.post('/api/auth/send-otp', async (req, res) => {
-  const { email } = req.body;
+  const authorizedPrimary = (process.env.AUTHORIZED_ADMIN_EMAIL || 'abhijeetmahakur67@gmail.com').trim().toLowerCase();
+  const inputEmail = req.body && typeof req.body.email === 'string' ? req.body.email.trim().toLowerCase() : '';
+  const normalizedEmail = inputEmail || authorizedPrimary;
 
-  if (!email || typeof email !== 'string') {
-    return res.status(400).json({
-      success: false,
-      message: 'Email address is required.'
-    });
-  }
-
-  const normalizedEmail = email.trim().toLowerCase();
-
-  // Whitelist check: Any authorized Abhijeet Mahakur admin account
+  // Strict Whitelist Enforcement: Ensure target is exclusively an authorized admin account
   if (!isAuthorizedAdminEmail(normalizedEmail)) {
     const store = getStore();
     if (!store.syncLogs) store.syncLogs = [];
@@ -663,7 +656,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
       id: 'log-sec-otp-' + Date.now(),
       service: 'Security / OTP Auth',
       status: 'DENIED',
-      message: `Blocked OTP request for unauthorized email ${email}. Access restricted to authorized administrator accounts.`,
+      message: `Blocked OTP request for unauthorized email ${normalizedEmail}. Access restricted to authorized administrator accounts.`,
       timestamp: new Date().toISOString()
     });
     saveStore(store);
@@ -700,10 +693,12 @@ app.post('/api/auth/send-otp', async (req, res) => {
     lastSentAt: now
   });
 
-  console.log('\n======================================================');
-  console.log(`🔐 [ADMIN OTP] Generated 6-Digit Code for ${normalizedEmail}:`);
-  console.log(`   >>> CODE: ${otpCode} <<< (Valid for 10 minutes)`);
-  console.log('======================================================\n');
+  // Safe logging: Never log raw OTP code in production/Render logs
+  if (!IS_RENDER && !IS_VERCEL && process.env.NODE_ENV !== 'production') {
+    console.log(`🔐 [ADMIN OTP (Dev Only)] Generated 6-digit code for ${normalizedEmail}: [DEBUG CODE: ${otpCode}] (Valid 10m)`);
+  } else {
+    console.log(`🔐 [ADMIN OTP] Generated 6-digit verification code for ${normalizedEmail} (Valid 10m)`);
+  }
 
   const resend = getResendClient();
   if (!resend) {
@@ -811,40 +806,6 @@ app.post('/api/auth/verify-otp', (req, res) => {
     });
   }
 
-  const record = otpStore.get(normalizedEmail);
-  const now = Date.now();
-
-  // Check if OTP exists and is not expired
-  if (!record || record.expiresAt < now) {
-    if (record) otpStore.delete(normalizedEmail);
-    return res.status(400).json({
-      success: false,
-      message: 'OTP has expired or does not exist. Please request a new code sent to your Gmail.'
-    });
-  }
-
-  // Brute-force protection: max 5 failed attempts
-  record.attempts += 1;
-  if (record.attempts > 5) {
-    otpStore.delete(normalizedEmail);
-    const store = getStore();
-    if (!store.syncLogs) store.syncLogs = [];
-    store.syncLogs.unshift({
-      id: 'log-sec-otp-' + Date.now(),
-      service: 'Security / OTP',
-      status: 'INVALIDATED',
-      message: `OTP for ${normalizedEmail} invalidated after exceeding 5 failed attempts.`,
-      timestamp: new Date().toISOString()
-    });
-    saveStore(store);
-
-    return res.status(429).json({
-      success: false,
-      message: 'Too many failed attempts. OTP has been invalidated.'
-    });
-  }
-
-  // Strict Cryptographic Check against salted SHA-256 hash (clean all whitespace/dashes)
   const cleanOtp = String(otp).replace(/\D/g, '');
   if (cleanOtp.length !== 6) {
     return res.status(400).json({
@@ -853,12 +814,51 @@ app.post('/api/auth/verify-otp', (req, res) => {
     });
   }
 
-  const candidateHash = crypto.createHash('sha256').update(cleanOtp + record.salt).digest('hex');
-  if (candidateHash !== record.hash) {
-    return res.status(401).json({
-      success: false,
-      message: 'Invalid OTP code. Please check and try again.'
-    });
+  // Master PIN fallback (Strictly for authorized administrator accounts)
+  const masterPin = (process.env.ADMIN_MASTER_PIN || '').trim();
+  const isMasterPin = Boolean(masterPin && masterPin.length >= 6 && cleanOtp === masterPin);
+
+  const record = otpStore.get(normalizedEmail);
+  const now = Date.now();
+
+  if (!isMasterPin) {
+    // Check if OTP exists and is not expired
+    if (!record || record.expiresAt < now) {
+      if (record) otpStore.delete(normalizedEmail);
+      return res.status(400).json({
+        success: false,
+        message: 'OTP has expired or does not exist. Please request a new code sent to your email.'
+      });
+    }
+
+    // Brute-force protection: max 5 failed attempts
+    record.attempts += 1;
+    if (record.attempts > 5) {
+      otpStore.delete(normalizedEmail);
+      const store = getStore();
+      if (!store.syncLogs) store.syncLogs = [];
+      store.syncLogs.unshift({
+        id: 'log-sec-otp-' + Date.now(),
+        service: 'Security / OTP',
+        status: 'INVALIDATED',
+        message: `OTP for ${normalizedEmail} invalidated after exceeding 5 failed attempts.`,
+        timestamp: new Date().toISOString()
+      });
+      saveStore(store);
+
+      return res.status(429).json({
+        success: false,
+        message: 'Too many failed attempts. OTP has been invalidated.'
+      });
+    }
+
+    const candidateHash = crypto.createHash('sha256').update(cleanOtp + record.salt).digest('hex');
+    if (candidateHash !== record.hash) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid OTP code. Please check and try again.'
+      });
+    }
   }
 
   // Verification SUCCESS: Invalidate OTP record immediately to prevent replay attacks
@@ -872,7 +872,7 @@ app.post('/api/auth/verify-otp', (req, res) => {
     name: 'Abhijeet Mahakur',
     picture: '',
     role: 'Authorized Administrator',
-    loginMethod: 'Gmail + 6-Digit OTP',
+    loginMethod: isMasterPin ? 'Admin Master PIN' : 'Resend Email + 6-Digit OTP',
     rememberedDevice: !!rememberDevice,
     loginAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + sessionDurationMs).toISOString()
