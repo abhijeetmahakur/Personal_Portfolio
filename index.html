@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="google-site-verification" content="sgEefxy_LnTwPiEBzOBVm7TdnLehVuWwmXids5RSXbI" />
+    <title>Abhijeet Mahakur | B.Tech CSE Student & Software Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Abhijeet Mahakur - Software Developer specializing in scalable web solutions, modern frontend engineering, and interactive digital experiences."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/admin-cms.css" />
+  </head>
+  <body>
+    <!-- Top Glowing Buffer Progress Line -->
+    <div id="loader-line" class="loader-line">
+      <div id="loader-progress" class="loader-progress"></div>
+    </div>
+
+    <!-- Fixed Background Canvas Stage -->
+    <div id="canvas-container" class="canvas-container">
+      <canvas id="animation-canvas"></canvas>
+      <div class="ambient-vignette"></div>
+      <div class="ambient-glow hero-ambient-glow"></div>
+    </div>
+
+    <!-- Pinned Header / Navigation -->
+    <header class="site-header">
+      <div class="header-inner container">
+        <a href="#home" class="brand-logo" aria-label="Home">
+          <div class="logo-monogram" title="Abhijeet Mahakur">
+            <img src="/abhijeet_avatar_thumb.webp" alt="Abhijeet Mahakur Avatar" class="logo-avatar-img" onerror="this.onerror=null; this.src='/abhijeet_avatar_thumb.png';" />
+          </div>
+          <span class="logo-name">Abhijeet Mahakur</span>
+        </a>
+
+        <nav class="nav-desktop">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#experience" class="nav-link">Education</a>
+          <a href="#certificates" class="nav-link">Certificates</a>
+          <a href="#exploring" class="nav-link">Focus</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+          <!-- Dark / Light Theme Toggle Button -->
+          <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark and Light Mode" title="Toggle theme (Dark / Light)">
+            <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <a href="#contact" class="btn-cv">
+            <span>Get in Touch</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </a>
+          <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-drawer">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation Backdrop & Drawer -->
+    <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
+    <aside class="mobile-nav-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+      <div class="mobile-drawer-header">
+        <div class="brand-logo">
+          <div class="logo-monogram" title="Abhijeet Mahakur">
+            <img src="/abhijeet_avatar_thumb.webp" alt="Abhijeet Mahakur Avatar" class="logo-avatar-img" onerror="this.onerror=null; this.src='/abhijeet_avatar_thumb.png';" />
+          </div>
+          <span class="logo-name">Abhijeet Mahakur</span>
+        </div>
+        <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close Navigation Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="#home" class="mobile-nav-link">Home</a>
+        <a href="#about" class="mobile-nav-link">About</a>
+        <a href="#skills" class="mobile-nav-link">Skills</a>
+        <a href="#projects" class="mobile-nav-link">Projects</a>
+        <a href="#experience" class="mobile-nav-link">Education</a>
+        <a href="#certificates" class="mobile-nav-link">Certificates</a>
+        <a href="#exploring" class="mobile-nav-link">Focus</a>
+        <a href="#contact" class="btn-cv mobile-cv-btn">Get in Touch</a>
+        <button class="theme-toggle-btn mobile-theme-btn" aria-label="Toggle Dark and Light Mode" title="Toggle theme (Dark / Light)" style="margin-top: 8px;">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Flow -->
+    <main class="main-content">
+      <!-- 1. HERO SECTION -->
+      <section id="home" class="hero-section">
+        <div class="container hero-grid">
+          <!-- Left Content -->
+          <div class="hero-content">
+            <div class="hero-badge">
+              <span class="badge-text">B.TECH CSE · ITER SOA UNIVERSITY</span>
+            </div>
+            
+            <h1 class="hero-title">
+              ABHIJEET<br />
+              <span class="highlight-gradient">MAHAKUR</span>
+            </h1>
+
+            <p class="hero-desc">
+              B.Tech Computer Science & Engineering student focused on software development, problem solving, full-stack web engineering, AI/ML, and computer vision.
+            </p>
+
+            <div class="hero-cta-group">
+              <a href="#projects" class="btn-primary">
+                <span>View My Work</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+              <a href="#contact" class="btn-secondary">
+                <span>Get In Touch</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Hero Direct Social Links Row -->
+            <div class="hero-social-row">
+              <span style="font-size: 0.76rem; font-family: monospace; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase;">Connect:</span>
+              <a href="https://github.com/abhijeetmahakur" target="_blank" rel="noreferrer" class="social-btn" aria-label="GitHub" title="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/abhijeet-mahakur-23bb983b6" target="_blank" rel="noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+              <a href="https://x.com/ABHIJEET_MAHAKU" target="_blank" rel="noreferrer" class="social-btn" aria-label="X (Twitter)" title="X (Twitter)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/abhijeet_mahakur?stkn=MXJ1ODJtZ3M0ODZzcA==" target="_blank" rel="noreferrer" class="social-btn" aria-label="Instagram" title="Instagram">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+            </div>
+
+            <div class="tech-stack-ribbon">
+              <span class="tech-label">TECH I WORK WITH</span>
+              <div class="tech-icons">
+                <!-- 1. Java ☕ -->
+                <div class="tech-icon-box" title="Java (DSA & Core Programming)">
+                  <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+                    <path d="M10.8 24.5c2.8.4 5.7.3 8.4-.4.8-.2 1.5.4 1.3 1.2-.5 1.1-1.9 1.9-3.3 2.1-2.9.5-6 .3-8.8-.7-.5-.2-.7-1-.2-1.4.4-.4.8-.6 1.3-.8h1.3z" fill="#e76f00"/>
+                    <path d="M9.2 21.6c3.6.6 7.3.5 10.8-.3.6-.1 1.3.4 1.1 1-.4.9-1.4 1.5-2.5 1.8-3.4.6-7 .5-10.3-.4-.5-.1-.8-.8-.4-1.3.3-.5.8-.7 1.3-.8z" fill="#e76f00"/>
+                    <path d="M16 15.5c1.1 1.1 1.8 2.8 1.4 4.5-.9-.5-1.5-1.4-1.8-2.4-.4-1-.1-2.3.4-2.1z" fill="#5382a1"/>
+                    <path d="M13.7 13.1c1.5 1.5 2 3.8 1.4 6-.8-.6-1.3-1.7-1.4-2.7-.1-1.3.3-2.4.6-3.3h-.6z" fill="#5382a1"/>
+                    <path d="M18.7 18.7c2.2-.1 4.2-1 5.9-2.4 1.4-1.1 2.4-2.8 2.3-4.7-.1-1.8-1.3-3.2-2.8-3.8-1.7-.6-3.6-.5-5.2-.1.5.8.9 1.7 1 2.7 1-.1 2.2-.1 3.1.4.9.5 1.4 1.5 1.3 2.6-.1 1.1-.9 2-1.9 2.5-1 .5-2.3.8-3.4.8-.2.7-.2 1.4-.3 2z" fill="#5382a1"/>
+                    <path d="M7.7 18.8c-.3-.1-.5-.3-.6-.5-1.4-1.7-1.8-3.9-1-6 .9 1.3 2.2 2.2 3.7 2.6-1.4 1.7-1.8 2.9-2.1 3.9z" fill="#e76f00"/>
+                  </svg>
+                </div>
+                <!-- 2. Python 🐍 -->
+                <div class="tech-icon-box" title="Python (AI/ML & OpenCV)">
+                  <svg width="22" height="22" viewBox="0 0 128 128" fill="none">
+                    <path d="M63.6 2c-15.6 0-25.2 6.8-25.2 20.3v15h25.7v3.8H26.3C11.8 41.1 0 50.8 0 65.5c0 14.8 12.3 23.9 26.3 23.9h8.3v-11.7c0-13.3 11.2-24.8 24.8-24.8h25.4V36.2c0-13.8-11.4-23.7-25.2-23.7h-6zm-13.8 7.3c2.6 0 4.7 2.1 4.7 4.7s-2.1 4.7-4.7 4.7-4.7-2.1-4.7-4.7 2.1-4.7 4.7-4.7z" fill="#387EB8"/>
+                    <path d="M64.4 126c15.6 0 25.2-6.8 25.2-20.3v-15H63.9v-3.8h37.8c14.5 0 26.3-9.7 26.3-24.4 0-14.8-12.3-23.9-26.3-23.9h-8.3v11.7c0 13.3-11.2 24.8-24.8 24.8H43.2v16.7c0 13.8 11.4 23.7 25.2 23.7h6zm13.8-7.3c-2.6 0-4.7-2.1-4.7-4.7s2.1-4.7 4.7-4.7 4.7 2.1 4.7 4.7-2.1 4.7-4.7 4.7z" fill="#FFE052"/>
+                  </svg>
+                </div>
+                <!-- 3. JavaScript JS -->
+                <div class="tech-icon-box" title="JavaScript (Web Development)">
+                  <svg width="22" height="22" viewBox="0 0 128 128" fill="none">
+                    <rect width="128" height="128" rx="16" fill="#F7DF1E" />
+                    <path d="M68 83c2 4 5 7 11 7 5 0 9-3 9-7 0-5-4-7-11-10-10-4-16-9-16-19 0-10 8-18 19-18 8 0 14 3 18 10l-8 5c-2-4-5-5-10-5-5 0-8 3-8 7 0 4 3 6 10 9 11 4 17 9 17 20 0 12-9 19-21 19-11 0-18-6-21-13l9-5zM28 85c2 4 4 6 8 6 5 0 8-3 8-11V37h12v43c0 14-8 21-20 21-10 0-16-5-19-12l11-5z" fill="#000" />
+                  </svg>
+                </div>
+                <!-- 4. React ⚛️ -->
+                <div class="tech-icon-box" title="React (Frontend UI & Next.js)">
+                  <svg width="22" height="22" viewBox="0 0 115.3 100" fill="#00d8ff">
+                    <path d="M57.65 65.4c-8.5 0-15.4-6.9-15.4-15.4s6.9-15.4 15.4-15.4 15.4 6.9 15.4 15.4-6.9 15.4-15.4 15.4z" />
+                    <ellipse cx="57.65" cy="50" rx="14.5" ry="48.5" fill="none" stroke="#00d8ff" stroke-width="4.5" transform="rotate(30 57.65 50)" />
+                    <ellipse cx="57.65" cy="50" rx="14.5" ry="48.5" fill="none" stroke="#00d8ff" stroke-width="4.5" transform="rotate(90 57.65 50)" />
+                    <ellipse cx="57.65" cy="50" rx="14.5" ry="48.5" fill="none" stroke="#00d8ff" stroke-width="4.5" transform="rotate(150 57.65 50)" />
+                  </svg>
+                </div>
+                <!-- 5. Django -->
+                <div class="tech-icon-box" title="Django (Backend & Web Framework)">
+                  <svg width="22" height="22" viewBox="0 0 128 128" fill="none">
+                    <rect width="128" height="128" rx="16" fill="#092E20" />
+                    <path d="M60.8 18h14.4v54.7c0 14.8-6.1 23-17.7 23-3.6 0-7-.6-9.6-1.8l2.9-11.4c1.7.7 3.6 1.1 5.8 1.1 5.4 0 7.9-3.9 7.9-11.3V18h-3.7zM42.8 45.4v31c-3.1 1.6-7.3 2.6-11.5 2.6-10.7 0-17.3-6.5-17.3-17.6 0-11.6 7.4-18.4 18.2-18.4 3.7 0 7.3.9 10.6 2.4zm-14.4 23.4c2.1 0 4.1-.5 5.6-1.3V54.4c-1.5-.7-3.3-1.1-5.3-1.1-4.8 0-8 3.5-8 8.8 0 4.9 2.8 6.7 7.7 6.7z" fill="#44B78B"/>
+                  </svg>
+                </div>
+                <!-- 6. GitHub -->
+                <div class="tech-icon-box" title="GitHub (Version Control & Workflow)">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Space: Preserves 2-column hero framing over background canvas portrait -->
+          <div class="hero-visual-col" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <!-- 2. ABOUT ME SECTION -->
+      <section id="about" class="section-block">
+        <div class="container">
+          <div class="about-grid">
+            <!-- Left Info -->
+            <div class="about-left">
+              <span class="section-eyebrow">ABOUT ME</span>
+              <h2 class="section-title">
+                Building practical software with<br />
+                clean code and <span class="highlight-blue">interactive tech</span>.
+              </h2>
+              <p class="about-paragraph">
+                I'm Abhijeet Mahakur, a B.Tech Computer Science & Engineering student at ITER, SOA University in Bhubaneswar, Odisha. I enjoy building software that solves practical problems and delivers engaging user experiences. My technical journey spans core programming and data structures to full-stack web development and computer vision pipelines.
+              </p>
+              <a href="#contact" class="btn-outline">
+                <span>More About Me</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Right Info Cards Grid -->
+            <div class="about-cards-grid">
+              <!-- Name -->
+              <div class="info-card glass-panel">
+                <div class="info-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <span class="info-label">Name</span>
+                  <span class="info-val">Abhijeet Mahakur</span>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="info-card glass-panel">
+                <div class="info-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <span class="info-label">Email</span>
+                  <span class="info-val">abhijeetmahakur67@gmail.com</span>
+                </div>
+              </div>
+
+              <!-- Location -->
+              <div class="info-card glass-panel">
+                <div class="info-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <span class="info-label">Location</span>
+                  <span class="info-val">Jamshedpur, Jharkhand, India</span>
+                </div>
+              </div>
+
+              <!-- Availability -->
+              <div class="info-card glass-panel">
+                <div class="info-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <span class="info-label">Availability</span>
+                  <span class="info-val text-success">Open for opportunities</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. SKILLS & SERVICES SECTION -->
+      <section id="skills" class="section-block">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="section-eyebrow">SKILLS & EXPERTISE</span>
+            <h2 class="section-title">My Technical Toolbox</h2>
+            <p class="section-subtitle">Core competencies across software development, web engineering, and intelligent systems.</p>
+          </div>
+
+          <div class="skills-grid">
+            <!-- Skill 1: Software Development -->
+            <div class="skill-card glass-panel">
+              <div class="skill-icon-wrap icon-blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <h3 class="skill-title">Software Development</h3>
+              <p class="skill-desc">Core programming logic, data structures, algorithms, and object-oriented architectures.</p>
+              <div class="skill-tags">
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">DSA</span>
+                <span class="skill-tag">OOP</span>
+                <span class="skill-tag">Problem Solving</span>
+              </div>
+            </div>
+
+            <!-- Skill 2: Web Development -->
+            <div class="skill-card glass-panel">
+              <div class="skill-icon-wrap icon-purple">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+              <h3 class="skill-title">Web Development</h3>
+              <p class="skill-desc">Building responsive modern web user interfaces and database-driven backend web services.</p>
+              <div class="skill-tags">
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">CSS3</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Django</span>
+              </div>
+            </div>
+
+            <!-- Skill 3: AI/ML & Computer Vision -->
+            <div class="skill-card glass-panel">
+              <div class="skill-icon-wrap icon-cyan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                  <rect x="9" y="9" width="6" height="6"></rect>
+                  <line x1="9" y1="1" x2="9" y2="4"></line>
+                  <line x1="15" y1="1" x2="15" y2="4"></line>
+                  <line x1="9" y1="20" x2="9" y2="23"></line>
+                  <line x1="15" y1="20" x2="15" y2="23"></line>
+                </svg>
+              </div>
+              <h3 class="skill-title">AI / ML & Computer Vision</h3>
+              <p class="skill-desc">Contactless gesture perception, landmark coordinate tracking, and computer vision pipelines.</p>
+              <div class="skill-tags">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">OpenCV</span>
+                <span class="skill-tag">MediaPipe</span>
+                <span class="skill-tag">Computer Vision</span>
+              </div>
+            </div>
+
+            <!-- Skill 4: Tools & Engineering -->
+            <div class="skill-card glass-panel">
+              <div class="skill-icon-wrap icon-green">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+              </div>
+              <h3 class="skill-title">Tools & Engineering</h3>
+              <p class="skill-desc">Collaborative version control, modern IDE workflows, and developer productivity tools.</p>
+              <div class="skill-tags">
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">GitHub</span>
+                <span class="skill-tag">VS Code</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. FEATURED PROJECTS SECTION -->
+      <section id="projects" class="section-block">
+        <div class="container">
+          <div class="section-header-split">
+            <div>
+              <span class="section-eyebrow">FEATURED PROJECTS</span>
+              <h2 class="section-title">Selected Work & Applications</h2>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+              <button type="button" id="btn-sync-github-now" class="header-link" title="Check GitHub for newly pushed repositories" style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; cursor: pointer; padding: 7px 14px; border-radius: 9999px; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px;">
+                <span class="sync-icon">🔄</span>
+                <span class="sync-text">Live GitHub Sync</span>
+              </button>
+              <a href="https://github.com/abhijeetmahakur" target="_blank" rel="noopener noreferrer" class="header-link">
+                <span>View All on GitHub</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="projects-grid">
+            <!-- Project 1: GraviSphere -->
+            <div class="project-card glass-panel">
+              <div class="project-thumb-wrap">
+                <img src="/project_gravisphere.jpg" alt="GraviSphere Preview" loading="lazy" class="project-thumb" />
+                <div class="project-thumb-overlay"></div>
+              </div>
+              <div class="project-body">
+                <div class="project-tag-row">
+                  <span class="project-cat">Interactive Simulation / Web Tech</span>
+                  <div class="project-links">
+                    <a href="https://gravisphere.vercel.app" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="Live Demo">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                    <a href="https://github.com/abhijeetmahakur/gravisphere" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="Source Code">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <h3 class="project-title">GraviSphere</h3>
+                <p class="project-desc">An interactive web simulation interface featuring modular UI architecture, interactive gravity-control zones, and smooth 60fps animations.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">JavaScript</span>
+                  <span class="skill-tag">CSS3</span>
+                  <span class="skill-tag">Interactive UI</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 2: Air Writing -->
+            <div class="project-card glass-panel">
+              <div class="project-thumb-wrap">
+                <img src="/project_airwriting.jpg" alt="Air Writing Preview" loading="lazy" class="project-thumb" />
+                <div class="project-thumb-overlay"></div>
+              </div>
+              <div class="project-body">
+                <div class="project-tag-row">
+                  <span class="project-cat">Computer Vision & AI</span>
+                  <div class="project-links">
+                    <a href="https://github.com/abhijeetmahakur/air_writing" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="Source Code">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <h3 class="project-title">Air Writing</h3>
+                <p class="project-desc">A real-time contactless drawing system using hand landmark tracking to translate fingertip motions into digital strokes on screen.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">OpenCV</span>
+                  <span class="skill-tag">MediaPipe</span>
+                  <span class="skill-tag">Computer Vision</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 3: Django Blog Website -->
+            <div class="project-card glass-panel">
+              <div class="project-thumb-wrap">
+                <img src="/project_djangoblog.jpg" alt="Django Blog Preview" loading="lazy" class="project-thumb" />
+                <div class="project-thumb-overlay"></div>
+              </div>
+              <div class="project-body">
+                <div class="project-tag-row">
+                  <span class="project-cat">Full-Stack Web Development</span>
+                  <div class="project-links">
+                    <a href="https://github.com/abhijeetmahakur/Django" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="Source Code">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <h3 class="project-title">Django Blog Website</h3>
+                <p class="project-desc">A database-driven web publishing platform with author authentication, dynamic CRUD workflows, ORM models, and responsive templates.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">Django</span>
+                  <span class="skill-tag">SQLite</span>
+                  <span class="skill-tag">HTML/CSS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. EXPERIENCE & EDUCATION SECTION -->
+      <section id="experience" class="section-block">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="section-eyebrow">EDUCATION & JOURNEY</span>
+            <h2 class="section-title">Academic Background & Practical Milestones</h2>
+          </div>
+
+          <div class="timeline-container">
+            <div class="timeline-spine"></div>
+
+            <!-- Node 1: College Education -->
+            <div class="timeline-node node-left">
+              <div class="timeline-card glass-panel">
+                <span class="timeline-period">2024 — Present</span>
+                <h3 class="timeline-role">B.Tech in Computer Science & Engineering</h3>
+                <h4 class="timeline-org">ITER, SOA University · Bhubaneswar</h4>
+                <p class="timeline-desc">
+                  Currently pursuing 5th Semester (Expected Graduation: 2028). Core coursework and practice in Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, and Web Engineering.
+                </p>
+              </div>
+            </div>
+
+            <!-- Node 2: School Education -->
+            <div class="timeline-node node-right">
+              <div class="timeline-card glass-panel">
+                <span class="timeline-period">Secondary & Senior Secondary</span>
+                <h3 class="timeline-role">Senior Secondary Education (CBSE)</h3>
+                <h4 class="timeline-org">DAV Bistupur · Jamshedpur</h4>
+                <p class="timeline-desc">
+                  Completed secondary and senior secondary education under the CBSE board with a strong curriculum foundation in Mathematics, Physics, and foundational computing.
+                </p>
+              </div>
+            </div>
+
+            <!-- Node 3: Practical Projects -->
+            <div class="timeline-node node-left">
+              <div class="timeline-card glass-panel">
+                <span class="timeline-period">Hands-on Engineering</span>
+                <h3 class="timeline-role">Software Developer / Independent Project Engineering</h3>
+                <h4 class="timeline-org">Self-Directed Systems & Computer Vision</h4>
+                <p class="timeline-desc">
+                  Designed and developed end-to-end practical applications including the GraviSphere interactive physics interface, Air Writing computer vision tracker, and full-stack database-driven Django web apps.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5.5 CERTIFICATES & CREDENTIALS SECTION (AUTO-SYNCED) -->
+      <section id="certificates" class="section-block">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="section-eyebrow">VERIFIED CREDENTIALS</span>
+            <h2 class="section-title">Certifications & Professional Badges</h2>
+            <p class="section-subtitle">Accredited certifications and technical qualifications synced directly from LinkedIn & credential issuers.</p>
+            <div class="cert-header-actions" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+              <button type="button" class="btn-cert-upload-trigger" id="btn-open-more-certs" style="background: rgba(168, 85, 247, 0.2); border: 1px solid rgba(168, 85, 247, 0.5); color: #d8b4fe; font-weight: 600;">
+                <span>📜 Explore All Credentials</span>
+              </button>
+              <button type="button" class="btn-cert-upload-trigger" id="btn-open-cert-modal">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <span>Upload Certificate</span>
+              </button>
+              <button type="button" class="btn-cert-upload-trigger" id="btn-sync-linkedin-now" style="background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.4); color: #38bdf8;">
+                <span class="sync-icon">🔄</span>
+                <span class="sync-text">Sync with LinkedIn</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="certificates-grid" id="certificates-grid">
+            <!-- Hydrated dynamically from data.certificates -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Certificate Upload Modal Dialog (Matches Portfolio Glassmorphism Theme) -->
+      <div id="cert-upload-modal-overlay" class="cert-modal-overlay" data-lenis-prevent aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="cert-modal-container glass-panel" data-lenis-prevent>
+          <div class="cert-modal-header">
+            <div class="cert-modal-title-wrap">
+              <div class="cert-modal-icon-badge">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 15l-2 5l9-13h-6l2-5l-9 13h6z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="cert-modal-title">Upload Certificate</h3>
+                <p class="cert-modal-subtitle">Add your verified credentials to your portfolio vault.</p>
+              </div>
+            </div>
+            <button type="button" class="cert-modal-close" id="btn-close-cert-modal" aria-label="Close Modal">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <form id="portfolio-cert-upload-form" class="cert-modal-form">
+            <!-- Drag & Drop Zone -->
+            <div class="cert-dropzone" id="cert-dropzone">
+              <input type="file" id="inp-cert-file" accept="image/*,application/pdf" style="display: none;" />
+              <div class="dropzone-content" id="dropzone-empty-state">
+                <div class="dropzone-icon">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
+                    <path d="M12 12v9"></path>
+                    <path d="m16 16-4-4-4 4"></path>
+                  </svg>
+                </div>
+                <p class="dropzone-text"><strong>Click to browse</strong> or drag & drop certificate</p>
+                <span class="dropzone-hint">Supports PNG, JPG, WEBP, or PDF certificate documents</span>
+              </div>
+              <div class="dropzone-preview is-hidden" id="dropzone-preview-state">
+                <img id="cert-preview-img" src="" alt="Certificate Preview" class="dropzone-preview-thumb" />
+                <div class="preview-meta">
+                  <span id="cert-preview-filename" class="preview-filename">certificate.pdf</span>
+                  <span id="cert-preview-size" class="preview-filesize">1.2 MB</span>
+                  <button type="button" class="btn-remove-preview" id="btn-remove-cert-file">Remove File</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Metadata Fields -->
+            <div class="cert-form-grid">
+              <div class="form-group full-col">
+                <label for="inp-form-cert-title" class="form-label">Certificate Title <span class="required">*</span></label>
+                <input type="text" id="inp-form-cert-title" class="form-input" placeholder="e.g. AWS Certified Cloud Practitioner" required />
+              </div>
+
+              <div class="form-group">
+                <label for="inp-form-cert-issuer" class="form-label">Issuing Organization <span class="required">*</span></label>
+                <input type="text" id="inp-form-cert-issuer" class="form-input" placeholder="e.g. Amazon Web Services, HackerRank" required />
+              </div>
+
+              <div class="form-group">
+                <label for="inp-form-cert-date" class="form-label">Issue Date</label>
+                <input type="date" id="inp-form-cert-date" class="form-input" />
+              </div>
+
+              <div class="form-group">
+                <label for="inp-form-cert-cat" class="form-label">Domain / Category</label>
+                <select id="inp-form-cert-cat" class="form-input form-select">
+                  <option value="Computer Science">Computer Science</option>
+                  <option value="Cloud Computing">Cloud Computing</option>
+                  <option value="AI & Machine Learning">AI & Machine Learning</option>
+                  <option value="Web Development">Web Development</option>
+                  <option value="Data Structures & Algorithms">Data Structures & Algorithms</option>
+                  <option value="Cybersecurity">Cybersecurity</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="inp-form-cert-url" class="form-label">Verification / Credential URL</label>
+                <input type="url" id="inp-form-cert-url" class="form-input" placeholder="https://..." />
+              </div>
+
+              <div class="form-group full-col">
+                <label for="inp-form-cert-desc" class="form-label">Description / Core Competencies</label>
+                <textarea id="inp-form-cert-desc" class="form-input form-textarea" placeholder="Brief summary of skills assessed or key milestones achieved..."></textarea>
+              </div>
+            </div>
+
+            <div class="cert-modal-footer">
+              <div id="cert-upload-status" class="cert-status-msg"></div>
+              <div class="cert-modal-btns">
+                <button type="button" class="btn-cert-secondary" id="btn-cancel-cert-modal">Cancel</button>
+                <button type="submit" class="btn-cert-primary" id="btn-submit-cert-modal">
+                  <span>📜 Publish to Portfolio Vault</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- 6. TESTIMONIALS & ACHIEVEMENTS SECTION -->
+      <section id="exploring" class="section-block">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="section-eyebrow">CONTINUOUS LEARNING</span>
+            <h2 class="section-title">Currently Exploring & Focus Areas</h2>
+            <p class="section-subtitle">Key technical domains and methodologies actively being explored and practiced.</p>
+          </div>
+
+          <div class="skills-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+            <div class="skill-card glass-panel" style="padding: 24px;">
+              <h3 class="skill-title" style="font-size: 1.05rem; margin-bottom: 6px;">Data Structures & Algorithms</h3>
+              <p class="skill-desc" style="font-size: 0.85rem;">Algorithmic problem solving, complex data structures, and optimal time-space efficiency.</p>
+            </div>
+            <div class="skill-card glass-panel" style="padding: 24px;">
+              <h3 class="skill-title" style="font-size: 1.05rem; margin-bottom: 6px;">Full-Stack Web Dev</h3>
+              <p class="skill-desc" style="font-size: 0.85rem;">Scalable web architectures, responsive client applications, and REST APIs.</p>
+            </div>
+            <div class="skill-card glass-panel" style="padding: 24px;">
+              <h3 class="skill-title" style="font-size: 1.05rem; margin-bottom: 6px;">AI & Machine Learning</h3>
+              <p class="skill-desc" style="font-size: 0.85rem;">Applied machine learning algorithms, model evaluation, and intelligent workflows.</p>
+            </div>
+            <div class="skill-card glass-panel" style="padding: 24px;">
+              <h3 class="skill-title" style="font-size: 1.05rem; margin-bottom: 6px;">Computer Vision</h3>
+              <p class="skill-desc" style="font-size: 0.85rem;">Real-time video processing, MediaPipe landmark tracking, and OpenCV perception pipelines.</p>
+            </div>
+            <div class="skill-card glass-panel" style="padding: 24px;">
+              <h3 class="skill-title" style="font-size: 1.05rem; margin-bottom: 6px;">Interactive Interfaces</h3>
+              <p class="skill-desc" style="font-size: 0.85rem;">60fps canvas animations, physics-based simulations, and creative UI engineering.</p>
+            </div>
+            <div class="skill-card glass-panel" style="padding: 24px;">
+              <h3 class="skill-title" style="font-size: 1.05rem; margin-bottom: 6px;">Automation</h3>
+              <p class="skill-desc" style="font-size: 0.85rem;">Scripting repetitive tasks, build tool optimizations, and streamlined workflows.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. GET IN TOUCH SECTION -->
+      <section id="contact" class="section-block contact-block">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="section-eyebrow">GET IN TOUCH</span>
+          </div>
+
+          <div class="contact-grid">
+            <!-- Left Info -->
+            <div class="contact-left">
+              <p class="contact-lead">
+                Have a project in mind or want to work together? Feel free to reach out, I'll get back to you!
+              </p>
+
+              <div class="contact-items">
+                <div class="contact-entry">
+                  <div class="entry-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                  </div>
+                  <span class="entry-val">abhijeetmahakur67@gmail.com</span>
+                </div>
+
+                <div class="contact-entry">
+                  <div class="entry-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                  </div>
+                  <span class="entry-val">+91 8797009790</span>
+                </div>
+
+                <div class="contact-entry">
+                  <div class="entry-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                  </div>
+                  <span class="entry-val">Jamshedpur, Jharkhand, India</span>
+                </div>
+              </div>
+
+              <!-- Direct Social Connect in Contact section -->
+              <div class="contact-social-row" style="display: flex; gap: 12px; margin-top: 20px; align-items: center;">
+                <a href="https://github.com/abhijeetmahakur" target="_blank" rel="noreferrer" class="social-btn" aria-label="GitHub" title="GitHub">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                  </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/abhijeet-mahakur-23bb983b6" target="_blank" rel="noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="https://x.com/ABHIJEET_MAHAKU" target="_blank" rel="noreferrer" class="social-btn" aria-label="X (Twitter)" title="X (Twitter)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+                <a href="https://www.instagram.com/abhijeet_mahakur?stkn=MXJ1ODJtZ3M0ODZzcA==" target="_blank" rel="noreferrer" class="social-btn" aria-label="Instagram" title="Instagram">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                </a>
+              </div>
+
+              <!-- Decorative 3D Orb Asset from Reference -->
+              <div class="contact-orb-wrap">
+                <img src="/assets/contact_orb.jpg" alt="Glowing 3D Orbit" class="contact-orb-img" />
+              </div>
+            </div>
+
+            <!-- Right Interactive Form -->
+            <div class="contact-form-card glass-panel">
+              <form id="contact-form" class="contact-form">
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Your Email" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="text" id="subject" name="subject" placeholder="Subject" required />
+                </div>
+
+                <div class="form-group">
+                  <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                  <span>Send Message</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+                <div id="form-status" class="form-status-msg"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 8. FOOTER -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top-grid">
+          <!-- Col 1: Brand -->
+          <div class="footer-col brand-col">
+            <a href="#home" class="brand-logo">
+              <div class="logo-monogram">
+                <span>AM</span>
+              </div>
+              <span class="logo-name">Abhijeet Mahakur</span>
+            </a>
+            <p class="footer-tagline">
+              Building digital experiences that are fast, accessible and user-focused.
+            </p>
+          </div>
+
+          <!-- Col 2: Quick Links -->
+          <div class="footer-col">
+            <h4 class="footer-heading">Quick Links</h4>
+            <ul class="footer-links-list">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#skills">Skills</a></li>
+              <li><a href="#projects">Projects</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: More Links & Connect -->
+          <div class="footer-col">
+            <h4 class="footer-heading">&nbsp;</h4>
+            <ul class="footer-links-list">
+              <li><a href="#experience">Education</a></li>
+              <li><a href="#exploring">Focus</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Social Connect -->
+          <div class="footer-col">
+            <h4 class="footer-heading">Connect</h4>
+            <div class="social-icons-row">
+              <a href="https://github.com/abhijeetmahakur" target="_blank" rel="noreferrer" class="social-btn" aria-label="GitHub" title="GitHub">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/abhijeet-mahakur-23bb983b6" target="_blank" rel="noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+              <a href="https://x.com/ABHIJEET_MAHAKU" target="_blank" rel="noreferrer" class="social-btn" aria-label="X (Twitter)" title="X (Twitter)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/abhijeet_mahakur?stkn=MXJ1ODJtZ3M0ODZzcA==" target="_blank" rel="noreferrer" class="social-btn" aria-label="Instagram" title="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 5: Newsletter -->
+          <div class="footer-col newsletter-col">
+            <h4 class="footer-heading">Newsletter</h4>
+            <p class="newsletter-sub">Stay updated with my latest projects and articles.</p>
+            <form id="newsletter-form" class="newsletter-form">
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit" aria-label="Subscribe">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+            <div id="newsletter-status" class="newsletter-status-msg" style="font-size: 0.82rem; margin-top: 8px; min-height: 18px;"></div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Abhijeet Mahakur. All rights reserved.</p>
+          <p class="built-with">Built with ❤️ and Canvas / JavaScript</p>
+        </div>
+      </div>
+    </footer>
+
+
+
+    <!-- Floating Ask Abhijeet AI Assistant Interface -->
+    <div class="ai-assistant-widget" id="ai-assistant-widget">
+      <!-- Floating Launcher Button -->
+      <button id="ai-assistant-toggle" class="ai-launcher-btn" aria-label="Ask Abhijeet AI Assistant" title="Ask Abhijeet AI (Interactive Portfolio Assistant)" aria-expanded="false" aria-controls="ai-chat-panel">
+        <div class="ai-launcher-pulse"></div>
+        <div class="ai-launcher-icon">
+          <svg class="ai-icon-sparkle" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"></path>
+          </svg>
+          <svg class="ai-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </div>
+        <span class="ai-launcher-label">Ask AI</span>
+        <span class="ai-status-indicator" title="AI Ready"></span>
+      </button>
+
+      <!-- Chat Dialog Panel -->
+      <div id="ai-chat-panel" class="ai-chat-panel glass-panel" role="dialog" aria-modal="true" aria-labelledby="ai-panel-title">
+        <div class="ai-chat-header">
+          <div class="ai-header-info">
+            <div class="ai-avatar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 id="ai-panel-title" class="ai-title">Ask Abhijeet AI</h3>
+              <div class="ai-status-sub">
+                <span class="ai-online-dot"></span>
+                <span>Powered by Portfolio Knowledge</span>
+              </div>
+            </div>
+          </div>
+          <div class="ai-header-controls">
+            <button id="ai-chat-reset" class="ai-btn-icon" title="Clear Chat History" aria-label="Clear chat">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+            </button>
+            <button id="ai-chat-close" class="ai-btn-icon" title="Close AI Assistant" aria-label="Close AI Assistant">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div id="ai-chat-messages" class="ai-chat-messages">
+          <div class="ai-msg ai-msg-bot">
+            <div class="ai-msg-bubble">
+              <p>👋 Hi! I'm <strong>Abhijeet's AI Assistant</strong>. Ask me anything about his projects, technical skills, education, or how to get in touch!</p>
+            </div>
+          </div>
+          <div class="ai-quick-chips" id="ai-quick-chips">
+            <button class="ai-chip" data-question="What featured projects has Abhijeet built?">Featured Projects</button>
+            <button class="ai-chip" data-question="What is Abhijeet's technical stack?">Tech Stack</button>
+            <button class="ai-chip" data-question="Where is Abhijeet studying?">Education</button>
+            <button class="ai-chip" data-question="How can I contact Abhijeet?">Contact Info</button>
+          </div>
+        </div>
+
+        <div id="ai-chat-typing" class="ai-chat-typing is-hidden">
+          <span class="ai-typing-dot"></span>
+          <span class="ai-typing-dot"></span>
+          <span class="ai-typing-dot"></span>
+          <span class="ai-typing-text">Abhijeet AI is typing...</span>
+        </div>
+
+        <form id="ai-chat-form" class="ai-chat-form">
+          <input type="text" id="ai-chat-input" placeholder="Ask about projects, skills, contact..." autocomplete="off" maxlength="300" required aria-label="Ask Abhijeet AI a question" />
+          <button type="submit" id="ai-chat-send" aria-label="Send query">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MORE PROJECTS MODAL DIALOG (PORTFOLIO VAULT) -->
+    <div id="more-projects-modal-overlay" class="cert-modal-overlay" data-lenis-prevent aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="cert-modal-container glass-panel more-modal-wide" data-lenis-prevent>
+        <div class="cert-modal-header">
+          <div class="cert-modal-title-wrap">
+            <div class="cert-modal-icon-badge">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </div>
+            <div>
+              <h3 class="cert-modal-title">All Projects & Applications</h3>
+              <p class="cert-modal-subtitle">Explore Abhijeet's complete portfolio of web applications, AI/ML models, and software engineering projects.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <button type="button" id="btn-modal-sync-github" class="header-link" title="Sync with GitHub" style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; cursor: pointer; padding: 6px 14px; border-radius: 9999px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px;">
+              <span class="sync-icon">🔄</span>
+              <span class="sync-text">Live GitHub Sync</span>
+            </button>
+            <button type="button" class="cert-modal-close" id="btn-close-more-projects-modal" aria-label="Close Modal">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="modal-controls-bar">
+          <div class="modal-search-wrap">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="inp-search-more-projects" class="modal-search-input" placeholder="Search projects by title, tech stack (Python, React, Django)..." />
+          </div>
+          <div class="modal-filter-chips" id="project-filter-chips">
+            <button type="button" class="modal-chip active" data-filter="all">All Projects</button>
+            <button type="button" class="modal-chip" data-filter="web">Web Dev</button>
+            <button type="button" class="modal-chip" data-filter="ai">AI / Vision</button>
+            <button type="button" class="modal-chip" data-filter="simulation">Simulations</button>
+          </div>
+        </div>
+
+        <!-- Scrollable Grid -->
+        <div class="modal-grid-scroll" data-lenis-prevent>
+          <div class="projects-grid" id="more-projects-grid">
+            <!-- Hydrated dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MORE CERTIFICATES MODAL DIALOG (CREDENTIALS VAULT) -->
+    <div id="more-certs-modal-overlay" class="cert-modal-overlay" data-lenis-prevent aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="cert-modal-container glass-panel more-modal-wide" data-lenis-prevent>
+        <div class="cert-modal-header">
+          <div class="cert-modal-title-wrap">
+            <div class="cert-modal-icon-badge" style="background: rgba(168, 85, 247, 0.15); border-color: rgba(168, 85, 247, 0.35);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+            </div>
+            <div>
+              <h3 class="cert-modal-title">All Verified Certificates & Badges</h3>
+              <p class="cert-modal-subtitle">Browse all accredited credentials, professional development certifications, and industry recognitions.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <button type="button" id="btn-modal-sync-linkedin" class="header-link" title="Sync with LinkedIn" style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #d8b4fe; cursor: pointer; padding: 6px 14px; border-radius: 9999px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px;">
+              <span class="sync-icon">🔄</span>
+              <span class="sync-text">Sync with LinkedIn</span>
+            </button>
+            <button type="button" class="cert-modal-close" id="btn-close-more-certs-modal" aria-label="Close Modal">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="modal-controls-bar">
+          <div class="modal-search-wrap">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="inp-search-more-certs" class="modal-search-input" placeholder="Search certificates by title, issuer (IBM, TCS, IIT)..." />
+          </div>
+          <div class="modal-filter-chips" id="cert-filter-chips">
+            <button type="button" class="modal-chip active" data-filter="all">All Credentials</button>
+            <button type="button" class="modal-chip" data-filter="ai">AI & ML</button>
+            <button type="button" class="modal-chip" data-filter="web">Web Dev</button>
+            <button type="button" class="modal-chip" data-filter="professional">Professional</button>
+          </div>
+        </div>
+
+        <!-- Scrollable Grid -->
+        <div class="modal-grid-scroll" data-lenis-prevent>
+          <div class="certificates-grid" id="more-certs-grid">
+            <!-- Hydrated dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

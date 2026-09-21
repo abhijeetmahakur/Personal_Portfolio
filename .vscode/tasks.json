@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Portfolio Dev Server (Frontend + Backend)",
+      "type": "shell",
+      "command": "node scripts/dev.js",
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Start Express Backend Only",
+      "type": "shell",
+      "command": "node server/server.js",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Start Vite Frontend Only",
+      "type": "shell",
+      "command": "npx vite --host",
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

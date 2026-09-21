@@ -1,0 +1,1933 @@
+{
+  "personalInfo": {
+    "name": "Abhijeet Mahakur",
+    "shortName": "Abhijeet",
+    "headline": "B.Tech CSE Student | Software Developer | AI & Web Development Enthusiast",
+    "secondaryHeadline": "Building Ideas into Interactive Digital Experiences.",
+    "introParagraph": "I'm Abhijeet Mahakur, a Computer Science & Engineering student passionate about software development, problem-solving, AI, and modern web technologies. I enjoy building practical projects that combine technology, creativity, and interactive user experiences.",
+    "email": "abhijeetmahakur67@gmail.com",
+    "phone": "+91 8797009790",
+    "github": "https://github.com/abhijeetmahakur",
+    "githubUsername": "abhijeetmahakur",
+    "linkedin": "https://linkedin.com/in/abhijeet-mahakur-23bb983b6",
+    "location": "Bhubaneswar, Odisha, India",
+    "college": "ITER, SOA University",
+    "degree": "B.Tech — Computer Science & Engineering",
+    "status": "Currently pursuing",
+    "photoUrl": "",
+    "ctaPrimary": "View My Work",
+    "ctaSecondary": "Contact Me",
+    "availabilityStatus": "Available for Immediate Impact & Research",
+    "twitter": "https://x.com/ABHIJEET_MAHAKU",
+    "instagram": "https://www.instagram.com/abhijeet_mahakur?stkn=MXJ1ODJtZ3M0ODZzcA=="
+  },
+  "quickInfo": [
+    {
+      "field": "Name",
+      "value": "Abhijeet Mahakur"
+    },
+    {
+      "field": "Degree",
+      "value": "B.Tech — Computer Science & Engineering"
+    },
+    {
+      "field": "College",
+      "value": "ITER, SOA University"
+    },
+    {
+      "field": "Location",
+      "value": "Bhubaneswar, Odisha, India"
+    },
+    {
+      "field": "Focus",
+      "value": "Software Development, DSA, Web Development, AI/ML"
+    },
+    {
+      "field": "Current Learning",
+      "value": "DSA, Web Development, AI/ML"
+    },
+    {
+      "field": "GitHub",
+      "value": "github.com/abhijeetmahakur",
+      "link": "https://github.com/abhijeetmahakur"
+    },
+    {
+      "field": "LinkedIn",
+      "value": "linkedin.com/in/abhijeet-mahakur-23bb983b6",
+      "link": "https://linkedin.com/in/abhijeet-mahakur-23bb983b6"
+    }
+  ],
+  "skillGroups": [
+    {
+      "category": "Programming Languages",
+      "skills": [
+        "Java",
+        "Python",
+        "JavaScript"
+      ]
+    },
+    {
+      "category": "Web Development",
+      "skills": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "React",
+        "Django"
+      ]
+    },
+    {
+      "category": "Computer Science",
+      "skills": [
+        "Data Structures & Algorithms",
+        "Object-Oriented Programming",
+        "Graph Algorithms"
+      ]
+    },
+    {
+      "category": "AI / ML",
+      "skills": [
+        "Machine Learning fundamentals",
+        "Data preprocessing",
+        "Computer Vision"
+      ]
+    },
+    {
+      "category": "Tools & Platforms",
+      "skills": [
+        "Git",
+        "GitHub",
+        "VS Code",
+        "Linux/Windows development environments",
+        "Antigravity",
+        "Loveable"
+      ]
+    },
+    {
+      "category": "Currently Learning",
+      "skills": [
+        "Advanced DSA",
+        "Full-Stack Development",
+        "AI/ML",
+        "Advanced React",
+        "Backend Development"
+      ],
+      "isLearning": true
+    }
+  ],
+  "projects": [
+    {
+      "id": "personal-portfolio",
+      "title": "Personal Portfolio & CMS",
+      "tagline": "Full-Stack Portfolio with Headless CMS, Canvas Scroll Animation & AI Chatbot",
+      "description": "A high-performance personal portfolio featuring cinematic canvas scroll animations, dual-layer admin authentication (Google OAuth + Gmail OTP), and a headless dynamic CMS engine.",
+      "technologies": [
+        "JavaScript",
+        "Node.js",
+        "Express.js",
+        "Vite",
+        "HTML5/CSS3"
+      ],
+      "category": "Full-Stack Web Development",
+      "image": "/project_personalportfolio.jpg",
+      "accentColor": "#38bdf8",
+      "glowColor": "rgba(56, 189, 248, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/Personal_Portfolio",
+      "liveUrl": "",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-20T17:27:01.314Z",
+      "caseStudy": {
+        "problem": "Engineering implementation and architecture for Personal Portfolio.",
+        "idea": "Architect a full-stack portfolio with headless REST endpoints, Lenis canvas animations, and secure admin authentication for real-time updates.",
+        "technologies": [
+          "JavaScript",
+          "Node.js",
+          "Express.js",
+          "Vite",
+          "Lenis"
+        ],
+        "development": "Engineered with modular code structure, Git revision tracking, and automated deployment pipelines.",
+        "challenges": "Ensuring high performance, optimal code maintainability, and clean documentation.",
+        "solution": "Implemented best practice architectural patterns with rigorous testing.",
+        "result": "Published on GitHub with verified version history and 0 stars.",
+        "whatILearned": "Strengthened expertise in JavaScript and automated Git workflows.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/Personal_Portfolio",
+          "liveDemo": ""
+        }
+      }
+    },
+    {
+      "id": "gravisphere",
+      "title": "GraviSphere",
+      "tagline": "Smart Gravity Control System — Interactive Simulation",
+      "description": "A futuristic interactive interface concept designed around a simulated gravity-control system. It explores immersive UI design, environmental controls, interactive zones, and intelligent recommendations.",
+      "technologies": [
+        "React",
+        "JavaScript/TypeScript",
+        "Modern UI technologies",
+        "Interactive animations"
+      ],
+      "category": "Interactive Web & Simulation",
+      "accentColor": "#06B6D4",
+      "glowColor": "rgba(6, 182, 212, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/gravisphere",
+      "liveUrl": "https://gravisphere.vercel.app",
+      "caseStudy": {
+        "problem": "Standard user interfaces for complex physics controls and environmental simulations are often rigid, cluttered, and lack real-time visual feedback, making simulated control concepts unintuitive for users.",
+        "idea": "Design and engineer a futuristic, space-themed interactive workstation interface that gives users real-time sensory manipulation over gravitational zones, dynamic environmental parameters, and responsive animations.",
+        "technologies": [
+          "React",
+          "TypeScript",
+          "Tailwind CSS",
+          "GSAP Animation",
+          "HTML5 Canvas",
+          "Modern UI Design Tokens"
+        ],
+        "development": "Structured modular React components representing distinct gravity containment pods and environmental monitoring grids. Integrated custom animation tweens to visually simulate gravitational mass shifts dynamically.",
+        "challenges": "Coordinating smooth multi-directional visual cues and high-framerate particle movement without causing rendering stutter or interface layout shifts on different screen sizes.",
+        "solution": "Used hardware-accelerated CSS transforms and lightweight requestAnimationFrame rendering loops, isolating simulation canvas updates from the React state cycle.",
+        "result": "An engaging, futuristic gravity simulation control console with responsive touch/drag controls, interactive environmental zones, and real-time state visualization.",
+        "whatILearned": "Deepened practical expertise in interactive UI architecture, component-level state decoupling, responsive web layout scaling, and high-performance web animations.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/gravisphere",
+          "liveDemo": "https://gravisphere.vercel.app"
+        }
+      },
+      "stars": 0,
+      "image": "/project_gravisphere.jpg"
+    },
+    {
+      "id": "air-writing",
+      "title": "Air Writing",
+      "tagline": "Computer Vision Based Air Drawing System",
+      "description": "A computer-vision project that allows users to draw in the air using hand gestures captured through a webcam.",
+      "technologies": [
+        "Python",
+        "OpenCV",
+        "MediaPipe",
+        "Computer Vision"
+      ],
+      "features": [
+        "Hand tracking",
+        "Gesture-based drawing",
+        "Virtual canvas",
+        "Color selection",
+        "Brush controls",
+        "Eraser functionality"
+      ],
+      "category": "Computer Vision & AI",
+      "accentColor": "#6366F1",
+      "glowColor": "rgba(99, 102, 241, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/air_writing",
+      "caseStudy": {
+        "problem": "Traditional digital drawing interfaces require physical contact devices (mice, touchscreens, stylus pens), which limits accessibility and contactless interaction modalities.",
+        "idea": "Create an intelligent contactless canvas using real-time computer vision where fingertip landmarks act as a virtual pen in 3D space, translating natural air gestures into digital brushstrokes.",
+        "technologies": [
+          "Python",
+          "OpenCV",
+          "MediaPipe Hands",
+          "NumPy"
+        ],
+        "development": "Implemented MediaPipe hand landmark detection pipelines to isolate index fingertip coordinates. Built mathematical gesture recognizers (such as two-finger pinch for mode switching and single-finger glide for drawing).",
+        "challenges": "Camera noise, lighting fluctuations, and jitter causing broken or wavy lines during fast hand movements.",
+        "solution": "Applied coordinate smoothing filters (exponential moving averages) and dynamic distance thresholding to stabilize fingertip trajectories across successive video frames.",
+        "result": "A standalone real-time air drawing system featuring multi-color selection palettes, dynamic brush sizing, instant gesture-triggered eraser, and seamless frame-by-frame canvas rendering.",
+        "whatILearned": "Gained hands-on experience in real-time frame processing, computer vision pipelines with OpenCV, MediaPipe landmark topology, and gesture-state machine implementation.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/air_writing"
+        }
+      },
+      "stars": 0,
+      "image": "/project_airwriting.jpg"
+    },
+    {
+      "id": "django-blog",
+      "title": "Django Blog Website",
+      "tagline": "Full-Stack Blog Application",
+      "description": "A database-driven blog application built with Django, featuring structured blog posts, authors, publishing status, and dynamic web pages.",
+      "technologies": [
+        "Python",
+        "Django",
+        "HTML",
+        "CSS",
+        "SQLite/Database",
+        "Git"
+      ],
+      "features": [
+        "Blog posts",
+        "Author management",
+        "Draft/published status",
+        "Dynamic pages",
+        "Database integration",
+        "Django admin"
+      ],
+      "category": "Full-Stack Web Development",
+      "accentColor": "#10B981",
+      "glowColor": "rgba(16, 185, 129, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/Django.git",
+      "caseStudy": {
+        "problem": "Building a reliable, secure content publication platform that supports clear relational database separation between post authors, publishing states, and frontend readers.",
+        "idea": "Develop a full-stack Model-View-Template (MVT) web platform utilizing Django's secure ORM, role authentication, and dynamic template rendering engine.",
+        "technologies": [
+          "Python",
+          "Django ORM",
+          "SQLite",
+          "HTML5",
+          "CSS3",
+          "Git"
+        ],
+        "development": "Designed relational database schemas for articles, user profiles, categories, and publication timestamps. Configured Django Admin workflows for effortless content authoring and publishing control.",
+        "challenges": "Handling post state transitions (Draft vs Published), pagination for high volumes of posts, and secure form validation against CSRF vulnerabilities.",
+        "solution": "Leveraged Django's built-in query filtering, class-based generic views, CSRF tokens, and template tags to enforce secure publication rules and seamless pagination.",
+        "result": "A responsive full-stack blog platform with author management, post drafts, dynamic slug-based routing, database-backed search, and administrative control.",
+        "whatILearned": "Mastered the Django MVT architecture, relational database schema design, ORM query optimization, server-rendered dynamic templates, and full-stack project deployment.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/Django"
+        }
+      },
+      "image": "/project_djangoblog.jpg",
+      "stars": 0
+    },
+    {
+      "id": "attendanceapp",
+      "title": "AttendanceApp",
+      "tagline": "Python Smart Attendance & Management System",
+      "description": "A desktop and web-integrated attendance management solution featuring automated check-in logging, verification badges, and real-time attendance analytics.",
+      "technologies": [
+        "Python",
+        "Database",
+        "Analytics",
+        "Automation",
+        "GUI"
+      ],
+      "category": "Python Application & Analytics",
+      "accentColor": "#0ea5e9",
+      "glowColor": "rgba(14, 165, 233, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/AttendanceApp",
+      "liveUrl": "",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-19T18:49:19.978Z",
+      "caseStudy": {
+        "problem": "Engineering implementation and architecture for AttendanceApp.",
+        "idea": "Build and publish a modular, performant software solution hosted on GitHub.",
+        "technologies": [
+          "Python"
+        ],
+        "development": "Engineered with modular code structure, Git revision tracking, and automated deployment pipelines.",
+        "challenges": "Ensuring high performance, optimal code maintainability, and clean documentation.",
+        "solution": "Implemented best practice architectural patterns with rigorous testing.",
+        "result": "Published on GitHub with verified version history and 0 stars.",
+        "whatILearned": "Strengthened expertise in Python and automated Git workflows.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/AttendanceApp",
+          "liveDemo": ""
+        }
+      },
+      "image": "/project_attendanceapp.jpg"
+    },
+    {
+      "id": "thermax",
+      "title": "ThermaX",
+      "tagline": "Hardware Thermal Monitoring & Temperature Analytics",
+      "description": "A hardware monitoring dashboard for real-time CPU/GPU thermal telemetry, core temperature curves, fan speed controls, and thermal throttling alerts.",
+      "technologies": [
+        "Python",
+        "Hardware Telemetry",
+        "Data Visualization",
+        "System Monitoring"
+      ],
+      "category": "System Telemetry & Python",
+      "accentColor": "#f97316",
+      "glowColor": "rgba(249, 115, 22, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/ThermaX",
+      "liveUrl": "",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-19T18:49:19.978Z",
+      "caseStudy": {
+        "problem": "Engineering implementation and architecture for ThermaX.",
+        "idea": "Build and publish a modular, performant software solution hosted on GitHub.",
+        "technologies": [
+          "Python"
+        ],
+        "development": "Engineered with modular code structure, Git revision tracking, and automated deployment pipelines.",
+        "challenges": "Ensuring high performance, optimal code maintainability, and clean documentation.",
+        "solution": "Implemented best practice architectural patterns with rigorous testing.",
+        "result": "Published on GitHub with verified version history and 0 stars.",
+        "whatILearned": "Strengthened expertise in Python and automated Git workflows.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/ThermaX",
+          "liveDemo": ""
+        }
+      },
+      "image": "/project_thermax.jpg"
+    },
+    {
+      "id": "amazon-clone",
+      "title": "Amazon Clone",
+      "tagline": "E-Commerce Web Application & Storefront",
+      "description": "A responsive full-featured e-commerce storefront inspired by Amazon, featuring dynamic product grids, deal banners, star ratings, and shopping cart flows.",
+      "technologies": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Responsive Design",
+        "E-Commerce UI"
+      ],
+      "category": "Frontend Web Engineering",
+      "accentColor": "#f59e0b",
+      "glowColor": "rgba(245, 158, 11, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/amazon_clone",
+      "liveUrl": "",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-19T18:49:19.979Z",
+      "caseStudy": {
+        "problem": "Engineering implementation and architecture for Amazon Clone.",
+        "idea": "Build and publish a modular, performant software solution hosted on GitHub.",
+        "technologies": [
+          "HTML"
+        ],
+        "development": "Engineered with modular code structure, Git revision tracking, and automated deployment pipelines.",
+        "challenges": "Ensuring high performance, optimal code maintainability, and clean documentation.",
+        "solution": "Implemented best practice architectural patterns with rigorous testing.",
+        "result": "Published on GitHub with verified version history and 0 stars.",
+        "whatILearned": "Strengthened expertise in HTML and automated Git workflows.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/amazon_clone",
+          "liveDemo": ""
+        }
+      },
+      "image": "/project_amazonclone.jpg"
+    },
+    {
+      "id": "webdevelopmentbasic",
+      "title": "WebDevelopmentBasic",
+      "tagline": "Interactive Web UI Components & Layout Sandbox",
+      "description": "A curated collection of modern responsive UI components, CSS Grid/Flexbox layouts, gradient palettes, and interactive elements demonstrating web fundamentals.",
+      "technologies": [
+        "HTML5",
+        "CSS3",
+        "Flexbox",
+        "CSS Grid",
+        "UI Design"
+      ],
+      "category": "Web Fundamentals & UI",
+      "accentColor": "#38bdf8",
+      "glowColor": "rgba(56, 189, 248, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/WebDevelopmentBasic",
+      "liveUrl": "",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-19T18:49:19.979Z",
+      "caseStudy": {
+        "problem": "Engineering implementation and architecture for WebDevelopmentBasic.",
+        "idea": "Build and publish a modular, performant software solution hosted on GitHub.",
+        "technologies": [
+          "HTML"
+        ],
+        "development": "Engineered with modular code structure, Git revision tracking, and automated deployment pipelines.",
+        "challenges": "Ensuring high performance, optimal code maintainability, and clean documentation.",
+        "solution": "Implemented best practice architectural patterns with rigorous testing.",
+        "result": "Published on GitHub with verified version history and 0 stars.",
+        "whatILearned": "Strengthened expertise in HTML and automated Git workflows.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/WebDevelopmentBasic",
+          "liveDemo": ""
+        }
+      },
+      "image": "/project_webdevbasic.jpg"
+    },
+    {
+      "id": "python",
+      "title": "Python Algorithms Suite",
+      "tagline": "Algorithms, Data Structures & Problem Solving Suite",
+      "description": "Comprehensive implementations of core computer science algorithms, graph traversals, dynamic programming, and binary search trees with automated test suites.",
+      "technologies": [
+        "Python",
+        "DSA",
+        "Algorithms",
+        "Graph Theory",
+        "Testing"
+      ],
+      "category": "Computer Science & DSA",
+      "accentColor": "#8b5cf6",
+      "glowColor": "rgba(139, 92, 246, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/python",
+      "liveUrl": "",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-19T18:49:19.979Z",
+      "caseStudy": {
+        "problem": "Engineering implementation and architecture for Python.",
+        "idea": "Build and publish a modular, performant software solution hosted on GitHub.",
+        "technologies": [
+          "Python"
+        ],
+        "development": "Engineered with modular code structure, Git revision tracking, and automated deployment pipelines.",
+        "challenges": "Ensuring high performance, optimal code maintainability, and clean documentation.",
+        "solution": "Implemented best practice architectural patterns with rigorous testing.",
+        "result": "Published on GitHub with verified version history and 0 stars.",
+        "whatILearned": "Strengthened expertise in Python and automated Git workflows.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/python",
+          "liveDemo": ""
+        }
+      },
+      "image": "/project_python.jpg"
+    },
+    {
+      "id": "express",
+      "title": "Express REST API & Backend Server",
+      "tagline": "Fast, unopinionated, minimalist web framework for Node.js",
+      "description": "A lightweight Node.js and Express backend architecture demonstrating modular routing, middleware pipelines, RESTful API endpoints, and request validation.",
+      "technologies": [
+        "JavaScript",
+        "Node.js",
+        "Express.js",
+        "REST API",
+        "Backend"
+      ],
+      "category": "Backend & API Engineering",
+      "image": "/project_webdevbasic.jpg",
+      "accentColor": "#22c55e",
+      "glowColor": "rgba(34, 197, 94, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/express",
+      "liveUrl": "",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-20T17:45:00.000Z",
+      "caseStudy": {
+        "problem": "Developing a lightweight, maintainable backend server template with structured routing and middleware handling.",
+        "idea": "Architect a scalable Express.js server providing clear separation of concerns between route handlers, controller logic, and middleware.",
+        "technologies": [
+          "JavaScript",
+          "Node.js",
+          "Express.js"
+        ],
+        "development": "Configured modular route mounting, error-handling middleware, CORS, and request body parsing.",
+        "challenges": "Handling asynchronous error boundaries without server crashing.",
+        "solution": "Implemented centralized async error handler wrappers and middleware chains.",
+        "result": "A clean, efficient Express.js backend repository ready for microservices and API integrations.",
+        "whatILearned": "Deepened understanding of Node.js event loop, Express middleware execution pipelines, and REST principles.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/express",
+          "liveDemo": ""
+        }
+      }
+    },
+    {
+      "id": "localrepo",
+      "title": "LocalRepo — Git & Version Control Architecture",
+      "tagline": "Hands-on Version Control, Branching & Git Workflows Sandbox",
+      "description": "An exploratory repository dedicated to mastering Git internals, branching strategies, rebase operations, merge conflict resolutions, and CI/CD version control workflows.",
+      "technologies": [
+        "Git",
+        "Version Control",
+        "GitHub",
+        "DevOps",
+        "Shell"
+      ],
+      "category": "DevOps & Version Control",
+      "image": "/project_python.jpg",
+      "accentColor": "#a855f7",
+      "glowColor": "rgba(168, 85, 247, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/localrepo",
+      "liveUrl": "",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-20T17:45:00.000Z",
+      "caseStudy": {
+        "problem": "Navigating complex Git workflows, branch rebasing, and multi-contributor version control environments.",
+        "idea": "Create a hands-on repository for testing advanced Git commands, commit squashing, cherry-picking, and remote synchronization.",
+        "technologies": [
+          "Git",
+          "GitHub",
+          "Shell"
+        ],
+        "development": "Practiced feature branching, stash workflows, and Git hook configurations.",
+        "challenges": "Resolving complex three-way merge conflicts and maintaining clean commit histories.",
+        "solution": "Documented and standardized interactive rebasing and conflict resolution procedures.",
+        "result": "A comprehensive reference repository demonstrating best practices in Git version control.",
+        "whatILearned": "Mastered Git tree navigation, reflog recovery, branch lifecycle management, and repository hygiene.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/localrepo",
+          "liveDemo": ""
+        }
+      }
+    },
+    {
+      "id": "demo",
+      "title": "Demo — Foundations & Code Sandbox",
+      "tagline": "First Git Repository & Foundational Code Sandbox",
+      "description": "Abhijeet's inaugural Git repository marking the start of his software engineering journey, containing foundational code exercises, syntax explorations, and initial algorithm experiments.",
+      "technologies": [
+        "Git",
+        "Programming Foundations",
+        "Problem Solving"
+      ],
+      "category": "Foundations & Exploration",
+      "image": "/project_webdevbasic.jpg",
+      "accentColor": "#ec4899",
+      "glowColor": "rgba(236, 72, 153, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/demo",
+      "liveUrl": "",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-20T17:45:00.000Z",
+      "caseStudy": {
+        "problem": "Establishing initial developer workflows and learning Git basics.",
+        "idea": "Set up a sandbox repository to experiment with version control, commit conventions, and foundational coding exercises.",
+        "technologies": [
+          "Git",
+          "GitHub"
+        ],
+        "development": "Initial repository setup with README, commit history, and basic code experiments.",
+        "challenges": "Understanding Git remotes, SSH/HTTPS authentication, and staging area mechanics.",
+        "solution": "Hands-on iterative commits and remote pushing practice.",
+        "result": "The foundational milestone repository that began Abhijeet's public open-source portfolio on GitHub.",
+        "whatILearned": "Foundational understanding of Git remotes, commits, and collaborative coding workflows.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/demo",
+          "liveDemo": ""
+        }
+      }
+    }
+  ],
+  "education": {
+    "institution": "ITER, SOA University",
+    "location": "Bhubaneswar, Odisha, India",
+    "degree": "Bachelor of Technology — Computer Science & Engineering",
+    "timeline": "2024 — 2028",
+    "status": "Currently pursuing",
+    "secondaryDegree": "Higher Secondary Education (Science)",
+    "secondaryInstitution": "DAV BISTUPUR ,JAMSHEDPUR,JHARKHAND",
+    "secondaryTimeline": "2022 — 2024",
+    "secondaryDescription": "Completed intermediate with a rigorous focus on Mathematics, Physics, and foundational computing.",
+    "relevantAreas": [
+      "Data Structures & Algorithms",
+      "Object-Oriented Programming",
+      "Graph Theory",
+      "Database Systems",
+      "Web Development",
+      "Computer Networks",
+      "Artificial Intelligence / Machine Learning",
+      "Software Development"
+    ]
+  },
+  "experience": {
+    "role": "Student Developer / Independent Projects",
+    "focus": "Self-Directed Project Engineering & Research",
+    "location": "Bhubaneswar, India",
+    "timeline": "2024 — Present",
+    "badge": "Hands-On Experience",
+    "summary": "Rather than traditional corporate internships, my practical development experience is built on designing, developing, and debugging complete software applications from scratch:",
+    "items": [
+      {
+        "id": "exp-thiranex",
+        "title": "Web Development Internship",
+        "org": "Thiranex (Remote / Project-Based)",
+        "period": "27 Jul 2026 — 26 Aug 2026",
+        "internId": "THX-JUL2726-371",
+        "verifyUrl": "https://www.thiranex.in/",
+        "description": "Remote, project-based Web Development internship involving practical projects under industry mentorship (Intern ID: THX-JUL2726-371).",
+        "highlightColor": "#06B6D4"
+      },
+      {
+        "id": "exp-beeskilled",
+        "title": "Python Developer Internship",
+        "org": "BeeSkilled (Remote / Online)",
+        "period": "Jun 2026 — 30 Jul 2026",
+        "description": "6-Week online internship program in Python focusing on hands-on software development, script automation, and practical engineering projects.",
+        "highlightColor": "#6366F1"
+      },
+      {
+        "id": "exp-1",
+        "title": "Software Developer & Project Builder",
+        "org": "Self-Directed Engineering & Systems",
+        "period": "2024 — Present",
+        "description": "Designed and developed end-to-end practical applications including GraviSphere physics interface, Air Writing computer vision system, and full-stack Django web applications.",
+        "highlightColor": "#10B981"
+      }
+    ]
+  },
+  "interests": [
+    {
+      "id": "int-1",
+      "title": "Web Applications",
+      "description": "Modern and responsive websites and web applications built with clean architecture and interactive components.",
+      "icon": "💻"
+    },
+    {
+      "id": "int-2",
+      "title": "AI Applications",
+      "description": "Exploring AI-powered tools, machine learning pipelines, and intelligent interactive interfaces.",
+      "icon": "🤖"
+    },
+    {
+      "id": "int-3",
+      "title": "Computer Vision",
+      "description": "Applications involving image processing, real-time hand/gesture tracking, and OpenCV/MediaPipe solutions.",
+      "icon": "👁️"
+    },
+    {
+      "id": "int-4",
+      "title": "Automation",
+      "description": "Tools, scripts, and workflows that automate repetitive tasks and optimize developer productivity.",
+      "icon": "⚙️"
+    },
+    {
+      "id": "int-5",
+      "title": "Interactive Interfaces",
+      "description": "Futuristic, engaging, and dynamic user interfaces designed for smooth 60fps digital experiences.",
+      "icon": "🎨"
+    }
+  ],
+  "journey": [
+    {
+      "year": "2024",
+      "title": "Foundation in Computer Science & Programming",
+      "description": "Began B.Tech in CSE at ITER, SOA University. Built core competencies in Java, object-oriented concepts, and problem-solving techniques.",
+      "category": "Foundation",
+      "skills": [
+        "Java",
+        "C/C++",
+        "OOP Foundations",
+        "Algorithm Basics"
+      ]
+    },
+    {
+      "year": "2025",
+      "title": "Full-Stack Development & Computer Vision Exploration",
+      "description": "Engineered practical applications including Python OpenCV gesture tracking and full-stack web applications with Django and React.",
+      "category": "Project Development",
+      "skills": [
+        "Python",
+        "OpenCV",
+        "MediaPipe",
+        "Django",
+        "React",
+        "Git"
+      ]
+    },
+    {
+      "year": "2026",
+      "title": "Advanced Engineering, AI Integration & Creative Web",
+      "description": "Currently focusing on advanced Data Structures & Algorithms, modern interactive WebGL interfaces, and scalable software systems.",
+      "category": "Specialization",
+      "skills": [
+        "Advanced DSA",
+        "Three.js / WebGL",
+        "AI/ML Workflows",
+        "Performance Optimization"
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "id": "cert-ibm-ai",
+      "title": "Getting Started with Artificial Intelligence",
+      "issuer": "IBM SkillsBuild",
+      "date": "2026-03-09",
+      "category": "Artificial Intelligence",
+      "verifyUrl": "https://www.credly.com/badges/7074f4f7-a252-4164-b4bf-b480e14a7589",
+      "description": "Foundational introduction to Artificial Intelligence through IBM SkillsBuild.",
+      "source": "IBM Credly Verified"
+    },
+    {
+      "id": "cert-tcs-careeredge",
+      "title": "TCS iON Career Edge – Young Professional",
+      "issuer": "TCS iON – Tata Consultancy Services",
+      "date": "2026-04-28",
+      "category": "Professional Development",
+      "verifyUrl": "https://g25.tcsion.com/LX/ecertificate/verification",
+      "certId": "272697-30477454-1016",
+      "description": "Communication skills, workplace thinking skills, presentation skills, soft skills, resume writing, group discussion, interview skills, business etiquette, email writing, problem-solving mindset, IT foundations and overview of Artificial Intelligence (Start Date: 11 Mar 2026, End Date: 28 Apr 2026, Cert ID: 272697-30477454-1016).",
+      "source": "TCS iON Verified"
+    },
+    {
+      "id": "cert-google-gemini",
+      "title": "Gemini Certified Student",
+      "issuer": "Google for Education",
+      "date": "2026-03-09",
+      "category": "Artificial Intelligence",
+      "verifyUrl": "",
+      "description": "Demonstrated knowledge, skills, and basic competencies needed to use Google AI tools and workflows (Valid through 09/03/2029).",
+      "source": "Google for Education"
+    },
+    {
+      "id": "cert-acmegrade-webdev",
+      "title": "Web Development – Training Completion",
+      "issuer": "Acmegrade / Rendezvous, IIT Delhi",
+      "date": "2025-10-09",
+      "category": "Web Development",
+      "verifyUrl": "",
+      "description": "Completed practical training in Web Development, covering fundamentals and hands-on development concepts (Training period: 9 Sep 2025 to 9 Oct 2025).",
+      "source": "Acmegrade / IIT Delhi"
+    },
+    {
+      "id": "cert-beeskilled-python",
+      "title": "Internship Program Certificate in Python",
+      "issuer": "BeeSkilled — Tech and Internships",
+      "date": "2026-07-30",
+      "category": "Python Development",
+      "verifyUrl": "",
+      "description": "Completed the 6-Week online internship program in Python at BeeSkilled focusing on practical programming projects, script automation, and learning growth.",
+      "source": "BeeSkilled Verified"
+    }
+  ],
+  "achievements": [
+    {
+      "id": "ach-1",
+      "title": "Competitive Problem Solving Preparation",
+      "category": "Coding Competitions",
+      "description": "Actively solving algorithmic and data structure challenges in Java and Python.",
+      "date": "2026"
+    }
+  ],
+  "resume": {
+    "fileName": "Abhijeet_Mahakur_Resume.pdf",
+    "fileUrl": "",
+    "lastUpdated": "2026-09-16T15:30:16.662Z",
+    "headline": "B.Tech CSE Student & Software Engineer"
+  },
+  "aiKnowledge": {
+    "systemPrompt": "You are the official interactive AI assistant for Abhijeet Mahakur's personal portfolio. Your role is to answer questions from recruiters, collaborators, and visitors about Abhijeet's background, education, projects, technical skills, and contact information with accuracy, enthusiasm, and a polite, professional tone.",
+    "faqs": [
+      {
+        "question": "Who is Abhijeet Mahakur?",
+        "answer": "Abhijeet Mahakur is a B.Tech Computer Science & Engineering student at ITER, SOA University in Bhubaneswar, Odisha, India. He is a passionate software developer and creative technologist specializing in software development, AI/ML, computer vision, and modern web applications."
+      },
+      {
+        "question": "What are Abhijeet's core technical skills?",
+        "answer": "His core programming languages include Java, Python, and JavaScript/TypeScript. His web stack includes React, Django, HTML5, and CSS3. In AI/ML, he works with computer vision tools like OpenCV and MediaPipe, alongside strong fundamentals in Data Structures & Algorithms and Database systems."
+      },
+      {
+        "question": "What featured projects has he built?",
+        "answer": "His three main projects are:\n1. GraviSphere: An interactive physics and gravity simulation workstation with 3D animation.\n2. Air Writing System: A computer vision gesture drawing system using Python, OpenCV, and MediaPipe.\n3. Django Blog Website: A robust full-stack blog platform with relational ORM and dynamic templates."
+      },
+      {
+        "question": "How can I contact Abhijeet?",
+        "answer": "You can email him directly at abhijeetmahakur67@gmail.com, or connect with him on LinkedIn (linkedin.com/in/abhijeet-mahakur-23bb983b6) and GitHub (github.com/abhijeetmahakur)."
+      }
+    ]
+  },
+  "syncLogs": [
+    {
+      "id": "log-1789931048102",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T19:04:08.102Z"
+    },
+    {
+      "id": "log-1789930643609",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:57:23.609Z"
+    },
+    {
+      "id": "log-1789930642871",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:57:22.871Z"
+    },
+    {
+      "id": "log-1789930617913",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:56:57.913Z"
+    },
+    {
+      "id": "log-1789930617567",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:56:57.567Z"
+    },
+    {
+      "id": "log-1789930596525",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:56:36.525Z"
+    },
+    {
+      "id": "log-1789930583812",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:56:23.812Z"
+    },
+    {
+      "id": "log-1789930552374",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:55:52.374Z"
+    },
+    {
+      "id": "log-1789930523621",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:55:23.621Z"
+    },
+    {
+      "id": "log-1789930522272",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:55:22.272Z"
+    },
+    {
+      "id": "log-1789930516345",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:55:16.345Z"
+    },
+    {
+      "id": "log-1789930475308",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:54:35.308Z"
+    },
+    {
+      "id": "log-1789930464312",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:54:24.312Z"
+    },
+    {
+      "id": "log-1789930415378",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:53:35.378Z"
+    },
+    {
+      "id": "log-1789930404200",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:53:24.200Z"
+    },
+    {
+      "id": "log-1789930355315",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:52:35.315Z"
+    },
+    {
+      "id": "log-1789930344245",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:52:24.245Z"
+    },
+    {
+      "id": "log-1789930295367",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:51:35.367Z"
+    },
+    {
+      "id": "log-1789930284405",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:51:24.405Z"
+    },
+    {
+      "id": "log-1789930235878",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:50:35.878Z"
+    },
+    {
+      "id": "log-1789930224723",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:50:24.723Z"
+    },
+    {
+      "id": "log-1789930175952",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:49:35.952Z"
+    },
+    {
+      "id": "log-1789930164641",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:49:24.641Z"
+    },
+    {
+      "id": "log-1789930115991",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:48:35.991Z"
+    },
+    {
+      "id": "log-1789930104834",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:48:24.834Z"
+    },
+    {
+      "id": "log-1789930055999",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:47:35.999Z"
+    },
+    {
+      "id": "log-1789930044721",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:47:24.721Z"
+    },
+    {
+      "id": "log-1789929995900",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:46:35.900Z"
+    },
+    {
+      "id": "log-1789929985578",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:46:25.578Z"
+    },
+    {
+      "id": "log-1789929935973",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:45:35.973Z"
+    },
+    {
+      "id": "log-1789929924812",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:45:24.812Z"
+    },
+    {
+      "id": "log-1789929875902",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:44:35.902Z"
+    },
+    {
+      "id": "log-1789929864694",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:44:24.694Z"
+    },
+    {
+      "id": "log-1789929815902",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:43:35.902Z"
+    },
+    {
+      "id": "log-1789929804682",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:43:24.682Z"
+    },
+    {
+      "id": "log-1789929755965",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:42:35.965Z"
+    },
+    {
+      "id": "log-1789929744742",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:42:24.742Z"
+    },
+    {
+      "id": "log-1789929695253",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:41:35.253Z"
+    },
+    {
+      "id": "log-1789929684293",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:41:24.293Z"
+    },
+    {
+      "id": "log-1789929635316",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:40:35.316Z"
+    },
+    {
+      "id": "log-1789929624271",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:40:24.271Z"
+    },
+    {
+      "id": "log-1789929575312",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:39:35.312Z"
+    },
+    {
+      "id": "log-1789929564169",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:39:24.169Z"
+    },
+    {
+      "id": "log-1789929515923",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:38:35.923Z"
+    },
+    {
+      "id": "log-1789929504684",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:38:24.684Z"
+    },
+    {
+      "id": "log-1789929456071",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:37:36.071Z"
+    },
+    {
+      "id": "log-1789929445679",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:37:25.679Z"
+    },
+    {
+      "id": "log-1789929383964",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:36:23.964Z"
+    },
+    {
+      "id": "log-1789929353358",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 12.",
+      "timestamp": "2026-09-20T18:35:53.358Z"
+    },
+    {
+      "id": "log-1789929326605",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:35:26.605Z"
+    },
+    {
+      "id": "log-1789929313424",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:35:13.424Z"
+    },
+    {
+      "id": "log-1789929292063",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:34:52.063Z"
+    },
+    {
+      "id": "log-1789929288331",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:34:48.331Z"
+    },
+    {
+      "id": "log-1789929262255",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:34:22.255Z"
+    },
+    {
+      "id": "log-1789929232016",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:33:52.016Z"
+    },
+    {
+      "id": "log-1789929228334",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:33:48.334Z"
+    },
+    {
+      "id": "log-1789929223074",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:33:43.074Z"
+    },
+    {
+      "id": "log-1789929222898",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:33:42.898Z"
+    },
+    {
+      "id": "log-1789929220157",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:33:40.157Z"
+    },
+    {
+      "id": "log-1789929219945",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:33:39.945Z"
+    },
+    {
+      "id": "log-auth-1789929219752",
+      "service": "Google OAuth",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via Google OAuth 2.0.",
+      "timestamp": "2026-09-20T18:33:39.752Z"
+    },
+    {
+      "id": "log-1789929215993",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:33:35.993Z"
+    },
+    {
+      "id": "log-1789929186921",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:33:06.921Z"
+    },
+    {
+      "id": "log-1789929186213",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:33:06.213Z"
+    },
+    {
+      "id": "log-1789929185963",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:33:05.963Z"
+    },
+    {
+      "id": "log-1789929179512",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:32:59.512Z"
+    },
+    {
+      "id": "log-1789929179320",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:32:59.320Z"
+    },
+    {
+      "id": "log-auth-1789929178790",
+      "service": "Google OAuth",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur69@gmail.com authenticated successfully via Google OAuth 2.0.",
+      "timestamp": "2026-09-20T18:32:58.790Z"
+    },
+    {
+      "id": "log-1789929172400",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:32:52.400Z"
+    },
+    {
+      "id": "log-1789929171575",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:32:51.575Z"
+    },
+    {
+      "id": "log-1789929171387",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:32:51.387Z"
+    },
+    {
+      "id": "log-1789929168047",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:32:48.047Z"
+    },
+    {
+      "id": "log-1789929167732",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:32:47.732Z"
+    },
+    {
+      "id": "log-1789929159341",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:32:39.341Z"
+    },
+    {
+      "id": "log-1789929129315",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:32:09.315Z"
+    },
+    {
+      "id": "log-1789929111889",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 11.",
+      "timestamp": "2026-09-20T18:31:51.889Z"
+    },
+    {
+      "id": "log-auth-1789929013562",
+      "service": "Google OAuth",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via Google OAuth 2.0.",
+      "timestamp": "2026-09-20T18:30:13.562Z"
+    },
+    {
+      "id": "log-1789928899420",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 9.",
+      "timestamp": "2026-09-20T18:28:19.420Z"
+    },
+    {
+      "id": "log-auth-1789928212826",
+      "service": "Google OAuth",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via Google OAuth 2.0.",
+      "timestamp": "2026-09-20T18:16:52.826Z"
+    },
+    {
+      "id": "log-auth-1789928137439",
+      "service": "Google OAuth",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via Google OAuth 2.0.",
+      "timestamp": "2026-09-20T18:15:37.439Z"
+    },
+    {
+      "id": "log-auth-1789928096128",
+      "service": "Google OAuth",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via Google OAuth 2.0.",
+      "timestamp": "2026-09-20T18:14:56.128Z"
+    },
+    {
+      "id": "log-otp-1789928073301",
+      "service": "Admin Auth / OTP",
+      "status": "OTP_DISPATCHED",
+      "message": "6-Digit OTP generated and dispatched via Gmail SMTP to abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-20T18:14:33.301Z"
+    },
+    {
+      "id": "log-auth-1789927987179",
+      "service": "Google OAuth",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via Google OAuth 2.0.",
+      "timestamp": "2026-09-20T18:13:07.179Z"
+    },
+    {
+      "id": "log-1789927870356",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 9.",
+      "timestamp": "2026-09-20T18:11:10.356Z"
+    },
+    {
+      "id": "log-1789926849716",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 9.",
+      "timestamp": "2026-09-20T17:54:09.716Z"
+    },
+    {
+      "id": "log-1789926194608",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 9.",
+      "timestamp": "2026-09-20T17:43:14.608Z"
+    },
+    {
+      "id": "log-1789926070262",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 9.",
+      "timestamp": "2026-09-20T17:41:10.262Z"
+    },
+    {
+      "id": "log-1789925815358",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 9.",
+      "timestamp": "2026-09-20T17:36:55.358Z"
+    },
+    {
+      "id": "log-1789925798518",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 9.",
+      "timestamp": "2026-09-20T17:36:38.518Z"
+    },
+    {
+      "id": "log-1789925740034",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 9.",
+      "timestamp": "2026-09-20T17:35:40.034Z"
+    },
+    {
+      "id": "log-1789925221315",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Added 1 new, updated 8.",
+      "timestamp": "2026-09-20T17:27:01.315Z"
+    },
+    {
+      "id": "log-1789924370317",
+      "service": "Admin CMS",
+      "status": "UPDATED",
+      "message": "Portfolio CMS data updated by abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-20T17:12:50.317Z"
+    },
+    {
+      "id": "log-1789924274672",
+      "service": "GitHub Auto-Sync",
+      "status": "WARNING",
+      "message": "GitHub sync notice: GitHub user API returned status 403",
+      "timestamp": "2026-09-20T17:11:14.672Z"
+    },
+    {
+      "id": "log-1789922805429",
+      "service": "GitHub Auto-Sync",
+      "status": "WARNING",
+      "message": "GitHub sync notice: GitHub user API returned status 403",
+      "timestamp": "2026-09-20T16:46:45.429Z"
+    },
+    {
+      "id": "log-1789922663156",
+      "service": "Admin CMS",
+      "status": "UPDATED",
+      "message": "Portfolio CMS data updated by abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-20T16:44:23.156Z"
+    },
+    {
+      "id": "log-1789922602151",
+      "service": "Admin CMS",
+      "status": "UPDATED",
+      "message": "Portfolio CMS data updated by abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-20T16:43:22.151Z"
+    },
+    {
+      "id": "log-1789922100130",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-20T16:35:00.130Z"
+    },
+    {
+      "id": "log-1789921531791",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-20T16:25:31.791Z"
+    },
+    {
+      "id": "log-1789901367308",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-20T10:49:27.308Z"
+    },
+    {
+      "id": "log-contact-1789901284091",
+      "service": "Contact Dispatcher",
+      "status": "MESSAGE_RECEIVED",
+      "message": "Message from anup (abhijeetmahakur67@gmail.com): \"fdfgdcxcc\"",
+      "timestamp": "2026-09-20T10:48:04.091Z"
+    },
+    {
+      "id": "log-auth-1789900811567",
+      "service": "Admin Auth / OTP",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via 6-Digit OTP (30 days).",
+      "timestamp": "2026-09-20T10:40:11.567Z"
+    },
+    {
+      "id": "log-otp-1789900789276",
+      "service": "Admin Auth / OTP",
+      "status": "OTP_DISPATCHED",
+      "message": "6-Digit OTP generated and dispatched via Gmail SMTP to abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-20T10:39:49.276Z"
+    },
+    {
+      "id": "log-sec-1789900763483",
+      "service": "Security / Google OAuth",
+      "status": "DENIED",
+      "message": "Blocked unauthorized Google login attempt from abhijeetmahakur69@gmail.com. Access restricted to abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-20T10:39:23.483Z"
+    },
+    {
+      "id": "log-1789899572611",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-20T10:19:32.611Z"
+    },
+    {
+      "id": "log-1789887138761",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-20T06:52:18.761Z"
+    },
+    {
+      "id": "log-1789885338892",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-20T06:22:18.892Z"
+    },
+    {
+      "id": "log-1789883538920",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-20T05:52:18.920Z"
+    },
+    {
+      "id": "log-1789881739219",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-20T05:22:19.219Z"
+    },
+    {
+      "id": "log-1789880353987",
+      "service": "Certificate Vault",
+      "status": "DELETED",
+      "message": "Certificate ID \"cert-1789880161989\" removed from vault.",
+      "timestamp": "2026-09-20T04:59:13.987Z"
+    },
+    {
+      "id": "log-1789880161989",
+      "service": "LinkedIn Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Ingested new certificate from LinkedIn: \"Aws Certificate\" issued by LinkedIn / Accredited Issuer.",
+      "timestamp": "2026-09-20T04:56:01.989Z"
+    },
+    {
+      "id": "log-1789879944641",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-20T04:52:24.641Z"
+    },
+    {
+      "id": "log-1789846981910",
+      "service": "Certificate Vault",
+      "status": "DELETED",
+      "message": "Certificate ID \"cert-1789572043988\" removed from vault.",
+      "timestamp": "2026-09-19T19:43:01.910Z"
+    },
+    {
+      "id": "log-1789846979507",
+      "service": "Certificate Vault",
+      "status": "DELETED",
+      "message": "Certificate ID \"cert-1789843781417\" removed from vault.",
+      "timestamp": "2026-09-19T19:42:59.507Z"
+    },
+    {
+      "id": "log-1789846926895",
+      "service": "Admin CMS",
+      "status": "UPDATED",
+      "message": "Portfolio CMS data updated by abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-19T19:42:06.895Z"
+    },
+    {
+      "id": "log-auth-1789846847906",
+      "service": "Google OAuth",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via Google OAuth 2.0.",
+      "timestamp": "2026-09-19T19:40:47.906Z"
+    },
+    {
+      "id": "log-1789846802971",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-19T19:40:02.971Z"
+    },
+    {
+      "id": "log-auth-1789846443243",
+      "service": "Google OAuth",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via Google OAuth 2.0.",
+      "timestamp": "2026-09-19T19:34:03.243Z"
+    },
+    {
+      "id": "log-otp-1789846399841",
+      "service": "Admin Auth / OTP",
+      "status": "OTP_DISPATCHED",
+      "message": "6-Digit OTP generated and dispatched via Gmail SMTP to abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-19T19:33:19.841Z"
+    },
+    {
+      "id": "log-1789846380028",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-19T19:33:00.028Z"
+    },
+    {
+      "id": "log-1789846179147",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-19T19:29:39.147Z"
+    },
+    {
+      "id": "log-otp-1789845900362",
+      "service": "Admin Auth / OTP",
+      "status": "OTP_DISPATCHED",
+      "message": "6-Digit OTP generated and dispatched via Gmail SMTP to abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-19T19:25:00.362Z"
+    },
+    {
+      "id": "log-1789845776619",
+      "service": "GitHub Auto-Sync",
+      "status": "WARNING",
+      "message": "GitHub sync notice: GitHub user API returned status 403",
+      "timestamp": "2026-09-19T19:22:56.619Z"
+    },
+    {
+      "id": "log-1789845099929",
+      "service": "Certificate Vault",
+      "status": "DELETED",
+      "message": "Certificate ID \"cert-1789845091537\" removed from vault.",
+      "timestamp": "2026-09-19T19:11:39.929Z"
+    },
+    {
+      "id": "log-1789845091537",
+      "service": "Certificate Vault",
+      "status": "UPLOADED",
+      "message": "Certificate \"Test Certified Developer\" (Google Cloud & DeepMind) published to vault.",
+      "timestamp": "2026-09-19T19:11:31.537Z"
+    },
+    {
+      "id": "log-1789844733886",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-19T19:05:33.886Z"
+    },
+    {
+      "id": "log-1789843781417",
+      "service": "LinkedIn Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Ingested new certificate from LinkedIn: \"Python & Computer Vision Specialist\" issued by LinkedIn Learning.",
+      "timestamp": "2026-09-19T18:49:41.417Z"
+    },
+    {
+      "id": "log-1789843774895",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 7.",
+      "timestamp": "2026-09-19T18:49:34.895Z"
+    },
+    {
+      "id": "log-1789843759979",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 10 repos from GitHub (@abhijeetmahakur). Added 5 new, updated 2.",
+      "timestamp": "2026-09-19T18:49:19.979Z"
+    },
+    {
+      "id": "log-1789816184885",
+      "service": "Admin CMS",
+      "status": "UPDATED",
+      "message": "Portfolio CMS data updated by abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-19T11:09:44.885Z"
+    },
+    {
+      "id": "log-auth-1789816082150",
+      "service": "Google OAuth",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via Google OAuth 2.0.",
+      "timestamp": "2026-09-19T11:08:02.150Z"
+    },
+    {
+      "id": "log-sub-1789816038363",
+      "service": "Newsletter Service",
+      "status": "SUBSCRIBED",
+      "message": "New newsletter subscription: abhijeetmahakur14@gmail.com",
+      "timestamp": "2026-09-19T11:07:18.363Z"
+    },
+    {
+      "id": "log-sec-1789815989140",
+      "service": "Security / Google OAuth",
+      "status": "DENIED",
+      "message": "Blocked unauthorized Google login attempt from abhijeetmahakur69@gmail.com. Access restricted to abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-19T11:06:29.140Z"
+    },
+    {
+      "id": "log-sub-1789815178821",
+      "service": "Newsletter Service",
+      "status": "SUBSCRIBED",
+      "message": "New newsletter subscription: kavya.developer@example.com",
+      "timestamp": "2026-09-19T10:52:58.821Z"
+    },
+    {
+      "id": "log-sub-1789814993761",
+      "service": "Newsletter Service",
+      "status": "SUBSCRIBED",
+      "message": "New newsletter subscription: priya.tech.updates@example.com",
+      "timestamp": "2026-09-19T10:49:53.761Z"
+    },
+    {
+      "id": "log-contact-1789814513757",
+      "service": "Contact Dispatcher",
+      "status": "MESSAGE_RECEIVED",
+      "message": "Message from Aarav Sharma (aarav.sharma.dev@gmail.com): \"Project Inquiry - GraviSphere\"",
+      "timestamp": "2026-09-19T10:41:53.757Z"
+    },
+    {
+      "id": "log-contact-1789814177456",
+      "service": "Contact Dispatcher",
+      "status": "MESSAGE_RECEIVED",
+      "message": "Message from Aarav Sharma (aarav.sharma.dev@gmail.com): \"Project Inquiry - GraviSphere\"",
+      "timestamp": "2026-09-19T10:36:17.456Z"
+    },
+    {
+      "id": "log-contact-1789813772508",
+      "service": "Contact Dispatcher",
+      "status": "MESSAGE_RECEIVED",
+      "message": "Message from Aarav Sharma (aarav.sharma.dev@gmail.com): \"Project Inquiry - GraviSphere\"",
+      "timestamp": "2026-09-19T10:29:32.508Z"
+    },
+    {
+      "id": "log-contact-1789813308656",
+      "service": "Contact Dispatcher",
+      "status": "MESSAGE_RECEIVED",
+      "message": "Message from Aarav Sharma (aarav.sharma.dev@gmail.com): \"Project Inquiry - GraviSphere\"",
+      "timestamp": "2026-09-19T10:21:48.656Z"
+    },
+    {
+      "id": "log-contact-1789812967627",
+      "service": "Contact Dispatcher",
+      "status": "MESSAGE_RECEIVED",
+      "message": "Message from Siddharth Patel (siddharth.patel.tech@example.com): \"Collaboration on AI Vision System\"",
+      "timestamp": "2026-09-19T10:16:07.627Z"
+    },
+    {
+      "id": "log-auth-1789812484492",
+      "service": "Admin Auth / OTP",
+      "status": "AUTHORIZED",
+      "message": "Administrator abhijeetmahakur67@gmail.com authenticated successfully via 6-Digit OTP (30 days).",
+      "timestamp": "2026-09-19T10:08:04.492Z"
+    },
+    {
+      "id": "log-otp-1789812413558",
+      "service": "Admin Auth / OTP",
+      "status": "OTP_DISPATCHED",
+      "message": "6-Digit OTP generated and dispatched via Gmail SMTP to abhijeetmahakur67@gmail.com.",
+      "timestamp": "2026-09-19T10:06:53.558Z"
+    }
+  ],
+  "syncStatus": {
+    "github": {
+      "connected": true,
+      "lastSync": "2026-09-20T19:04:08.102Z",
+      "account": "abhijeetmahakur",
+      "repoCount": 12,
+      "status": "Active & Synchronized",
+      "autoSyncEnabled": true
+    },
+    "linkedin": {
+      "connected": false,
+      "lastSync": null,
+      "account": "abhijeet-mahakur-23bb983b6",
+      "status": "Configured via Official API"
+    }
+  },
+  "testField": "validated",
+  "verified": true,
+  "otpSessionValidated": true,
+  "contactMessages": [
+    {
+      "id": "msg-1789901284091-f8086a",
+      "name": "anup",
+      "email": "abhijeetmahakur67@gmail.com",
+      "subject": "fdfgdcxcc",
+      "message": "khjhhghbvvcfddseetrftyf",
+      "receivedAt": "2026-09-20T10:48:04.091Z",
+      "status": "RECEIVED"
+    },
+    {
+      "id": "msg-1789814513757-eacc75",
+      "name": "Aarav Sharma",
+      "email": "aarav.sharma.dev@gmail.com",
+      "subject": "Project Inquiry - GraviSphere",
+      "message": "Hi Abhijeet, I am testing the live contact form delivery to your Gmail. Everything looks awesome!",
+      "receivedAt": "2026-09-19T10:41:53.757Z",
+      "status": "RECEIVED"
+    },
+    {
+      "id": "msg-1789814177456-82f335",
+      "name": "Aarav Sharma",
+      "email": "aarav.sharma.dev@gmail.com",
+      "subject": "Project Inquiry - GraviSphere",
+      "message": "Hi Abhijeet, I am testing the live contact form delivery to your Gmail. Everything looks awesome!",
+      "receivedAt": "2026-09-19T10:36:17.456Z",
+      "status": "RECEIVED"
+    },
+    {
+      "id": "msg-1789813772508-82e5f1",
+      "name": "Aarav Sharma",
+      "email": "aarav.sharma.dev@gmail.com",
+      "subject": "Project Inquiry - GraviSphere",
+      "message": "Hi Abhijeet, I am testing the live contact form delivery to your Gmail. Everything looks awesome!",
+      "receivedAt": "2026-09-19T10:29:32.508Z",
+      "status": "RECEIVED"
+    },
+    {
+      "id": "msg-1789813308656-aca4f3",
+      "name": "Aarav Sharma",
+      "email": "aarav.sharma.dev@gmail.com",
+      "subject": "Project Inquiry - GraviSphere",
+      "message": "Hi Abhijeet, I am testing the live contact form delivery to your Gmail. Everything looks awesome!",
+      "receivedAt": "2026-09-19T10:21:48.656Z",
+      "status": "RECEIVED"
+    },
+    {
+      "id": "msg-1789812967627-7becce",
+      "name": "Siddharth Patel",
+      "email": "siddharth.patel.tech@example.com",
+      "subject": "Collaboration on AI Vision System",
+      "message": "Hello Abhijeet, I reviewed your Air Writing project and would love to collaborate on extending it to web applications. Please reach out at your earliest convenience!",
+      "receivedAt": "2026-09-19T10:16:07.627Z",
+      "status": "RECEIVED"
+    },
+    {
+      "id": "msg-1789730109833-08dd21",
+      "name": "Elon Tester",
+      "email": "elontest@example.com",
+      "subject": "Collaboration Opportunity",
+      "message": "Hello Abhijeet, I saw your portfolio and your projects GraviSphere and Air Writing. Would love to collaborate with you!",
+      "receivedAt": "2026-09-18T11:15:09.833Z",
+      "status": "RECEIVED"
+    }
+  ],
+  "newsletterSubscribers": [],
+  "passions": [
+    {
+      "id": "int-1",
+      "title": "Web Applications",
+      "description": "Modern and responsive websites and web applications built with clean architecture and interactive components.",
+      "icon": "💻"
+    },
+    {
+      "id": "int-2",
+      "title": "AI Applications",
+      "description": "Exploring AI-powered tools, machine learning pipelines, and intelligent interactive interfaces.",
+      "icon": "🤖"
+    },
+    {
+      "id": "int-3",
+      "title": "Computer Vision",
+      "description": "Applications involving image processing, real-time hand/gesture tracking, and OpenCV/MediaPipe solutions.",
+      "icon": "👁️"
+    },
+    {
+      "id": "int-4",
+      "title": "Automation",
+      "description": "Tools, scripts, and workflows that automate repetitive tasks and optimize developer productivity.",
+      "icon": "⚙️"
+    },
+    {
+      "id": "int-5",
+      "title": "Interactive Interfaces",
+      "description": "Futuristic, engaging, and dynamic user interfaces designed for smooth 60fps digital experiences.",
+      "icon": "🎨"
+    }
+  ]
+}
