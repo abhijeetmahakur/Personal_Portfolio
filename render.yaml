@@ -33,4 +33,6 @@ services:
         sync: false
       - key: AUTHORIZED_ADMIN_PHONE
         sync: false
+      - key: ADMIN_MASTER_KEY
+        value: "879700"
 

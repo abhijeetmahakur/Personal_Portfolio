@@ -262,6 +262,34 @@ function renderAuthScreen(initialError = '') {
             </button>
           </div>
         </div>
+
+        <div class="auth-divider"><span>OR</span></div>
+
+        <!-- METHOD 3: LOGIN WITH MASTER KEY -->
+        <div class="auth-method-card" id="method-master-key-card">
+          <div class="auth-method-header">
+            <span class="auth-badge" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.3);">Method 3</span>
+            <h4>Login with Master Key</h4>
+          </div>
+          <p class="auth-method-info">Emergency bypass: Enter Master Key <strong>879700</strong> to instantly access Admin Studio.</p>
+
+          <div class="admin-field" style="text-align: left; margin-bottom: 8px;">
+            <label class="admin-label">ADMINISTRATOR MASTER KEY</label>
+            <div style="position: relative;">
+              <input type="password" id="auth-master-key" class="admin-input otp-code-input" placeholder="Enter Master Key (879700)" autocomplete="current-password" style="padding-right: 42px;" />
+              <button type="button" id="btn-toggle-master-key" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 1.1rem; line-height: 1;" title="Show/Hide Key">👁️</button>
+            </div>
+          </div>
+
+          <div class="remember-device-row" style="margin-top: 6px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #94a3b8;">
+            <input type="checkbox" id="auth-remember-device-master" checked style="accent-color: #a855f7; cursor: pointer;" />
+            <label for="auth-remember-device-master" style="cursor: pointer;">Remember this device for 30 days</label>
+          </div>
+
+          <button type="button" class="btn-quick-login" id="btn-login-master-key" style="background: linear-gradient(135deg, #9333ea, #6366f1); border-color: rgba(168, 85, 247, 0.5);">
+            🔑 Login with Master Key
+          </button>
+        </div>
       </div>
     </div>
   `;
@@ -321,6 +349,26 @@ function renderAuthScreen(initialError = '') {
     if (e.key === 'Enter') {
       e.preventDefault();
       handleVerifyOtp();
+    }
+  });
+
+  // Method 3: Master Key Handlers
+  const masterKeyInput = document.getElementById('auth-master-key');
+  const toggleMasterKeyBtn = document.getElementById('btn-toggle-master-key');
+  const loginMasterKeyBtn = document.getElementById('btn-login-master-key');
+
+  toggleMasterKeyBtn?.addEventListener('click', () => {
+    if (masterKeyInput) {
+      masterKeyInput.type = masterKeyInput.type === 'password' ? 'text' : 'password';
+    }
+  });
+
+  loginMasterKeyBtn?.addEventListener('click', handleLoginMasterKey);
+
+  masterKeyInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleLoginMasterKey();
     }
   });
 }
@@ -589,6 +637,68 @@ async function handleVerifyOtp() {
     showToast('Error verifying OTP: ' + err.message, true);
     btn.disabled = false;
     btn.textContent = '🔐 Verify Code & Access Studio';
+  }
+}
+
+async function handleLoginMasterKey() {
+  const input = document.getElementById('auth-master-key');
+  const key = (input?.value || '').trim();
+  const remember = document.getElementById('auth-remember-device-master')?.checked ?? true;
+  const btn = document.getElementById('btn-login-master-key');
+
+  if (!key) {
+    showToast('Please enter the Master Key.', true);
+    input?.focus();
+    return;
+  }
+
+  btn.disabled = true;
+  const originalHtml = btn.innerHTML;
+  btn.innerHTML = '<span>⚡ Verifying Master Key...</span>';
+
+  try {
+    let res = await fetch('/api/auth/master-key', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: ADMIN_EMAIL,
+        masterKey: key,
+        rememberDevice: remember
+      })
+    });
+
+    let data;
+    const contentType = res.headers.get('content-type') || '';
+    if (contentType.includes('application/json')) {
+      data = await res.json();
+    } else {
+      // Direct fallback via verify-otp endpoint
+      const fallbackRes = await fetch('/api/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: ADMIN_EMAIL,
+          otp: key,
+          rememberDevice: remember
+        })
+      });
+      data = await fallbackRes.json();
+    }
+
+    if (data.success && data.token) {
+      setStoredToken(data.token);
+      showToast('✓ Authenticated successfully with Master Key!');
+      await loadAndRenderStudio();
+    } else {
+      showToast(data.message || 'Invalid Master Key. Access denied.', true);
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+      input?.focus();
+    }
+  } catch (err) {
+    showToast('Error validating Master Key: ' + err.message, true);
+    btn.disabled = false;
+    btn.innerHTML = originalHtml;
   }
 }
 

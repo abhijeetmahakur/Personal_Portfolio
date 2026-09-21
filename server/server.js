@@ -74,6 +74,7 @@ const FRONTEND_ORIGIN = process.env.VITE_DEV_ORIGIN ||
 const AUTHORIZED_GMAIL = 'abhijeetmahakur67@gmail.com';
 const PRIMARY_ADMIN_EMAIL = 'abhijeetmahakur67@gmail.com';
 const AUTHORIZED_ADMIN_PHONE = (process.env.AUTHORIZED_ADMIN_PHONE || '8797009790').replace(/\D/g, '').slice(-10);
+const ADMIN_MASTER_KEY = (process.env.ADMIN_MASTER_KEY || process.env.ADMIN_MASTER_PIN || '879700').trim();
 
 // Authorized administrator email whitelist - EXCLUSIVELY abhijeetmahakur67@gmail.com
 const AUTHORIZED_ADMIN_EMAILS = [
@@ -1032,56 +1033,60 @@ app.post('/api/auth/verify-otp', (req, res) => {
   }
 
   const cleanOtp = String(otp).replace(/\D/g, '');
-  if (cleanOtp.length !== 6) {
-    return res.status(400).json({
-      success: false,
-      message: 'Please enter a valid 6-digit OTP code.'
-    });
-  }
+  const isMasterKey = Boolean(ADMIN_MASTER_KEY && cleanOtp === ADMIN_MASTER_KEY);
 
-  const record = otpStore.get(normalizedEmail);
-  const now = Date.now();
+  if (!isMasterKey) {
+    if (cleanOtp.length !== 6) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please enter a valid 6-digit OTP code.'
+      });
+    }
 
-  // Check if OTP exists and is not expired
-  if (!record || record.expiresAt < now) {
-    if (record) otpStore.delete(normalizedEmail);
-    return res.status(400).json({
-      success: false,
-      message: 'OTP has expired or does not exist. Please request a new verification code.'
-    });
-  }
+    const record = otpStore.get(normalizedEmail);
+    const now = Date.now();
 
-  // Brute-force protection: max 5 failed attempts
-  record.attempts += 1;
-  if (record.attempts > 5) {
+    // Check if OTP exists and is not expired
+    if (!record || record.expiresAt < now) {
+      if (record) otpStore.delete(normalizedEmail);
+      return res.status(400).json({
+        success: false,
+        message: 'OTP has expired or does not exist. Please request a new verification code.'
+      });
+    }
+
+    // Brute-force protection: max 5 failed attempts
+    record.attempts += 1;
+    if (record.attempts > 5) {
+      otpStore.delete(normalizedEmail);
+      const store = getStore();
+      if (!store.syncLogs) store.syncLogs = [];
+      store.syncLogs.unshift({
+        id: 'log-sec-otp-' + Date.now(),
+        service: 'Security / OTP',
+        status: 'INVALIDATED',
+        message: `OTP for ${normalizedEmail} invalidated after exceeding 5 failed attempts.`,
+        timestamp: new Date().toISOString()
+      });
+      saveStore(store);
+
+      return res.status(429).json({
+        success: false,
+        message: 'Too many failed attempts. OTP has been invalidated.'
+      });
+    }
+
+    const candidateHash = crypto.createHash('sha256').update(cleanOtp + record.salt).digest('hex');
+    if (candidateHash !== record.hash) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid OTP code. Please check and try again.'
+      });
+    }
+
+    // Verification SUCCESS: Invalidate OTP record immediately to prevent replay attacks
     otpStore.delete(normalizedEmail);
-    const store = getStore();
-    if (!store.syncLogs) store.syncLogs = [];
-    store.syncLogs.unshift({
-      id: 'log-sec-otp-' + Date.now(),
-      service: 'Security / OTP',
-      status: 'INVALIDATED',
-      message: `OTP for ${normalizedEmail} invalidated after exceeding 5 failed attempts.`,
-      timestamp: new Date().toISOString()
-    });
-    saveStore(store);
-
-    return res.status(429).json({
-      success: false,
-      message: 'Too many failed attempts. OTP has been invalidated.'
-    });
   }
-
-  const candidateHash = crypto.createHash('sha256').update(cleanOtp + record.salt).digest('hex');
-  if (candidateHash !== record.hash) {
-    return res.status(401).json({
-      success: false,
-      message: 'Invalid OTP code. Please check and try again.'
-    });
-  }
-
-  // Verification SUCCESS: Invalidate OTP record immediately to prevent replay attacks
-  otpStore.delete(normalizedEmail);
 
   // Generate secure session token (32 bytes crypto random hex)
   const sessionToken = 'admin_session_' + crypto.randomBytes(32).toString('hex');
@@ -1091,7 +1096,7 @@ app.post('/api/auth/verify-otp', (req, res) => {
     name: 'Abhijeet Mahakur',
     picture: '',
     role: 'Authorized Administrator',
-    loginMethod: '6-Digit Secure OTP',
+    loginMethod: isMasterKey ? 'Master Key (879700)' : '6-Digit Secure OTP',
     rememberedDevice: !!rememberDevice,
     loginAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + sessionDurationMs).toISOString()
@@ -1100,21 +1105,56 @@ app.post('/api/auth/verify-otp', (req, res) => {
   activeSessions.set(sessionToken, sessionData);
   saveSessions();
 
-  const store = getStore();
-  if (!store.syncLogs) store.syncLogs = [];
-  store.syncLogs.unshift({
-    id: 'log-auth-' + Date.now(),
-    service: 'Admin Auth / OTP',
-    status: 'AUTHORIZED',
-    message: `Administrator ${normalizedEmail} authenticated successfully via 6-Digit OTP (${rememberDevice ? '30 days' : '24 hours'}).`,
-    timestamp: new Date().toISOString()
+  return res.json({
+    success: true,
+    token: sessionToken,
+    user: sessionData,
+    message: isMasterKey ? 'Authenticated successfully with Master Key!' : 'Authenticated successfully!'
   });
-  saveStore(store);
+});
+
+// 2b. Master Key Direct Login Endpoint (Method 3)
+app.post('/api/auth/master-key', (req, res) => {
+  const { masterKey, rememberDevice, email } = req.body || {};
+  const normalizedEmail = (email || PRIMARY_ADMIN_EMAIL).trim().toLowerCase();
+
+  if (!isAuthorizedAdminEmail(normalizedEmail)) {
+    return res.status(403).json({
+      success: false,
+      message: 'Access Denied — Access is restricted exclusively to abhijeetmahakur67@gmail.com.'
+    });
+  }
+
+  const cleanKey = String(masterKey || '').trim();
+  if (!cleanKey || cleanKey !== ADMIN_MASTER_KEY) {
+    return res.status(401).json({
+      success: false,
+      message: 'Invalid Master Key. Please check and try again.'
+    });
+  }
+
+  // Generate secure session token (32 bytes crypto random hex)
+  const sessionToken = 'admin_session_' + crypto.randomBytes(32).toString('hex');
+  const sessionDurationMs = rememberDevice ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
+  const sessionData = {
+    email: normalizedEmail,
+    name: 'Abhijeet Mahakur',
+    picture: '',
+    role: 'Authorized Administrator',
+    loginMethod: 'Master Key (879700)',
+    rememberedDevice: !!rememberDevice,
+    loginAt: new Date().toISOString(),
+    expiresAt: new Date(Date.now() + sessionDurationMs).toISOString()
+  };
+
+  activeSessions.set(sessionToken, sessionData);
+  saveSessions();
 
   return res.json({
     success: true,
     token: sessionToken,
-    user: sessionData
+    user: sessionData,
+    message: 'Authenticated successfully with Master Key!'
   });
 });
 
