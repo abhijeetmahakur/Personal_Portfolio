@@ -189,19 +189,61 @@ function renderAuthScreen(initialError = '') {
           <p class="auth-method-info">Receive a secure verification code directly via WhatsApp, Gmail, or SMS.</p>
 
           <div class="otp-channel-tabs">
-            <button type="button" class="otp-tab active" data-channel="whatsapp" id="tab-whatsapp">💬 WhatsApp</button>
+            <button type="button" class="otp-tab active" data-channel="whatsapp" id="tab-whatsapp">🤖 WhatsApp Bot</button>
             <button type="button" class="otp-tab" data-channel="email" id="tab-email">✉️ Gmail</button>
             <button type="button" class="otp-tab" data-channel="sms" id="tab-sms">📱 SMS</button>
           </div>
 
-          <div class="admin-field" style="text-align: left; margin-bottom: 10px;">
+          <div class="admin-field" style="text-align: left; margin-bottom: 8px;">
             <label class="admin-label" id="otp-target-label">AUTHORIZED WHATSAPP NUMBER</label>
             <input type="text" id="auth-otp-target" class="admin-input" value="+91 8797009790" readonly style="opacity: 0.85; background: rgba(0,0,0,0.3);" />
           </div>
 
+          <!-- WhatsApp Bot Helper & Status Panel -->
+          <div id="whatsapp-bot-panel" class="whatsapp-bot-panel">
+            <div class="whatsapp-bot-badge-row">
+              <span class="bot-badge-pill" id="wa-bot-status-pill">🤖 Checking Bot...</span>
+              <button type="button" class="btn-wa-toggle-setup" id="btn-toggle-bot-setup" title="Configure or update CallMeBot API Key">⚙️ Bot Key</button>
+            </div>
+
+            <div id="wa-bot-setup-card" class="wa-bot-setup-card" style="display: none;">
+              <div class="wa-step-item">
+                <div class="step-num-circle">1</div>
+                <div class="step-text-content">
+                  <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 5px;">
+                    Send <code>I allow callmebot to send me messages</code> to WhatsApp bot (<strong>+34 623 78 95 80</strong>):
+                  </div>
+                  <a href="https://wa.me/34623789580?text=I%20allow%20callmebot%20to%20send%20me%20messages" target="_blank" class="btn-open-wa-bot">
+                    💬 Message WhatsApp Bot
+                  </a>
+                </div>
+              </div>
+
+              <div class="wa-step-item" style="margin-top: 10px;">
+                <div class="step-num-circle">2</div>
+                <div class="step-text-content">
+                  <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 5px;">
+                    Enter API Key received from bot:
+                  </div>
+                  <div class="bot-key-input-row">
+                    <input type="text" id="input-wa-bot-key" class="admin-input-small" placeholder="Paste API Key (e.g. 123456)" />
+                    <button type="button" class="btn-save-bot-key" id="btn-save-bot-key">Save & Activate</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <button type="button" class="btn-send-otp" id="btn-send-otp">
-            💬 Send 6-Digit OTP to WhatsApp
+            🤖 Send 6-Digit OTP via WhatsApp Bot
           </button>
+
+          <div class="wa-fallback-container" style="text-align: center; margin-top: 8px;">
+            <a href="#" id="link-wa-direct-fallback" class="wa-fallback-link" target="_blank" style="display: none;">
+              <span>💬 Fallback: Open WhatsApp Directly</span>
+            </a>
+          </div>
+
           <div id="otp-status-msg" class="otp-status-text" style="display: none;"></div>
 
           <div class="otp-verify-block" id="otp-verify-block" style="margin-top: 14px;">
@@ -243,8 +285,19 @@ function renderAuthScreen(initialError = '') {
     );
   });
 
-  // Initialize OTP channel tabs
+  // Initialize OTP channel tabs & Bot status
   setupOtpChannelTabs();
+  refreshWhatsAppBotStatus();
+
+  // Attach WhatsApp Bot controls
+  document.getElementById('btn-toggle-bot-setup')?.addEventListener('click', () => {
+    const card = document.getElementById('wa-bot-setup-card');
+    if (card) {
+      card.style.display = card.style.display === 'none' ? 'block' : 'none';
+    }
+  });
+
+  document.getElementById('btn-save-bot-key')?.addEventListener('click', handleSaveBotKey);
 
   // Attach Send OTP Handler
   document.getElementById('btn-send-otp')?.addEventListener('click', handleSendOtp);
@@ -276,10 +329,72 @@ let selectedOtpChannel = 'whatsapp';
 const ADMIN_PHONE = '+91 8797009790';
 
 function getChannelButtonLabel(channel, isResend = false) {
-  if (channel === 'whatsapp') return isResend ? '💬 Resend OTP to WhatsApp' : '💬 Send 6-Digit OTP to WhatsApp';
+  if (channel === 'whatsapp') return isResend ? '🤖 Resend OTP via WhatsApp Bot' : '🤖 Send 6-Digit OTP via WhatsApp Bot';
   if (channel === 'email') return isResend ? '✉️ Resend OTP to Gmail' : '✉️ Send 6-Digit OTP to Gmail';
   if (channel === 'sms') return isResend ? '📱 Resend OTP via SMS' : '📱 Send 6-Digit OTP via SMS';
   return 'Send 6-Digit OTP';
+}
+
+async function refreshWhatsAppBotStatus() {
+  const pill = document.getElementById('wa-bot-status-pill');
+  const setupCard = document.getElementById('wa-bot-setup-card');
+  if (!pill) return;
+
+  try {
+    const res = await fetch('/api/auth/whatsapp-bot-status');
+    const data = await res.json();
+    if (data.success) {
+      if (data.configured) {
+        pill.className = 'bot-badge-pill active';
+        pill.innerHTML = '🟢 WhatsApp Bot Active';
+        if (setupCard) setupCard.style.display = 'none';
+      } else {
+        pill.className = 'bot-badge-pill pending';
+        pill.innerHTML = '⚙️ Bot Setup Needed';
+      }
+    }
+  } catch (_) {
+    pill.className = 'bot-badge-pill active';
+    pill.innerHTML = '🤖 WhatsApp Bot Ready';
+  }
+}
+
+async function handleSaveBotKey() {
+  const input = document.getElementById('input-wa-bot-key');
+  const key = input ? input.value.trim() : '';
+  if (!key) {
+    showToast('Please enter your CallMeBot API key.', true);
+    return;
+  }
+  const saveBtn = document.getElementById('btn-save-bot-key');
+  if (saveBtn) {
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving...';
+  }
+
+  try {
+    const res = await fetch('/api/auth/configure-whatsapp-bot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: ADMIN_EMAIL, apiKey: key })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('✓ WhatsApp Bot Key saved and activated!');
+      await refreshWhatsAppBotStatus();
+      // Auto-trigger OTP send now that bot is active!
+      handleSendOtp();
+    } else {
+      showToast(data.message || 'Failed to save key', true);
+    }
+  } catch (err) {
+    showToast('Error saving key: ' + err.message, true);
+  } finally {
+    if (saveBtn) {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save & Activate';
+    }
+  }
 }
 
 function setupOtpChannelTabs() {
@@ -288,6 +403,8 @@ function setupOtpChannelTabs() {
   const targetInput = document.getElementById('auth-otp-target');
   const sendBtn = document.getElementById('btn-send-otp');
   const statusEl = document.getElementById('otp-status-msg');
+  const botPanel = document.getElementById('whatsapp-bot-panel');
+  const fallbackLink = document.getElementById('link-wa-direct-fallback');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -296,16 +413,21 @@ function setupOtpChannelTabs() {
       selectedOtpChannel = tab.dataset.channel || 'whatsapp';
 
       if (statusEl) statusEl.style.display = 'none';
+      if (fallbackLink) fallbackLink.style.display = 'none';
 
       if (selectedOtpChannel === 'whatsapp') {
         if (targetLabel) targetLabel.textContent = 'AUTHORIZED WHATSAPP NUMBER';
         if (targetInput) targetInput.value = ADMIN_PHONE;
+        if (botPanel) botPanel.style.display = 'block';
+        refreshWhatsAppBotStatus();
       } else if (selectedOtpChannel === 'email') {
         if (targetLabel) targetLabel.textContent = 'TARGET AUTHORIZED EMAIL';
         if (targetInput) targetInput.value = ADMIN_EMAIL;
+        if (botPanel) botPanel.style.display = 'none';
       } else if (selectedOtpChannel === 'sms') {
         if (targetLabel) targetLabel.textContent = 'AUTHORIZED MOBILE NUMBER (SMS)';
         if (targetInput) targetInput.value = ADMIN_PHONE;
+        if (botPanel) botPanel.style.display = 'none';
       }
 
       if (sendBtn && otpCooldownSeconds <= 0) {
@@ -320,6 +442,7 @@ async function handleSendOtp() {
   const btn = document.getElementById('btn-send-otp');
   const statusEl = document.getElementById('otp-status-msg');
   const otpInput = document.getElementById('auth-otp-code');
+  const fallbackLink = document.getElementById('link-wa-direct-fallback');
   if (otpCooldownSeconds > 0) return;
 
   btn.disabled = true;
@@ -348,12 +471,13 @@ async function handleSendOtp() {
     }
 
     if (data.success) {
-      showToast(data.channel === 'whatsapp' ? '✓ 6-Digit OTP sent automatically to your WhatsApp!' : '✓ OTP dispatched successfully!');
+      showToast(data.channel === 'whatsapp' ? '✓ 6-Digit OTP sent automatically to your WhatsApp by Bot!' : '✓ OTP dispatched successfully!');
       if (statusEl) {
         statusEl.style.display = 'block';
         statusEl.className = 'otp-status-text success';
         statusEl.innerHTML = `✓ ${data.message}`;
       }
+      if (fallbackLink) fallbackLink.style.display = 'none';
 
       startOtpCooldown(data.cooldownSeconds || 15);
       if (otpInput) {
@@ -369,6 +493,14 @@ async function handleSendOtp() {
         statusEl.style.display = 'block';
         statusEl.className = 'otp-status-text error';
         statusEl.textContent = '❌ ' + (data.message || 'Failed to send OTP.');
+      }
+      if (data.botNeedsSetup) {
+        const setupCard = document.getElementById('wa-bot-setup-card');
+        if (setupCard) setupCard.style.display = 'block';
+      }
+      if (data.whatsappUrl && fallbackLink) {
+        fallbackLink.href = data.whatsappUrl;
+        fallbackLink.style.display = 'inline-flex';
       }
       btn.disabled = false;
       btn.textContent = getChannelButtonLabel(selectedOtpChannel, false);
@@ -2560,6 +2692,15 @@ function attachEventListeners() {
     if (e.key === 'Escape') {
       closeAdminModal();
     }
+  });
+
+  // Listen for hashchange (e.g. clicking #admin links)
+  window.addEventListener('hashchange', checkUrlForAdminTrigger);
+
+  // Footer discreet admin button trigger
+  document.getElementById('btn-footer-admin')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openAdminModal();
   });
 }
 

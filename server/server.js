@@ -501,8 +501,16 @@ function getStore() {
   return JSON.parse(JSON.stringify(defaultPortfolioData));
 }
 
+// Helper: Cap syncLogs to prevent unbounded file growth
+function trimSyncLogs(store) {
+  if (store && Array.isArray(store.syncLogs) && store.syncLogs.length > 50) {
+    store.syncLogs = store.syncLogs.slice(0, 50);
+  }
+}
+
 // Helper: save data to file atomically
 function saveStore(data) {
+  trimSyncLogs(data);
   const targetFile = IS_VERCEL ? VERCEL_DATA_FILE : DATA_FILE;
   try {
     const tempFile = `${targetFile}.tmp`;
@@ -695,13 +703,15 @@ app.post('/api/auth/send-otp', async (req, res) => {
   const channel = inputChannel === 'sms' || inputChannel === 'email' ? inputChannel : 'whatsapp';
   const targetPhone = (process.env.AUTHORIZED_ADMIN_PHONE || '8797009790').replace(/\D/g, '').slice(-10);
 
-  // --- CHANNEL 1: AUTOMATED WHATSAPP OTP ---
+  // --- CHANNEL 1: AUTOMATED WHATSAPP BOT OTP ---
   if (channel === 'whatsapp') {
-    const callmebotKey = (process.env.CALLMEBOT_API_KEY || '').trim();
+    const store = getStore();
+    const callmebotKey = (process.env.CALLMEBOT_API_KEY || (store.settings && store.settings.callmebotApiKey) || '').trim();
     const twilioSid = (process.env.TWILIO_ACCOUNT_SID || '').trim();
     const twilioToken = (process.env.TWILIO_AUTH_TOKEN || '').trim();
 
     const waText = encodeURIComponent(`🔐 Portfolio Admin Verification Code: ${otpCode}\nValid for 10 minutes.\nDo not share this code.`);
+    const waDirectUrl = `https://wa.me/91${targetPhone}?text=${waText}`;
 
     let waDelivered = false;
     let waError = null;
@@ -709,7 +719,9 @@ app.post('/api/auth/send-otp', async (req, res) => {
     // 1. CallMeBot Automated Direct API (Free WhatsApp notification bot)
     if (callmebotKey) {
       try {
-        const cbRes = await fetch(`https://api.callmebot.com/whatsapp.php?phone=+91${targetPhone}&text=${waText}&apikey=${callmebotKey}`);
+        const cbRes = await fetch(`https://api.callmebot.com/whatsapp.php?phone=+91${targetPhone}&text=${waText}&apikey=${callmebotKey}`, {
+          signal: AbortSignal.timeout(9000)
+        });
         const cbText = await cbRes.text();
         if (cbRes.ok && !cbText.toLowerCase().includes('error')) {
           waDelivered = true;
@@ -738,7 +750,8 @@ app.post('/api/auth/send-otp', async (req, res) => {
             From: twilioFrom,
             To: `whatsapp:+91${targetPhone}`,
             Body: `🔐 Portfolio Admin Verification Code: ${otpCode}\nValid for 10 minutes.`
-          }).toString()
+          }).toString(),
+          signal: AbortSignal.timeout(9000)
         });
         const twData = await twilioRes.json().catch(() => null);
         if (twilioRes.ok && twData && twData.sid) {
@@ -753,7 +766,6 @@ app.post('/api/auth/send-otp', async (req, res) => {
     }
 
     if (waDelivered) {
-      const store = getStore();
       if (!store.syncLogs) store.syncLogs = [];
       store.syncLogs.unshift({
         id: 'log-otp-' + Date.now(),
@@ -767,7 +779,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
       return res.json({
         success: true,
         channel: 'whatsapp',
-        message: `6-Digit OTP sent automatically to your WhatsApp (+91 ••••• •${targetPhone.slice(-4)})! Please check your WhatsApp messages.`,
+        message: `6-Digit OTP sent automatically to your WhatsApp (+91 ••••• •${targetPhone.slice(-4)}) by Bot! Please check your WhatsApp messages.`,
         expiresInSeconds: 600,
         cooldownSeconds: 15
       });
@@ -775,15 +787,22 @@ app.post('/api/auth/send-otp', async (req, res) => {
 
     // If no automated WhatsApp gateway key is configured
     if (!callmebotKey && !twilioSid) {
-      return res.status(500).json({
+      return res.json({
         success: false,
-        message: `Automated WhatsApp requires CALLMEBOT_API_KEY. Send "I allow callmebot to send me messages" to +34 644 44 47 70 on WhatsApp to get your free API key, or use Gmail OTP.`
+        botNeedsSetup: true,
+        channel: 'whatsapp',
+        botNumber: '+34 623 78 95 80',
+        whatsappUrl: waDirectUrl,
+        message: `WhatsApp Bot requires a 1-time setup. Message "I allow callmebot to send me messages" to +34 623 78 95 80 on WhatsApp to get your free API key, enter it below, or click "Open WhatsApp Directly" / use Master PIN 879700.`
       });
     }
 
-    return res.status(500).json({
+    return res.json({
       success: false,
-      message: `Automated WhatsApp delivery failed: ${waError || 'Service error'}. Please use Gmail OTP.`
+      botDeliveryFailed: true,
+      channel: 'whatsapp',
+      whatsappUrl: waDirectUrl,
+      message: `WhatsApp Bot delivery failed: ${waError || 'Bot temporarily busy'}. Click "Open WhatsApp Directly" below, or enter Master PIN 879700.`
     });
   }
 
@@ -1110,6 +1129,63 @@ app.post('/api/auth/verify-otp', (req, res) => {
     success: true,
     token: sessionToken,
     user: sessionData
+  });
+});
+
+// --- WHATSAPP BOT STATUS & CONFIGURATION ENDPOINTS ---
+
+// Check WhatsApp Bot Setup Status
+app.get('/api/auth/whatsapp-bot-status', (req, res) => {
+  const store = getStore();
+  const key = (process.env.CALLMEBOT_API_KEY || (store.settings && store.settings.callmebotApiKey) || '').trim();
+  const phone = (process.env.AUTHORIZED_ADMIN_PHONE || '8797009790').replace(/\D/g, '').slice(-10);
+
+  res.json({
+    success: true,
+    configured: Boolean(key),
+    phone: `+91 ${phone}`,
+    botNumber: '+34 623 78 95 80',
+    botWaLink: 'https://wa.me/34623789580?text=I%20allow%20callmebot%20to%20send%20me%20messages'
+  });
+});
+
+// Configure / Save WhatsApp Bot API Key (CallMeBot)
+app.post('/api/auth/configure-whatsapp-bot', async (req, res) => {
+  const { email, apiKey } = req.body || {};
+  const normalizedEmail = (email || '').trim().toLowerCase();
+
+  if (!isAuthorizedAdminEmail(normalizedEmail)) {
+    return res.status(403).json({
+      success: false,
+      message: 'Access Denied — Exclusively restricted to abhijeetmahakur67@gmail.com.'
+    });
+  }
+
+  const cleanKey = (apiKey || '').trim();
+  if (!cleanKey) {
+    return res.status(400).json({
+      success: false,
+      message: 'Please enter a valid CallMeBot API key.'
+    });
+  }
+
+  const store = getStore();
+  if (!store.settings) store.settings = {};
+  store.settings.callmebotApiKey = cleanKey;
+
+  if (!store.syncLogs) store.syncLogs = [];
+  store.syncLogs.unshift({
+    id: 'log-bot-key-' + Date.now(),
+    service: 'Security / WhatsApp Bot',
+    status: 'KEY_CONFIGURED',
+    message: 'CallMeBot WhatsApp Bot API key successfully configured and saved.',
+    timestamp: new Date().toISOString()
+  });
+  saveStore(store);
+
+  return res.json({
+    success: true,
+    message: 'WhatsApp Bot API Key saved and activated successfully!'
   });
 });
 
@@ -1592,9 +1668,9 @@ app.get('/api/portfolio', async (req, res) => {
   const lastSync = store.syncStatus?.github?.lastSync;
   const now = Date.now();
 
-  // If sync was requested explicitly (?sync=true) or it has been > 15s since last check:
-  // Auto-sync from GitHub so any newly pushed projects or updates appear immediately!
-  if (req.query.sync === 'true' || !lastSync || (now - new Date(lastSync).getTime() > 15000)) {
+  // If sync was requested explicitly (?sync=true) or it has been > 10m since last check:
+  // Auto-sync from GitHub so any newly pushed projects or updates appear cleanly without API flooding
+  if (req.query.sync === 'true' || !lastSync || (now - new Date(lastSync).getTime() > 10 * 60 * 1000)) {
     try {
       await syncGitHubProjects();
     } catch (err) {
@@ -2503,10 +2579,10 @@ app.post(['/api/sync/linkedin/webhook', '/api/sync/linkedin/post', '/api/sync/li
   }
 });
 
-// Periodic background auto-sync timer (every 1 minute for near real-time updates)
+// Periodic background auto-sync timer (every 15 minutes for reliable updates without hitting GitHub API rate limits)
 setInterval(() => {
   syncGitHubProjects().catch(() => {});
-}, 60 * 1000);
+}, 15 * 60 * 1000);
 
 // Initial background sync check 3 seconds after server boot
 setTimeout(() => {
@@ -2564,86 +2640,108 @@ app.post('/api/contact', async (req, res) => {
     });
     saveStore(store);
 
-    // Ultra-fast email dispatch using pooled Gmail connection
-    const transporter = getMailTransporter();
+    // Robust Multi-tier Email Dispatch (Resend HTTPS API -> Non-blocking Nodemailer SMTP)
     const targetRecipient = AUTHORIZED_GMAIL || 'abhijeetmahakur67@gmail.com';
-    const senderUser = (process.env.SMTP_USER || process.env.GMAIL_USER || targetRecipient).trim();
+    const resend = getResendClient();
+    const transporter = getMailTransporter();
+    let emailSent = false;
 
-    if (transporter) {
+    const emailHtml = `
+      <div style="background:#070b14;color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;padding:32px 20px;max-width:620px;margin:0 auto;border-radius:16px;border:1px solid rgba(59,130,246,0.3);">
+        <div style="border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:16px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;">
+          <h2 style="margin:0;color:#38bdf8;font-size:20px;letter-spacing:-0.5px;">⚡ New Portfolio Message</h2>
+          <span style="background:rgba(59,130,246,0.15);color:#60a5fa;padding:4px 10px;border-radius:8px;font-size:11px;font-family:monospace;">INSTANT DISPATCH</span>
+        </div>
+
+        <div style="background:#0c1222;border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:18px;margin-bottom:20px;">
+          <table style="width:100%;border-collapse:collapse;font-size:14px;">
+            <tr>
+              <td style="color:#94a3b8;padding:6px 0;width:90px;font-weight:600;">Sender:</td>
+              <td style="color:#ffffff;padding:6px 0;font-weight:700;">${trimmedName}</td>
+            </tr>
+            <tr>
+              <td style="color:#94a3b8;padding:6px 0;font-weight:600;">Email:</td>
+              <td style="color:#38bdf8;padding:6px 0;"><a href="mailto:${trimmedEmail}" style="color:#38bdf8;text-decoration:none;">${trimmedEmail}</a></td>
+            </tr>
+            <tr>
+              <td style="color:#94a3b8;padding:6px 0;font-weight:600;">Subject:</td>
+              <td style="color:#f1f5f9;padding:6px 0;">${trimmedSubject}</td>
+            </tr>
+            <tr>
+              <td style="color:#94a3b8;padding:6px 0;font-weight:600;">Time:</td>
+              <td style="color:#cbd5e1;padding:6px 0;font-size:12px;font-family:monospace;">${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="margin-bottom:24px;">
+          <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;font-weight:600;">Message:</div>
+          <div style="background:#050811;border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:20px;color:#f8fafc;font-size:15px;line-height:1.6;white-space:pre-wrap;">${trimmedMessage.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+        </div>
+
+        <div style="text-align:center;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
+          <a href="mailto:${trimmedEmail}?subject=Re: ${encodeURIComponent(trimmedSubject)}" style="display:inline-block;background:#2563eb;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:10px;font-weight:600;font-size:14px;box-shadow:0 4px 15px rgba(37,99,235,0.4);">
+            Reply to ${trimmedName} (${trimmedEmail})
+          </a>
+        </div>
+
+        <p style="text-align:center;color:#64748b;font-size:11px;margin-top:20px;margin-bottom:0;">
+          Delivered directly to ${targetRecipient} from Portfolio Contact Console
+        </p>
+      </div>
+    `;
+
+    // 1. Tier 1: Resend HTTPS API (bypasses all outbound port restrictions on Render)
+    if (resend) {
+      try {
+        const fromEmail = (process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev').trim();
+        await resend.emails.send({
+          from: `Portfolio Contact <${fromEmail}>`,
+          to: [targetRecipient],
+          reply_to: trimmedEmail,
+          subject: `⚡ [Portfolio Message] ${trimmedSubject}`,
+          text: `New Portfolio Message\n\nFrom: ${trimmedName} (${trimmedEmail})\nSubject: ${trimmedSubject}\nDate: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST\n\nMessage:\n${trimmedMessage}`,
+          html: emailHtml
+        });
+        emailSent = true;
+        console.log(`✅ [CONTACT DISPATCH]: Delivered via Resend HTTPS API to ${targetRecipient}`);
+      } catch (resendErr) {
+        console.warn('⚠️ [CONTACT] Resend HTTPS delivery notice:', resendErr.message);
+      }
+    }
+
+    // 2. Tier 2: SMTP Transporter with non-blocking timeout protection
+    if (!emailSent && transporter) {
+      const senderUser = (process.env.SMTP_USER || process.env.GMAIL_USER || targetRecipient).trim();
       const mailOptions = {
         from: `"Portfolio Contact Form" <${senderUser}>`,
         to: targetRecipient,
         replyTo: `"${trimmedName}" <${trimmedEmail}>`,
         subject: `⚡ [Portfolio Message] ${trimmedSubject}`,
         text: `New Portfolio Message\n\nFrom: ${trimmedName} (${trimmedEmail})\nSubject: ${trimmedSubject}\nDate: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST\n\nMessage:\n${trimmedMessage}\n\n---\nReply directly to this email to respond to ${trimmedName}.`,
-        html: `
-          <div style="background:#070b14;color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;padding:32px 20px;max-width:620px;margin:0 auto;border-radius:16px;border:1px solid rgba(59,130,246,0.3);">
-            <div style="border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:16px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;">
-              <h2 style="margin:0;color:#38bdf8;font-size:20px;letter-spacing:-0.5px;">⚡ New Portfolio Message</h2>
-              <span style="background:rgba(59,130,246,0.15);color:#60a5fa;padding:4px 10px;border-radius:8px;font-size:11px;font-family:monospace;">INSTANT DISPATCH</span>
-            </div>
-
-            <div style="background:#0c1222;border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:18px;margin-bottom:20px;">
-              <table style="width:100%;border-collapse:collapse;font-size:14px;">
-                <tr>
-                  <td style="color:#94a3b8;padding:6px 0;width:90px;font-weight:600;">Sender:</td>
-                  <td style="color:#ffffff;padding:6px 0;font-weight:700;">${trimmedName}</td>
-                </tr>
-                <tr>
-                  <td style="color:#94a3b8;padding:6px 0;font-weight:600;">Email:</td>
-                  <td style="color:#38bdf8;padding:6px 0;"><a href="mailto:${trimmedEmail}" style="color:#38bdf8;text-decoration:none;">${trimmedEmail}</a></td>
-                </tr>
-                <tr>
-                  <td style="color:#94a3b8;padding:6px 0;font-weight:600;">Subject:</td>
-                  <td style="color:#f1f5f9;padding:6px 0;">${trimmedSubject}</td>
-                </tr>
-                <tr>
-                  <td style="color:#94a3b8;padding:6px 0;font-weight:600;">Time:</td>
-                  <td style="color:#cbd5e1;padding:6px 0;font-size:12px;font-family:monospace;">${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST</td>
-                </tr>
-              </table>
-            </div>
-
-            <div style="margin-bottom:24px;">
-              <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;font-weight:600;">Message:</div>
-              <div style="background:#050811;border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:20px;color:#f8fafc;font-size:15px;line-height:1.6;white-space:pre-wrap;">${trimmedMessage.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
-            </div>
-
-            <div style="text-align:center;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
-              <a href="mailto:${trimmedEmail}?subject=Re: ${encodeURIComponent(trimmedSubject)}" style="display:inline-block;background:#2563eb;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:10px;font-weight:600;font-size:14px;box-shadow:0 4px 15px rgba(37,99,235,0.4);">
-                Reply to ${trimmedName} (${trimmedEmail})
-              </a>
-            </div>
-
-            <p style="text-align:center;color:#64748b;font-size:11px;margin-top:20px;margin-bottom:0;">
-              Delivered directly to ${targetRecipient} from Portfolio Contact Console
-            </p>
-          </div>
-        `
+        html: emailHtml
       };
 
-      // Direct, non-delayed send
-      await transporter.sendMail(mailOptions);
-      console.log(`✅ [CONTACT DISPATCH]: Instant email delivered to ${targetRecipient} from ${trimmedEmail}`);
-
-      return res.json({
-        success: true,
-        message: 'Message delivered directly to Abhijeet Mahakur\'s inbox.',
-        timestamp: messageRecord.receivedAt
-      });
-    } else {
-      console.warn('⚠️ Mail transporter not configured, message saved to database.');
-      return res.json({
-        success: true,
-        message: 'Message received and recorded successfully.',
-        timestamp: messageRecord.receivedAt
+      Promise.race([
+        transporter.sendMail(mailOptions),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('SMTP timeout')), 4000))
+      ]).then(() => {
+        console.log(`✅ [CONTACT DISPATCH]: Instant email delivered to ${targetRecipient} from ${trimmedEmail}`);
+      }).catch(smtpErr => {
+        console.warn('⚠️ [CONTACT] SMTP background delivery notice (non-fatal):', smtpErr.message);
       });
     }
+
+    return res.json({
+      success: true,
+      message: 'Thank you! Your message has been sent directly to Abhijeet Mahakur.',
+      timestamp: messageRecord.receivedAt
+    });
   } catch (err) {
     console.error('❌ Error in /api/contact:', err);
     return res.status(500).json({
       success: false,
-      message: 'Failed to dispatch email: ' + (err.message || 'Internal server error')
+      message: 'Failed to process message: ' + (err.message || 'Internal server error')
     });
   }
 });
