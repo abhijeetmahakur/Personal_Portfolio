@@ -180,21 +180,21 @@ function renderAuthScreen(initialError = '') {
 
         <div class="auth-divider"><span>OR</span></div>
 
-        <!-- METHOD 2: 6-DIGIT OTP -->
+        <!-- METHOD 2: 6-DIGIT EMAIL OTP -->
         <div class="auth-method-card">
           <div class="auth-method-header">
             <span class="auth-badge">Method 2</span>
-            <h4>6-Digit OTP (SMS / Email)</h4>
+            <h4>6-Digit Email OTP</h4>
           </div>
-          <p class="auth-method-info">Receive a cryptographically secure one-time passcode on your mobile via SMS (+91 8797009790) or email.</p>
+          <p class="auth-method-info">Receive a cryptographically salted one-time passcode directly in your Gmail inbox.</p>
 
           <div class="admin-field" style="text-align: left; margin-bottom: 10px;">
-            <label class="admin-label">Authorized Account & Mobile</label>
-            <input type="text" id="auth-otp-email" class="admin-input" value="${ADMIN_EMAIL} • +91 8797009790" readonly style="opacity: 0.85; background: rgba(0,0,0,0.3);" />
+            <label class="admin-label">TARGET AUTHORIZED EMAIL</label>
+            <input type="email" id="auth-otp-email" class="admin-input" value="${ADMIN_EMAIL}" readonly style="opacity: 0.85; background: rgba(0,0,0,0.3);" />
           </div>
 
           <button type="button" class="btn-send-otp" id="btn-send-otp">
-            📱 Send 6-Digit OTP (SMS / Email)
+            ✉️ Send 6-Digit OTP to Gmail
           </button>
           <div id="otp-status-msg" class="otp-status-text" style="display: none;"></div>
 
@@ -291,7 +291,7 @@ async function handleSendOtp() {
     }
 
     if (data.success) {
-      showToast('✓ 6-Digit OTP dispatched successfully!');
+      showToast('✓ 6-Digit OTP sent to your email inbox!');
       if (statusEl) {
         statusEl.style.display = 'block';
         statusEl.className = 'otp-status-text success';
@@ -313,12 +313,12 @@ async function handleSendOtp() {
         statusEl.textContent = '❌ ' + (data.message || 'Failed to send OTP.');
       }
       btn.disabled = false;
-      btn.textContent = '📱 Send 6-Digit OTP (SMS / Email)';
+      btn.textContent = '✉️ Send 6-Digit OTP to Gmail';
     }
   } catch (err) {
     showToast('OTP dispatch error: ' + err.message, true);
     btn.disabled = false;
-    btn.textContent = '📱 Send 6-Digit OTP (SMS / Email)';
+    btn.textContent = '✉️ Send 6-Digit OTP to Gmail';
   }
 }
 
@@ -333,7 +333,7 @@ function startOtpCooldown(seconds) {
       otpCooldownTimer = null;
       if (btn) {
         btn.disabled = false;
-        btn.textContent = '📱 Resend 6-Digit OTP';
+        btn.textContent = '✉️ Resend OTP to Gmail';
       }
     } else {
       if (btn) {

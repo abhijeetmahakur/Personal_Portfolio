@@ -585,15 +585,15 @@ function getResendClient() {
   return cachedResendClient;
 }
 
-// Cached pooled mail transporter for instant zero-latency email dispatch
+// Cached mail transporter for instant zero-latency email dispatch
 let cachedMailTransporter = null;
 
 function getMailTransporter() {
   if (cachedMailTransporter) return cachedMailTransporter;
 
   const host = process.env.SMTP_HOST || 'smtp.gmail.com';
-  const user = (process.env.GMAIL_USER || process.env.SMTP_USER || GMAIL_USER || 'abhijeetmahakur67@gmail.com').trim();
-  let pass = (process.env.GMAIL_APP_PASSWORD || process.env.SMTP_PASS || GMAIL_APP_PASSWORD || '').trim();
+  const user = (process.env.GMAIL_USER || process.env.SMTP_USER || process.env.AUTHORIZED_ADMIN_EMAIL || 'abhijeetmahakur67@gmail.com').trim();
+  let pass = (process.env.GMAIL_APP_PASSWORD || process.env.SMTP_PASS || '').trim();
   if (pass) {
     pass = pass.replace(/\s+/g, ''); // strip spaces from Gmail App Password
   }
@@ -605,32 +605,18 @@ function getMailTransporter() {
         host,
         port: 465,
         secure: true,
-        pool: true,
-        maxConnections: 5,
-        maxMessages: 100,
-        rateDelta: 1000,
-        rateLimit: 5,
         auth: { user, pass },
         tls: {
           rejectUnauthorized: false
         },
-        connectionTimeout: 8000,
-        greetingTimeout: 8000,
-        socketTimeout: 10000
+        connectionTimeout: 6000,
+        greetingTimeout: 6000,
+        socketTimeout: 8000
       });
 
       cachedMailTransporter.on('error', (err) => {
-        console.warn('⚠️ [SMTP Pool] Transporter connection notice, refreshing pool:', err.message);
+        console.warn('⚠️ [SMTP] Transporter connection notice:', err.message);
         cachedMailTransporter = null;
-      });
-
-      // Pre-warm the pool connection
-      cachedMailTransporter.verify((err) => {
-        if (err) {
-          console.warn('⚠️ [SMTP Pool] Gmail connection warning:', err.message);
-        } else {
-          console.log('⚡ [SMTP Pool] Gmail SSL (Port 465) connection pool warmed up and ready for instant delivery.');
-        }
       });
 
       return cachedMailTransporter;
@@ -701,81 +687,18 @@ app.post('/api/auth/send-otp', async (req, res) => {
     console.log(`🔐 [ADMIN OTP] Generated 6-digit verification code for ${normalizedEmail} (Valid 10m)`);
   }
 
-  const fast2smsKey = (process.env.FAST2SMS_API_KEY || '').trim();
   const resend = getResendClient();
+  const transporter = getMailTransporter();
+  const fast2smsKey = (process.env.FAST2SMS_API_KEY || '').trim();
 
-  if (!fast2smsKey && !resend) {
-    console.error('❌ [OTP] Neither FAST2SMS_API_KEY nor RESEND_API_KEY is configured in environment variables.');
+  if (!transporter && !resend && !fast2smsKey) {
+    console.error('❌ [OTP] No delivery provider configured (GMAIL_APP_PASSWORD or RESEND_API_KEY).');
     return res.status(500).json({
       success: false,
-      message: 'OTP delivery service is not configured. Please add FAST2SMS_API_KEY in Render (or enter your Admin Master PIN).'
+      message: 'Email delivery service is not configured. Please configure GMAIL_APP_PASSWORD (or RESEND_API_KEY) in Render, or enter your Admin Master PIN.'
     });
   }
 
-  // 1. Primary Method: Fast2SMS Mobile SMS OTP (Direct to Indian Mobile Number)
-  if (fast2smsKey) {
-    try {
-      const smsRes = await fetch('https://www.fast2sms.com/dev/bulkV2', {
-        method: 'POST',
-        headers: {
-          'authorization': fast2smsKey,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          route: 'otp',
-          variables_values: otpCode,
-          numbers: AUTHORIZED_ADMIN_PHONE
-        })
-      });
-
-      const smsData = await smsRes.json().catch(() => null);
-      if (smsRes.ok && smsData && smsData.return === true) {
-        console.log(`📱 [OTP] SMS delivered successfully via Fast2SMS to +91 ******${AUTHORIZED_ADMIN_PHONE.slice(-4)}`);
-
-        // Record audit log
-        const store = getStore();
-        if (!store.syncLogs) store.syncLogs = [];
-        store.syncLogs.unshift({
-          id: 'log-otp-' + Date.now(),
-          service: 'Admin Auth / OTP',
-          status: 'OTP_DISPATCHED_SMS',
-          message: `6-Digit OTP generated and dispatched via Fast2SMS to +91 ******${AUTHORIZED_ADMIN_PHONE.slice(-4)}.`,
-          timestamp: new Date().toISOString()
-        });
-        saveStore(store);
-
-        return res.json({
-          success: true,
-          channel: 'sms',
-          message: `6-Digit OTP sent via SMS to your phone (+91 ••••• •${AUTHORIZED_ADMIN_PHONE.slice(-4)}). Please check your SMS inbox.`,
-          expiresInSeconds: 600,
-          cooldownSeconds: 15
-        });
-      } else {
-        const errorDetail = (smsData && smsData.message && smsData.message[0]) || (smsData && smsData.message) || `Fast2SMS HTTP ${smsRes.status}`;
-        console.error('❌ [OTP] Fast2SMS delivery error:', errorDetail);
-        if (!resend) {
-          return res.status(500).json({
-            success: false,
-            message: `SMS delivery failed: ${errorDetail}. Please check your Fast2SMS account or enter your Admin Master PIN.`
-          });
-        }
-        console.log('⚠️ [OTP] Falling back to Resend email delivery...');
-      }
-    } catch (smsErr) {
-      console.error('❌ [OTP] Fast2SMS dispatch exception:', smsErr.message);
-      if (!resend) {
-        return res.status(500).json({
-          success: false,
-          message: `SMS delivery failed: ${smsErr.message}. Please try again or enter your Admin Master PIN.`
-        });
-      }
-      console.log('⚠️ [OTP] Falling back to Resend email delivery...');
-    }
-  }
-
-  // 2. Secondary / Fallback Method: Resend Email HTTPS API
-  const resendSender = (process.env.RESEND_FROM_EMAIL || 'Portfolio Admin <onboarding@resend.dev>').trim();
   const emailSubject = `🔐 Your Admin Verification Code: ${otpCode}`;
   const emailText = `Your Abhijeet Mahakur Portfolio Admin OTP code is: ${otpCode}\n\nThis 6-digit code is valid for 10 minutes.\nPlease enter this code in your Admin Studio to authenticate.\n\nIf you did not request this code, please ignore this email.`;
   const emailHtml = `
@@ -793,25 +716,108 @@ app.post('/api/auth/send-otp', async (req, res) => {
       </div>
   `;
 
-  try {
-    const { data, error } = await resend.emails.send({
-      from: resendSender,
-      to: [normalizedEmail],
-      subject: emailSubject,
-      text: emailText,
-      html: emailHtml
-    });
+  let sent = false;
+  let deliveryMethod = '';
+  let lastError = null;
 
-    if (error) {
-      console.error('❌ [OTP] Resend delivery error:', error.message || 'Unknown error');
-      return res.status(500).json({
-        success: false,
-        message: `Email delivery failed: ${error.message || 'Resend error'}. Please verify your Resend configuration or enter your Admin Master PIN.`
+  // 1. If running on Render and Resend is configured, use Resend HTTPS API (bypasses Render SMTP port restrictions)
+  if (IS_RENDER && resend) {
+    try {
+      const resendSender = (process.env.RESEND_FROM_EMAIL || 'Portfolio Admin <onboarding@resend.dev>').trim();
+      const { data, error } = await resend.emails.send({
+        from: resendSender,
+        to: [normalizedEmail],
+        subject: emailSubject,
+        text: emailText,
+        html: emailHtml
       });
+      if (!error && data?.id) {
+        sent = true;
+        deliveryMethod = 'Resend HTTPS API';
+        console.log(`⚡ [OTP] Delivered successfully via Resend to ${normalizedEmail}: ${data.id}`);
+      } else if (error) {
+        lastError = error.message || 'Resend API error';
+        console.warn('⚠️ [OTP] Resend error, attempting SMTP fallback:', lastError);
+      }
+    } catch (rErr) {
+      lastError = rErr.message;
+      console.warn('⚠️ [OTP] Resend exception, attempting SMTP fallback:', rErr.message);
     }
+  }
 
-    console.log(`⚡ [OTP] Delivered successfully via Resend to ${normalizedEmail}:`, data?.id);
+  // 2. Direct Gmail SMTP via Nodemailer (Primary for local dev, or fallback/primary if configured)
+  if (!sent && transporter) {
+    try {
+      const senderUser = (process.env.GMAIL_USER || process.env.SMTP_USER || process.env.AUTHORIZED_ADMIN_EMAIL || 'abhijeetmahakur67@gmail.com').trim();
+      const info = await transporter.sendMail({
+        from: `"Abhijeet Mahakur Portfolio" <${senderUser}>`,
+        to: normalizedEmail,
+        subject: emailSubject,
+        text: emailText,
+        html: emailHtml
+      });
+      if (info && info.messageId) {
+        sent = true;
+        deliveryMethod = 'Gmail SMTP';
+        console.log(`✉️ [OTP] Delivered successfully via Gmail SMTP to ${normalizedEmail}: ${info.messageId}`);
+      }
+    } catch (smtpErr) {
+      lastError = smtpErr.message;
+      console.error('❌ [OTP] Gmail SMTP delivery error:', smtpErr.message);
+      cachedMailTransporter = null;
+    }
+  }
 
+  // 3. Fallback to Resend if not on Render or if SMTP failed and Resend is available
+  if (!sent && resend) {
+    try {
+      const resendSender = (process.env.RESEND_FROM_EMAIL || 'Portfolio Admin <onboarding@resend.dev>').trim();
+      const { data, error } = await resend.emails.send({
+        from: resendSender,
+        to: [normalizedEmail],
+        subject: emailSubject,
+        text: emailText,
+        html: emailHtml
+      });
+      if (!error && data?.id) {
+        sent = true;
+        deliveryMethod = 'Resend HTTPS API (Fallback)';
+        console.log(`⚡ [OTP] Delivered successfully via Resend fallback to ${normalizedEmail}: ${data.id}`);
+      } else if (error) {
+        lastError = error.message || 'Resend error';
+      }
+    } catch (rErr) {
+      lastError = rErr.message;
+    }
+  }
+
+  // 4. Auxiliary SMS Fallback (only if email couldn't be sent and Fast2SMS is explicitly configured)
+  if (!sent && fast2smsKey) {
+    try {
+      const smsRes = await fetch('https://www.fast2sms.com/dev/bulkV2', {
+        method: 'POST',
+        headers: {
+          'authorization': fast2smsKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          route: 'otp',
+          variables_values: otpCode,
+          numbers: AUTHORIZED_ADMIN_PHONE
+        })
+      });
+      const smsData = await smsRes.json().catch(() => null);
+      if (smsRes.ok && smsData && smsData.return === true) {
+        sent = true;
+        deliveryMethod = 'Fast2SMS';
+        console.log(`📱 [OTP] SMS delivered successfully via Fast2SMS to +91 ******${AUTHORIZED_ADMIN_PHONE.slice(-4)}`);
+      }
+    } catch (smsErr) {
+      lastError = smsErr.message;
+    }
+  }
+
+  if (sent) {
     // Record audit log
     const store = getStore();
     if (!store.syncLogs) store.syncLogs = [];
@@ -819,7 +825,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
       id: 'log-otp-' + Date.now(),
       service: 'Admin Auth / OTP',
       status: 'OTP_DISPATCHED',
-      message: `6-Digit OTP generated and dispatched via Resend to ${normalizedEmail}.`,
+      message: `6-Digit OTP generated and dispatched via ${deliveryMethod} to ${normalizedEmail}.`,
       timestamp: new Date().toISOString()
     });
     saveStore(store);
@@ -827,17 +833,25 @@ app.post('/api/auth/send-otp', async (req, res) => {
     return res.json({
       success: true,
       channel: 'email',
-      message: `A 6-digit OTP has been sent to ${normalizedEmail}. Please check your Inbox and Spam / Updates folder.`,
+      message: `A 6-digit OTP has been sent to ${normalizedEmail}. Please check your Inbox and Spam folder.`,
       expiresInSeconds: 600,
       cooldownSeconds: 15
     });
-  } catch (err) {
-    console.error('❌ [OTP] Resend delivery exception:', err.message);
-    return res.status(500).json({
-      success: false,
-      message: `Email delivery failed: ${err.message}. Please try again later or enter your Admin Master PIN.`
-    });
   }
+
+  // If delivery failed
+  const isTimeout = lastError && (lastError.includes('timeout') || lastError.includes('ETIMEDOUT') || lastError.includes('ESOCKETTIMEDOUT'));
+  let failureMsg = `Email delivery failed: ${lastError || 'Unable to send OTP'}.`;
+  if (IS_RENDER && isTimeout) {
+    failureMsg = `Email delivery timed out. On Render free tier, please add RESEND_API_KEY to Render Environment, use Google Sign-In, or enter your Admin Master PIN.`;
+  } else {
+    failureMsg += ' Please check your credentials, use Google Sign-In, or enter your Admin Master PIN.';
+  }
+
+  return res.status(500).json({
+    success: false,
+    message: failureMsg
+  });
 });
 
 // 2. Verify 6-Digit Email OTP Endpoint (NO Master PIN • Authorized Account Only)
@@ -2778,15 +2792,14 @@ if (!IS_VERCEL) {
     console.log(`🔒 Authorized Admin: ${AUTHORIZED_GMAIL}`);
     console.log(`📱 Authorized Phone: +91 ******${AUTHORIZED_ADMIN_PHONE.slice(-4)}`);
     printOAuthConfigCheck();
-    if (process.env.FAST2SMS_API_KEY) {
-      console.log(`📱 [SMS] Fast2SMS configured for Admin Mobile OTP delivery (+91 ******${AUTHORIZED_ADMIN_PHONE.slice(-4)}).`);
+    if (process.env.GMAIL_APP_PASSWORD && process.env.RESEND_API_KEY) {
+      console.log('⚡ [Email] Dual transport active: Gmail SMTP & Resend API configured.');
+    } else if (process.env.GMAIL_APP_PASSWORD) {
+      console.log('✉️ [Email] Gmail SMTP configured for Admin OTP delivery.');
     } else if (process.env.RESEND_API_KEY) {
       console.log('⚡ [Email] Resend API configured for Admin OTP delivery.');
     } else {
-      console.log('ℹ️ [OTP] Configure FAST2SMS_API_KEY (for SMS) or RESEND_API_KEY (for Email) in Render. Admin Master PIN is active.');
-    }
-    if (!IS_RENDER && !IS_VERCEL) {
-      getMailTransporter();
+      console.log('ℹ️ [Email] Configure GMAIL_APP_PASSWORD or RESEND_API_KEY in Render. Admin Master PIN is active.');
     }
   });
 }
