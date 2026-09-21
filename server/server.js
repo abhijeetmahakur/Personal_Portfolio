@@ -73,6 +73,7 @@ const FRONTEND_ORIGIN = process.env.VITE_DEV_ORIGIN ||
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:5173'));
 const AUTHORIZED_GMAIL = process.env.AUTHORIZED_ADMIN_EMAIL || 'abhijeetmahakur67@gmail.com';
 const PRIMARY_ADMIN_EMAIL = AUTHORIZED_GMAIL;
+const AUTHORIZED_ADMIN_PHONE = (process.env.AUTHORIZED_ADMIN_PHONE || '8797009790').replace(/\D/g, '').slice(-10);
 
 // Authorized administrator email whitelist
 const AUTHORIZED_ADMIN_EMAILS = [
@@ -700,16 +701,80 @@ app.post('/api/auth/send-otp', async (req, res) => {
     console.log(`🔐 [ADMIN OTP] Generated 6-digit verification code for ${normalizedEmail} (Valid 10m)`);
   }
 
+  const fast2smsKey = (process.env.FAST2SMS_API_KEY || '').trim();
   const resend = getResendClient();
-  if (!resend) {
-    console.error('❌ [OTP] RESEND_API_KEY is not configured in environment variables.');
+
+  if (!fast2smsKey && !resend) {
+    console.error('❌ [OTP] Neither FAST2SMS_API_KEY nor RESEND_API_KEY is configured in environment variables.');
     return res.status(500).json({
       success: false,
-      message: 'Email delivery service is not configured. Please configure RESEND_API_KEY in Render.'
+      message: 'OTP delivery service is not configured. Please add FAST2SMS_API_KEY in Render (or enter your Admin Master PIN).'
     });
   }
 
-  // Resend sender configuration: use custom verified sender if set, or default Resend testing sender
+  // 1. Primary Method: Fast2SMS Mobile SMS OTP (Direct to Indian Mobile Number)
+  if (fast2smsKey) {
+    try {
+      const smsRes = await fetch('https://www.fast2sms.com/dev/bulkV2', {
+        method: 'POST',
+        headers: {
+          'authorization': fast2smsKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          route: 'otp',
+          variables_values: otpCode,
+          numbers: AUTHORIZED_ADMIN_PHONE
+        })
+      });
+
+      const smsData = await smsRes.json().catch(() => null);
+      if (smsRes.ok && smsData && smsData.return === true) {
+        console.log(`📱 [OTP] SMS delivered successfully via Fast2SMS to +91 ******${AUTHORIZED_ADMIN_PHONE.slice(-4)}`);
+
+        // Record audit log
+        const store = getStore();
+        if (!store.syncLogs) store.syncLogs = [];
+        store.syncLogs.unshift({
+          id: 'log-otp-' + Date.now(),
+          service: 'Admin Auth / OTP',
+          status: 'OTP_DISPATCHED_SMS',
+          message: `6-Digit OTP generated and dispatched via Fast2SMS to +91 ******${AUTHORIZED_ADMIN_PHONE.slice(-4)}.`,
+          timestamp: new Date().toISOString()
+        });
+        saveStore(store);
+
+        return res.json({
+          success: true,
+          channel: 'sms',
+          message: `6-Digit OTP sent via SMS to your phone (+91 ••••• •${AUTHORIZED_ADMIN_PHONE.slice(-4)}). Please check your SMS inbox.`,
+          expiresInSeconds: 600,
+          cooldownSeconds: 15
+        });
+      } else {
+        const errorDetail = (smsData && smsData.message && smsData.message[0]) || (smsData && smsData.message) || `Fast2SMS HTTP ${smsRes.status}`;
+        console.error('❌ [OTP] Fast2SMS delivery error:', errorDetail);
+        if (!resend) {
+          return res.status(500).json({
+            success: false,
+            message: `SMS delivery failed: ${errorDetail}. Please check your Fast2SMS account or enter your Admin Master PIN.`
+          });
+        }
+        console.log('⚠️ [OTP] Falling back to Resend email delivery...');
+      }
+    } catch (smsErr) {
+      console.error('❌ [OTP] Fast2SMS dispatch exception:', smsErr.message);
+      if (!resend) {
+        return res.status(500).json({
+          success: false,
+          message: `SMS delivery failed: ${smsErr.message}. Please try again or enter your Admin Master PIN.`
+        });
+      }
+      console.log('⚠️ [OTP] Falling back to Resend email delivery...');
+    }
+  }
+
+  // 2. Secondary / Fallback Method: Resend Email HTTPS API
   const resendSender = (process.env.RESEND_FROM_EMAIL || 'Portfolio Admin <onboarding@resend.dev>').trim();
   const emailSubject = `🔐 Your Admin Verification Code: ${otpCode}`;
   const emailText = `Your Abhijeet Mahakur Portfolio Admin OTP code is: ${otpCode}\n\nThis 6-digit code is valid for 10 minutes.\nPlease enter this code in your Admin Studio to authenticate.\n\nIf you did not request this code, please ignore this email.`;
@@ -741,7 +806,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
       console.error('❌ [OTP] Resend delivery error:', error.message || 'Unknown error');
       return res.status(500).json({
         success: false,
-        message: `Email delivery failed: ${error.message || 'Resend error'}. Please verify your Resend configuration.`
+        message: `Email delivery failed: ${error.message || 'Resend error'}. Please verify your Resend configuration or enter your Admin Master PIN.`
       });
     }
 
@@ -761,6 +826,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
 
     return res.json({
       success: true,
+      channel: 'email',
       message: `A 6-digit OTP has been sent to ${normalizedEmail}. Please check your Inbox and Spam / Updates folder.`,
       expiresInSeconds: 600,
       cooldownSeconds: 15
@@ -769,7 +835,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
     console.error('❌ [OTP] Resend delivery exception:', err.message);
     return res.status(500).json({
       success: false,
-      message: `Email delivery failed: ${err.message}. Please try again later.`
+      message: `Email delivery failed: ${err.message}. Please try again later or enter your Admin Master PIN.`
     });
   }
 });
@@ -2710,11 +2776,14 @@ if (!IS_VERCEL) {
       console.log(`🌐 Local URL: http://localhost:${PORT}`);
     }
     console.log(`🔒 Authorized Admin: ${AUTHORIZED_GMAIL}`);
+    console.log(`📱 Authorized Phone: +91 ******${AUTHORIZED_ADMIN_PHONE.slice(-4)}`);
     printOAuthConfigCheck();
-    if (process.env.RESEND_API_KEY) {
+    if (process.env.FAST2SMS_API_KEY) {
+      console.log(`📱 [SMS] Fast2SMS configured for Admin Mobile OTP delivery (+91 ******${AUTHORIZED_ADMIN_PHONE.slice(-4)}).`);
+    } else if (process.env.RESEND_API_KEY) {
       console.log('⚡ [Email] Resend API configured for Admin OTP delivery.');
     } else {
-      console.log('⚠️ [Email] RESEND_API_KEY is not configured in environment variables.');
+      console.log('ℹ️ [OTP] Configure FAST2SMS_API_KEY (for SMS) or RESEND_API_KEY (for Email) in Render. Admin Master PIN is active.');
     }
     if (!IS_RENDER && !IS_VERCEL) {
       getMailTransporter();
