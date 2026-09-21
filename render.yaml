@@ -28,6 +28,8 @@ services:
         sync: false
       - key: FAST2SMS_API_KEY
         sync: false
+      - key: CALLMEBOT_API_KEY
+        sync: false
       - key: AUTHORIZED_ADMIN_PHONE
         sync: false
       - key: ADMIN_MASTER_PIN

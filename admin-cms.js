@@ -204,10 +204,6 @@ function renderAuthScreen(initialError = '') {
           </button>
           <div id="otp-status-msg" class="otp-status-text" style="display: none;"></div>
 
-          <a id="btn-whatsapp-open" class="btn-whatsapp-open" href="#" target="_blank" style="display: none;">
-            📲 Open WhatsApp & View OTP Code
-          </a>
-
           <div class="otp-verify-block" id="otp-verify-block" style="margin-top: 14px;">
             <div class="admin-field" style="text-align: left;">
               <label class="admin-label">Enter 6-Digit Code</label>
@@ -292,7 +288,6 @@ function setupOtpChannelTabs() {
   const targetLabel = document.getElementById('otp-target-label');
   const targetInput = document.getElementById('auth-otp-target');
   const sendBtn = document.getElementById('btn-send-otp');
-  const waOpenBtn = document.getElementById('btn-whatsapp-open');
   const statusEl = document.getElementById('otp-status-msg');
 
   tabs.forEach(tab => {
@@ -301,7 +296,6 @@ function setupOtpChannelTabs() {
       tab.classList.add('active');
       selectedOtpChannel = tab.dataset.channel || 'whatsapp';
 
-      if (waOpenBtn) waOpenBtn.style.display = 'none';
       if (statusEl) statusEl.style.display = 'none';
 
       if (selectedOtpChannel === 'whatsapp') {
@@ -327,7 +321,6 @@ async function handleSendOtp() {
   const btn = document.getElementById('btn-send-otp');
   const statusEl = document.getElementById('otp-status-msg');
   const otpInput = document.getElementById('auth-otp-code');
-  const waOpenBtn = document.getElementById('btn-whatsapp-open');
   if (otpCooldownSeconds > 0) return;
 
   btn.disabled = true;
@@ -356,21 +349,11 @@ async function handleSendOtp() {
     }
 
     if (data.success) {
-      showToast(data.channel === 'whatsapp' ? '✓ WhatsApp OTP generated!' : '✓ OTP dispatched successfully!');
+      showToast(data.channel === 'whatsapp' ? '✓ 6-Digit OTP sent automatically to your WhatsApp!' : '✓ OTP dispatched successfully!');
       if (statusEl) {
         statusEl.style.display = 'block';
         statusEl.className = 'otp-status-text success';
         statusEl.innerHTML = `✓ ${data.message}`;
-      }
-
-      if (data.whatsappUrl) {
-        if (waOpenBtn) {
-          waOpenBtn.href = data.whatsappUrl;
-          waOpenBtn.style.display = 'flex';
-        }
-        try {
-          window.open(data.whatsappUrl, '_blank');
-        } catch (_) {}
       }
 
       startOtpCooldown(data.cooldownSeconds || 15);

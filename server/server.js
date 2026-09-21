@@ -691,38 +691,95 @@ app.post('/api/auth/send-otp', async (req, res) => {
   const channel = inputChannel === 'sms' || inputChannel === 'email' ? inputChannel : 'whatsapp';
   const targetPhone = (process.env.AUTHORIZED_ADMIN_PHONE || '8797009790').replace(/\D/g, '').slice(-10);
 
-  // --- CHANNEL 1: WHATSAPP OTP ---
+  // --- CHANNEL 1: AUTOMATED WHATSAPP OTP ---
   if (channel === 'whatsapp') {
-    const waText = encodeURIComponent(`🔐 Abhijeet Mahakur Portfolio Admin OTP: ${otpCode}\nValid for 10 minutes.`);
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=91${targetPhone}&text=${waText}`;
-
-    // Optional CallMeBot API dispatch if key is present
     const callmebotKey = (process.env.CALLMEBOT_API_KEY || '').trim();
+    const twilioSid = (process.env.TWILIO_ACCOUNT_SID || '').trim();
+    const twilioToken = (process.env.TWILIO_AUTH_TOKEN || '').trim();
+
+    const waText = encodeURIComponent(`🔐 Portfolio Admin Verification Code: ${otpCode}\nValid for 10 minutes.\nDo not share this code.`);
+
+    let waDelivered = false;
+    let waError = null;
+
+    // 1. CallMeBot Automated Direct API (Free WhatsApp notification bot)
     if (callmebotKey) {
       try {
-        fetch(`https://api.callmebot.com/whatsapp.php?phone=+91${targetPhone}&text=${waText}&apikey=${callmebotKey}`).catch(() => {});
-      } catch (_) {}
+        const cbRes = await fetch(`https://api.callmebot.com/whatsapp.php?phone=+91${targetPhone}&text=${waText}&apikey=${callmebotKey}`);
+        const cbText = await cbRes.text();
+        if (cbRes.ok && !cbText.toLowerCase().includes('error')) {
+          waDelivered = true;
+          console.log(`💬 [OTP] Automated WhatsApp message delivered via CallMeBot to +91 ******${targetPhone.slice(-4)}`);
+        } else {
+          waError = cbText.replace(/<[^>]*>?/gm, '').trim();
+          console.error('❌ [OTP] CallMeBot error:', waError);
+        }
+      } catch (cbErr) {
+        waError = cbErr.message;
+        console.error('❌ [OTP] CallMeBot exception:', cbErr.message);
+      }
     }
 
-    // Record audit log
-    const store = getStore();
-    if (!store.syncLogs) store.syncLogs = [];
-    store.syncLogs.unshift({
-      id: 'log-otp-' + Date.now(),
-      service: 'Admin Auth / WhatsApp OTP',
-      status: 'OTP_DISPATCHED',
-      message: `6-Digit OTP generated for WhatsApp to +91 ******${targetPhone.slice(-4)}.`,
-      timestamp: new Date().toISOString()
-    });
-    saveStore(store);
+    // 2. Twilio WhatsApp API (if configured)
+    if (!waDelivered && twilioSid && twilioToken) {
+      try {
+        const twilioFrom = process.env.TWILIO_WHATSAPP_FROM || 'whatsapp:+14155238886';
+        const twilioRes = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`, {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Basic ' + Buffer.from(`${twilioSid}:${twilioToken}`).toString('base64'),
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: new URLSearchParams({
+            From: twilioFrom,
+            To: `whatsapp:+91${targetPhone}`,
+            Body: `🔐 Portfolio Admin Verification Code: ${otpCode}\nValid for 10 minutes.`
+          }).toString()
+        });
+        const twData = await twilioRes.json().catch(() => null);
+        if (twilioRes.ok && twData && twData.sid) {
+          waDelivered = true;
+          console.log(`💬 [OTP] Automated WhatsApp delivered via Twilio to +91 ******${targetPhone.slice(-4)}`);
+        } else {
+          waError = (twData && twData.message) || `Twilio HTTP ${twilioRes.status}`;
+        }
+      } catch (twErr) {
+        waError = twErr.message;
+      }
+    }
 
-    return res.json({
-      success: true,
-      channel: 'whatsapp',
-      whatsappUrl,
-      message: `6-Digit OTP generated for WhatsApp (+91 ••••• •${targetPhone.slice(-4)}). Click below to view code.`,
-      expiresInSeconds: 600,
-      cooldownSeconds: 15
+    if (waDelivered) {
+      const store = getStore();
+      if (!store.syncLogs) store.syncLogs = [];
+      store.syncLogs.unshift({
+        id: 'log-otp-' + Date.now(),
+        service: 'Admin Auth / WhatsApp OTP',
+        status: 'OTP_DISPATCHED_AUTO',
+        message: `6-Digit OTP automatically delivered to WhatsApp (+91 ******${targetPhone.slice(-4)}).`,
+        timestamp: new Date().toISOString()
+      });
+      saveStore(store);
+
+      return res.json({
+        success: true,
+        channel: 'whatsapp',
+        message: `6-Digit OTP sent automatically to your WhatsApp (+91 ••••• •${targetPhone.slice(-4)})! Please check your WhatsApp messages.`,
+        expiresInSeconds: 600,
+        cooldownSeconds: 15
+      });
+    }
+
+    // If no automated WhatsApp gateway key is configured
+    if (!callmebotKey && !twilioSid) {
+      return res.status(500).json({
+        success: false,
+        message: `Automated WhatsApp requires CALLMEBOT_API_KEY. Send "I allow callmebot to send me messages" to +34 644 44 47 70 on WhatsApp to get your free API key, or use Gmail OTP / Master PIN 879700.`
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      message: `Automated WhatsApp delivery failed: ${waError || 'Service error'}. Please use Gmail OTP or enter Master PIN 879700.`
     });
   }
 
