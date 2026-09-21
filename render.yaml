@@ -35,4 +35,10 @@ services:
         sync: false
       - key: ADMIN_MASTER_KEY
         sync: false
+      - key: META_WHATSAPP_TOKEN
+        sync: false
+      - key: META_PHONE_NUMBER_ID
+        sync: false
+      - key: META_TEMPLATE_NAME
+        value: "otp_code"
 

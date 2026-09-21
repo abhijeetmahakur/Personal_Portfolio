@@ -203,31 +203,59 @@ function renderAuthScreen(initialError = '') {
           <div id="whatsapp-bot-panel" class="whatsapp-bot-panel">
             <div class="whatsapp-bot-badge-row">
               <span class="bot-badge-pill" id="wa-bot-status-pill">🤖 Checking Bot...</span>
-              <button type="button" class="btn-wa-toggle-setup" id="btn-toggle-bot-setup" title="Configure or update CallMeBot API Key">⚙️ Bot Key</button>
+              <button type="button" class="btn-wa-toggle-setup" id="btn-toggle-bot-setup" title="Configure WhatsApp Bot (Meta Cloud API or CallMeBot)">⚙️ Bot Setup</button>
             </div>
 
             <div id="wa-bot-setup-card" class="wa-bot-setup-card" style="display: none;">
-              <div class="wa-step-item">
-                <div class="step-num-circle">1</div>
-                <div class="step-text-content">
-                  <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 5px;">
-                    Send <code>I allow callmebot to send me messages</code> to WhatsApp bot (<strong>+34 623 78 95 80</strong>):
-                  </div>
-                  <a href="https://wa.me/34623789580?text=I%20allow%20callmebot%20to%20send%20me%20messages" target="_blank" class="btn-open-wa-bot">
-                    💬 Message WhatsApp Bot
-                  </a>
-                </div>
+              <div class="wa-provider-tabs">
+                <button type="button" class="wa-provider-tab active" id="tab-provider-meta">🌐 Meta Cloud API (100% Free)</button>
+                <button type="button" class="wa-provider-tab" id="tab-provider-callmebot">🤖 CallMeBot</button>
               </div>
 
-              <div class="wa-step-item" style="margin-top: 10px;">
-                <div class="step-num-circle">2</div>
-                <div class="step-text-content">
-                  <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 5px;">
-                    Enter API Key received from bot:
+              <!-- Provider 1: Meta WhatsApp Cloud API -->
+              <div id="wa-panel-meta" class="wa-provider-panel">
+                <div style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 8px; line-height: 1.4;">
+                  Meta gives <strong>1,000 free WhatsApp conversations/month</strong> forever. Direct from Facebook Developers.
+                </div>
+                <div class="admin-field" style="text-align: left; margin-bottom: 6px;">
+                  <label class="admin-label">PHONE NUMBER ID</label>
+                  <input type="text" id="input-meta-phone-id" class="admin-input-small" placeholder="e.g. 106482910293849" />
+                </div>
+                <div class="admin-field" style="text-align: left; margin-bottom: 6px;">
+                  <label class="admin-label">ACCESS TOKEN</label>
+                  <input type="password" id="input-meta-token" class="admin-input-small" placeholder="Paste Meta Access Token (EAAG...)" />
+                </div>
+                <div class="admin-field" style="text-align: left; margin-bottom: 8px;">
+                  <label class="admin-label">TEMPLATE NAME (DEFAULT: otp_code)</label>
+                  <input type="text" id="input-meta-template" class="admin-input-small" value="otp_code" />
+                </div>
+                <button type="button" class="btn-save-bot-key" id="btn-save-meta-api">Save & Activate Meta API</button>
+              </div>
+
+              <!-- Provider 2: CallMeBot -->
+              <div id="wa-panel-callmebot" class="wa-provider-panel" style="display: none;">
+                <div class="wa-step-item">
+                  <div class="step-num-circle">1</div>
+                  <div class="step-text-content">
+                    <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 5px;">
+                      Send <code>I allow callmebot to send me messages</code> to WhatsApp bot (<strong>+34 623 78 95 80</strong>):
+                    </div>
+                    <a href="https://wa.me/34623789580?text=I%20allow%20callmebot%20to%20send%20me%20messages" target="_blank" class="btn-open-wa-bot">
+                      💬 Message WhatsApp Bot
+                    </a>
                   </div>
-                  <div class="bot-key-input-row">
-                    <input type="text" id="input-wa-bot-key" class="admin-input-small" placeholder="Paste API Key (e.g. 123456)" />
-                    <button type="button" class="btn-save-bot-key" id="btn-save-bot-key">Save & Activate</button>
+                </div>
+
+                <div class="wa-step-item" style="margin-top: 10px;">
+                  <div class="step-num-circle">2</div>
+                  <div class="step-text-content">
+                    <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 5px;">
+                      Enter API Key received from bot:
+                    </div>
+                    <div class="bot-key-input-row">
+                      <input type="text" id="input-wa-bot-key" class="admin-input-small" placeholder="Paste API Key (e.g. 123456)" />
+                      <button type="button" class="btn-save-bot-key" id="btn-save-bot-key">Save & Activate</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -325,6 +353,26 @@ function renderAuthScreen(initialError = '') {
     }
   });
 
+  // Switch between Meta Cloud API and CallMeBot tabs
+  document.getElementById('tab-provider-meta')?.addEventListener('click', () => {
+    document.getElementById('tab-provider-meta')?.classList.add('active');
+    document.getElementById('tab-provider-callmebot')?.classList.remove('active');
+    const pMeta = document.getElementById('wa-panel-meta');
+    const pCb = document.getElementById('wa-panel-callmebot');
+    if (pMeta) pMeta.style.display = 'block';
+    if (pCb) pCb.style.display = 'none';
+  });
+
+  document.getElementById('tab-provider-callmebot')?.addEventListener('click', () => {
+    document.getElementById('tab-provider-callmebot')?.classList.add('active');
+    document.getElementById('tab-provider-meta')?.classList.remove('active');
+    const pMeta = document.getElementById('wa-panel-meta');
+    const pCb = document.getElementById('wa-panel-callmebot');
+    if (pMeta) pMeta.style.display = 'none';
+    if (pCb) pCb.style.display = 'block';
+  });
+
+  document.getElementById('btn-save-meta-api')?.addEventListener('click', handleSaveMetaApi);
   document.getElementById('btn-save-bot-key')?.addEventListener('click', handleSaveBotKey);
 
   // Attach Send OTP Handler
@@ -394,7 +442,7 @@ async function refreshWhatsAppBotStatus() {
     if (data.success) {
       if (data.configured) {
         pill.className = 'bot-badge-pill active';
-        pill.innerHTML = '🟢 WhatsApp Bot Active';
+        pill.innerHTML = data.metaActive ? '🟢 Meta Cloud API Active' : '🟢 WhatsApp Bot Active';
         if (setupCard) setupCard.style.display = 'none';
       } else {
         pill.className = 'bot-badge-pill pending';
@@ -404,6 +452,51 @@ async function refreshWhatsAppBotStatus() {
   } catch (_) {
     pill.className = 'bot-badge-pill active';
     pill.innerHTML = '🤖 WhatsApp Bot Ready';
+  }
+}
+
+async function handleSaveMetaApi() {
+  const phoneId = document.getElementById('input-meta-phone-id')?.value?.trim();
+  const token = document.getElementById('input-meta-token')?.value?.trim();
+  const template = document.getElementById('input-meta-template')?.value?.trim() || 'otp_code';
+
+  if (!phoneId || !token) {
+    showToast('Please enter both Phone Number ID and Access Token from Meta.', true);
+    return;
+  }
+
+  const btn = document.getElementById('btn-save-meta-api');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Activating...';
+  }
+
+  try {
+    const res = await fetch('/api/auth/configure-whatsapp-bot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: ADMIN_EMAIL,
+        metaPhoneId: phoneId,
+        metaToken: token,
+        metaTemplate: template
+      })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('✓ Meta WhatsApp Cloud API activated successfully!');
+      await refreshWhatsAppBotStatus();
+      handleSendOtp();
+    } else {
+      showToast(data.message || 'Failed to activate Meta API.', true);
+    }
+  } catch (err) {
+    showToast('Error saving Meta credentials: ' + err.message, true);
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Save & Activate Meta API';
+    }
   }
 }
 

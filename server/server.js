@@ -709,8 +709,83 @@ app.post('/api/auth/send-otp', async (req, res) => {
     let waDelivered = false;
     let waError = null;
 
-    // 1. CallMeBot Automated Direct API (Free WhatsApp notification bot)
-    if (callmebotKey) {
+    // 1. Meta WhatsApp Cloud API (Official 100% Free - 1,000 conversations/month)
+    const metaToken = (process.env.META_WHATSAPP_TOKEN || process.env.WHATSAPP_ACCESS_TOKEN || (store.settings && store.settings.metaWhatsAppToken) || '').trim();
+    const metaPhoneId = (process.env.META_PHONE_NUMBER_ID || process.env.WHATSAPP_PHONE_ID || (store.settings && store.settings.metaPhoneNumberId) || '').trim();
+    const metaTemplate = (process.env.META_TEMPLATE_NAME || (store.settings && store.settings.metaTemplateName) || 'otp_code').trim();
+
+    if (metaToken && metaPhoneId) {
+      try {
+        const metaRes = await fetch(`https://graph.facebook.com/v20.0/${metaPhoneId}/messages`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${metaToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            messaging_product: 'whatsapp',
+            to: `91${targetPhone}`,
+            type: 'template',
+            template: {
+              name: metaTemplate,
+              language: { code: 'en_US' },
+              components: [
+                {
+                  type: 'body',
+                  parameters: [
+                    { type: 'text', text: String(otpCode) }
+                  ]
+                }
+              ]
+            }
+          }),
+          signal: AbortSignal.timeout(10000)
+        });
+
+        const metaData = await metaRes.json().catch(() => null);
+        if (metaRes.ok && metaData && metaData.messages && metaData.messages.length > 0) {
+          waDelivered = true;
+          console.log(`💬 [OTP] Automated WhatsApp delivered via Meta Cloud API to +91 ******${targetPhone.slice(-4)} (Msg ID: ${metaData.messages[0].id})`);
+        } else {
+          // Fallback: try direct text message if template is pending
+          try {
+            const textRes = await fetch(`https://graph.facebook.com/v20.0/${metaPhoneId}/messages`, {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${metaToken}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                messaging_product: 'whatsapp',
+                to: `91${targetPhone}`,
+                type: 'text',
+                text: {
+                  body: `🔐 Portfolio Admin Verification Code: ${otpCode}\nValid for 10 minutes.`
+                }
+              }),
+              signal: AbortSignal.timeout(8000)
+            });
+            const textData = await textRes.json().catch(() => null);
+            if (textRes.ok && textData && textData.messages && textData.messages.length > 0) {
+              waDelivered = true;
+              console.log(`💬 [OTP] Automated WhatsApp delivered via Meta Text API to +91 ******${targetPhone.slice(-4)}`);
+            } else {
+              waError = (metaData && metaData.error && metaData.error.message) || (textData && textData.error && textData.error.message) || `Meta HTTP ${metaRes.status}`;
+              console.error('❌ [OTP] Meta Cloud API error:', waError);
+            }
+          } catch (_) {
+            waError = (metaData && metaData.error && metaData.error.message) || `Meta HTTP ${metaRes.status}`;
+            console.error('❌ [OTP] Meta Cloud API error:', waError);
+          }
+        }
+      } catch (metaErr) {
+        waError = metaErr.message;
+        console.error('❌ [OTP] Meta Cloud API exception:', metaErr.message);
+      }
+    }
+
+    // 2. CallMeBot Automated Direct API (Free WhatsApp notification bot)
+    if (!waDelivered && callmebotKey) {
       try {
         const cbRes = await fetch(`https://api.callmebot.com/whatsapp.php?phone=+91${targetPhone}&text=${waText}&apikey=${callmebotKey}`, {
           signal: AbortSignal.timeout(9000)
@@ -729,7 +804,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
       }
     }
 
-    // 2. Twilio WhatsApp API (if configured)
+    // 3. Twilio WhatsApp API (if configured)
     if (!waDelivered && twilioSid && twilioToken) {
       try {
         const twilioFrom = process.env.TWILIO_WHATSAPP_FROM || 'whatsapp:+14155238886';
@@ -772,14 +847,14 @@ app.post('/api/auth/send-otp', async (req, res) => {
       return res.json({
         success: true,
         channel: 'whatsapp',
-        message: `6-Digit OTP sent automatically to your WhatsApp (+91 ••••• •${targetPhone.slice(-4)}) by Bot! Please check your WhatsApp messages.`,
+        message: `6-Digit OTP sent automatically to your WhatsApp (+91 ••••• •${targetPhone.slice(-4)})! Please check your WhatsApp messages.`,
         expiresInSeconds: 600,
         cooldownSeconds: 15
       });
     }
 
     // If no automated WhatsApp gateway key is configured
-    if (!callmebotKey && !twilioSid) {
+    if (!callmebotKey && !twilioSid && (!metaToken || !metaPhoneId)) {
       return res.json({
         success: false,
         botNeedsSetup: true,
@@ -1163,21 +1238,32 @@ app.post('/api/auth/master-key', (req, res) => {
 // Check WhatsApp Bot Setup Status
 app.get('/api/auth/whatsapp-bot-status', (req, res) => {
   const store = getStore();
-  const key = (process.env.CALLMEBOT_API_KEY || (store.settings && store.settings.callmebotApiKey) || '').trim();
+  const callmebotKey = (process.env.CALLMEBOT_API_KEY || (store.settings && store.settings.callmebotApiKey) || '').trim();
+  const metaToken = (process.env.META_WHATSAPP_TOKEN || process.env.WHATSAPP_ACCESS_TOKEN || (store.settings && store.settings.metaWhatsAppToken) || '').trim();
+  const metaPhoneId = (process.env.META_PHONE_NUMBER_ID || process.env.WHATSAPP_PHONE_ID || (store.settings && store.settings.metaPhoneNumberId) || '').trim();
+  const metaTemplate = (process.env.META_TEMPLATE_NAME || (store.settings && store.settings.metaTemplateName) || 'otp_code').trim();
   const phone = (process.env.AUTHORIZED_ADMIN_PHONE || '8797009790').replace(/\D/g, '').slice(-10);
+
+  const metaActive = Boolean(metaToken && metaPhoneId);
+  const callmebotActive = Boolean(callmebotKey);
 
   res.json({
     success: true,
-    configured: Boolean(key),
+    configured: metaActive || callmebotActive,
+    provider: metaActive ? 'meta' : (callmebotActive ? 'callmebot' : 'none'),
+    metaActive,
+    callmebotActive,
+    metaPhoneId: metaPhoneId ? `••••${metaPhoneId.slice(-4)}` : '',
+    metaTemplate,
     phone: `+91 ${phone}`,
     botNumber: '+34 623 78 95 80',
     botWaLink: 'https://wa.me/34623789580?text=I%20allow%20callmebot%20to%20send%20me%20messages'
   });
 });
 
-// Configure / Save WhatsApp Bot API Key (CallMeBot)
+// Configure / Save WhatsApp Bot API Credentials (Meta Cloud API or CallMeBot)
 app.post('/api/auth/configure-whatsapp-bot', async (req, res) => {
-  const { email, apiKey } = req.body || {};
+  const { email, apiKey, metaToken, metaPhoneId, metaTemplate } = req.body || {};
   const normalizedEmail = (email || '').trim().toLowerCase();
 
   if (!isAuthorizedAdminEmail(normalizedEmail)) {
@@ -1187,31 +1273,44 @@ app.post('/api/auth/configure-whatsapp-bot', async (req, res) => {
     });
   }
 
-  const cleanKey = (apiKey || '').trim();
-  if (!cleanKey) {
-    return res.status(400).json({
-      success: false,
-      message: 'Please enter a valid CallMeBot API key.'
-    });
-  }
-
   const store = getStore();
   if (!store.settings) store.settings = {};
-  store.settings.callmebotApiKey = cleanKey;
+
+  let updatedProvider = '';
+
+  if (metaToken || metaPhoneId) {
+    if (metaToken) store.settings.metaWhatsAppToken = String(metaToken).trim();
+    if (metaPhoneId) store.settings.metaPhoneNumberId = String(metaPhoneId).trim();
+    if (metaTemplate) store.settings.metaTemplateName = String(metaTemplate).trim();
+    updatedProvider = 'Meta WhatsApp Cloud API';
+  }
+
+  if (apiKey) {
+    store.settings.callmebotApiKey = String(apiKey).trim();
+    if (!updatedProvider) updatedProvider = 'CallMeBot';
+    else updatedProvider += ' & CallMeBot';
+  }
+
+  if (!updatedProvider) {
+    return res.status(400).json({
+      success: false,
+      message: 'Please provide valid Meta Cloud API credentials or a CallMeBot API key.'
+    });
+  }
 
   if (!store.syncLogs) store.syncLogs = [];
   store.syncLogs.unshift({
     id: 'log-bot-key-' + Date.now(),
     service: 'Security / WhatsApp Bot',
     status: 'KEY_CONFIGURED',
-    message: 'CallMeBot WhatsApp Bot API key successfully configured and saved.',
+    message: `${updatedProvider} credentials successfully configured and saved.`,
     timestamp: new Date().toISOString()
   });
   saveStore(store);
 
   return res.json({
     success: true,
-    message: 'WhatsApp Bot API Key saved and activated successfully!'
+    message: `${updatedProvider} saved and activated successfully!`
   });
 });
 
