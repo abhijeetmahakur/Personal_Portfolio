@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080c18"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- Top App Navigation -->
+  <rect x="40" y="32" width="1200" height="64" rx="16" fill="rgba(15, 23, 42, 0.7)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <circle cx="72" cy="64" r="6" fill="#ef4444"/>
+  <circle cx="94" cy="64" r="6" fill="#f59e0b"/>
+  <circle cx="116" cy="64" r="6" fill="#10b981"/>
+  <text x="150" y="70" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16" font-weight="700" letter-spacing="1">DEMO // FOUNDATIONS &amp; CODE EXPERIMENTATION SANDBOX</text>
+
+  <!-- Left: Code Editor Component -->
+  <rect x="40" y="116" width="600" height="564" rx="20" fill="rgba(15, 23, 42, 0.9)" stroke="rgba(168, 85, 247, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="72" y="160" fill="#c084fc" font-family="monospace" font-size="16" font-weight="700">App.jsx // Reactive State Engine</text>
+
+  <g transform="translate(72, 205)" font-family="monospace" font-size="15">
+    <text y="0" fill="#a855f7">import <tspan fill="#f1f5f9">{ useState, useEffect }</tspan> from <tspan fill="#34d399">'react'</tspan>;</text>
+    <text y="32" fill="#a855f7">import <tspan fill="#f1f5f9">{ Canvas, Motion }</tspan> from <tspan fill="#34d399">'@web/engine'</tspan>;</text>
+    
+    <text y="90" fill="#60a5fa">export default function <tspan fill="#facc15">SandboxDemo</tspan>() {</text>
+    <text y="122" fill="#94a3b8">  const [metrics, setMetrics] = useState({</text>
+    <text y="150" fill="#38bdf8">    fps<tspan fill="#94a3b8">: </tspan><tspan fill="#fde047">60</tspan><tspan fill="#94a3b8">,</tspan></text>
+    <text y="178" fill="#38bdf8">    renderTime<tspan fill="#94a3b8">: </tspan><tspan fill="#fde047">'2.4ms'</tspan><tspan fill="#94a3b8">,</tspan></text>
+    <text y="206" fill="#38bdf8">    interactive<tspan fill="#94a3b8">: </tspan><tspan fill="#34d399">true</tspan></text>
+    <text y="234" fill="#94a3b8">  });</text>
+    
+    <text y="284" fill="#60a5fa">  return (</text>
+    <text y="312" fill="#94a3b8">    &lt;<tspan fill="#38bdf8">InteractiveViewport</tspan>&gt;</text>
+    <text y="340" fill="#94a3b8">      &lt;<tspan fill="#38bdf8">ParticleCanvas</tspan> count={<tspan fill="#fde047">1500</tspan>} /&gt;</text>
+    <text y="368" fill="#94a3b8">      &lt;<tspan fill="#38bdf8">HUDTelemetry</tspan> data={metrics} /&gt;</text>
+    <text y="396" fill="#94a3b8">    &lt;/<tspan fill="#38bdf8">InteractiveViewport</tspan>&gt;</text>
+    <text y="424" fill="#60a5fa">  );</text>
+    <text y="452" fill="#60a5fa">}</text>
+  </g>
+
+  <!-- Right: Live Interactive Render Preview -->
+  <rect x="664" y="116" width="576" height="564" rx="20" fill="rgba(10, 15, 30, 0.95)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <rect x="664" y="116" width="576" height="48" rx="20" fill="rgba(255,255,255,0.03)"/>
+  <text x="696" y="146" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="14" font-weight="700">LIVE RENDER VIEWPORT (60 FPS)</text>
+
+  <!-- Interactive Graphic Orbs in Right Panel -->
+  <g transform="translate(952, 380)">
+    <circle cx="0" cy="0" r="140" fill="none" stroke="url(#purpleGrad)" stroke-width="3" stroke-dasharray="8 6"/>
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#38bdf8" stroke-width="2"/>
+    <circle cx="0" cy="0" r="60" fill="rgba(168, 85, 247, 0.2)" stroke="#a855f7" stroke-width="3" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="18" fill="#38bdf8" filter="url(#glow)"/>
+    
+    <!-- Orbiting Nodes -->
+    <circle cx="-100" cy="0" r="8" fill="#facc15"/>
+    <circle cx="70" cy="-70" r="10" fill="#10b981"/>
+    <circle cx="0" cy="140" r="9" fill="#f43f5e"/>
+  </g>
+
+  <!-- Telemetry stats -->
+  <g transform="translate(696, 570)">
+    <rect width="160" height="70" rx="10" fill="rgba(255,255,255,0.03)"/>
+    <text x="20" y="28" fill="#64748b" font-family="system-ui, sans-serif" font-size="11">FRAMERATE</text>
+    <text x="20" y="54" fill="#10b981" font-family="monospace" font-size="20" font-weight="800">60 FPS</text>
+
+    <rect x="176" y="0" width="160" height="70" rx="10" fill="rgba(255,255,255,0.03)"/>
+    <text x="196" y="28" fill="#64748b" font-family="system-ui, sans-serif" font-size="11">PARTICLES</text>
+    <text x="196" y="54" fill="#38bdf8" font-family="monospace" font-size="20" font-weight="800">1,500</text>
+
+    <rect x="352" y="0" width="160" height="70" rx="10" fill="rgba(255,255,255,0.03)"/>
+    <text x="372" y="28" fill="#64748b" font-family="system-ui, sans-serif" font-size="11">RENDER TIME</text>
+    <text x="372" y="54" fill="#c084fc" font-family="monospace" font-size="20" font-weight="800">2.4 ms</text>
+  </g>
+</svg>

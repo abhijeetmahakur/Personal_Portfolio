@@ -257,7 +257,7 @@
         "HTML5/CSS3"
       ],
       "category": "Full-Stack Web Development",
-      "image": "/project_ips.jpg",
+      "image": "/project_personalportfolio.jpg",
       "accentColor": "#38bdf8",
       "glowColor": "rgba(56, 189, 248, 0.35)",
       "githubUrl": "https://github.com/abhijeetmahakur/Personal_Portfolio",
@@ -286,7 +286,7 @@
           "liveDemo": ""
         }
       },
-      "imageUrl": "/project_ips.jpg"
+      "imageUrl": "/project_personalportfolio.jpg"
     },
     {
       "id": "gravisphere",
@@ -326,8 +326,8 @@
         }
       },
       "stars": 0,
-      "image": "/project_ips.jpg",
-      "imageUrl": "/project_ips.jpg"
+      "image": "/project_gravisphere.jpg",
+      "imageUrl": "/project_gravisphere.jpg"
     },
     {
       "id": "air-writing",
@@ -539,8 +539,8 @@
           "liveDemo": ""
         }
       },
-      "image": "/project_ips.jpg",
-      "imageUrl": "/project_ips.jpg"
+      "image": "/project_amazonclone.jpg",
+      "imageUrl": "/project_amazonclone.jpg"
     },
     {
       "id": "webdevelopmentbasic",
@@ -619,8 +619,8 @@
           "liveDemo": ""
         }
       },
-      "image": "/project_ips.jpg",
-      "imageUrl": "/project_ips.jpg"
+      "image": "/project_python.jpg",
+      "imageUrl": "/project_python.jpg"
     },
     {
       "id": "express",
@@ -635,7 +635,7 @@
         "Backend"
       ],
       "category": "Backend & API Engineering",
-      "image": "/project_ips.jpg",
+      "image": "/project_express.svg",
       "accentColor": "#22c55e",
       "glowColor": "rgba(34, 197, 94, 0.35)",
       "githubUrl": "https://github.com/abhijeetmahakur/express",
@@ -662,7 +662,7 @@
           "liveDemo": ""
         }
       },
-      "imageUrl": "/project_ips.jpg"
+      "imageUrl": "/project_express.svg"
     },
     {
       "id": "localrepo",
@@ -677,7 +677,7 @@
         "Shell"
       ],
       "category": "DevOps & Version Control",
-      "image": "/project_personalportfolio.jpg",
+      "image": "/project_localrepo.svg",
       "accentColor": "#a855f7",
       "glowColor": "rgba(168, 85, 247, 0.35)",
       "githubUrl": "https://github.com/abhijeetmahakur/localrepo",
@@ -704,7 +704,7 @@
           "liveDemo": ""
         }
       },
-      "imageUrl": "/project_personalportfolio.jpg"
+      "imageUrl": "/project_localrepo.svg"
     },
     {
       "id": "demo",
@@ -717,7 +717,7 @@
         "Problem Solving"
       ],
       "category": "Foundations & Exploration",
-      "image": "/project_ips.jpg",
+      "image": "/project_demo.svg",
       "accentColor": "#ec4899",
       "glowColor": "rgba(236, 72, 153, 0.35)",
       "githubUrl": "https://github.com/abhijeetmahakur/demo",
@@ -743,7 +743,7 @@
           "liveDemo": ""
         }
       },
-      "imageUrl": "/project_ips.jpg"
+      "imageUrl": "/project_demo.svg"
     }
   ],
   "education": {
@@ -1002,6 +1002,20 @@
     ]
   },
   "syncLogs": [
+    {
+      "id": "log-1790281268773",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T20:21:08.773Z"
+    },
+    {
+      "id": "log-1790281097499",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T20:18:17.499Z"
+    },
     {
       "id": "log-1790280495595",
       "service": "GitHub Auto-Sync",
@@ -1337,26 +1351,12 @@
       "status": "SUCCESS",
       "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
       "timestamp": "2026-09-24T17:35:16.010Z"
-    },
-    {
-      "id": "log-1790271313019",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:35:13.019Z"
-    },
-    {
-      "id": "log-1790271281249",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:34:41.249Z"
     }
   ],
   "syncStatus": {
     "github": {
       "connected": true,
-      "lastSync": "2026-09-24T20:08:15.595Z",
+      "lastSync": "2026-09-24T20:21:08.773Z",
       "account": "abhijeetmahakur",
       "repoCount": 14,
       "status": "Active & Synchronized",

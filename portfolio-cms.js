@@ -208,9 +208,9 @@ export function hydratePortfolio(data) {
         'amazon_clone': '/project_amazonclone.jpg',
         'webdevelopmentbasic': '/project_webdevbasic.jpg',
         'python': '/project_python.jpg',
-        'express': '/project_webdevbasic.jpg',
-        'localrepo': '/project_python.jpg',
-        'demo': '/project_webdevbasic.jpg'
+        'express': '/project_express.svg',
+        'localrepo': '/project_localrepo.svg',
+        'demo': '/project_demo.svg'
       };
 
       const fallbackImages = [
@@ -225,16 +225,27 @@ export function hydratePortfolio(data) {
         '/project_thermax.jpg',
         '/project_amazonclone.jpg',
         '/project_webdevbasic.jpg',
-        '/project_python.jpg'
+        '/project_python.jpg',
+        '/project_express.svg',
+        '/project_localrepo.svg',
+        '/project_demo.svg'
       ];
 
       function resolveProjectImage(proj, index) {
-        const idKey = (proj.id || '').toLowerCase().replace(/[-_]/g, '');
+        const idKey = (proj.id || '').toLowerCase().replace(/[-_.]/g, '');
         const titleKey = (proj.title || '').toLowerCase();
 
-        // 1. Explicit custom image if set and not generic placeholder
+        // 1. Exact project registry lookup (prevents any cross-project image bleeding)
+        for (const [key, imgPath] of Object.entries(projectImageRegistry)) {
+          const normKey = key.replace(/[-_.]/g, '');
+          if (idKey === normKey) {
+            return imgPath;
+          }
+        }
+
+        // 2. Explicit custom image if set and not generic placeholder
         const customImg = proj.image || proj.imageUrl || proj.thumbnail;
-        if (customImg && customImg !== '/project_webdevbasic.jpg' && customImg !== '/project_gravisphere.jpg') {
+        if (customImg && customImg !== '/project_webdevbasic.jpg' && customImg !== '/project_gravisphere.jpg' && customImg !== '/project_ips.jpg') {
           return customImg;
         }
 
@@ -1164,7 +1175,26 @@ function wireUpTopicImageGenerator() {
       const tech = Array.isArray(proj.technologies) ? proj.technologies.join(', ') : (proj.technologies || '');
       keywordsInp.value = `${proj.title} - ${proj.category || 'Software'}. ${tech}. ${proj.description || ''}`;
       if (techPills) techPills.textContent = tech ? `Tech: ${tech}` : '';
-      const curImg = proj.image || proj.imageUrl || '/project_truckflow.jpg';
+      const canonicalMap = {
+        'truckflow': '/project_truckflow.jpg',
+        'spotify-clone': '/project_spotifyclone.jpg',
+        'ips': '/project_ips.jpg',
+        'personal-portfolio': '/project_personalportfolio.jpg',
+        'gravisphere': '/project_gravisphere.jpg',
+        'air-writing': '/project_airwriting.jpg',
+        'django-blog': '/project_djangoblog.jpg',
+        'attendanceapp': '/project_attendanceapp.jpg',
+        'thermax': '/project_thermax.jpg',
+        'amazon-clone': '/project_amazonclone.jpg',
+        'webdevelopmentbasic': '/project_webdevbasic.jpg',
+        'python': '/project_python.jpg',
+        'express': '/project_express.svg',
+        'localrepo': '/project_localrepo.svg',
+        'demo': '/project_demo.svg'
+      };
+      const curImg = (proj.image && proj.image !== '/project_ips.jpg' && proj.image !== '/project_webdevbasic.jpg') 
+        ? proj.image 
+        : (canonicalMap[proj.id] || proj.image || '/project_personalportfolio.jpg');
       previewImg.src = curImg;
       currentGeneratedUrl = curImg;
       if (statusIndicator) statusIndicator.textContent = `Target: ${proj.title}`;
@@ -1272,7 +1302,10 @@ function wireUpTopicImageGenerator() {
         'thermax': '/project_thermax.jpg',
         'amazon-clone': '/project_amazonclone.jpg',
         'webdevelopmentbasic': '/project_webdevbasic.jpg',
-        'python': '/project_python.jpg'
+        'python': '/project_python.jpg',
+        'express': '/project_express.svg',
+        'localrepo': '/project_localrepo.svg',
+        'demo': '/project_demo.svg'
       };
       const fallbackUrl = fallbackMap[selectedId] || (proj ? (proj.image || '/project_personalportfolio.jpg') : '/project_personalportfolio.jpg');
       currentGeneratedUrl = fallbackUrl;

@@ -112,6 +112,7 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use('/uploads', express.static(UPLOADS_DIR));
+app.use('/uploads', express.static(path.join(__dirname, '..', 'public', 'uploads')));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -2650,19 +2651,19 @@ async function syncGitHubProjects(overrideUsername) {
         const lowerName = repo.name.toLowerCase();
         let defaultImage = '/project_webdevbasic.jpg';
         if (lowerName.includes('truck') || lowerName.includes('logistics')) defaultImage = '/project_truckflow.jpg';
-        else if (lowerName.includes('ips') || (repo.language && repo.language.toLowerCase() === 'java')) defaultImage = '/project_ips.jpg';
         else if (lowerName.includes('spotify') || lowerName.includes('music') || lowerName.includes('audio')) defaultImage = '/project_spotifyclone.jpg';
         else if (lowerName.includes('portfolio')) defaultImage = '/project_personalportfolio.jpg';
-        else if (lowerName.includes('attendance')) defaultImage = '/project_attendanceapp.jpg';
-        else if (lowerName.includes('thermax') || lowerName.includes('thermal')) defaultImage = '/project_thermax.jpg';
         else if (lowerName.includes('amazon')) defaultImage = '/project_amazonclone.jpg';
+        else if (lowerName.includes('gravi')) defaultImage = '/project_gravisphere.jpg';
         else if (lowerName.includes('air') || lowerName.includes('gesture')) defaultImage = '/project_airwriting.jpg';
         else if (lowerName.includes('blog') || lowerName.includes('django')) defaultImage = '/project_djangoblog.jpg';
-        else if (lowerName.includes('gravi')) defaultImage = '/project_gravisphere.jpg';
-        else if (lowerName.includes('express')) defaultImage = '/project_webdevbasic.jpg';
-        else if (lowerName.includes('localrepo')) defaultImage = '/project_python.jpg';
-        else if (lowerName.includes('demo')) defaultImage = '/project_webdevbasic.jpg';
+        else if (lowerName.includes('attendance')) defaultImage = '/project_attendanceapp.jpg';
+        else if (lowerName.includes('thermax') || lowerName.includes('thermal')) defaultImage = '/project_thermax.jpg';
+        else if (lowerName.includes('express')) defaultImage = '/project_express.svg';
+        else if (lowerName.includes('localrepo') || lowerName.includes('git')) defaultImage = '/project_localrepo.svg';
+        else if (lowerName.includes('demo') || lowerName.includes('sandbox')) defaultImage = '/project_demo.svg';
         else if (repo.language && repo.language.toLowerCase() === 'python') defaultImage = '/project_python.jpg';
+        else if (/\bips\b/i.test(lowerName) || (repo.language && repo.language.toLowerCase() === 'java')) defaultImage = '/project_ips.jpg';
         else defaultImage = '/project_webdevbasic.jpg';
 
         const newProject = {
@@ -2793,38 +2794,130 @@ async function generateTopicImage({ title, category, technologies, description, 
   const cleanCat = (category || 'Tech').trim();
   const lower = `${cleanTitle} ${cleanCat} ${techStr} ${description || ''} ${projectId || ''}`.toLowerCase();
 
-  if (!promptTopic) {
-    let themeHint = 'modern high-tech software application dashboard interface';
-    if (lower.includes('truck') || lower.includes('logistics') || lower.includes('freight')) {
-      themeHint = 'heavy commercial freight trucks on highway, real-time GPS telemetry HUD, route optimization map analytics, cyber blue and amber neon, logistics control cockpit';
-    } else if (lower.includes('spotify') || lower.includes('music') || lower.includes('audio') || lower.includes('sound')) {
-      themeHint = 'sleek modern Spotify music streaming web app player, glowing neon emerald green and violet audio waveform visualizer, dark glassmorphism dashboard, synthwave playlist cards, futuristic audio player UI';
-    } else if (lower.includes('java') || lower.includes('algorithm') || lower.includes('tree') || lower.includes('graph') || lower.includes('ips')) {
-      themeHint = 'Java algorithmic code dashboard, glowing binary search tree, graph data structures, cyber code editor, neon cyan and violet, algorithm visualizer workstation';
-    } else if (lower.includes('gravity') || lower.includes('gravisphere') || lower.includes('physics')) {
-      themeHint = 'futuristic gravity control simulation cockpit, glowing celestial orbital physics, cyan telemetry dials, high-tech space station UI';
-    } else if (lower.includes('vision') || lower.includes('gesture') || lower.includes('hand') || lower.includes('air')) {
-      themeHint = 'computer vision hand gesture landmark tracking with MediaPipe, holographic glowing neon drawing strokes in mid-air, cyber AI camera canvas';
-    } else if (lower.includes('attendance') || lower.includes('biometric')) {
-      themeHint = 'smart attendance management dashboard, automated check-in analytics, facial verification telemetry, clean cyber UI';
-    } else if (lower.includes('thermax') || lower.includes('thermal') || lower.includes('hardware')) {
-      themeHint = 'hardware thermal telemetry cockpit, CPU GPU temperature telemetry curves, fan speed controls, cyber flame orange neon';
-    } else if (lower.includes('blog') || lower.includes('django')) {
-      themeHint = 'full-stack Python Django editorial web publication dashboard, sleek modern article feed, author cards, dark glassmorphism layout, emerald green accents';
-    } else if (lower.includes('e-commerce') || lower.includes('amazon') || lower.includes('cart') || lower.includes('shop')) {
-      themeHint = 'modern e-commerce product platform, digital shopping dashboard, deal banners and product showcase, dark glassmorphism UI';
-    } else if (lower.includes('portfolio') || lower.includes('personal') || lower.includes('cms')) {
-      themeHint = 'high-performance personal developer portfolio workstation, Lenis canvas animations, headless CMS interface, dark glassmorphism cyan and violet';
-    } else if (lower.includes('python')) {
-      themeHint = 'Python software engineering and data science workstation, clean syntax highlighting, automated analytics pipelines';
-    } else if (lower.includes('web') || lower.includes('html') || lower.includes('css')) {
-      themeHint = 'interactive modern web UI design components, responsive grid layouts, cyber blue and violet';
-    } else if (lower.includes('certificate') || lower.includes('certification') || lower.includes('credential') || lower.includes('badge') || cleanCat.toLowerCase().includes('cert')) {
-      themeHint = 'prestigious accredited digital certificate diploma, glowing holographic seal, verified achievement badge, cybernetic gold and emerald borders, clean dark glassmorphism luxury aesthetic';
-      promptTopic = `Prestigious professional certification credential for ${cleanTitle}, ${themeHint}, verified skills: ${techStr}, 8k sharp typography, cinematic illumination`;
+  const normId = (projectId || '').toLowerCase().replace(/[-_.]/g, '');
+
+  // 1. Precise Curated Project Profiles & Fallbacks
+  const knownProjectProfiles = {
+    'personalportfolio': {
+      theme: 'high-performance personal developer portfolio workstation, Lenis smooth scrolling canvas, headless CMS interface, dark glassmorphism cyan and violet',
+      image: '/project_personalportfolio.jpg'
+    },
+    'amazonclone': {
+      theme: 'modern e-commerce product platform, digital shopping dashboard, deal banners and product showcase cards, dark glassmorphism shopping cart UI',
+      image: '/project_amazonclone.jpg'
+    },
+    'gravisphere': {
+      theme: 'futuristic 3D gravity control simulation cockpit, orbital planetary telemetry, glowing celestial orbital mechanics, cyan telemetry dials, high-tech space physics UI',
+      image: '/project_gravisphere.jpg'
+    },
+    'spotifyclone': {
+      theme: 'sleek modern Spotify music streaming web app player, glowing neon emerald green and violet audio waveform visualizer, dark glassmorphism dashboard, synthwave playlist cards, futuristic audio player UI',
+      image: '/project_spotifyclone.jpg'
+    },
+    'truckflow': {
+      theme: 'heavy commercial freight trucks on highway, real-time GPS telemetry HUD, route optimization map analytics, cyber blue and amber neon, logistics control cockpit',
+      image: '/project_truckflow.jpg'
+    },
+    'airwriting': {
+      theme: 'computer vision hand gesture landmark tracking with MediaPipe and OpenCV, holographic glowing neon drawing strokes in mid-air, cyber AI camera canvas',
+      image: '/project_airwriting.jpg'
+    },
+    'djangoblog': {
+      theme: 'full-stack Python Django editorial web publication dashboard, sleek modern article feed, author cards, dark glassmorphism layout, emerald green accents',
+      image: '/project_djangoblog.jpg'
+    },
+    'attendanceapp': {
+      theme: 'smart attendance management dashboard, automated check-in analytics, facial verification telemetry, clean cyber UI, real-time analytics graphs',
+      image: '/project_attendanceapp.jpg'
+    },
+    'thermax': {
+      theme: 'hardware thermal telemetry cockpit, CPU GPU temperature telemetry curves, fan speed controls, cyber flame orange neon, real-time sensor dials',
+      image: '/project_thermax.jpg'
+    },
+    'python': {
+      theme: 'Python software engineering and data science workstation, clean syntax highlighting, automated analytics pipelines, algorithm visualizer',
+      image: '/project_python.jpg'
+    },
+    'webdevelopmentbasic': {
+      theme: 'interactive modern web UI design components, responsive grid layouts, HTML5 CSS3 JavaScript live sandbox playground, cyber blue and violet',
+      image: '/project_webdevbasic.jpg'
+    },
+    'ips': {
+      theme: 'Java algorithmic code dashboard, glowing binary search tree, graph data structures, cyber code editor, neon cyan and violet, algorithm visualizer workstation',
+      image: '/project_ips.jpg'
+    },
+    'express': {
+      theme: 'Express.js Node backend REST API microservices architecture dashboard, endpoint routing telemetry, JSON payload inspector, cyber terminal console',
+      image: '/project_express.svg'
+    },
+    'localrepo': {
+      theme: 'Git version control architecture workstation, branch commit graph topology, DevOps deployment pipeline telemetry, dark glassmorphism UI',
+      image: '/project_localrepo.svg'
+    },
+    'demo': {
+      theme: 'developer code sandbox and experimentation lab, reactive interactive components, modern high-tech developer cockpit',
+      image: '/project_demo.svg'
     }
-    
-    if (!promptTopic) {
+  };
+
+  // Determine fallback image and theme based on known project or keyword classification
+  let fallback = '/project_personalportfolio.jpg';
+  let themeHint = 'modern high-tech software application dashboard interface';
+
+  if (knownProjectProfiles[normId]) {
+    themeHint = knownProjectProfiles[normId].theme;
+    fallback = knownProjectProfiles[normId].image;
+  } else if (lower.includes('truck') || lower.includes('logistics') || lower.includes('freight')) {
+    themeHint = 'heavy commercial freight trucks on highway, real-time GPS telemetry HUD, route optimization map analytics, cyber blue and amber neon, logistics control cockpit';
+    fallback = '/project_truckflow.jpg';
+  } else if (lower.includes('spotify') || lower.includes('music') || lower.includes('audio') || lower.includes('sound')) {
+    themeHint = 'sleek modern Spotify music streaming web app player, glowing neon emerald green and violet audio waveform visualizer, dark glassmorphism dashboard, synthwave playlist cards, futuristic audio player UI';
+    fallback = '/project_spotifyclone.jpg';
+  } else if (lower.includes('amazon') || lower.includes('e-commerce') || lower.includes('ecommerce') || lower.includes('shop') || lower.includes('cart')) {
+    themeHint = 'modern e-commerce product platform, digital shopping dashboard, deal banners and product showcase, dark glassmorphism UI';
+    fallback = '/project_amazonclone.jpg';
+  } else if (lower.includes('gravity') || lower.includes('gravisphere') || lower.includes('physics') || lower.includes('orbital')) {
+    themeHint = 'futuristic gravity control simulation cockpit, glowing celestial orbital physics, cyan telemetry dials, high-tech space station UI';
+    fallback = '/project_gravisphere.jpg';
+  } else if (lower.includes('vision') || lower.includes('gesture') || lower.includes('air-writing') || lower.includes('opencv') || lower.includes('mediapipe')) {
+    themeHint = 'computer vision hand gesture landmark tracking with MediaPipe, holographic glowing neon drawing strokes in mid-air, cyber AI camera canvas';
+    fallback = '/project_airwriting.jpg';
+  } else if (lower.includes('attendance') || lower.includes('biometric') || lower.includes('check-in')) {
+    themeHint = 'smart attendance management dashboard, automated check-in analytics, facial verification telemetry, clean cyber UI';
+    fallback = '/project_attendanceapp.jpg';
+  } else if (lower.includes('thermax') || lower.includes('thermal') || lower.includes('hardware') || lower.includes('temperature')) {
+    themeHint = 'hardware thermal telemetry cockpit, CPU GPU temperature telemetry curves, fan speed controls, cyber flame orange neon';
+    fallback = '/project_thermax.jpg';
+  } else if (lower.includes('blog') || lower.includes('django') || lower.includes('editorial') || lower.includes('article')) {
+    themeHint = 'full-stack Python Django editorial web publication dashboard, sleek modern article feed, author cards, dark glassmorphism layout, emerald green accents';
+    fallback = '/project_djangoblog.jpg';
+  } else if (lower.includes('portfolio') || lower.includes('personal') || lower.includes('resume') || lower.includes('cms')) {
+    themeHint = 'high-performance personal developer portfolio workstation, Lenis canvas animations, headless CMS interface, dark glassmorphism cyan and violet';
+    fallback = '/project_personalportfolio.jpg';
+  } else if (lower.includes('express') || lower.includes('backend') || lower.includes('microservice') || lower.includes('rest api')) {
+    themeHint = 'Express.js backend REST API server console, endpoint telemetry and JSON payloads, dark glassmorphism architecture';
+    fallback = '/project_express.svg';
+  } else if (lower.includes('git') || lower.includes('version control') || lower.includes('localrepo') || lower.includes('devops')) {
+    themeHint = 'Git version control architecture workstation, branch commit graph topology, DevOps deployment pipeline telemetry';
+    fallback = '/project_localrepo.svg';
+  } else if (lower.includes('python')) {
+    themeHint = 'Python software engineering and data science workstation, clean syntax highlighting, automated analytics pipelines';
+    fallback = '/project_python.jpg';
+  } else if (lower.includes('certificate') || lower.includes('certification') || lower.includes('credential') || lower.includes('badge') || cleanCat.toLowerCase().includes('cert')) {
+    themeHint = 'prestigious accredited digital certificate diploma, glowing holographic seal, verified achievement badge, cybernetic gold and emerald borders, clean dark glassmorphism luxury aesthetic';
+    fallback = '/cert_ibm_ai.svg';
+  } else if (/\bips\b/i.test(lower) || (/\bjava\b/i.test(lower) && !lower.includes('javascript'))) {
+    themeHint = 'Java algorithmic code dashboard, glowing binary search tree, graph data structures, cyber code editor, neon cyan and violet, algorithm visualizer workstation';
+    fallback = '/project_ips.jpg';
+  } else {
+    themeHint = 'interactive modern web UI design components, responsive grid layouts, cyber blue and violet';
+    fallback = '/project_webdevbasic.jpg';
+  }
+
+  if (!promptTopic) {
+    if (lower.includes('certificate') || lower.includes('certification') || lower.includes('credential') || cleanCat.toLowerCase().includes('cert')) {
+      promptTopic = `Prestigious professional certification credential for ${cleanTitle}, ${themeHint}, verified skills: ${techStr}, 8k sharp typography, cinematic illumination`;
+    } else {
       promptTopic = `High-tech ${cleanTitle} software application cover, ${themeHint}, technologies: ${techStr}, sleek dark mode UI, glowing cyber accents, cinematic lighting, 8k professional render`;
     }
   }
@@ -2835,53 +2928,43 @@ async function generateTopicImage({ title, category, technologies, description, 
   
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3500);
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
     const imgRes = await fetch(aiUrl, { signal: controller.signal });
     clearTimeout(timeoutId);
     
-    if (imgRes.ok) {
+    if (imgRes.ok && imgRes.headers.get('content-type')?.includes('image')) {
       const buffer = Buffer.from(await imgRes.arrayBuffer());
-      const safeId = (projectId || title || 'topic').toLowerCase().replace(/[^a-z0-9]/g, '_').slice(0, 20);
-      const filename = `proj_ai_${safeId}_${Date.now()}.jpg`;
-      
-      const savePath = path.join(UPLOADS_DIR, filename);
-      fs.writeFileSync(savePath, buffer);
-      
-      // Also copy to public/uploads and dist/uploads
-      const publicUploads = path.join(__dirname, '..', 'public', 'uploads');
-      const distUploads = path.join(__dirname, '..', 'dist', 'uploads');
-      try {
-        if (!fs.existsSync(publicUploads)) fs.mkdirSync(publicUploads, { recursive: true });
-        fs.writeFileSync(path.join(publicUploads, filename), buffer);
-      } catch (_) {}
-      try {
-        if (fs.existsSync(distUploads)) fs.writeFileSync(path.join(distUploads, filename), buffer);
-      } catch (_) {}
+      if (buffer.length > 5000) {
+        const safeId = (projectId || title || 'topic').toLowerCase().replace(/[^a-z0-9]/g, '_').slice(0, 20);
+        const filename = `proj_ai_${safeId}_${Date.now()}.jpg`;
+        
+        const savePath = path.join(UPLOADS_DIR, filename);
+        fs.writeFileSync(savePath, buffer);
+        
+        // Also copy to public/uploads and dist/uploads
+        const publicUploads = path.join(__dirname, '..', 'public', 'uploads');
+        const distUploads = path.join(__dirname, '..', 'dist', 'uploads');
+        try {
+          if (!fs.existsSync(publicUploads)) fs.mkdirSync(publicUploads, { recursive: true });
+          fs.writeFileSync(path.join(publicUploads, filename), buffer);
+        } catch (_) {}
+        try {
+          if (fs.existsSync(distUploads)) fs.mkdirSync(distUploads, { recursive: true });
+          fs.writeFileSync(path.join(distUploads, filename), buffer);
+        } catch (_) {}
 
-      return {
-        success: true,
-        imageUrl: `/uploads/${filename}`,
-        prompt: promptTopic
-      };
+        return {
+          success: true,
+          imageUrl: `/uploads/${filename}`,
+          prompt: promptTopic
+        };
+      }
     }
   } catch (err) {
-    console.warn(`[AI Image] Fetch failed (${err.message}). Using topic fallback image.`);
+    console.warn(`[AI Image] Fetch notice (${err.message}). Using accurate topic cover: ${fallback}`);
   }
 
   // Fallback: Return curated high-res topic match
-  let fallback = '/project_personalportfolio.jpg';
-  if (lower.includes('truck') || lower.includes('logistics')) fallback = '/project_truckflow.jpg';
-  else if (lower.includes('music') || lower.includes('spotify')) fallback = '/project_spotifyclone.jpg';
-  else if (lower.includes('java') || lower.includes('algorithm') || lower.includes('ips')) fallback = '/project_ips.jpg';
-  else if (lower.includes('gravity') || lower.includes('gravisphere')) fallback = '/project_gravisphere.jpg';
-  else if (lower.includes('air') || lower.includes('vision') || lower.includes('hand')) fallback = '/project_airwriting.jpg';
-  else if (lower.includes('blog') || lower.includes('django')) fallback = '/project_djangoblog.jpg';
-  else if (lower.includes('attendance')) fallback = '/project_attendanceapp.jpg';
-  else if (lower.includes('thermax') || lower.includes('thermal')) fallback = '/project_thermax.jpg';
-  else if (lower.includes('amazon')) fallback = '/project_amazonclone.jpg';
-  else if (lower.includes('python')) fallback = '/project_python.jpg';
-  else if (lower.includes('web') || lower.includes('express') || lower.includes('basic') || lower.includes('demo')) fallback = '/project_webdevbasic.jpg';
-
   return {
     success: true,
     imageUrl: fallback,

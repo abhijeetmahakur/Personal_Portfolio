@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050811"/>
+      <stop offset="50%" stop-color="#0c1322"/>
+      <stop offset="100%" stop-color="#020409"/>
+    </linearGradient>
+    <linearGradient id="neonGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(15, 23, 42, 0.85)"/>
+      <stop offset="100%" stop-color="rgba(10, 15, 30, 0.92)"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- Grid Pattern -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="160" y1="0" x2="160" y2="720"/>
+    <line x1="320" y1="0" x2="320" y2="720"/>
+    <line x1="480" y1="0" x2="480" y2="720"/>
+    <line x1="640" y1="0" x2="640" y2="720"/>
+    <line x1="800" y1="0" x2="800" y2="720"/>
+    <line x1="960" y1="0" x2="960" y2="720"/>
+    <line x1="1120" y1="0" x2="1120" y2="720"/>
+    <line x1="0" y1="180" x2="1280" y2="180"/>
+    <line x1="0" y1="360" x2="1280" y2="360"/>
+    <line x1="0" y1="540" x2="1280" y2="540"/>
+  </g>
+
+  <!-- Ambient Glow Orbs -->
+  <circle cx="280" cy="220" r="220" fill="#10b981" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="1020" cy="480" r="260" fill="#38bdf8" opacity="0.09" filter="url(#glow)"/>
+
+  <!-- Top App Navigation Bar -->
+  <rect x="40" y="32" width="1200" height="64" rx="16" fill="rgba(15, 23, 42, 0.7)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <circle cx="72" cy="64" r="6" fill="#ef4444"/>
+  <circle cx="94" cy="64" r="6" fill="#f59e0b"/>
+  <circle cx="116" cy="64" r="6" fill="#10b981"/>
+  
+  <text x="150" y="70" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" letter-spacing="1">EXPRESS // BACKEND REST API &amp; MICROSERVICES ARCHITECTURE</text>
+  <rect x="1040" y="48" width="170" height="32" rx="8" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1"/>
+  <circle cx="1060" cy="64" r="4" fill="#10b981"/>
+  <text x="1074" y="69" fill="#10b981" font-family="monospace" font-size="12" font-weight="700">PORT 3001 ONLINE</text>
+
+  <!-- Left Card: API Endpoints Table -->
+  <rect x="40" y="116" width="600" height="564" rx="20" fill="url(#cardBg)" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="72" y="160" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800">REST API ROUTE CONTROLLER</text>
+  <text x="72" y="186" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="13">High-throughput Node.js microservices with JSON serialization</text>
+
+  <!-- Endpoint 1 -->
+  <g transform="translate(68, 210)">
+    <rect width="544" height="68" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    <rect x="16" y="18" width="56" height="32" rx="6" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="1"/>
+    <text x="44" y="39" fill="#10b981" font-family="monospace" font-size="13" font-weight="700" text-anchor="middle">GET</text>
+    <text x="86" y="39" fill="#f1f5f9" font-family="monospace" font-size="14" font-weight="600">/api/projects</text>
+    <rect x="360" y="20" width="76" height="28" rx="6" fill="rgba(16, 185, 129, 0.15)"/>
+    <text x="398" y="39" fill="#34d399" font-family="monospace" font-size="12" font-weight="700" text-anchor="middle">200 OK</text>
+    <text x="490" y="39" fill="#64748b" font-family="monospace" font-size="12">12ms</text>
+  </g>
+
+  <!-- Endpoint 2 -->
+  <g transform="translate(68, 290)">
+    <rect width="544" height="68" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    <rect x="16" y="18" width="56" height="32" rx="6" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="1"/>
+    <text x="44" y="39" fill="#38bdf8" font-family="monospace" font-size="13" font-weight="700" text-anchor="middle">POST</text>
+    <text x="86" y="39" fill="#f1f5f9" font-family="monospace" font-size="14" font-weight="600">/api/projects/generate</text>
+    <rect x="360" y="20" width="76" height="28" rx="6" fill="rgba(16, 185, 129, 0.15)"/>
+    <text x="398" y="39" fill="#34d399" font-family="monospace" font-size="12" font-weight="700" text-anchor="middle">201 CRE</text>
+    <text x="490" y="39" fill="#64748b" font-family="monospace" font-size="12">38ms</text>
+  </g>
+
+  <!-- Endpoint 3 -->
+  <g transform="translate(68, 370)">
+    <rect width="544" height="68" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    <rect x="16" y="18" width="56" height="32" rx="6" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="1"/>
+    <text x="44" y="39" fill="#38bdf8" font-family="monospace" font-size="13" font-weight="700" text-anchor="middle">POST</text>
+    <text x="86" y="39" fill="#f1f5f9" font-family="monospace" font-size="14" font-weight="600">/api/sync/github</text>
+    <rect x="360" y="20" width="76" height="28" rx="6" fill="rgba(16, 185, 129, 0.15)"/>
+    <text x="398" y="39" fill="#34d399" font-family="monospace" font-size="12" font-weight="700" text-anchor="middle">200 OK</text>
+    <text x="490" y="39" fill="#64748b" font-family="monospace" font-size="12">45ms</text>
+  </g>
+
+  <!-- Endpoint 4 -->
+  <g transform="translate(68, 450)">
+    <rect width="544" height="68" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    <rect x="16" y="18" width="56" height="32" rx="6" fill="rgba(129, 140, 248, 0.2)" stroke="#818cf8" stroke-width="1"/>
+    <text x="44" y="39" fill="#818cf8" font-family="monospace" font-size="13" font-weight="700" text-anchor="middle">PUT</text>
+    <text x="86" y="39" fill="#f1f5f9" font-family="monospace" font-size="14" font-weight="600">/api/portfolio</text>
+    <rect x="360" y="20" width="76" height="28" rx="6" fill="rgba(16, 185, 129, 0.15)"/>
+    <text x="398" y="39" fill="#34d399" font-family="monospace" font-size="12" font-weight="700" text-anchor="middle">200 OK</text>
+    <text x="490" y="39" fill="#64748b" font-family="monospace" font-size="12">18ms</text>
+  </g>
+
+  <!-- Telemetry Row inside Left Card -->
+  <g transform="translate(68, 540)">
+    <rect width="170" height="100" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)"/>
+    <text x="20" y="36" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" font-weight="600">THROUGHPUT</text>
+    <text x="20" y="72" fill="#10b981" font-family="monospace" font-size="24" font-weight="800">1,480 <tspan font-size="13" fill="#94a3b8">req/s</tspan></text>
+
+    <rect x="186" y="0" width="170" height="100" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)"/>
+    <text x="206" y="36" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" font-weight="600">UPTIME</text>
+    <text x="206" y="72" fill="#38bdf8" font-family="monospace" font-size="24" font-weight="800">99.98%</text>
+
+    <rect x="372" y="0" width="172" height="100" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)"/>
+    <text x="392" y="36" fill="#64748b" font-family="system-ui, sans-serif" font-size="12" font-weight="600">HEAP USAGE</text>
+    <text x="392" y="72" fill="#a78bfa" font-family="monospace" font-size="24" font-weight="800">42.6 <tspan font-size="13" fill="#94a3b8">MB</tspan></text>
+  </g>
+
+  <!-- Right Card: Live JSON Inspector -->
+  <rect x="664" y="116" width="576" height="564" rx="20" fill="url(#cardBg)" stroke="rgba(16, 185, 129, 0.3)" stroke-width="1.5" filter="url(#glow)"/>
+  <rect x="664" y="116" width="576" height="48" rx="20" fill="rgba(255,255,255,0.03)"/>
+  <text x="696" y="146" fill="#38bdf8" font-family="monospace" font-size="14" font-weight="700">RESPONSE PAYLOAD // application/json</text>
+
+  <g transform="translate(696, 195)" font-family="monospace" font-size="15" font-weight="500">
+    <text y="0" fill="#94a3b8">{</text>
+    <text y="28" fill="#38bdf8">  "success"<tspan fill="#94a3b8">: </tspan><tspan fill="#34d399">true</tspan><tspan fill="#94a3b8">,</tspan></text>
+    <text y="56" fill="#38bdf8">  "server"<tspan fill="#94a3b8">: </tspan><tspan fill="#fde047">"Express/4.18 (Node.js v20)"</tspan><tspan fill="#94a3b8">,</tspan></text>
+    <text y="84" fill="#38bdf8">  "cluster"<tspan fill="#94a3b8">: </tspan><tspan fill="#fde047">"primary-worker-01"</tspan><tspan fill="#94a3b8">,</tspan></text>
+    <text y="112" fill="#38bdf8">  "endpoints"<tspan fill="#94a3b8">: [</tspan></text>
+    <text y="140" fill="#fde047">    "/api/projects"<tspan fill="#94a3b8">,</tspan></text>
+    <text y="168" fill="#fde047">    "/api/projects/generate-image"<tspan fill="#94a3b8">,</tspan></text>
+    <text y="196" fill="#fde047">    "/api/sync/github"<tspan fill="#94a3b8">,</tspan></text>
+    <text y="224" fill="#fde047">    "/api/certificates"</text>
+    <text y="252" fill="#94a3b8">  ],</text>
+    <text y="280" fill="#38bdf8">  "rateLimit"<tspan fill="#94a3b8">: { </tspan><tspan fill="#38bdf8">"limit"</tspan><tspan fill="#94a3b8">: </tspan><tspan fill="#fde047">500</tspan><tspan fill="#94a3b8">, </tspan><tspan fill="#38bdf8">"remaining"</tspan><tspan fill="#94a3b8">: </tspan><tspan fill="#fde047">498</tspan><tspan fill="#94a3b8"> },</tspan></text>
+    <text y="308" fill="#38bdf8">  "telemetry"<tspan fill="#94a3b8">: {</tspan></text>
+    <text y="336" fill="#38bdf8">    "status"<tspan fill="#94a3b8">: </tspan><tspan fill="#34d399">"HEALTHY_OPTIMAL"</tspan><tspan fill="#94a3b8">,</tspan></text>
+    <text y="364" fill="#38bdf8">    "activeConnections"<tspan fill="#94a3b8">: </tspan><tspan fill="#fde047">24</tspan><tspan fill="#94a3b8">,</tspan></text>
+    <text y="392" fill="#38bdf8">    "latencyP99"<tspan fill="#94a3b8">: </tspan><tspan fill="#fde047">"18.4ms"</tspan></text>
+    <text y="420" fill="#94a3b8">  }</text>
+    <text y="448" fill="#94a3b8">}</text>
+  </g>
+</svg>
