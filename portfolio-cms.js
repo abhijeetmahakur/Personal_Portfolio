@@ -6,7 +6,7 @@
 const API_BASE = ''; // Uses Vite proxy (/api) or falls back to http://localhost:3001
 
 export const HOMEPAGE_PROJECTS_COUNT = 5;
-export const HOMEPAGE_CERTS_COUNT = 8;
+export const HOMEPAGE_CERTS_COUNT = 4;
 
 export async function fetchPortfolioData(forceSync = false) {
   try {
@@ -953,7 +953,9 @@ function initMoreModals() {
     if (!grid) return;
 
     const query = (certSearchInput?.value || '').toLowerCase().trim();
-    const moreCerts = currentCertsData;
+    // Exclude certificates shown on homepage (first 4); display the rest in Explore All Credentials
+    // When a search query is typed, search across the entire archive so no certificate is missed
+    const moreCerts = query ? currentCertsData : currentCertsData.slice(HOMEPAGE_CERTS_COUNT);
     const filtered = moreCerts.filter(c => {
       const titleMatches = (c.title || '').toLowerCase().includes(query);
       const issuerMatches = (c.issuer || '').toLowerCase().includes(query);

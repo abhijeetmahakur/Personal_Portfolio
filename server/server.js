@@ -2994,6 +2994,7 @@ app.post(['/api/sync/linkedin', '/api/sync/linkedin/refresh'], async (req, res) 
     timestamp: new Date().toISOString()
   });
 
+  ensureAuthenticCertificates(store);
   saveStore(store);
 
   res.json({
@@ -3105,13 +3106,44 @@ app.post(['/api/sync/linkedin/ingest', '/api/sync/linkedin/post', '/api/sync/lin
         ? skills.split(',').map(s => s.trim())
         : (isCert ? ['Credential', 'Skill Verification'] : ['Software Engineering', 'Full-Stack']));
 
-  // Auto-generate topic cover image if requested
-  let coverImage = payload.imageUrl || payload.image_url || payload.media_url || payload.fileUrl || payload.picture || '';
-  if (!coverImage && autoGenerateImage) {
+  // Automatically set picture for certificates synced from LinkedIn
+  let coverImage = payload.imageUrl || payload.image_url || payload.media_url || payload.fileUrl || payload.picture || payload.image || '';
+  
+  if (isCert && !coverImage) {
+    const fullText = `${itemTitle} ${detectedIssuer} ${category} ${rawContent}`.toLowerCase();
+    if (fullText.includes('pod') || fullText.includes('testing mindset') || fullText.includes('automated testing')) {
+      coverImage = '/cert_podai_testing.jpg';
+    } else if (fullText.includes('thiranex')) {
+      coverImage = '/cert_thiranex_webdev.jpg';
+    } else if (fullText.includes('ibm') || fullText.includes('skillsbuild') || fullText.includes('artificial intelligence')) {
+      coverImage = '/cert_ibm_ai.jpg';
+    } else if (fullText.includes('tcs') || fullText.includes('careeredge') || fullText.includes('career edge')) {
+      coverImage = '/cert_tcs_careeredge.jpg';
+    } else if (fullText.includes('google') || fullText.includes('gemini')) {
+      coverImage = '/cert_google_gemini.jpg';
+    } else if (fullText.includes('acmegrade') || fullText.includes('iit delhi')) {
+      coverImage = '/cert_acmegrade_webdev.jpg';
+    } else if (fullText.includes('beeskilled') || fullText.includes('python')) {
+      coverImage = '/cert_beeskilled_python.jpg';
+    } else {
+      // Auto-generate topic badge / certificate image for newly announced credentials
+      try {
+        const imgRes = await generateTopicImage({
+          title: itemTitle,
+          category: category || 'Professional Certification',
+          technologies: techList,
+          description: rawContent || itemTitle
+        });
+        coverImage = imgRes.imageUrl;
+      } catch (_) {
+        coverImage = '/cert_ibm_ai.jpg';
+      }
+    }
+  } else if (!isCert && !coverImage && autoGenerateImage) {
     try {
       const imgRes = await generateTopicImage({
         title: itemTitle,
-        category: category || (isCert ? 'Professional Certification' : 'Featured Project'),
+        category: category || 'Featured Project',
         technologies: techList,
         description: rawContent || itemTitle
       });
@@ -3131,7 +3163,10 @@ app.post(['/api/sync/linkedin/ingest', '/api/sync/linkedin/post', '/api/sync/lin
     if (existing) {
       if (postUrl) existing.verifyUrl = postUrl;
       if (rawContent) existing.description = rawContent;
-      if (coverImage) existing.fileUrl = coverImage;
+      if (coverImage) {
+        existing.image = coverImage;
+        existing.fileUrl = coverImage;
+      }
       saveStore(store);
       return res.json({ success: true, message: `Updated existing certificate "${itemTitle}".`, certificate: existing });
     }
@@ -3144,7 +3179,8 @@ app.post(['/api/sync/linkedin/ingest', '/api/sync/linkedin/post', '/api/sync/lin
       description: rawContent || `Accredited credential announced on LinkedIn.`,
       category: category || (Array.isArray(techList) && techList.length > 0 ? techList[0] : 'Certification'),
       verifyUrl: (verifyUrl || postUrl || 'https://linkedin.com/in/abhijeet-mahakur-23bb983b6').trim(),
-      fileUrl: coverImage || '',
+      image: coverImage || '/cert_ibm_ai.jpg',
+      fileUrl: coverImage || '/cert_ibm_ai.jpg',
       source: 'LinkedIn Post Sync',
       createdAt: new Date().toISOString()
     };

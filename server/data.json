@@ -984,6 +984,55 @@
   },
   "syncLogs": [
     {
+      "id": "log-1790279315926",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:48:35.926Z"
+    },
+    {
+      "id": "log-1790279315919",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:48:35.920Z"
+    },
+    {
+      "id": "log-1790279292396",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T19:48:12.396Z"
+    },
+    {
+      "id": "log-1790279157657",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:45:57.657Z"
+    },
+    {
+      "id": "log-1790278674922",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T19:37:54.922Z"
+    },
+    {
+      "id": "log-1790278617008",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:36:57.008Z"
+    },
+    {
+      "id": "log-1790278617004",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:36:57.004Z"
+    },
+    {
       "id": "log-1790278397305",
       "service": "GitHub Auto-Sync",
       "status": "SUCCESS",
@@ -1283,61 +1332,12 @@
       "status": "SUCCESS",
       "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
       "timestamp": "2026-09-24T17:34:28.277Z"
-    },
-    {
-      "id": "log-1790271266660",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:34:26.660Z"
-    },
-    {
-      "id": "log-1790271259243",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:34:19.243Z"
-    },
-    {
-      "id": "log-1790271231597",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:33:51.597Z"
-    },
-    {
-      "id": "log-1790271203684",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:33:23.684Z"
-    },
-    {
-      "id": "log-1790271199586",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:33:19.586Z"
-    },
-    {
-      "id": "log-1790271175923",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:32:55.923Z"
-    },
-    {
-      "id": "log-1790271146745",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:32:26.745Z"
     }
   ],
   "syncStatus": {
     "github": {
       "connected": true,
-      "lastSync": "2026-09-24T19:33:17.305Z",
+      "lastSync": "2026-09-24T19:48:12.396Z",
       "account": "abhijeetmahakur",
       "repoCount": 14,
       "status": "Active & Synchronized",
@@ -1345,10 +1345,10 @@
     },
     "linkedin": {
       "connected": true,
-      "lastSync": "2026-09-24T19:31:14.490Z",
+      "lastSync": "2026-09-24T19:48:35.926Z",
+      "profileUrl": "https://linkedin.com/in/abhijeet-mahakur-23bb983b6",
       "account": "abhijeet-mahakur-23bb983b6",
       "status": "Active & Ingested",
-      "profileUrl": "https://linkedin.com/in/abhijeet-mahakur-23bb983b6",
       "certificatesCount": 7,
       "autoSyncEnabled": true
     }
