@@ -1015,6 +1015,13 @@
   },
   "syncLogs": [
     {
+      "id": "log-1790283806937",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T21:03:26.937Z"
+    },
+    {
       "id": "log-1790283184579",
       "service": "GitHub Auto-Sync",
       "status": "SUCCESS",
@@ -1356,19 +1363,12 @@
       "status": "SUCCESS",
       "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
       "timestamp": "2026-09-24T17:35:47.566Z"
-    },
-    {
-      "id": "log-1790271316856",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:35:16.856Z"
     }
   ],
   "syncStatus": {
     "github": {
       "connected": true,
-      "lastSync": "2026-09-24T20:53:04.579Z",
+      "lastSync": "2026-09-24T21:03:26.937Z",
       "account": "abhijeetmahakur",
       "repoCount": 14,
       "status": "Active & Synchronized",
