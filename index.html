@@ -436,14 +436,24 @@
               <span class="section-eyebrow">FEATURED PROJECTS</span>
               <h2 class="section-title">Selected Work & Applications</h2>
             </div>
-            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <button type="button" id="btn-open-topic-generator" class="header-link" title="Generate AI Cover Images according to project topic" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(56, 189, 248, 0.15)); border: 1px solid rgba(168, 85, 247, 0.45); color: #d8b4fe; cursor: pointer; padding: 7px 15px; border-radius: 9999px; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 7px; font-weight: 600; box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);">
+                <span style="font-size: 0.95rem;">🎨</span>
+                <span>Generate Topic Image</span>
+              </button>
+              <button type="button" id="btn-sync-linkedin-post" class="header-link" title="Sync new post or project from LinkedIn" style="background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(14, 165, 233, 0.4); color: #38bdf8; cursor: pointer; padding: 7px 15px; border-radius: 9999px; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 7px; font-weight: 600;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.59 1.59 0 1 0 0-3.18 1.59 1.59 0 0 0 0 3.18m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+                </svg>
+                <span>Sync LinkedIn Post</span>
+              </button>
               <button type="button" id="btn-sync-github-now" class="header-link" title="Check GitHub for newly pushed repositories" style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; cursor: pointer; padding: 7px 14px; border-radius: 9999px; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px;">
                 <span class="sync-icon">🔄</span>
                 <span class="sync-text">Live GitHub Sync</span>
               </button>
               <a href="https://github.com/abhijeetmahakur" target="_blank" rel="noopener noreferrer" class="header-link">
-                <span>View All on GitHub</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <span>GitHub Repos</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
@@ -1172,6 +1182,169 @@
         <div class="modal-grid-scroll" data-lenis-prevent>
           <div class="certificates-grid" id="more-certs-grid">
             <!-- Hydrated dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Topic Image Generator Studio Modal -->
+    <div id="modal-topic-image-generator" class="portfolio-modal" style="display: none;" aria-hidden="true" role="dialog" aria-labelledby="topic-gen-title">
+      <div class="portfolio-modal-backdrop" id="topic-gen-backdrop"></div>
+      <div class="portfolio-modal-card" style="max-width: 680px; width: 92%;">
+        <div class="modal-card-header">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #a855f7, #38bdf8); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+              🎨
+            </div>
+            <div>
+              <h3 id="topic-gen-title" class="modal-card-title" style="margin: 0; font-size: 1.25rem;">AI Topic Image Generator</h3>
+              <p style="margin: 2px 0 0 0; font-size: 0.8rem; color: #94a3b8;">Generate aesthetic project covers tailored to the exact topic & tech stack</p>
+            </div>
+          </div>
+          <button type="button" class="cert-modal-close" id="btn-close-topic-gen-modal" aria-label="Close">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-card-body" style="padding: 20px 24px;">
+          <!-- Target Project Selector -->
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Select Project to Update</label>
+            <select id="sel-topic-gen-project" class="modal-search-input" style="width: 100%; border-radius: 10px; padding: 10px 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.9rem;">
+              <!-- Hydrated dynamically from window.cmsData.projects -->
+            </select>
+          </div>
+
+          <!-- Topic / Visual Prompt Input -->
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label style="font-size: 0.82rem; font-weight: 600; color: #cbd5e1;">Topic Description / Visual Keywords</label>
+              <span id="topic-gen-tech-pills" style="font-size: 0.75rem; color: #38bdf8;"></span>
+            </div>
+            <textarea id="inp-topic-gen-keywords" rows="3" class="modal-search-input" style="width: 100%; border-radius: 10px; padding: 10px 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.88rem; resize: vertical; line-height: 1.5;" placeholder="e.g. Modern freight logistics dashboard, truck telemetry HUD, Indian highways, cyber blue lighting..."></textarea>
+          </div>
+
+          <!-- Style Aesthetic Presets -->
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1; margin-bottom: 8px;">Aesthetic Style Preset</label>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="topic-style-chips">
+              <button type="button" class="modal-chip active" data-style="cyber-hud">⚡ Cyberpunk HUD</button>
+              <button type="button" class="modal-chip" data-style="glass-cockpit">💎 Dark Glassmorphism</button>
+              <button type="button" class="modal-chip" data-style="isometric-3d">🔮 3D Isometric</button>
+              <button type="button" class="modal-chip" data-style="code-editor">💻 Code & Algorithmic</button>
+            </div>
+          </div>
+
+          <!-- Live Image Preview Stage -->
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1; margin-bottom: 8px;">Generated Cover Preview</label>
+            <div id="topic-gen-preview-wrap" style="position: relative; border-radius: 12px; overflow: hidden; background: #090d16; border: 1px solid rgba(255, 255, 255, 0.1); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;">
+              <img id="topic-gen-preview-img" src="/project_truckflow.jpg" alt="Generated Preview" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+              <div id="topic-gen-spinner" style="display: none; position: absolute; inset: 0; background: rgba(5, 7, 11, 0.85); flex-direction: column; align-items: center; justify-content: center; gap: 12px; z-index: 10;">
+                <div class="sync-icon spinning" style="font-size: 2rem; display: inline-block;">✨</div>
+                <div style="font-size: 0.9rem; font-weight: 600; color: #d8b4fe;">Generating topic-matched image with AI...</div>
+                <div style="font-size: 0.75rem; color: #94a3b8;">Synthesizing visual elements according to project keywords</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div style="display: flex; gap: 12px; justify-content: flex-end;">
+            <button type="button" id="btn-do-generate-topic-img" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #9333ea, #0284c7); border: none; border-radius: 10px; color: #fff; cursor: pointer; font-weight: 600;">
+              <span>✨ Generate AI Image for Topic</span>
+            </button>
+            <button type="button" id="btn-apply-topic-img" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px; background: #059669; border: none; border-radius: 10px; color: #fff; cursor: pointer; font-weight: 600;">
+              <span>✓ Save & Publish to Project</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LinkedIn Post Sync & Ingestion Modal -->
+    <div id="modal-linkedin-sync" class="portfolio-modal" style="display: none;" aria-hidden="true" role="dialog" aria-labelledby="linkedin-sync-title">
+      <div class="portfolio-modal-backdrop" id="linkedin-sync-backdrop"></div>
+      <div class="portfolio-modal-card" style="max-width: 620px; width: 92%;">
+        <div class="modal-card-header">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: #0077b5; display: flex; align-items: center; justify-content: center; color: #fff;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.59 1.59 0 1 0 0-3.18 1.59 1.59 0 0 0 0 3.18m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 id="linkedin-sync-title" class="modal-card-title" style="margin: 0; font-size: 1.25rem;">Sync LinkedIn Post</h3>
+              <p style="margin: 2px 0 0 0; font-size: 0.8rem; color: #94a3b8;">Instantly ingest newly posted projects or certificates from your LinkedIn</p>
+            </div>
+          </div>
+          <button type="button" class="cert-modal-close" id="btn-close-linkedin-modal" aria-label="Close">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-card-body" style="padding: 20px 24px;">
+          <!-- Post Link Input -->
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">LinkedIn Post URL (Optional)</label>
+            <input type="url" id="inp-li-post-url" class="modal-search-input" style="width: 100%; border-radius: 10px; padding: 10px 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.88rem;" placeholder="https://www.linkedin.com/posts/abhijeet-mahakur..." />
+          </div>
+
+          <!-- Post Content / Text -->
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Post Title or Announcement Text</label>
+            <textarea id="inp-li-post-text" rows="3" class="modal-search-input" style="width: 100%; border-radius: 10px; padding: 10px 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.88rem; resize: vertical; line-height: 1.5;" placeholder="Paste the text from your LinkedIn post or describe what you published..."></textarea>
+          </div>
+
+          <!-- Type Selector -->
+          <div style="margin-bottom: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Ingest Into</label>
+              <select id="sel-li-type" class="modal-search-input" style="width: 100%; border-radius: 10px; padding: 9px 12px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.88rem;">
+                <option value="project">Featured Projects (Selected Work)</option>
+                <option value="certificate">Certificates & Credentials Vault</option>
+              </select>
+            </div>
+            <div>
+              <label id="lbl-li-skills" style="display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Tech Stack / Category</label>
+              <input type="text" id="inp-li-skills" class="modal-search-input" style="width: 100%; border-radius: 10px; padding: 9px 12px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.88rem;" placeholder="e.g. Artificial Intelligence, Python, Cloud" />
+            </div>
+          </div>
+
+          <!-- Dynamic Certificate Specific Row (Issuer & Credential URL) -->
+          <div id="row-li-cert-fields" style="display: none; margin-bottom: 16px; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Issuing Organization</label>
+              <input type="text" id="inp-li-issuer" class="modal-search-input" style="width: 100%; border-radius: 10px; padding: 9px 12px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.88rem;" placeholder="e.g. IBM SkillsBuild, Google, Coursera" />
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Credential / Verification Link</label>
+              <input type="url" id="inp-li-verify-url" class="modal-search-input" style="width: 100%; border-radius: 10px; padding: 9px 12px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.88rem;" placeholder="https://www.credly.com/... or cert URL" />
+            </div>
+          </div>
+
+          <!-- Auto-Generate Cover Toggle -->
+          <div style="margin-bottom: 20px; padding: 12px 14px; background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 10px; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 0.85rem; font-weight: 600; color: #d8b4fe;">✨ Generate AI Cover Image According to Topic</div>
+              <div style="font-size: 0.75rem; color: #94a3b8;">Automatically generates a high-res cover visual matching the post</div>
+            </div>
+            <input type="checkbox" id="chk-li-auto-img" checked style="width: 18px; height: 18px; accent-color: #a855f7; cursor: pointer;" />
+          </div>
+
+          <!-- Status Message -->
+          <div id="li-sync-status-msg" style="display: none; margin-bottom: 14px; font-size: 0.85rem; padding: 10px; border-radius: 8px;"></div>
+
+          <!-- Actions -->
+          <div style="display: flex; gap: 12px; justify-content: flex-end;">
+            <button type="button" id="btn-do-sync-linkedin" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px; background: #0077b5; border: none; border-radius: 10px; color: #fff; cursor: pointer; font-weight: 600;">
+              <span>⚡ Sync Post into Portfolio</span>
+            </button>
           </div>
         </div>
       </div>

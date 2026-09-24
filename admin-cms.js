@@ -1899,6 +1899,10 @@ function attachStudioTabEvents() {
 
   // Quick Import Project from LinkedIn
   document.getElementById('btn-import-linkedin-project')?.addEventListener('click', async () => {
+    if (typeof window.openLinkedInSyncModal === 'function') {
+      window.openLinkedInSyncModal();
+      return;
+    }
     if (!currentEditingData.projects) currentEditingData.projects = [];
     const newProj = {
       id: 'proj-linkedin-' + Date.now(),
@@ -1907,10 +1911,10 @@ function attachStudioTabEvents() {
       description: 'Engineering application developed and published on LinkedIn.',
       technologies: ['React', 'JavaScript', 'Node.js'],
       category: 'Software Engineering',
-      image: '/project_webdevbasic.jpg',
+      image: '/project_personalportfolio.jpg',
       githubUrl: '',
       liveUrl: '',
-      source: 'LinkedIn Ingest',
+      source: 'LinkedIn Post Sync',
       published: true
     };
     currentEditingData.projects.unshift(newProj);
@@ -2149,9 +2153,12 @@ function renderProjectsEditorList(projects) {
           </div>
           <div class="admin-field full-width">
             <label class="admin-label">Project Image URL / Asset Path</label>
-            <div style="display: flex; gap: 12px; align-items: center;">
-              <input type="text" class="admin-input" value="${escapeVal(p.image || '')}" placeholder="/project_...jpg" oninput="window.updateProjectField(${idx}, 'image', this.value)" style="flex: 1;" />
-              ${p.image ? `<img src="${escapeVal(p.image)}" alt="Thumbnail" style="width: 60px; height: 34px; object-fit: cover; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2);" />` : ''}
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <input type="text" id="inp-proj-img-${idx}" class="admin-input" value="${escapeVal(p.image || '')}" placeholder="/project_...jpg" oninput="window.updateProjectField(${idx}, 'image', this.value)" style="flex: 1; min-width: 220px;" />
+              <button type="button" class="btn-quick-antigravity" id="btn-admin-gen-img-${idx}" style="padding: 8px 14px; font-size: 0.8rem; background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #d8b4fe;" onclick="window.adminGenerateTopicCover(${idx})">
+                🎨 AI Topic Cover
+              </button>
+              ${p.image ? `<img id="preview-proj-img-${idx}" src="${escapeVal(p.image)}" alt="Thumbnail" style="width: 60px; height: 34px; object-fit: cover; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2);" />` : ''}
             </div>
           </div>
           <div class="admin-field full-width">
@@ -2492,6 +2499,53 @@ window.updateProjectField = (idx, field, value) => {
     currentEditingData.projects[idx][field] = value.split(',').map(s => s.trim()).filter(Boolean);
   } else {
     currentEditingData.projects[idx][field] = value;
+  }
+};
+
+window.adminGenerateTopicCover = async function(idx) {
+  const p = currentEditingData?.projects?.[idx];
+  if (!p) return;
+  const btn = document.getElementById(`btn-admin-gen-img-${idx}`);
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = `<span class="spinning">✨</span> Generating...`;
+  }
+  showToast(`Generating AI cover image for "${p.title}" based on topic...`);
+  try {
+    const res = await fetch('/api/projects/generate-image', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        projectId: p.id,
+        title: p.title,
+        category: p.category,
+        technologies: p.technologies,
+        description: p.description
+      })
+    });
+    const data = await res.json();
+    if (data.success && data.imageUrl) {
+      p.image = data.imageUrl;
+      p.imageUrl = data.imageUrl;
+      const inp = document.getElementById(`inp-proj-img-${idx}`);
+      if (inp) inp.value = data.imageUrl;
+      const prev = document.getElementById(`preview-proj-img-${idx}`);
+      if (prev) {
+        prev.src = data.imageUrl;
+        prev.style.display = 'block';
+      }
+      showToast(`✓ Generated & applied AI cover for ${p.title}!`);
+      hydratePortfolio(currentEditingData);
+    } else {
+      showToast(data.message || 'Generation notice', true);
+    }
+  } catch (err) {
+    showToast('Failed to generate image: ' + err.message, true);
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = `🎨 AI Topic Cover`;
+    }
   }
 };
 

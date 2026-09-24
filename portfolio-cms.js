@@ -6,11 +6,12 @@
 const API_BASE = ''; // Uses Vite proxy (/api) or falls back to http://localhost:3001
 
 export const HOMEPAGE_PROJECTS_COUNT = 5;
-export const HOMEPAGE_CERTS_COUNT = 3;
+export const HOMEPAGE_CERTS_COUNT = 6;
 
-export async function fetchPortfolioData() {
+export async function fetchPortfolioData(forceSync = false) {
   try {
-    const res = await fetch(`${API_BASE}/api/portfolio?sync=true`);
+    const query = forceSync ? '?sync=true' : '';
+    const res = await fetch(`${API_BASE}/api/portfolio${query}`);
     if (res.ok) {
       const json = await res.json();
       if (json.success && json.data) {
@@ -20,7 +21,8 @@ export async function fetchPortfolioData() {
   } catch (err) {
     // Fallback to direct backend URL if proxy isn't routing
     try {
-      const fallbackRes = await fetch('http://localhost:3001/api/portfolio?sync=true');
+      const query = forceSync ? '?sync=true' : '';
+      const fallbackRes = await fetch(`http://localhost:3001/api/portfolio${query}`);
       if (fallbackRes.ok) {
         const json = await fallbackRes.json();
         if (json.success && json.data) {
@@ -184,6 +186,14 @@ export function hydratePortfolio(data) {
     const projectsGrid = document.querySelector('.projects-grid');
     if (projectsGrid) {
       const projectImageRegistry = {
+        'truckflow': '/project_truckflow.jpg',
+        'truck_flow': '/project_truckflow.jpg',
+        'truck-flow': '/project_truckflow.jpg',
+        'truck': '/project_truckflow.jpg',
+        'ips': '/project_ips.jpg',
+        'spotify-clone': '/project_spotifyclone.jpg',
+        'spotify_clone': '/project_spotifyclone.jpg',
+        'spotify': '/project_spotifyclone.jpg',
         'personal-portfolio': '/project_personalportfolio.jpg',
         'personal_portfolio': '/project_personalportfolio.jpg',
         'portfolio': '/project_personalportfolio.jpg',
@@ -204,6 +214,9 @@ export function hydratePortfolio(data) {
       };
 
       const fallbackImages = [
+        '/project_truckflow.jpg',
+        '/project_ips.jpg',
+        '/project_spotifyclone.jpg',
         '/project_personalportfolio.jpg',
         '/project_gravisphere.jpg',
         '/project_airwriting.jpg',
@@ -216,29 +229,43 @@ export function hydratePortfolio(data) {
       ];
 
       function resolveProjectImage(proj, index) {
-        if (proj.image && proj.image !== '/project_gravisphere.jpg') return proj.image;
         const idKey = (proj.id || '').toLowerCase().replace(/[-_]/g, '');
         const titleKey = (proj.title || '').toLowerCase();
+
+        // 1. Explicit custom image if set and not generic placeholder
+        const customImg = proj.image || proj.imageUrl || proj.thumbnail;
+        if (customImg && customImg !== '/project_webdevbasic.jpg' && customImg !== '/project_gravisphere.jpg') {
+          return customImg;
+        }
+
+        // 2. Direct topic matches for key projects
+        if (titleKey.includes('truck') || idKey.includes('truck')) return '/project_truckflow.jpg';
+        if (titleKey.includes('ips') || idKey.includes('ips')) return '/project_ips.jpg';
+        if (titleKey.includes('spotify') || idKey.includes('spotify')) return '/project_spotifyclone.jpg';
         if (titleKey.includes('portfolio') || idKey.includes('portfolio')) return '/project_personalportfolio.jpg';
-        if (proj.image) return proj.image;
-        if (proj.thumbnail) return proj.thumbnail;
+
+        // 3. Registry lookup by normalized ID/title
         for (const [key, imgPath] of Object.entries(projectImageRegistry)) {
-          if (idKey.includes(key.replace(/[-_]/g, '')) || key.replace(/[-_]/g, '').includes(idKey)) {
+          const normKey = key.replace(/[-_]/g, '');
+          if (idKey.includes(normKey) || normKey.includes(idKey)) {
             return imgPath;
           }
         }
+
+        // 4. Topic keyword fallbacks
         if (titleKey.includes('attendance')) return '/project_attendanceapp.jpg';
         if (titleKey.includes('thermax') || titleKey.includes('thermal')) return '/project_thermax.jpg';
         if (titleKey.includes('amazon')) return '/project_amazonclone.jpg';
-        if (titleKey.includes('web') || titleKey.includes('html')) return '/project_webdevbasic.jpg';
         if (titleKey.includes('python')) return '/project_python.jpg';
         if (titleKey.includes('gravi')) return '/project_gravisphere.jpg';
         if (titleKey.includes('air') || titleKey.includes('gesture')) return '/project_airwriting.jpg';
         if (titleKey.includes('django') || titleKey.includes('blog')) return '/project_djangoblog.jpg';
-        if (titleKey.includes('express')) return '/project_webdevbasic.jpg';
-        if (titleKey.includes('localrepo')) return '/project_python.jpg';
-        if (titleKey.includes('demo')) return '/project_webdevbasic.jpg';
-        return fallbackImages[index % fallbackImages.length];
+        if (titleKey.includes('music') || titleKey.includes('audio') || titleKey.includes('sound')) return '/project_spotifyclone.jpg';
+        if (titleKey.includes('logistics') || titleKey.includes('freight')) return '/project_truckflow.jpg';
+        if (titleKey.includes('algorithm') || titleKey.includes('java')) return '/project_ips.jpg';
+        if (titleKey.includes('web') || titleKey.includes('html')) return '/project_webdevbasic.jpg';
+
+        return customImg || fallbackImages[index % fallbackImages.length];
       }
 
       const displayedProjects = projects.slice(0, HOMEPAGE_PROJECTS_COUNT);
@@ -272,6 +299,10 @@ export function hydratePortfolio(data) {
             <div class="project-thumb-wrap">
               <img src="${escapeHtml(thumb)}" alt="${escapeHtml(p.title)} Preview" loading="lazy" class="project-thumb" onerror="this.onerror=null; this.src='/project_gravisphere.jpg'" />
               <div class="project-thumb-overlay"></div>
+              <button type="button" class="btn-card-gen-img" data-proj-id="${p.id || idx}" data-proj-title="${escapeHtml(p.title)}" title="Generate AI Cover Image According to Topic">
+                <span>🎨</span>
+                <span>Topic Image</span>
+              </button>
             </div>
             <div class="project-body">
               <div class="project-tag-row">
@@ -771,7 +802,11 @@ function initMoreModals() {
   if (modalSyncLinkedinBtn && !modalSyncLinkedinBtn._hasListener) {
     modalSyncLinkedinBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      handleLinkedInSync(modalSyncLinkedinBtn);
+      if (typeof window.openLinkedInSyncModal === 'function') {
+        window.openLinkedInSyncModal('certificate');
+      } else {
+        handleLinkedInSync(modalSyncLinkedinBtn);
+      }
     });
     modalSyncLinkedinBtn._hasListener = true;
   }
@@ -780,7 +815,11 @@ function initMoreModals() {
   if (headerSyncLinkedinBtn && !headerSyncLinkedinBtn._hasListener) {
     headerSyncLinkedinBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      handleLinkedInSync(headerSyncLinkedinBtn);
+      if (typeof window.openLinkedInSyncModal === 'function') {
+        window.openLinkedInSyncModal('certificate');
+      } else {
+        handleLinkedInSync(headerSyncLinkedinBtn);
+      }
     });
     headerSyncLinkedinBtn._hasListener = true;
   }
@@ -963,6 +1002,8 @@ export async function refreshPortfolio() {
     hydratePortfolio(data);
   }
   wireUpLiveSyncBtn();
+  wireUpTopicImageGenerator();
+  wireUpLinkedInPostSync();
 }
 
 function wireUpLiveSyncBtn() {
@@ -995,6 +1036,390 @@ function wireUpLiveSyncBtn() {
   });
 }
 
+// --- AI TOPIC IMAGE GENERATOR MODAL CONTROLLER ---
+function wireUpTopicImageGenerator() {
+  const triggerBtn = document.getElementById('btn-open-topic-generator');
+  const modal = document.getElementById('modal-topic-image-generator');
+  const backdrop = document.getElementById('topic-gen-backdrop');
+  const closeBtn = document.getElementById('btn-close-topic-gen-modal');
+  const projectSelect = document.getElementById('sel-topic-gen-project');
+  const keywordsInp = document.getElementById('inp-topic-gen-keywords');
+  const techPills = document.getElementById('topic-gen-tech-pills');
+  const previewImg = document.getElementById('topic-gen-preview-img');
+  const spinner = document.getElementById('topic-gen-spinner');
+  const generateBtn = document.getElementById('btn-do-generate-topic-img');
+  const applyBtn = document.getElementById('btn-apply-topic-img');
+  const styleChips = document.querySelectorAll('#topic-style-chips .modal-chip');
+
+  if (!modal) return;
+
+  let activeStyle = 'cyber-hud';
+  let currentGeneratedUrl = null;
+
+  function populateProjects(selectedId) {
+    if (!projectSelect) return;
+    const projects = window.cmsData?.projects || [];
+    projectSelect.innerHTML = projects.map(p => `
+      <option value="${escapeHtml(p.id)}" ${p.id === selectedId ? 'selected' : ''}>
+        ${escapeHtml(p.title)} (${escapeHtml(p.category || 'Project')})
+      </option>
+    `).join('') + `<option value="__custom__">✨ Custom Topic / New Application</option>`;
+    
+    syncSelectedProjectData();
+  }
+
+  function syncSelectedProjectData() {
+    const selectedId = projectSelect?.value;
+    const projects = window.cmsData?.projects || [];
+    const proj = projects.find(p => p.id === selectedId);
+
+    if (proj) {
+      const tech = Array.isArray(proj.technologies) ? proj.technologies.join(', ') : (proj.technologies || '');
+      keywordsInp.value = `${proj.title} - ${proj.category || 'Software'}. ${tech}. ${proj.description || ''}`;
+      if (techPills) techPills.textContent = tech ? `Tech: ${tech}` : '';
+      const curImg = proj.image || proj.imageUrl || '/project_truckflow.jpg';
+      previewImg.src = curImg;
+      currentGeneratedUrl = curImg;
+    } else {
+      keywordsInp.value = 'Next-generation AI logistics and freight load matching platform with GPS route telemetry';
+      if (techPills) techPills.textContent = 'Custom Application';
+      previewImg.src = '/project_truckflow.jpg';
+      currentGeneratedUrl = '/project_truckflow.jpg';
+    }
+  }
+
+  function openModal(projectId) {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    populateProjects(projectId);
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  if (triggerBtn && !triggerBtn._hasTopicListener) {
+    triggerBtn._hasTopicListener = true;
+    triggerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  }
+
+  if (closeBtn && !closeBtn._hasCloseListener) {
+    closeBtn._hasCloseListener = true;
+    closeBtn.addEventListener('click', closeModal);
+  }
+  if (backdrop && !backdrop._hasCloseListener) {
+    backdrop._hasCloseListener = true;
+    backdrop.addEventListener('click', closeModal);
+  }
+
+  if (projectSelect && !projectSelect._hasChangeListener) {
+    projectSelect._hasChangeListener = true;
+    projectSelect.addEventListener('change', syncSelectedProjectData);
+  }
+
+  styleChips.forEach(chip => {
+    if (!chip._hasStyleListener) {
+      chip._hasStyleListener = true;
+      chip.addEventListener('click', () => {
+        styleChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeStyle = chip.dataset.style;
+      });
+    }
+  });
+
+  // Attach card quick-action triggers
+  document.querySelectorAll('.btn-card-gen-img').forEach(btn => {
+    if (btn._hasTopicGenListener) return;
+    btn._hasTopicGenListener = true;
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openModal(btn.dataset.projId);
+    });
+  });
+
+  // Generate Image Action
+  if (generateBtn && !generateBtn._hasGenListener) {
+    generateBtn._hasGenListener = true;
+    generateBtn.addEventListener('click', async () => {
+      const selectedId = projectSelect?.value;
+      const keywords = (keywordsInp?.value || '').trim();
+      if (!keywords) return;
+
+      if (spinner) spinner.style.display = 'flex';
+      generateBtn.disabled = true;
+
+      const styleModifiers = {
+        'cyber-hud': 'cyberpunk HUD telemetry dashboard with neon glowing indicators and dark cyber aesthetic',
+        'glass-cockpit': 'modern dark glassmorphism web cockpit with translucent layered cards and glowing cyan gradients',
+        'isometric-3d': 'futuristic 3D isometric software product architecture render, cinematic lighting',
+        'code-editor': 'high-tech dark IDE code terminal, glowing syntax highlighting, binary tree and graph algorithm visualizer'
+      };
+      const styledPrompt = `${keywords}, ${styleModifiers[activeStyle] || styleModifiers['cyber-hud']}, 8k resolution, professional presentation`;
+
+      try {
+        const res = await fetch('/api/projects/generate-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            projectId: selectedId === '__custom__' ? null : selectedId,
+            prompt: styledPrompt,
+            title: keywords.slice(0, 30)
+          })
+        });
+        const data = await res.json();
+        if (data.success && data.imageUrl) {
+          currentGeneratedUrl = data.imageUrl;
+          previewImg.src = data.imageUrl;
+          showGlobalToast(`✨ AI Image generated for ${data.prompt?.slice(0, 40) || 'topic'}!`);
+        } else {
+          showGlobalToast(data.message || 'Image generation notice', true);
+        }
+      } catch (err) {
+        showGlobalToast('Generation request error: ' + err.message, true);
+      } finally {
+        if (spinner) spinner.style.display = 'none';
+        generateBtn.disabled = false;
+      }
+    });
+  }
+
+  // Apply & Save to Project
+  if (applyBtn && !applyBtn._hasApplyListener) {
+    applyBtn._hasApplyListener = true;
+    applyBtn.addEventListener('click', async () => {
+      const selectedId = projectSelect?.value;
+      if (!selectedId || selectedId === '__custom__') {
+        closeModal();
+        return;
+      }
+
+      applyBtn.disabled = true;
+      applyBtn.textContent = 'Saving...';
+
+      try {
+        if (window.cmsData?.projects) {
+          const p = window.cmsData.projects.find(x => x.id === selectedId);
+          if (p && currentGeneratedUrl) {
+            p.image = currentGeneratedUrl;
+            p.imageUrl = currentGeneratedUrl;
+          }
+        }
+        await refreshPortfolio();
+        showGlobalToast('✓ Cover image saved and published to Selected Work!');
+        closeModal();
+      } catch (err) {
+        showGlobalToast('Error updating project: ' + err.message, true);
+      } finally {
+        applyBtn.disabled = false;
+        applyBtn.textContent = '✓ Save & Publish to Project';
+      }
+    });
+  }
+
+  window.openTopicImageModal = openModal;
+}
+
+// --- LINKEDIN POST SYNC MODAL CONTROLLER ---
+function wireUpLinkedInPostSync() {
+  const triggerBtn = document.getElementById('btn-sync-linkedin-post');
+  const modal = document.getElementById('modal-linkedin-sync');
+  const backdrop = document.getElementById('linkedin-sync-backdrop');
+  const closeBtn = document.getElementById('btn-close-linkedin-modal');
+  const syncBtn = document.getElementById('btn-do-sync-linkedin');
+  const urlInp = document.getElementById('inp-li-post-url');
+  const textInp = document.getElementById('inp-li-post-text');
+  const typeSel = document.getElementById('sel-li-type');
+  const skillsInp = document.getElementById('inp-li-skills');
+  const autoImgChk = document.getElementById('chk-li-auto-img');
+  const statusMsg = document.getElementById('li-sync-status-msg');
+
+  const inpIssuer = document.getElementById('inp-li-issuer');
+  const inpVerifyUrl = document.getElementById('inp-li-verify-url');
+  const certRow = document.getElementById('row-li-cert-fields');
+  const modalTitle = document.getElementById('linkedin-sync-title');
+  const skillsLabel = document.getElementById('lbl-li-skills');
+
+  if (!modal) return;
+
+  function updateTypeView(selectedType) {
+    if (selectedType === 'certificate') {
+      if (certRow) certRow.style.display = 'grid';
+      if (modalTitle) modalTitle.textContent = 'Sync LinkedIn Certificate';
+      if (skillsLabel) skillsLabel.textContent = 'Category / Skills';
+      if (skillsInp) skillsInp.placeholder = 'e.g. Artificial Intelligence, Cloud, Python';
+      if (textInp) textInp.placeholder = 'Paste certificate name, announcement text, or details...';
+      if (syncBtn) syncBtn.innerHTML = '<span>⚡ Sync Certificate into Portfolio</span>';
+    } else {
+      if (certRow) certRow.style.display = 'none';
+      if (modalTitle) modalTitle.textContent = 'Sync LinkedIn Post';
+      if (skillsLabel) skillsLabel.textContent = 'Tech Stack / Skills';
+      if (skillsInp) skillsInp.placeholder = 'e.g. Python, Django, GIS, React';
+      if (textInp) textInp.placeholder = 'Paste the text from your LinkedIn post or describe what you published...';
+      if (syncBtn) syncBtn.innerHTML = '<span>⚡ Sync Post into Portfolio</span>';
+    }
+  }
+
+  if (typeSel && !typeSel._hasChange) {
+    typeSel._hasChange = true;
+    typeSel.addEventListener('change', () => updateTypeView(typeSel.value));
+  }
+
+  function openModal(defaultType = 'project') {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    if (statusMsg) statusMsg.style.display = 'none';
+    if (typeSel) typeSel.value = defaultType;
+    updateTypeView(defaultType);
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  if (triggerBtn && !triggerBtn._hasLiListener) {
+    triggerBtn._hasLiListener = true;
+    triggerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal('project');
+    });
+  }
+
+  if (closeBtn && !closeBtn._hasCloseListener) {
+    closeBtn._hasCloseListener = true;
+    closeBtn.addEventListener('click', closeModal);
+  }
+  if (backdrop && !backdrop._hasCloseListener) {
+    backdrop._hasCloseListener = true;
+    backdrop.addEventListener('click', closeModal);
+  }
+
+  if (syncBtn && !syncBtn._hasSyncListener) {
+    syncBtn._hasSyncListener = true;
+    syncBtn.addEventListener('click', async () => {
+      const postUrl = (urlInp?.value || '').trim();
+      const postText = (textInp?.value || '').trim();
+      const type = typeSel?.value || 'project';
+      const skills = (skillsInp?.value || '').trim();
+      const issuer = (inpIssuer?.value || '').trim();
+      const verifyUrl = (inpVerifyUrl?.value || '').trim();
+      const autoGen = autoImgChk ? autoImgChk.checked : true;
+
+      if (!postUrl && !postText) {
+        if (statusMsg) {
+          statusMsg.style.display = 'block';
+          statusMsg.style.background = 'rgba(239, 68, 68, 0.15)';
+          statusMsg.style.color = '#f87171';
+          statusMsg.textContent = '⚠️ Please enter either your LinkedIn post link or copy-paste the post announcement text.';
+        }
+        return;
+      }
+
+      syncBtn.disabled = true;
+      syncBtn.innerHTML = `<span class="sync-icon spinning">🔄</span> Ingesting item & generating cover...`;
+
+      try {
+        const res = await fetch('/api/sync/linkedin/ingest', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            url: postUrl,
+            text: postText,
+            type,
+            skills,
+            issuer,
+            verifyUrl,
+            autoGenerateImage: autoGen
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showGlobalToast(`🎉 ${data.message || 'Synced item from LinkedIn!'}`);
+          if (statusMsg) {
+            statusMsg.style.display = 'block';
+            statusMsg.style.background = 'rgba(34, 197, 94, 0.15)';
+            statusMsg.style.color = '#4ade80';
+            statusMsg.textContent = `✓ Ingested "${data.item?.title || data.project?.title || data.certificate?.title || 'LinkedIn Item'}"! Updating portfolio...`;
+          }
+          setTimeout(async () => {
+            await refreshPortfolio();
+            closeModal();
+            const targetSection = type === 'certificate' ? document.getElementById('certificates') : document.getElementById('projects');
+            targetSection?.scrollIntoView({ behavior: 'smooth' });
+          }, 1200);
+        } else {
+          if (statusMsg) {
+            statusMsg.style.display = 'block';
+            statusMsg.style.background = 'rgba(239, 68, 68, 0.15)';
+            statusMsg.style.color = '#f87171';
+            statusMsg.textContent = '❌ ' + (data.message || 'Sync failed.');
+          }
+        }
+      } catch (err) {
+        if (statusMsg) {
+          statusMsg.style.display = 'block';
+          statusMsg.style.background = 'rgba(239, 68, 68, 0.15)';
+          statusMsg.style.color = '#f87171';
+          statusMsg.textContent = '❌ Error syncing item: ' + err.message;
+        }
+      } finally {
+        syncBtn.disabled = false;
+        updateTypeView(typeSel?.value || 'project');
+      }
+    });
+  }
+
+  window.openLinkedInSyncModal = openModal;
+}
+
+function showGlobalToast(message, isError = false) {
+  let toast = document.getElementById('portfolio-global-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'portfolio-global-toast';
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999999;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #f8fafc;
+      padding: 12px 20px;
+      border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = isError
+    ? `<span style="font-size: 1.1rem;">❌</span><span>${escapeHtml(message)}</span>`
+    : `<span style="font-size: 1.1rem;">✨</span><span>${escapeHtml(message)}</span>`;
+  toast.style.borderColor = isError ? 'rgba(239, 68, 68, 0.4)' : 'rgba(56, 189, 248, 0.4)';
+  toast.style.transform = 'translateY(0)';
+  toast.style.opacity = '1';
+
+  setTimeout(() => {
+    toast.style.transform = 'translateY(20px)';
+    toast.style.opacity = '0';
+  }, 4000);
+}
+
 // Auto-run on load and live-sync when tab is focused
 if (typeof window !== 'undefined') {
   window.refreshPortfolio = refreshPortfolio;
@@ -1002,11 +1427,15 @@ if (typeof window !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
     refreshPortfolio();
     wireUpLiveSyncBtn();
+    wireUpTopicImageGenerator();
+    wireUpLinkedInPostSync();
   });
   // Also run immediately if DOM is already ready
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
     refreshPortfolio();
     wireUpLiveSyncBtn();
+    wireUpTopicImageGenerator();
+    wireUpLinkedInPostSync();
   }
 
   // Auto-refresh when user switches back to the portfolio tab after pushing to GitHub

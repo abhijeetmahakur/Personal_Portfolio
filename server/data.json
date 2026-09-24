@@ -117,6 +117,127 @@
   ],
   "projects": [
     {
+      "id": "truckflow",
+      "title": "TruckFlow",
+      "tagline": "TruckFlow is a freight logistics platform that matches trucks with loads, optimizes round trips, calculates routes and profits, manages bookings, tracks trips, and supports proof of delivery. It helps brokers, fleet owners, drivers, and shippers reduce empty kilometers and improve transportation efficiency.",
+      "description": "TruckFlow is a freight logistics platform that matches trucks with loads, optimizes round trips, calculates routes and profits, manages bookings, tracks trips, and supports proof of delivery. It helps brokers, fleet owners, drivers, and shippers reduce empty kilometers and improve transportation efficiency.",
+      "technologies": [
+        "Python",
+        "Django",
+        "Django REST Framework",
+        "Leaflet GIS",
+        "Logistics AI",
+        "Route Optimization"
+      ],
+      "category": "Freight Logistics & Route AI",
+      "image": "/project_truckflow.jpg",
+      "imageUrl": "/project_truckflow.jpg",
+      "accentColor": "#0ea5e9",
+      "glowColor": "rgba(14, 165, 233, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/TruckFlow",
+      "liveUrl": "http://127.0.0.1:8000/",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-24T16:44:44.677Z",
+      "caseStudy": {
+        "problem": "Engineering implementation and architecture for TruckFlow.",
+        "idea": "TruckFlow is a freight logistics platform that matches trucks with loads, optimizes round trips, calculates routes and profits, manages bookings, tracks trips, and supports proof of delivery. It helps brokers, fleet owners, drivers, and shippers reduce empty kilometers and improve transportation efficiency.",
+        "technologies": [
+          "Software Engineering",
+          "Git"
+        ],
+        "development": "Engineered with modular code structure, Git revision tracking, and automated deployment pipelines.",
+        "challenges": "Ensuring high performance, optimal code maintainability, and clean documentation.",
+        "solution": "Implemented best practice architectural patterns with rigorous testing.",
+        "result": "Published on GitHub with verified version history and 0 stars.",
+        "whatILearned": "Strengthened expertise in software development and automated Git workflows.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/TruckFlow",
+          "liveDemo": ""
+        }
+      }
+    },
+    {
+      "id": "spotify-clone",
+      "title": "Spotify Clone",
+      "tagline": "HTML Project on GitHub",
+      "description": "Practical engineering project developed by Abhijeet Mahakur in HTML.",
+      "technologies": [
+        "HTML"
+      ],
+      "category": "Audio Streaming Web App",
+      "image": "/project_spotifyclone.jpg",
+      "imageUrl": "/project_spotifyclone.jpg",
+      "accentColor": "#22c55e",
+      "glowColor": "rgba(34, 197, 94, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/Spotify_clone",
+      "liveUrl": "",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-24T16:42:33.864Z",
+      "caseStudy": {
+        "problem": "Engineering implementation and architecture for Spotify Clone.",
+        "idea": "Build and publish a modular, performant software solution hosted on GitHub.",
+        "technologies": [
+          "HTML"
+        ],
+        "development": "Engineered with modular code structure, Git revision tracking, and automated deployment pipelines.",
+        "challenges": "Ensuring high performance, optimal code maintainability, and clean documentation.",
+        "solution": "Implemented best practice architectural patterns with rigorous testing.",
+        "result": "Published on GitHub with verified version history and 0 stars.",
+        "whatILearned": "Strengthened expertise in HTML and automated Git workflows.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/Spotify_clone",
+          "liveDemo": ""
+        }
+      }
+    },
+    {
+      "id": "ips",
+      "title": "IPS — Algorithmic Architecture",
+      "tagline": "Core Java Data Structures & Algorithmic Architecture Suite",
+      "description": "A high-performance Java repository featuring algorithmic problem solving, binary search tree operations, graph theory traversals, and object-oriented architectural patterns.",
+      "technologies": [
+        "Java",
+        "Data Structures",
+        "Algorithms",
+        "Graph Theory",
+        "OOP Architecture"
+      ],
+      "category": "Core Java & Algorithm Architecture",
+      "image": "/project_ips.jpg",
+      "imageUrl": "/project_ips.jpg",
+      "accentColor": "#a855f7",
+      "glowColor": "rgba(168, 85, 247, 0.35)",
+      "githubUrl": "https://github.com/abhijeetmahakur/IPS",
+      "liveUrl": "",
+      "stars": 0,
+      "published": true,
+      "source": "GitHub Auto-Sync",
+      "syncedAt": "2026-09-24T16:42:33.863Z",
+      "caseStudy": {
+        "problem": "Developing clean, time- and space-optimal implementations for complex algorithmic challenges and foundational computer science data structures.",
+        "idea": "A structured Java repository containing modular solutions to complex computational problems, graph algorithms, and data structure implementations.",
+        "technologies": [
+          "Java",
+          "Algorithms",
+          "Data Structures",
+          "JUnit Testing"
+        ],
+        "development": "Architected using clean object-oriented design principles, strict time complexity analysis, and modular problem packages.",
+        "challenges": "Achieving asymptotic efficiency (O(log n) tree lookups, O(V + E) graph traversals) with clean, documented code.",
+        "solution": "Designed balanced tree and graph traversal routines with rigorous edge-case testing.",
+        "result": "Complete, verified Java algorithms library showcasing software engineering rigor.",
+        "whatILearned": "Mastered low-level Java memory efficiency, OOP design patterns, and algorithmic optimization.",
+        "links": {
+          "github": "https://github.com/abhijeetmahakur/IPS",
+          "liveDemo": ""
+        }
+      }
+    },
+    {
       "id": "personal-portfolio",
       "title": "Personal Portfolio & CMS",
       "tagline": "Full-Stack Portfolio with Headless CMS, Canvas Scroll Animation & AI Chatbot",
@@ -826,27 +947,373 @@
   },
   "syncLogs": [
     {
-      "id": "log-gh-sync-latest",
+      "id": "log-1790271383282",
       "service": "GitHub Auto-Sync",
       "status": "SUCCESS",
-      "message": "Synced 12 repos from GitHub (@abhijeetmahakur). Projects up to date.",
-      "timestamp": "2026-09-21T07:57:42.305Z"
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:36:23.282Z"
+    },
+    {
+      "id": "log-1790271347566",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:35:47.566Z"
+    },
+    {
+      "id": "log-1790271316856",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:35:16.856Z"
+    },
+    {
+      "id": "log-1790271316010",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:35:16.010Z"
+    },
+    {
+      "id": "log-1790271313019",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:35:13.019Z"
+    },
+    {
+      "id": "log-1790271281249",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:34:41.249Z"
+    },
+    {
+      "id": "log-1790271280965",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:34:40.965Z"
+    },
+    {
+      "id": "log-1790271268277",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:34:28.277Z"
+    },
+    {
+      "id": "log-1790271266660",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:34:26.660Z"
+    },
+    {
+      "id": "log-1790271259243",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:34:19.243Z"
+    },
+    {
+      "id": "log-1790271231597",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:33:51.597Z"
+    },
+    {
+      "id": "log-1790271203684",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:33:23.684Z"
+    },
+    {
+      "id": "log-1790271199586",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:33:19.586Z"
+    },
+    {
+      "id": "log-1790271175923",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:32:55.923Z"
+    },
+    {
+      "id": "log-1790271146745",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:32:26.745Z"
+    },
+    {
+      "id": "log-1790271114073",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:31:54.073Z"
+    },
+    {
+      "id": "log-1790271084626",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:31:24.626Z"
+    },
+    {
+      "id": "log-1790271057759",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:30:57.759Z"
+    },
+    {
+      "id": "log-1790271024528",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:30:24.528Z"
+    },
+    {
+      "id": "log-1790271020918",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:30:20.918Z"
+    },
+    {
+      "id": "log-1790271014085",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 5 certificates and 15 projects.",
+      "timestamp": "2026-09-24T17:30:14.085Z"
+    },
+    {
+      "id": "log-1790270996469",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:29:56.469Z"
+    },
+    {
+      "id": "log-1790270963669",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:29:23.669Z"
+    },
+    {
+      "id": "log-1790270933680",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:28:53.680Z"
+    },
+    {
+      "id": "log-1790270908589",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:28:28.589Z"
+    },
+    {
+      "id": "log-1790270892756",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:28:12.756Z"
+    },
+    {
+      "id": "log-1790270848562",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:27:28.562Z"
+    },
+    {
+      "id": "log-1790270844109",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:27:24.109Z"
+    },
+    {
+      "id": "log-1790270815417",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:26:55.417Z"
+    },
+    {
+      "id": "log-1790270800558",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:26:40.558Z"
+    },
+    {
+      "id": "log-1790270755058",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:25:55.058Z"
+    },
+    {
+      "id": "log-1790270746801",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:25:46.801Z"
+    },
+    {
+      "id": "log-1790270742064",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 5 certificates and 15 projects.",
+      "timestamp": "2026-09-24T17:25:42.064Z"
+    },
+    {
+      "id": "log-1790270725094",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:25:25.094Z"
+    },
+    {
+      "id": "log-1790270695373",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:24:55.373Z"
+    },
+    {
+      "id": "log-1790270665665",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:24:25.665Z"
+    },
+    {
+      "id": "log-1790270636482",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:23:56.482Z"
+    },
+    {
+      "id": "log-1790270613203",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:23:33.203Z"
+    },
+    {
+      "id": "log-1790270574933",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:22:54.933Z"
+    },
+    {
+      "id": "log-1790270545776",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:22:25.776Z"
+    },
+    {
+      "id": "log-1790270517183",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:21:57.183Z"
+    },
+    {
+      "id": "log-1790270485940",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:21:25.940Z"
+    },
+    {
+      "id": "log-1790270458059",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:20:58.059Z"
+    },
+    {
+      "id": "log-1790270425777",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:20:25.777Z"
+    },
+    {
+      "id": "log-1790270394207",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:19:54.207Z"
+    },
+    {
+      "id": "log-1790270383762",
+      "service": "LinkedIn Post Sync",
+      "status": "SUCCESS",
+      "message": "Ingested new project from LinkedIn: \"Excited to share our new Autonomous Drone Vision System built with ...\".",
+      "timestamp": "2026-09-24T17:19:43.762Z"
+    },
+    {
+      "id": "log-1790270364853",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:19:24.853Z"
+    },
+    {
+      "id": "log-1790270334748",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:18:54.748Z"
+    },
+    {
+      "id": "log-1790270305456",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:18:25.456Z"
+    },
+    {
+      "id": "log-1790270274254",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:17:54.254Z"
     }
   ],
   "syncStatus": {
     "github": {
       "connected": true,
-      "lastSync": "2026-09-21T07:57:42.305Z",
+      "lastSync": "2026-09-24T17:36:23.282Z",
       "account": "abhijeetmahakur",
-      "repoCount": 12,
+      "repoCount": 14,
       "status": "Active & Synchronized",
       "autoSyncEnabled": true
     },
     "linkedin": {
-      "connected": false,
-      "lastSync": null,
+      "connected": true,
+      "lastSync": "2026-09-24T17:30:14.085Z",
       "account": "abhijeet-mahakur-23bb983b6",
-      "status": "Configured via Official API"
+      "status": "Active & Ready for Ingestion",
+      "profileUrl": "https://linkedin.com/in/abhijeet-mahakur-23bb983b6",
+      "certificatesCount": 5,
+      "autoSyncEnabled": true
     }
   },
   "contactMessages": [],

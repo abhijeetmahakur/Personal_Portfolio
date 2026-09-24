@@ -2354,6 +2354,10 @@ async function syncGitHubProjects(overrideUsername) {
 
     if (!Array.isArray(reposData) || reposData.length === 0) {
       console.warn('[SYNC] No repositories found to sync.');
+      if (!store.syncStatus) store.syncStatus = {};
+      if (!store.syncStatus.github) store.syncStatus.github = {};
+      store.syncStatus.github.lastSync = new Date().toISOString();
+      saveStore(store);
       return { success: true, message: 'No repositories found to sync.', syncStatus: store.syncStatus?.github };
     }
 
@@ -2414,7 +2418,10 @@ async function syncGitHubProjects(overrideUsername) {
 
         const lowerName = repo.name.toLowerCase();
         let defaultImage = '/project_webdevbasic.jpg';
-        if (lowerName.includes('portfolio')) defaultImage = '/project_personalportfolio.jpg';
+        if (lowerName.includes('truck') || lowerName.includes('logistics')) defaultImage = '/project_truckflow.jpg';
+        else if (lowerName.includes('ips') || (repo.language && repo.language.toLowerCase() === 'java')) defaultImage = '/project_ips.jpg';
+        else if (lowerName.includes('spotify') || lowerName.includes('music') || lowerName.includes('audio')) defaultImage = '/project_spotifyclone.jpg';
+        else if (lowerName.includes('portfolio')) defaultImage = '/project_personalportfolio.jpg';
         else if (lowerName.includes('attendance')) defaultImage = '/project_attendanceapp.jpg';
         else if (lowerName.includes('thermax') || lowerName.includes('thermal')) defaultImage = '/project_thermax.jpg';
         else if (lowerName.includes('amazon')) defaultImage = '/project_amazonclone.jpg';
@@ -2500,6 +2507,7 @@ async function syncGitHubProjects(overrideUsername) {
     if (!store.syncStatus) store.syncStatus = {};
     if (!store.syncStatus.github) store.syncStatus.github = {};
     store.syncStatus.github.status = 'Rate Limited / API Warning';
+    store.syncStatus.github.lastSync = new Date().toISOString();
     store.syncStatus.github.lastError = err.message;
 
     if (!store.syncLogs) store.syncLogs = [];
@@ -2546,12 +2554,146 @@ app.post('/api/sync/github/webhook', async (req, res) => {
   });
 });
 
-// --- AUTOMATIC LINKEDIN SYNC ENDPOINT ---
+// --- TOPIC-AWARE AI IMAGE GENERATOR ENGINE ---
+async function generateTopicImage({ title, category, technologies, description, customPrompt, projectId }) {
+  let promptTopic = customPrompt;
+  if (!promptTopic) {
+    const techStr = Array.isArray(technologies) ? technologies.slice(0, 4).join(', ') : (technologies || '');
+    const cleanTitle = (title || 'Software Application').trim();
+    const cleanCat = (category || 'Tech').trim();
+    
+    // Topic-specific keyword enhancements
+    const lower = `${cleanTitle} ${cleanCat} ${techStr} ${description || ''}`.toLowerCase();
+    let themeHint = 'modern high-tech software application dashboard interface';
+    if (lower.includes('truck') || lower.includes('logistics') || lower.includes('freight')) {
+      themeHint = 'heavy commercial freight trucks on highway, real-time GPS telemetry HUD, route optimization map analytics, cyber blue and amber neon';
+    } else if (lower.includes('java') || lower.includes('algorithm') || lower.includes('tree') || lower.includes('graph')) {
+      themeHint = 'Java algorithmic code dashboard, glowing binary search tree, graph data structures, cyber code editor, neon cyan and violet';
+    } else if (lower.includes('music') || lower.includes('spotify') || lower.includes('audio') || lower.includes('sound')) {
+      themeHint = 'sleek modern music streaming player, glowing audio waveform visualizer, dark glassmorphism dashboard, neon emerald green';
+    } else if (lower.includes('attendance') || lower.includes('biometric')) {
+      themeHint = 'smart attendance management dashboard, automated check-in analytics, facial verification telemetry, clean cyber UI';
+    } else if (lower.includes('vision') || lower.includes('gesture') || lower.includes('hand') || lower.includes('air')) {
+      themeHint = 'computer vision hand gesture landmark tracking, holographic drawing strokes, cyber AI interface';
+    } else if (lower.includes('e-commerce') || lower.includes('amazon') || lower.includes('cart') || lower.includes('shop')) {
+      themeHint = 'modern e-commerce product platform, digital shopping dashboard, glassmorphism UI';
+    } else if (lower.includes('ai') || lower.includes('ml') || lower.includes('machine learning')) {
+      themeHint = 'artificial intelligence neural network visualizer, deep learning data pipeline, cybernetic UI';
+    } else if (lower.includes('certificate') || lower.includes('certification') || lower.includes('credential') || lower.includes('badge') || cleanCat.toLowerCase().includes('cert')) {
+      themeHint = 'prestigious accredited digital certificate diploma, glowing holographic seal, verified achievement badge, cybernetic gold and emerald borders, clean dark glassmorphism luxury aesthetic';
+      promptTopic = `Prestigious professional certification credential for ${cleanTitle}, ${themeHint}, verified skills: ${techStr}, 8k sharp typography, cinematic illumination`;
+    }
+    
+    if (!promptTopic) {
+      promptTopic = `High-tech ${cleanTitle} software application cover, ${themeHint}, technologies: ${techStr}, sleek dark mode UI, glowing cyber accents, cinematic lighting, 8k professional render`;
+    }
+  }
+
+  // Fetch image from Pollinations AI
+  const encoded = encodeURIComponent(promptTopic);
+  const aiUrl = `https://image.pollinations.ai/prompt/${encoded}?width=1280&height=720&nologo=true&seed=${Date.now()}`;
+  
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 18000);
+    const imgRes = await fetch(aiUrl, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    
+    if (imgRes.ok) {
+      const buffer = Buffer.from(await imgRes.arrayBuffer());
+      const safeId = (projectId || title || 'topic').toLowerCase().replace(/[^a-z0-9]/g, '_').slice(0, 20);
+      const filename = `proj_ai_${safeId}_${Date.now()}.jpg`;
+      
+      const savePath = path.join(UPLOADS_DIR, filename);
+      fs.writeFileSync(savePath, buffer);
+      
+      // Also copy to public/uploads and dist/uploads if they exist
+      const publicUploads = path.join(__dirname, '..', 'public', 'uploads');
+      const distUploads = path.join(__dirname, '..', 'dist', 'uploads');
+      try {
+        if (!fs.existsSync(publicUploads)) fs.mkdirSync(publicUploads, { recursive: true });
+        fs.writeFileSync(path.join(publicUploads, filename), buffer);
+      } catch (_) {}
+      try {
+        if (fs.existsSync(distUploads)) fs.writeFileSync(path.join(distUploads, filename), buffer);
+      } catch (_) {}
+
+      return {
+        success: true,
+        imageUrl: `/uploads/${filename}`,
+        prompt: promptTopic
+      };
+    }
+  } catch (err) {
+    console.warn(`[AI Image] Fetch failed (${err.message}). Using topic fallback image.`);
+  }
+
+  // Fallback: Return curated topic match
+  const lower = `${title} ${category}`.toLowerCase();
+  let fallback = '/project_personalportfolio.jpg';
+  if (lower.includes('truck') || lower.includes('logistics')) fallback = '/project_truckflow.jpg';
+  else if (lower.includes('java') || lower.includes('algorithm') || lower.includes('ips')) fallback = '/project_ips.jpg';
+  else if (lower.includes('music') || lower.includes('spotify')) fallback = '/project_spotifyclone.jpg';
+  else if (lower.includes('attendance')) fallback = '/project_attendanceapp.jpg';
+  else if (lower.includes('python')) fallback = '/project_python.jpg';
+  else if (lower.includes('air') || lower.includes('vision')) fallback = '/project_airwriting.jpg';
+  else if (lower.includes('blog') || lower.includes('django')) fallback = '/project_djangoblog.jpg';
+  else if (lower.includes('thermax')) fallback = '/project_thermax.jpg';
+  else if (lower.includes('amazon')) fallback = '/project_amazonclone.jpg';
+
+  return {
+    success: true,
+    imageUrl: fallback,
+    prompt: promptTopic,
+    isFallback: true
+  };
+}
+
+// --- PROJECT TOPIC IMAGE GENERATION API ---
+app.post('/api/projects/generate-image', async (req, res) => {
+  const { projectId, title, category, technologies, description, prompt } = req.body || {};
+  const store = getStore();
+  
+  let targetProj = null;
+  if (projectId && Array.isArray(store.projects)) {
+    targetProj = store.projects.find(p => p.id === projectId);
+  }
+
+  const projTitle = title || targetProj?.title || 'Software Engineering Project';
+  const projCat = category || targetProj?.category || 'Software';
+  const projTech = technologies || targetProj?.technologies || [];
+  const projDesc = description || targetProj?.description || '';
+
+  const result = await generateTopicImage({
+    title: projTitle,
+    category: projCat,
+    technologies: projTech,
+    description: projDesc,
+    customPrompt: prompt,
+    projectId: projectId || targetProj?.id
+  });
+
+  if (targetProj && result.imageUrl) {
+    targetProj.image = result.imageUrl;
+    targetProj.imageUrl = result.imageUrl;
+    saveStore(store);
+  }
+
+  res.json({
+    success: true,
+    message: `Generated AI cover image for "${projTitle}" according to topic!`,
+    imageUrl: result.imageUrl,
+    prompt: result.prompt,
+    projectId: targetProj?.id || projectId
+  });
+});
+
+// --- AUTOMATIC LINKEDIN SYNC STATUS ENDPOINT ---
 app.post(['/api/sync/linkedin', '/api/sync/linkedin/refresh'], async (req, res) => {
   const store = getStore();
   const linkedinProfile = store.personalInfo?.linkedin || 'https://linkedin.com/in/abhijeet-mahakur-23bb983b6';
   
-  console.log(`[SYNC] Synchronizing LinkedIn credentials from: ${linkedinProfile}`);
+  console.log(`[SYNC] Checking LinkedIn sync status for: ${linkedinProfile}`);
 
   if (!store.syncStatus) store.syncStatus = {};
   store.syncStatus.linkedin = {
@@ -2559,7 +2701,7 @@ app.post(['/api/sync/linkedin', '/api/sync/linkedin/refresh'], async (req, res) 
     lastSync: new Date().toISOString(),
     profileUrl: linkedinProfile,
     account: 'abhijeet-mahakur-23bb983b6',
-    status: 'Active & Synchronized',
+    status: 'Active & Ready for Ingestion',
     certificatesCount: Array.isArray(store.certificates) ? store.certificates.length : 0,
     autoSyncEnabled: true
   };
@@ -2567,9 +2709,9 @@ app.post(['/api/sync/linkedin', '/api/sync/linkedin/refresh'], async (req, res) 
   if (!store.syncLogs) store.syncLogs = [];
   store.syncLogs.unshift({
     id: 'log-' + Date.now(),
-    service: 'LinkedIn Auto-Sync',
+    service: 'LinkedIn Sync Hub',
     status: 'SUCCESS',
-    message: `LinkedIn credentials verified & synchronized (@abhijeet-mahakur-23bb983b6). Vault contains ${store.certificates?.length || 0} accredited certificates.`,
+    message: `LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains ${store.certificates?.length || 0} certificates and ${store.projects?.length || 0} projects.`,
     timestamp: new Date().toISOString()
   });
 
@@ -2577,68 +2719,105 @@ app.post(['/api/sync/linkedin', '/api/sync/linkedin/refresh'], async (req, res) 
 
   res.json({
     success: true,
-    message: `LinkedIn synchronized! Verified credentials vault up-to-date (${store.certificates?.length || 0} certificates).`,
+    message: `LinkedIn sync ready! Paste your post link or content to ingest immediately.`,
     syncStatus: store.syncStatus.linkedin,
-    totalCertificates: store.certificates?.length || 0
+    totalCertificates: store.certificates?.length || 0,
+    totalProjects: store.projects?.length || 0
   });
 });
 
-// --- LINKEDIN & INGESTION WEBHOOK ENDPOINTS ---
-// Ingests certificates and projects posted on LinkedIn or via automation (Zapier, Make, Shortcuts)
-app.post(['/api/sync/linkedin/webhook', '/api/sync/linkedin/post', '/api/sync/linkedin/import'], (req, res) => {
+// --- ENHANCED LINKEDIN POST INGESTION WITH AI TOPIC IMAGE ---
+app.post(['/api/sync/linkedin/ingest', '/api/sync/linkedin/post', '/api/sync/linkedin/webhook', '/api/sync/linkedin/import'], async (req, res) => {
   const store = getStore();
   const payload = req.body || {};
   const {
-    type = 'certificate', // 'certificate' or 'project'
+    url,
+    text,
     title,
+    type = 'auto', // 'auto', 'project', 'certificate'
+    category,
+    skills,
+    technologies,
     issuer,
-    date,
     credentialUrl,
     verifyUrl,
     githubUrl,
     liveUrl,
-    skills,
-    technologies,
-    description,
-    category,
-    imageUrl,
-    fileUrl
+    autoGenerateImage = true
   } = payload;
 
-  if (!title) {
-    return res.status(400).json({ success: false, message: 'Title is required for LinkedIn auto-sync ingestion.' });
+  const rawContent = (text || payload.description || '').trim();
+  const postUrl = (url || credentialUrl || verifyUrl || '').trim();
+
+  // Deduce title if missing
+  let itemTitle = (title || '').trim();
+  if (!itemTitle && rawContent) {
+    const firstLine = rawContent.split(/\r?\n/)[0].replace(/^[#\s*]+/, '').trim();
+    itemTitle = firstLine.length > 70 ? firstLine.slice(0, 67) + '...' : firstLine;
+  }
+  if (!itemTitle && postUrl) {
+    const slug = postUrl.split('/').filter(Boolean).pop() || '';
+    itemTitle = 'LinkedIn Update: ' + (slug.replace(/[-_]/g, ' ') || 'Professional Milestone');
+  }
+  if (!itemTitle) {
+    return res.status(400).json({ success: false, message: 'Please provide either a post URL, post text, or a title.' });
   }
 
-  const isCert = type === 'certificate' || (!githubUrl && (issuer || credentialUrl));
+  // Detect whether it's a certificate or project
+  const lowerText = `${itemTitle} ${rawContent} ${issuer || ''}`.toLowerCase();
+  const isCert = type === 'certificate' || (type === 'auto' && (
+    lowerText.includes('certified') || lowerText.includes('certificate') || lowerText.includes('credential') ||
+    lowerText.includes('completed the course') || lowerText.includes('badge') || (issuer && !githubUrl)
+  ));
+
+  const techList = Array.isArray(skills || technologies)
+    ? (skills || technologies)
+    : (typeof (skills || technologies) === 'string' && (skills || technologies).trim()
+        ? (skills || technologies).split(',').map(s => s.trim())
+        : (isCert ? ['Credential', 'Skill Verification'] : ['Software Engineering', 'Full-Stack']));
+
+  // Auto-generate topic cover image if requested
+  let coverImage = payload.imageUrl || payload.fileUrl || '';
+  if (!coverImage && autoGenerateImage) {
+    try {
+      const imgRes = await generateTopicImage({
+        title: itemTitle,
+        category: category || (isCert ? 'Professional Certification' : 'Featured Project'),
+        technologies: techList,
+        description: rawContent || itemTitle
+      });
+      coverImage = imgRes.imageUrl;
+    } catch (_) {}
+  }
 
   if (isCert) {
     if (!Array.isArray(store.certificates)) store.certificates = [];
     
     // Check if duplicate
     const existing = store.certificates.find(c => 
-      c.title.toLowerCase() === title.toLowerCase() && 
+      c.title.toLowerCase() === itemTitle.toLowerCase() && 
       (!issuer || c.issuer?.toLowerCase() === (issuer || '').toLowerCase())
     );
 
     if (existing) {
-      if (credentialUrl || verifyUrl) existing.verifyUrl = credentialUrl || verifyUrl;
-      if (date) existing.date = date;
-      if (description) existing.description = description;
+      if (postUrl) existing.verifyUrl = postUrl;
+      if (rawContent) existing.description = rawContent;
+      if (coverImage) existing.fileUrl = coverImage;
       saveStore(store);
-      return res.json({ success: true, message: `Updated existing certificate "${title}".`, certificate: existing });
+      return res.json({ success: true, message: `Updated existing certificate "${itemTitle}".`, certificate: existing });
     }
 
     const newCert = {
-      id: 'cert-' + Date.now(),
-      title: title.trim(),
-      issuer: (issuer || 'Verified Credential / LinkedIn').trim(),
-      date: date || new Date().toISOString().split('T')[0],
-      description: description || '',
-      category: category || 'Certification',
-      verifyUrl: credentialUrl || verifyUrl || '',
-      fileUrl: imageUrl || fileUrl || '',
-      createdAt: new Date().toISOString(),
-      source: 'LinkedIn Auto-Sync'
+      id: 'cert-li-' + Date.now(),
+      title: itemTitle,
+      issuer: (issuer || 'LinkedIn Verified / Accredited Issuer').trim(),
+      date: payload.date || new Date().toISOString().split('T')[0],
+      description: rawContent || `Accredited credential announced on LinkedIn.`,
+      category: category || (Array.isArray(techList) && techList.length > 0 ? techList[0] : 'Certification'),
+      verifyUrl: (verifyUrl || postUrl || 'https://linkedin.com/in/abhijeet-mahakur-23bb983b6').trim(),
+      fileUrl: coverImage || '',
+      source: 'LinkedIn Post Sync',
+      createdAt: new Date().toISOString()
     };
 
     store.certificates.unshift(newCert);
@@ -2646,16 +2825,26 @@ app.post(['/api/sync/linkedin/webhook', '/api/sync/linkedin/post', '/api/sync/li
     if (!store.syncLogs) store.syncLogs = [];
     store.syncLogs.unshift({
       id: 'log-' + Date.now(),
-      service: 'LinkedIn Auto-Sync',
+      service: 'LinkedIn Post Sync',
       status: 'SUCCESS',
-      message: `Ingested new certificate from LinkedIn: "${newCert.title}" issued by ${newCert.issuer}.`,
+      message: `Ingested new certificate from LinkedIn: "${newCert.title}" (${newCert.issuer}).`,
       timestamp: new Date().toISOString()
     });
+
+    store.syncStatus.linkedin = {
+      connected: true,
+      lastSync: new Date().toISOString(),
+      account: 'abhijeet-mahakur-23bb983b6',
+      status: 'Active & Synchronized',
+      lastPostTitle: itemTitle,
+      certificatesCount: store.certificates.length
+    };
 
     saveStore(store);
     return res.json({
       success: true,
-      message: `Certificate "${newCert.title}" successfully added to portfolio!`,
+      message: `Successfully synced certificate "${newCert.title}" from LinkedIn!`,
+      type: 'certificate',
       certificate: newCert,
       totalCertificates: store.certificates.length
     });
@@ -2663,23 +2852,43 @@ app.post(['/api/sync/linkedin/webhook', '/api/sync/linkedin/post', '/api/sync/li
     // Project from LinkedIn
     if (!Array.isArray(store.projects)) store.projects = [];
 
-    const techList = Array.isArray(skills || technologies)
-      ? (skills || technologies)
-      : (typeof (skills || technologies) === 'string' ? (skills || technologies).split(',').map(s => s.trim()) : ['Full-Stack', 'Engineering']);
+    // Check if duplicate project exists
+    const existing = store.projects.find(p => p.title.toLowerCase() === itemTitle.toLowerCase());
+    if (existing) {
+      if (coverImage) {
+        existing.image = coverImage;
+        existing.imageUrl = coverImage;
+      }
+      if (rawContent) {
+        existing.description = rawContent;
+        existing.tagline = rawContent.slice(0, 90);
+      }
+      if (techList && techList.length > 0) existing.technologies = techList;
+      if (liveUrl || postUrl) existing.liveUrl = liveUrl || postUrl;
+      saveStore(store);
+      return res.json({
+        success: true,
+        message: `Updated existing project "${itemTitle}" from LinkedIn!`,
+        type: 'project',
+        project: existing
+      });
+    }
 
     const newProject = {
-      id: 'proj-' + Date.now(),
-      title: title.trim(),
-      tagline: description ? description.slice(0, 80) : 'Project posted on LinkedIn',
-      description: description || 'Practical engineering project posted on LinkedIn.',
+      id: 'proj-li-' + Date.now(),
+      title: itemTitle,
+      tagline: rawContent ? rawContent.slice(0, 90) : 'Project announced on LinkedIn',
+      description: rawContent || `Practical engineering project shared by Abhijeet Mahakur on LinkedIn.`,
       technologies: techList,
       category: category || 'Software Engineering',
+      image: coverImage || '/project_personalportfolio.jpg',
+      imageUrl: coverImage || '/project_personalportfolio.jpg',
       accentColor: '#38bdf8',
       glowColor: 'rgba(56, 189, 248, 0.35)',
       githubUrl: githubUrl || '',
-      liveUrl: liveUrl || '',
+      liveUrl: liveUrl || postUrl || '',
       published: true,
-      source: 'LinkedIn Post',
+      source: 'LinkedIn Post Sync',
       createdAt: new Date().toISOString()
     };
 
@@ -2688,16 +2897,26 @@ app.post(['/api/sync/linkedin/webhook', '/api/sync/linkedin/post', '/api/sync/li
     if (!store.syncLogs) store.syncLogs = [];
     store.syncLogs.unshift({
       id: 'log-' + Date.now(),
-      service: 'LinkedIn Auto-Sync',
+      service: 'LinkedIn Post Sync',
       status: 'SUCCESS',
       message: `Ingested new project from LinkedIn: "${newProject.title}".`,
       timestamp: new Date().toISOString()
     });
 
+    store.syncStatus.linkedin = {
+      connected: true,
+      lastSync: new Date().toISOString(),
+      account: 'abhijeet-mahakur-23bb983b6',
+      status: 'Active & Synchronized',
+      lastPostTitle: itemTitle,
+      projectsCount: store.projects.length
+    };
+
     saveStore(store);
     return res.json({
       success: true,
-      message: `Project "${newProject.title}" successfully added to portfolio!`,
+      message: `Successfully synced project "${newProject.title}" from LinkedIn!`,
+      type: 'project',
       project: newProject,
       totalProjects: store.projects.length
     });
@@ -2709,10 +2928,15 @@ setInterval(() => {
   syncGitHubProjects().catch(() => {});
 }, 15 * 60 * 1000);
 
-// Initial background sync check 3 seconds after server boot
+// Initial background sync check after server boot (only if > 15m since last sync)
 setTimeout(() => {
-  syncGitHubProjects().catch(() => {});
-}, 3000);
+  const store = getStore();
+  const lastSync = store.syncStatus?.github?.lastSync;
+  const now = Date.now();
+  if (!lastSync || (now - new Date(lastSync).getTime() > 15 * 60 * 1000)) {
+    syncGitHubProjects().catch(() => {});
+  }
+}, 5000);
 
 // --- SYNC STATUS & LOGS ENDPOINT ---
 app.get('/api/sync/status', (req, res) => {
