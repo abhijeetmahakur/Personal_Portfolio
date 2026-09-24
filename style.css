@@ -4131,8 +4131,38 @@ section[id] {
   border-radius: 20px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(168, 85, 247, 0.15);
   max-height: 90vh;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   animation: modalScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-modal-card .modal-card-body {
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.portfolio-modal-card .modal-card-footer {
+  flex-shrink: 0;
+  padding: 14px 24px;
+  background: rgba(9, 14, 26, 0.97);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  z-index: 15;
+}
+
+.btn-quick-auto-gen {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-quick-auto-gen:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 22px rgba(139, 92, 246, 0.6) !important;
 }
 
 @keyframes modalFadeIn {

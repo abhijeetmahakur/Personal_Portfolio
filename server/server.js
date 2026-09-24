@@ -2788,28 +2788,37 @@ app.post('/api/sync/github/webhook', async (req, res) => {
 // --- TOPIC-AWARE AI IMAGE GENERATOR ENGINE ---
 async function generateTopicImage({ title, category, technologies, description, customPrompt, projectId }) {
   let promptTopic = customPrompt;
+  const techStr = Array.isArray(technologies) ? technologies.slice(0, 5).join(', ') : (technologies || '');
+  const cleanTitle = (title || 'Software Application').trim();
+  const cleanCat = (category || 'Tech').trim();
+  const lower = `${cleanTitle} ${cleanCat} ${techStr} ${description || ''} ${projectId || ''}`.toLowerCase();
+
   if (!promptTopic) {
-    const techStr = Array.isArray(technologies) ? technologies.slice(0, 4).join(', ') : (technologies || '');
-    const cleanTitle = (title || 'Software Application').trim();
-    const cleanCat = (category || 'Tech').trim();
-    
-    // Topic-specific keyword enhancements
-    const lower = `${cleanTitle} ${cleanCat} ${techStr} ${description || ''}`.toLowerCase();
     let themeHint = 'modern high-tech software application dashboard interface';
     if (lower.includes('truck') || lower.includes('logistics') || lower.includes('freight')) {
-      themeHint = 'heavy commercial freight trucks on highway, real-time GPS telemetry HUD, route optimization map analytics, cyber blue and amber neon';
-    } else if (lower.includes('java') || lower.includes('algorithm') || lower.includes('tree') || lower.includes('graph')) {
-      themeHint = 'Java algorithmic code dashboard, glowing binary search tree, graph data structures, cyber code editor, neon cyan and violet';
-    } else if (lower.includes('music') || lower.includes('spotify') || lower.includes('audio') || lower.includes('sound')) {
-      themeHint = 'sleek modern music streaming player, glowing audio waveform visualizer, dark glassmorphism dashboard, neon emerald green';
+      themeHint = 'heavy commercial freight trucks on highway, real-time GPS telemetry HUD, route optimization map analytics, cyber blue and amber neon, logistics control cockpit';
+    } else if (lower.includes('spotify') || lower.includes('music') || lower.includes('audio') || lower.includes('sound')) {
+      themeHint = 'sleek modern Spotify music streaming web app player, glowing neon emerald green and violet audio waveform visualizer, dark glassmorphism dashboard, synthwave playlist cards, futuristic audio player UI';
+    } else if (lower.includes('java') || lower.includes('algorithm') || lower.includes('tree') || lower.includes('graph') || lower.includes('ips')) {
+      themeHint = 'Java algorithmic code dashboard, glowing binary search tree, graph data structures, cyber code editor, neon cyan and violet, algorithm visualizer workstation';
+    } else if (lower.includes('gravity') || lower.includes('gravisphere') || lower.includes('physics')) {
+      themeHint = 'futuristic gravity control simulation cockpit, glowing celestial orbital physics, cyan telemetry dials, high-tech space station UI';
+    } else if (lower.includes('vision') || lower.includes('gesture') || lower.includes('hand') || lower.includes('air')) {
+      themeHint = 'computer vision hand gesture landmark tracking with MediaPipe, holographic glowing neon drawing strokes in mid-air, cyber AI camera canvas';
     } else if (lower.includes('attendance') || lower.includes('biometric')) {
       themeHint = 'smart attendance management dashboard, automated check-in analytics, facial verification telemetry, clean cyber UI';
-    } else if (lower.includes('vision') || lower.includes('gesture') || lower.includes('hand') || lower.includes('air')) {
-      themeHint = 'computer vision hand gesture landmark tracking, holographic drawing strokes, cyber AI interface';
+    } else if (lower.includes('thermax') || lower.includes('thermal') || lower.includes('hardware')) {
+      themeHint = 'hardware thermal telemetry cockpit, CPU GPU temperature telemetry curves, fan speed controls, cyber flame orange neon';
+    } else if (lower.includes('blog') || lower.includes('django')) {
+      themeHint = 'full-stack Python Django editorial web publication dashboard, sleek modern article feed, author cards, dark glassmorphism layout, emerald green accents';
     } else if (lower.includes('e-commerce') || lower.includes('amazon') || lower.includes('cart') || lower.includes('shop')) {
-      themeHint = 'modern e-commerce product platform, digital shopping dashboard, glassmorphism UI';
-    } else if (lower.includes('ai') || lower.includes('ml') || lower.includes('machine learning')) {
-      themeHint = 'artificial intelligence neural network visualizer, deep learning data pipeline, cybernetic UI';
+      themeHint = 'modern e-commerce product platform, digital shopping dashboard, deal banners and product showcase, dark glassmorphism UI';
+    } else if (lower.includes('portfolio') || lower.includes('personal') || lower.includes('cms')) {
+      themeHint = 'high-performance personal developer portfolio workstation, Lenis canvas animations, headless CMS interface, dark glassmorphism cyan and violet';
+    } else if (lower.includes('python')) {
+      themeHint = 'Python software engineering and data science workstation, clean syntax highlighting, automated analytics pipelines';
+    } else if (lower.includes('web') || lower.includes('html') || lower.includes('css')) {
+      themeHint = 'interactive modern web UI design components, responsive grid layouts, cyber blue and violet';
     } else if (lower.includes('certificate') || lower.includes('certification') || lower.includes('credential') || lower.includes('badge') || cleanCat.toLowerCase().includes('cert')) {
       themeHint = 'prestigious accredited digital certificate diploma, glowing holographic seal, verified achievement badge, cybernetic gold and emerald borders, clean dark glassmorphism luxury aesthetic';
       promptTopic = `Prestigious professional certification credential for ${cleanTitle}, ${themeHint}, verified skills: ${techStr}, 8k sharp typography, cinematic illumination`;
@@ -2826,7 +2835,7 @@ async function generateTopicImage({ title, category, technologies, description, 
   
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 18000);
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
     const imgRes = await fetch(aiUrl, { signal: controller.signal });
     clearTimeout(timeoutId);
     
@@ -2838,7 +2847,7 @@ async function generateTopicImage({ title, category, technologies, description, 
       const savePath = path.join(UPLOADS_DIR, filename);
       fs.writeFileSync(savePath, buffer);
       
-      // Also copy to public/uploads and dist/uploads if they exist
+      // Also copy to public/uploads and dist/uploads
       const publicUploads = path.join(__dirname, '..', 'public', 'uploads');
       const distUploads = path.join(__dirname, '..', 'dist', 'uploads');
       try {
@@ -2859,18 +2868,19 @@ async function generateTopicImage({ title, category, technologies, description, 
     console.warn(`[AI Image] Fetch failed (${err.message}). Using topic fallback image.`);
   }
 
-  // Fallback: Return curated topic match
-  const lower = `${title} ${category}`.toLowerCase();
+  // Fallback: Return curated high-res topic match
   let fallback = '/project_personalportfolio.jpg';
   if (lower.includes('truck') || lower.includes('logistics')) fallback = '/project_truckflow.jpg';
-  else if (lower.includes('java') || lower.includes('algorithm') || lower.includes('ips')) fallback = '/project_ips.jpg';
   else if (lower.includes('music') || lower.includes('spotify')) fallback = '/project_spotifyclone.jpg';
-  else if (lower.includes('attendance')) fallback = '/project_attendanceapp.jpg';
-  else if (lower.includes('python')) fallback = '/project_python.jpg';
-  else if (lower.includes('air') || lower.includes('vision')) fallback = '/project_airwriting.jpg';
+  else if (lower.includes('java') || lower.includes('algorithm') || lower.includes('ips')) fallback = '/project_ips.jpg';
+  else if (lower.includes('gravity') || lower.includes('gravisphere')) fallback = '/project_gravisphere.jpg';
+  else if (lower.includes('air') || lower.includes('vision') || lower.includes('hand')) fallback = '/project_airwriting.jpg';
   else if (lower.includes('blog') || lower.includes('django')) fallback = '/project_djangoblog.jpg';
-  else if (lower.includes('thermax')) fallback = '/project_thermax.jpg';
+  else if (lower.includes('attendance')) fallback = '/project_attendanceapp.jpg';
+  else if (lower.includes('thermax') || lower.includes('thermal')) fallback = '/project_thermax.jpg';
   else if (lower.includes('amazon')) fallback = '/project_amazonclone.jpg';
+  else if (lower.includes('python')) fallback = '/project_python.jpg';
+  else if (lower.includes('web') || lower.includes('express') || lower.includes('basic') || lower.includes('demo')) fallback = '/project_webdevbasic.jpg';
 
   return {
     success: true,
@@ -2916,6 +2926,43 @@ app.post('/api/projects/generate-image', async (req, res) => {
     imageUrl: result.imageUrl,
     prompt: result.prompt,
     projectId: targetProj?.id || projectId
+  });
+});
+
+// --- BATCH AUTO-GENERATE PICTURES FOR ALL PROJECTS ---
+app.post('/api/projects/auto-generate-all', async (req, res) => {
+  const store = getStore();
+  if (!Array.isArray(store.projects)) {
+    return res.status(400).json({ success: false, message: 'No projects found in database' });
+  }
+
+  console.log(`[AI Gen] Batch auto-generating covers for all ${store.projects.length} projects...`);
+  const updatedProjects = [];
+
+  for (const proj of store.projects) {
+    try {
+      const resImg = await generateTopicImage({
+        title: proj.title,
+        category: proj.category,
+        technologies: proj.technologies,
+        description: proj.description,
+        projectId: proj.id
+      });
+      if (resImg.imageUrl) {
+        proj.image = resImg.imageUrl;
+        proj.imageUrl = resImg.imageUrl;
+        updatedProjects.push({ id: proj.id, title: proj.title, image: resImg.imageUrl });
+      }
+    } catch (err) {
+      console.warn(`[AI Gen] Error generating for ${proj.title}:`, err.message);
+    }
+  }
+
+  saveStore(store);
+  res.json({
+    success: true,
+    message: `Successfully auto-generated and applied covers for ${updatedProjects.length} projects!`,
+    updatedProjects
   });
 });
 

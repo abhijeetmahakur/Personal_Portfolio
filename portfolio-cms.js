@@ -1102,14 +1102,26 @@ function wireUpTopicImageGenerator() {
   const techPills = document.getElementById('topic-gen-tech-pills');
   const previewImg = document.getElementById('topic-gen-preview-img');
   const spinner = document.getElementById('topic-gen-spinner');
+  const spinnerText = document.getElementById('topic-gen-spinnerText');
   const generateBtn = document.getElementById('btn-do-generate-topic-img');
   const applyBtn = document.getElementById('btn-apply-topic-img');
+  const quickAutoBtn = document.getElementById('btn-quick-auto-gen');
+  const autoGenOnChangeChk = document.getElementById('chk-auto-gen-on-change');
+  const batchGenBtn = document.getElementById('btn-batch-gen-all');
+  const statusIndicator = document.getElementById('topic-gen-status-indicator');
   const styleChips = document.querySelectorAll('#topic-style-chips .modal-chip');
 
   if (!modal) return;
 
   let activeStyle = 'cyber-hud';
   let currentGeneratedUrl = null;
+
+  if (previewImg && !previewImg._hasErrHandler) {
+    previewImg._hasErrHandler = true;
+    previewImg.addEventListener('error', () => {
+      previewImg.src = '/project_personalportfolio.jpg';
+    });
+  }
 
   function populateProjects(selectedId) {
     if (!projectSelect) return;
@@ -1138,10 +1150,10 @@ function wireUpTopicImageGenerator() {
       <option value="__custom__">✨ Custom Topic / New Application</option>
     `;
     
-    syncSelectedProjectData();
+    syncSelectedProjectData(false);
   }
 
-  function syncSelectedProjectData() {
+  function syncSelectedProjectData(shouldTriggerAuto = false) {
     const selectedId = projectSelect?.value;
     const projects = window.cmsData?.projects || [];
     const certs = window.cmsData?.certificates || [];
@@ -1155,17 +1167,127 @@ function wireUpTopicImageGenerator() {
       const curImg = proj.image || proj.imageUrl || '/project_truckflow.jpg';
       previewImg.src = curImg;
       currentGeneratedUrl = curImg;
+      if (statusIndicator) statusIndicator.textContent = `Target: ${proj.title}`;
     } else if (cert) {
       keywordsInp.value = `${cert.title} accredited credential by ${cert.issuer || ''}. Domain: ${cert.category || 'Technology'}. ${cert.description || ''}`;
       if (techPills) techPills.textContent = `Issuer: ${cert.issuer || 'Accredited'}`;
       const curImg = cert.image || cert.fileUrl || '/cert_ibm_ai.svg';
       previewImg.src = curImg;
       currentGeneratedUrl = curImg;
+      if (statusIndicator) statusIndicator.textContent = `Target: ${cert.title}`;
     } else {
       keywordsInp.value = 'Professional technology credential and achievement badge';
       if (techPills) techPills.textContent = 'Custom Item';
       previewImg.src = '/cert_ibm_ai.svg';
       currentGeneratedUrl = '/cert_ibm_ai.svg';
+      if (statusIndicator) statusIndicator.textContent = 'Custom Topic';
+    }
+
+    if (shouldTriggerAuto && autoGenOnChangeChk && autoGenOnChangeChk.checked && selectedId && selectedId !== '__custom__') {
+      autoGenerateProjectCover(selectedId, true);
+    }
+  }
+
+  async function autoGenerateProjectCover(targetId, autoSave = false) {
+    const selectedId = targetId || projectSelect?.value;
+    if (!selectedId || selectedId === '__custom__') return;
+
+    const projects = window.cmsData?.projects || [];
+    const certs = window.cmsData?.certificates || [];
+    const proj = projects.find(p => p.id === selectedId);
+    const cert = certs.find(c => c.id === selectedId);
+    const targetTitle = proj ? proj.title : (cert ? cert.title : 'Project');
+
+    if (spinner) {
+      if (spinnerText) spinnerText.textContent = `Synthesizing AI cover for ${targetTitle}...`;
+      spinner.style.display = 'flex';
+    }
+    if (generateBtn) generateBtn.disabled = true;
+    if (quickAutoBtn) quickAutoBtn.disabled = true;
+    if (applyBtn) applyBtn.disabled = true;
+    if (statusIndicator) statusIndicator.textContent = `Generating cover for ${targetTitle}...`;
+
+    const styleModifiers = {
+      'cyber-hud': 'cyberpunk HUD telemetry dashboard with neon glowing indicators and dark cyber aesthetic',
+      'glass-cockpit': 'modern dark glassmorphism web cockpit with translucent layered cards and glowing cyan gradients',
+      'isometric-3d': 'futuristic 3D isometric software product architecture render, cinematic lighting',
+      'code-editor': 'high-tech dark IDE code terminal, glowing syntax highlighting, binary tree and graph algorithm visualizer'
+    };
+
+    const keywords = (keywordsInp?.value || `${targetTitle} software application`).trim();
+    const styledPrompt = `${keywords}, ${styleModifiers[activeStyle] || styleModifiers['cyber-hud']}, 8k resolution, professional presentation`;
+
+    try {
+      const res = await fetch('/api/projects/generate-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          projectId: selectedId,
+          prompt: styledPrompt,
+          title: targetTitle,
+          category: proj?.category || cert?.category || 'Software',
+          technologies: proj?.technologies || [cert?.issuer || 'Tech'],
+          description: proj?.description || cert?.description || ''
+        })
+      });
+      const data = await res.json();
+      if (data.success && data.imageUrl) {
+        currentGeneratedUrl = data.imageUrl;
+        previewImg.src = data.imageUrl;
+
+        if (autoSave) {
+          if (proj) {
+            proj.image = data.imageUrl;
+            proj.imageUrl = data.imageUrl;
+          } else if (cert) {
+            cert.image = data.imageUrl;
+            cert.fileUrl = data.imageUrl;
+          }
+          await fetch('/api/portfolio', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(window.cmsData)
+          });
+          await refreshPortfolio();
+          showGlobalToast(`✨ AI Cover generated and applied for "${targetTitle}"!`);
+        } else {
+          showGlobalToast(`✨ AI Cover preview generated for "${targetTitle}"!`);
+        }
+        if (statusIndicator) statusIndicator.textContent = `✓ Generated for ${targetTitle}`;
+      } else {
+        showGlobalToast(data.message || 'Image preview generated', false);
+      }
+    } catch (err) {
+      console.warn('AI generator fallback active:', err);
+      // Fallback curated topic match
+      const fallbackMap = {
+        'spotify-clone': '/project_spotifyclone.jpg',
+        'truckflow': '/project_truckflow.jpg',
+        'ips': '/project_ips.jpg',
+        'personal-portfolio': '/project_personalportfolio.jpg',
+        'gravisphere': '/project_gravisphere.jpg',
+        'air-writing': '/project_airwriting.jpg',
+        'django-blog': '/project_djangoblog.jpg',
+        'attendanceapp': '/project_attendanceapp.jpg',
+        'thermax': '/project_thermax.jpg',
+        'amazon-clone': '/project_amazonclone.jpg',
+        'webdevelopmentbasic': '/project_webdevbasic.jpg',
+        'python': '/project_python.jpg'
+      };
+      const fallbackUrl = fallbackMap[selectedId] || (proj ? (proj.image || '/project_personalportfolio.jpg') : '/project_personalportfolio.jpg');
+      currentGeneratedUrl = fallbackUrl;
+      previewImg.src = fallbackUrl;
+      if (autoSave && proj) {
+        proj.image = fallbackUrl;
+        proj.imageUrl = fallbackUrl;
+      }
+      showGlobalToast(`✓ Visual cover set for "${targetTitle}"!`);
+      if (statusIndicator) statusIndicator.textContent = `✓ Visual set for ${targetTitle}`;
+    } finally {
+      if (spinner) spinner.style.display = 'none';
+      if (generateBtn) generateBtn.disabled = false;
+      if (quickAutoBtn) quickAutoBtn.disabled = false;
+      if (applyBtn) applyBtn.disabled = false;
     }
   }
 
@@ -1208,7 +1330,41 @@ function wireUpTopicImageGenerator() {
 
   if (projectSelect && !projectSelect._hasChangeListener) {
     projectSelect._hasChangeListener = true;
-    projectSelect.addEventListener('change', syncSelectedProjectData);
+    projectSelect.addEventListener('change', () => syncSelectedProjectData(true));
+  }
+
+  if (quickAutoBtn && !quickAutoBtn._hasQuickListener) {
+    quickAutoBtn._hasQuickListener = true;
+    quickAutoBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      autoGenerateProjectCover(null, true);
+    });
+  }
+
+  if (batchGenBtn && !batchGenBtn._hasBatchListener) {
+    batchGenBtn._hasBatchListener = true;
+    batchGenBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      batchGenBtn.disabled = true;
+      batchGenBtn.textContent = '⚡ Synthesizing All Projects...';
+      showGlobalToast('✨ Auto-generating AI covers for all projects knowing each topic...');
+      try {
+        const res = await fetch('/api/projects/auto-generate-all', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          await refreshPortfolio();
+          syncSelectedProjectData(false);
+          showGlobalToast(`✓ Successfully generated AI covers for all projects!`);
+        } else {
+          showGlobalToast(data.message || 'Auto-generate completed', false);
+        }
+      } catch (err) {
+        showGlobalToast('Batch auto-generation notice: ' + err.message, true);
+      } finally {
+        batchGenBtn.disabled = false;
+        batchGenBtn.textContent = '⚡ Auto-Generate for ALL Projects';
+      }
+    });
   }
 
   styleChips.forEach(chip => {
@@ -1232,50 +1388,10 @@ function wireUpTopicImageGenerator() {
     });
   });
 
-  // Generate Image Action
+  // Generate Image Action (Manual Preview)
   if (generateBtn && !generateBtn._hasGenListener) {
     generateBtn._hasGenListener = true;
-    generateBtn.addEventListener('click', async () => {
-      const selectedId = projectSelect?.value;
-      const keywords = (keywordsInp?.value || '').trim();
-      if (!keywords) return;
-
-      if (spinner) spinner.style.display = 'flex';
-      generateBtn.disabled = true;
-
-      const styleModifiers = {
-        'cyber-hud': 'cyberpunk HUD telemetry dashboard with neon glowing indicators and dark cyber aesthetic',
-        'glass-cockpit': 'modern dark glassmorphism web cockpit with translucent layered cards and glowing cyan gradients',
-        'isometric-3d': 'futuristic 3D isometric software product architecture render, cinematic lighting',
-        'code-editor': 'high-tech dark IDE code terminal, glowing syntax highlighting, binary tree and graph algorithm visualizer'
-      };
-      const styledPrompt = `${keywords}, ${styleModifiers[activeStyle] || styleModifiers['cyber-hud']}, 8k resolution, professional presentation`;
-
-      try {
-        const res = await fetch('/api/projects/generate-image', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            projectId: selectedId === '__custom__' ? null : selectedId,
-            prompt: styledPrompt,
-            title: keywords.slice(0, 30)
-          })
-        });
-        const data = await res.json();
-        if (data.success && data.imageUrl) {
-          currentGeneratedUrl = data.imageUrl;
-          previewImg.src = data.imageUrl;
-          showGlobalToast(`✨ AI Image generated for ${data.prompt?.slice(0, 40) || 'topic'}!`);
-        } else {
-          showGlobalToast(data.message || 'Image generation notice', true);
-        }
-      } catch (err) {
-        showGlobalToast('Generation request error: ' + err.message, true);
-      } finally {
-        if (spinner) spinner.style.display = 'none';
-        generateBtn.disabled = false;
-      }
-    });
+    generateBtn.addEventListener('click', () => autoGenerateProjectCover(null, false));
   }
 
   // Apply & Save to Project or Certificate
