@@ -18,7 +18,7 @@ let backendProcess = null;
 let frontendProcess = null;
 
 function startBackend() {
-  backendProcess = spawn(nodeExe, [serverScript], {
+  backendProcess = spawn(nodeExe, ['--watch', serverScript], {
     cwd: rootDir,
     stdio: 'inherit',
     env: { ...process.env, FORCE_COLOR: '1' }

@@ -483,9 +483,11 @@ html.lenis body {
   box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.65);
 }
 
-.section-block {
+.section-block,
+section[id] {
   padding: var(--space-section) 0;
   position: relative;
+  scroll-margin-top: 96px;
 }
 
 .section-eyebrow {
@@ -543,6 +545,32 @@ html.lenis body {
 .header-link:hover {
   color: var(--accent-cyan);
   transform: translateX(3px);
+}
+
+#btn-sync-linkedin-now,
+#btn-sync-github-now,
+#btn-modal-sync-linkedin,
+#btn-sync-linkedin-post {
+  position: relative;
+  z-index: 5;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#btn-sync-linkedin-now:hover,
+#btn-sync-github-now:hover,
+#btn-modal-sync-linkedin:hover,
+#btn-sync-linkedin-post:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.25);
+}
+
+#btn-sync-linkedin-now:active,
+#btn-sync-github-now:active,
+#btn-modal-sync-linkedin:active,
+#btn-sync-linkedin-post:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .highlight-blue {

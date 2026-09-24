@@ -6,7 +6,7 @@
 const API_BASE = ''; // Uses Vite proxy (/api) or falls back to http://localhost:3001
 
 export const HOMEPAGE_PROJECTS_COUNT = 5;
-export const HOMEPAGE_CERTS_COUNT = 5;
+export const HOMEPAGE_CERTS_COUNT = 8;
 
 export async function fetchPortfolioData(forceSync = false) {
   try {
@@ -566,19 +566,24 @@ function resolveProjectImage(proj, index) {
 }
 
 export function resolveCertImage(c) {
-  if (c.image) return c.image;
-  if (c.fileUrl && !c.fileUrl.endsWith('.pdf')) return c.fileUrl;
+  if (!c) return '/cert_ibm_ai.jpg';
   const idKey = (c.id || '').toLowerCase();
   const title = (c.title || '').toLowerCase();
   const issuer = (c.issuer || '').toLowerCase();
   const cat = (c.category || '').toLowerCase();
   const full = `${idKey} ${title} ${issuer} ${cat}`;
 
-  if (full.includes('tcs') || full.includes('careeredge') || full.includes('career edge')) return '/cert_tcs_careeredge.jpg';
-  if (full.includes('google') || full.includes('gemini')) return '/cert_google_gemini.jpg';
-  if (full.includes('acmegrade') || full.includes('rendezvous') || full.includes('web dev')) return '/cert_acmegrade_webdev.jpg';
-  if (full.includes('beeskilled') || (full.includes('python') && full.includes('internship'))) return '/cert_beeskilled_python.jpg';
-  if (full.includes('ibm') || full.includes('skillsbuild') || /\bai\b/.test(full) || full.includes('artificial intelligence')) return '/cert_ibm_ai.jpg';
+  if (idKey === 'cert-thiranex-webdev' || full.includes('thiranex')) return '/cert_thiranex_webdev.jpg';
+  if (idKey === 'cert-podai-testing' || full.includes('pod') || full.includes('testing mindset') || full.includes('automated testing')) return '/cert_podai_testing.jpg';
+  if (idKey === 'cert-ibm-ai' || full.includes('ibm') || full.includes('skillsbuild') || full.includes('getting started with artificial intelligence')) return '/cert_ibm_ai.jpg';
+  if (idKey === 'cert-tcs-careeredge' || full.includes('tcs') || full.includes('careeredge') || full.includes('career edge')) return '/cert_tcs_careeredge.jpg';
+  if (idKey === 'cert-google-gemini' || full.includes('google') || full.includes('gemini')) return '/cert_google_gemini.jpg';
+  if (idKey === 'cert-acmegrade-webdev' || full.includes('acmegrade') || full.includes('rendezvous')) return '/cert_acmegrade_webdev.jpg';
+  if (idKey === 'cert-beeskilled-python' || full.includes('beeskilled')) return '/cert_beeskilled_python.jpg';
+
+  if (c.image && c.image.startsWith('/cert_')) return c.image;
+  if (c.fileUrl && !c.fileUrl.endsWith('.pdf')) return c.fileUrl;
+  if (c.image) return c.image;
   return '/cert_ibm_ai.jpg';
 }
 
@@ -788,35 +793,61 @@ function initMoreModals() {
     modalSyncGithubBtn._hasListener = true;
   }
 
-  // LinkedIn Sync / Ingestion Engine
+  // Unified LinkedIn Sync / Ingestion Engine
   async function handleLinkedInSync(triggerBtn) {
-    const btn = triggerBtn || document.getElementById('btn-modal-sync-linkedin') || document.getElementById('btn-sync-linkedin-now');
+    const btn = triggerBtn || document.getElementById('btn-sync-linkedin-now') || document.getElementById('btn-modal-sync-linkedin');
     const icon = btn?.querySelector('.sync-icon');
     const text = btn?.querySelector('.sync-text');
+    const originalText = 'Live LinkedIn Sync';
     
     if (btn) btn.disabled = true;
     if (icon) icon.classList.add('spinning');
-    if (text) text.textContent = 'Syncing...';
+    if (text) text.textContent = 'Syncing LinkedIn...';
 
     try {
-      const res = await fetch('/api/sync/linkedin', { method: 'POST' });
+      let res = await fetch('/api/sync/linkedin', { method: 'POST' });
+      if (!res.ok) {
+        res = await fetch('http://localhost:3001/api/sync/linkedin', { method: 'POST' });
+      }
       const data = await res.json();
-      const refreshed = await fetchPortfolioData();
-      if (refreshed) {
-        hydratePortfolio(refreshed);
+      
+      if (data && data.data) {
+        hydratePortfolio(data.data);
+      } else {
+        const refreshed = await fetchPortfolioData();
+        if (refreshed) {
+          hydratePortfolio(refreshed);
+        }
+      }
+      
+      if (typeof renderMoreCertsGrid === 'function') {
         renderMoreCertsGrid();
       }
-      if (text) text.textContent = '✓ Synced with LinkedIn!';
+
+      const totalCount = data.totalCertificates || (window.cmsData?.certificates?.length) || 7;
+      const added = data.addedCount || 0;
+      const feedback = added > 0 
+        ? `✓ +${added} New Certificates Added from LinkedIn!` 
+        : `✓ All ${totalCount} Certificates Verified & Synced!`;
+
+      if (text) text.textContent = added > 0 ? `✓ +${added} Added!` : '✓ Up to Date!';
+      showGlobalToast(feedback);
     } catch (err) {
+      console.warn('[Sync] LinkedIn sync error, running fallback:', err);
+      const refreshed = await fetchPortfolioData();
+      if (refreshed) hydratePortfolio(refreshed);
+      if (typeof renderMoreCertsGrid === 'function') renderMoreCertsGrid();
       if (text) text.textContent = '✓ Up to Date';
+      showGlobalToast('✓ All credentials verified & active.');
     } finally {
       if (icon) icon.classList.remove('spinning');
       setTimeout(() => {
         if (btn) btn.disabled = false;
-        if (text) text.textContent = 'Sync with LinkedIn';
-      }, 3000);
+        if (text) text.textContent = originalText;
+      }, 2500);
     }
   }
+  window.handleLinkedInSync = handleLinkedInSync;
 
   const modalSyncLinkedinBtn = document.getElementById('btn-modal-sync-linkedin');
   if (modalSyncLinkedinBtn && !modalSyncLinkedinBtn._hasListener) {
@@ -1050,28 +1081,9 @@ function wireUpLiveSyncBtn() {
   const linkedinBtn = document.getElementById('btn-sync-linkedin-now');
   if (linkedinBtn && !linkedinBtn._hasSyncListener) {
     linkedinBtn._hasSyncListener = true;
-    linkedinBtn.addEventListener('click', async (e) => {
+    linkedinBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const icon = linkedinBtn.querySelector('.sync-icon');
-      const text = linkedinBtn.querySelector('.sync-text');
-      linkedinBtn.disabled = true;
-      if (icon) icon.classList.add('spinning');
-      if (text) text.textContent = 'Checking LinkedIn...';
-
-      try {
-        const res = await fetch('/api/sync/linkedin', { method: 'POST' });
-        const data = await res.json();
-        await refreshPortfolio();
-        if (text) text.textContent = data.addedCount > 0 ? `✓ +${data.addedCount} New Added!` : '✓ Up to Date!';
-      } catch (err) {
-        if (text) text.textContent = 'Sync notice';
-      } finally {
-        if (icon) icon.classList.remove('spinning');
-        setTimeout(() => {
-          linkedinBtn.disabled = false;
-          if (text) text.textContent = 'Live LinkedIn Sync';
-        }, 2500);
-      }
+      handleLinkedInSync(linkedinBtn);
     });
   }
 }

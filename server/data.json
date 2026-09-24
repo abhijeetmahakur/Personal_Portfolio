@@ -858,6 +858,32 @@
   ],
   "certificates": [
     {
+      "id": "cert-podai-testing",
+      "title": "The Automated Testing Mindset – Expert Talk",
+      "issuer": "Pod.ai",
+      "date": "2026-09-10",
+      "category": "Software Testing & QA",
+      "verifyUrl": "https://linkedin.com/in/abhijeet-mahakur-23bb983b6",
+      "certId": "POD-AUTO-TEST-2026",
+      "image": "/cert_podai_testing.jpg",
+      "fileUrl": "/cert_podai_testing.jpg",
+      "description": "Actively participated in Expert Talk on The Automated Testing Mindset conducted by Vinay Kushwaha (Frontend Expert) and Pod.ai on 10th September 2026.",
+      "source": "Pod.ai / LinkedIn"
+    },
+    {
+      "id": "cert-thiranex-webdev",
+      "title": "Web Development Internship",
+      "issuer": "Thiranex",
+      "date": "2026-08-26",
+      "category": "Web Development",
+      "verifyUrl": "https://linkedin.com/in/abhijeet-mahakur-23bb983b6",
+      "certId": "THX-JUL2726-371",
+      "image": "/cert_thiranex_webdev.jpg",
+      "fileUrl": "/cert_thiranex_webdev.jpg",
+      "description": "Completed an intensive Web Development internship from 27 Jul 2026 to 26 Aug 2026 at Thiranex, building frontend modules and practical web applications (Cert ID: THX-JUL2726-371).",
+      "source": "Thiranex / LinkedIn"
+    },
+    {
       "id": "cert-ibm-ai",
       "title": "Getting Started with Artificial Intelligence",
       "issuer": "IBM SkillsBuild",
@@ -957,6 +983,167 @@
     ]
   },
   "syncLogs": [
+    {
+      "id": "log-1790278397305",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T19:33:17.305Z"
+    },
+    {
+      "id": "log-1790278274490",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:31:14.490Z"
+    },
+    {
+      "id": "log-1790278274484",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:31:14.484Z"
+    },
+    {
+      "id": "log-1790277852131",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:24:12.131Z"
+    },
+    {
+      "id": "log-1790277852125",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:24:12.125Z"
+    },
+    {
+      "id": "log-1790277777946",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T19:22:57.946Z"
+    },
+    {
+      "id": "log-1790277747790",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:22:27.790Z"
+    },
+    {
+      "id": "log-1790277747785",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:22:27.785Z"
+    },
+    {
+      "id": "log-1790277714515",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:21:54.515Z"
+    },
+    {
+      "id": "log-1790277714510",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:21:54.510Z"
+    },
+    {
+      "id": "log-1790277474970",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:17:54.970Z"
+    },
+    {
+      "id": "log-1790277474964",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:17:54.964Z"
+    },
+    {
+      "id": "log-1790277395404",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T19:16:35.404Z"
+    },
+    {
+      "id": "log-1790277120959",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:12:00.959Z"
+    },
+    {
+      "id": "log-1790277120950",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:12:00.950Z"
+    },
+    {
+      "id": "log-1790276901084",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:08:21.084Z"
+    },
+    {
+      "id": "log-1790276778230",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T19:06:18.230Z"
+    },
+    {
+      "id": "log-1790276613307",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 7 certificates and 15 projects.",
+      "timestamp": "2026-09-24T19:03:33.307Z"
+    },
+    {
+      "id": "log-1790276172756",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T18:56:12.756Z"
+    },
+    {
+      "id": "log-1790275878285",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T18:51:18.285Z"
+    },
+    {
+      "id": "log-1790275564160",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 5 certificates and 15 projects.",
+      "timestamp": "2026-09-24T18:46:04.160Z"
+    },
+    {
+      "id": "log-1790275564156",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 5 certificates and 15 projects.",
+      "timestamp": "2026-09-24T18:46:04.156Z"
+    },
+    {
+      "id": "log-1790275271808",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T18:41:11.808Z"
+    },
     {
       "id": "log-1790274987702",
       "service": "GitHub Auto-Sync",
@@ -1145,173 +1332,12 @@
       "status": "SUCCESS",
       "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
       "timestamp": "2026-09-24T17:32:26.745Z"
-    },
-    {
-      "id": "log-1790271114073",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:31:54.073Z"
-    },
-    {
-      "id": "log-1790271084626",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:31:24.626Z"
-    },
-    {
-      "id": "log-1790271057759",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:30:57.759Z"
-    },
-    {
-      "id": "log-1790271024528",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:30:24.528Z"
-    },
-    {
-      "id": "log-1790271020918",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:30:20.918Z"
-    },
-    {
-      "id": "log-1790271014085",
-      "service": "LinkedIn Sync Hub",
-      "status": "SUCCESS",
-      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 5 certificates and 15 projects.",
-      "timestamp": "2026-09-24T17:30:14.085Z"
-    },
-    {
-      "id": "log-1790270996469",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:29:56.469Z"
-    },
-    {
-      "id": "log-1790270963669",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:29:23.669Z"
-    },
-    {
-      "id": "log-1790270933680",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:28:53.680Z"
-    },
-    {
-      "id": "log-1790270908589",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:28:28.589Z"
-    },
-    {
-      "id": "log-1790270892756",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:28:12.756Z"
-    },
-    {
-      "id": "log-1790270848562",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:27:28.562Z"
-    },
-    {
-      "id": "log-1790270844109",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:27:24.109Z"
-    },
-    {
-      "id": "log-1790270815417",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:26:55.417Z"
-    },
-    {
-      "id": "log-1790270800558",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:26:40.558Z"
-    },
-    {
-      "id": "log-1790270755058",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:25:55.058Z"
-    },
-    {
-      "id": "log-1790270746801",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:25:46.801Z"
-    },
-    {
-      "id": "log-1790270742064",
-      "service": "LinkedIn Sync Hub",
-      "status": "SUCCESS",
-      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 5 certificates and 15 projects.",
-      "timestamp": "2026-09-24T17:25:42.064Z"
-    },
-    {
-      "id": "log-1790270725094",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:25:25.094Z"
-    },
-    {
-      "id": "log-1790270695373",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:24:55.373Z"
-    },
-    {
-      "id": "log-1790270665665",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:24:25.665Z"
-    },
-    {
-      "id": "log-1790270636482",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:23:56.482Z"
-    },
-    {
-      "id": "log-1790270613203",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:23:33.203Z"
     }
   ],
   "syncStatus": {
     "github": {
       "connected": true,
-      "lastSync": "2026-09-24T18:36:27.702Z",
+      "lastSync": "2026-09-24T19:33:17.305Z",
       "account": "abhijeetmahakur",
       "repoCount": 14,
       "status": "Active & Synchronized",
@@ -1319,11 +1345,11 @@
     },
     "linkedin": {
       "connected": true,
-      "lastSync": "2026-09-24T18:06:49.597Z",
+      "lastSync": "2026-09-24T19:31:14.490Z",
       "account": "abhijeet-mahakur-23bb983b6",
-      "status": "Active & Ready for Ingestion",
+      "status": "Active & Ingested",
       "profileUrl": "https://linkedin.com/in/abhijeet-mahakur-23bb983b6",
-      "certificatesCount": 5,
+      "certificatesCount": 7,
       "autoSyncEnabled": true
     }
   },
