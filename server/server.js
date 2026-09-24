@@ -2726,31 +2726,60 @@ app.post(['/api/sync/linkedin', '/api/sync/linkedin/refresh'], async (req, res) 
   });
 });
 
-// --- ENHANCED LINKEDIN POST INGESTION WITH AI TOPIC IMAGE ---
+// --- ENHANCED LINKEDIN POST INGESTION & WEBHOOK (Zapier, Make, Automation) ---
 app.post(['/api/sync/linkedin/ingest', '/api/sync/linkedin/post', '/api/sync/linkedin/webhook', '/api/sync/linkedin/import'], async (req, res) => {
   const store = getStore();
   const payload = req.body || {};
-  const {
-    url,
-    text,
-    title,
-    type = 'auto', // 'auto', 'project', 'certificate'
-    category,
-    skills,
-    technologies,
-    issuer,
-    credentialUrl,
-    verifyUrl,
-    githubUrl,
-    liveUrl,
-    autoGenerateImage = true
-  } = payload;
 
-  const rawContent = (text || payload.description || '').trim();
-  const postUrl = (url || credentialUrl || verifyUrl || '').trim();
+  // Optional webhook secret validation if configured
+  const webhookSecret = process.env.LINKEDIN_WEBHOOK_SECRET;
+  if (webhookSecret) {
+    const providedSecret = req.query.secret || req.headers['x-webhook-secret'] || req.headers['x-api-key'];
+    if (providedSecret !== webhookSecret) {
+      return res.status(401).json({ success: false, message: 'Unauthorized: Invalid webhook secret key.' });
+    }
+  }
+
+  // Normalize fields across Zapier, Make, n8n, and custom forms
+  const rawContent = (
+    payload.text ||
+    payload.content ||
+    payload.commentary ||
+    payload.description ||
+    payload.message ||
+    payload.post_content ||
+    ''
+  ).trim();
+
+  const postUrl = (
+    payload.url ||
+    payload.postUrl ||
+    payload.post_url ||
+    payload.link ||
+    payload.permaLink ||
+    payload.credentialUrl ||
+    payload.verifyUrl ||
+    ''
+  ).trim();
+
+  const passedTitle = (
+    payload.title ||
+    payload.headline ||
+    payload.name ||
+    ''
+  ).trim();
+
+  const type = payload.type || 'auto'; // 'auto', 'project', 'certificate'
+  const category = payload.category;
+  const skills = payload.skills || payload.technologies || payload.topics;
+  const passedIssuer = payload.issuer || payload.organization || payload.company || payload.author;
+  const verifyUrl = (payload.verifyUrl || payload.credentialUrl || payload.certUrl || payload.certificate_url || '').trim();
+  const githubUrl = (payload.githubUrl || payload.github || '').trim();
+  const liveUrl = (payload.liveUrl || payload.demoUrl || '').trim();
+  const autoGenerateImage = payload.autoGenerateImage !== false;
 
   // Deduce title if missing
-  let itemTitle = (title || '').trim();
+  let itemTitle = passedTitle;
   if (!itemTitle && rawContent) {
     const firstLine = rawContent.split(/\r?\n/)[0].replace(/^[#\s*]+/, '').trim();
     itemTitle = firstLine.length > 70 ? firstLine.slice(0, 67) + '...' : firstLine;
@@ -2764,20 +2793,36 @@ app.post(['/api/sync/linkedin/ingest', '/api/sync/linkedin/post', '/api/sync/lin
   }
 
   // Detect whether it's a certificate or project
-  const lowerText = `${itemTitle} ${rawContent} ${issuer || ''}`.toLowerCase();
+  const lowerText = `${itemTitle} ${rawContent} ${passedIssuer || ''}`.toLowerCase();
   const isCert = type === 'certificate' || (type === 'auto' && (
-    lowerText.includes('certified') || lowerText.includes('certificate') || lowerText.includes('credential') ||
-    lowerText.includes('completed the course') || lowerText.includes('badge') || (issuer && !githubUrl)
+    lowerText.includes('certified') ||
+    lowerText.includes('certificate') ||
+    lowerText.includes('credential') ||
+    lowerText.includes('completed the course') ||
+    lowerText.includes('course completed') ||
+    lowerText.includes('earned a certificate') ||
+    lowerText.includes('badge') ||
+    lowerText.includes('specialization') ||
+    lowerText.includes('accreditation') ||
+    (passedIssuer && !githubUrl)
   ));
 
-  const techList = Array.isArray(skills || technologies)
-    ? (skills || technologies)
-    : (typeof (skills || technologies) === 'string' && (skills || technologies).trim()
-        ? (skills || technologies).split(',').map(s => s.trim())
+  let detectedIssuer = (passedIssuer || '').trim();
+  if (!detectedIssuer && isCert) {
+    const issuerMatch = rawContent.match(/(?:from|by|at|issued by)\s+([A-Z][A-Za-z0-9\s&–-]{2,30})/i);
+    if (issuerMatch) {
+      detectedIssuer = issuerMatch[1].trim();
+    }
+  }
+
+  const techList = Array.isArray(skills)
+    ? skills
+    : (typeof skills === 'string' && skills.trim()
+        ? skills.split(',').map(s => s.trim())
         : (isCert ? ['Credential', 'Skill Verification'] : ['Software Engineering', 'Full-Stack']));
 
   // Auto-generate topic cover image if requested
-  let coverImage = payload.imageUrl || payload.fileUrl || '';
+  let coverImage = payload.imageUrl || payload.image_url || payload.media_url || payload.fileUrl || payload.picture || '';
   if (!coverImage && autoGenerateImage) {
     try {
       const imgRes = await generateTopicImage({
@@ -2796,7 +2841,7 @@ app.post(['/api/sync/linkedin/ingest', '/api/sync/linkedin/post', '/api/sync/lin
     // Check if duplicate
     const existing = store.certificates.find(c => 
       c.title.toLowerCase() === itemTitle.toLowerCase() && 
-      (!issuer || c.issuer?.toLowerCase() === (issuer || '').toLowerCase())
+      (!detectedIssuer || c.issuer?.toLowerCase() === detectedIssuer.toLowerCase())
     );
 
     if (existing) {
@@ -2810,7 +2855,7 @@ app.post(['/api/sync/linkedin/ingest', '/api/sync/linkedin/post', '/api/sync/lin
     const newCert = {
       id: 'cert-li-' + Date.now(),
       title: itemTitle,
-      issuer: (issuer || 'LinkedIn Verified / Accredited Issuer').trim(),
+      issuer: (detectedIssuer || 'LinkedIn Verified / Accredited Issuer').trim(),
       date: payload.date || new Date().toISOString().split('T')[0],
       description: rawContent || `Accredited credential announced on LinkedIn.`,
       category: category || (Array.isArray(techList) && techList.length > 0 ? techList[0] : 'Certification'),
