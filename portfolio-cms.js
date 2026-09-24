@@ -425,8 +425,8 @@ export function hydratePortfolio(data) {
             </a>`
           : '';
 
-        const fileBtn = (c.fileUrl && c.fileUrl.endsWith('.pdf'))
-          ? `<a href="${escapeHtml(c.fileUrl)}" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="View Document">
+        const fileBtn = c.fileUrl
+          ? `<a href="${escapeHtml(c.fileUrl)}" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="View Full Original Certificate">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
@@ -436,10 +436,10 @@ export function hydratePortfolio(data) {
 
         return `
           <div class="project-card glass-panel cert-card">
-            <div class="project-thumb-wrap">
-              <img src="${escapeHtml(certThumb)}" alt="${escapeHtml(c.title)} Credential" loading="lazy" class="project-thumb" onerror="this.onerror=null; this.src='/cert_ibm_ai.svg'" />
+            <div class="project-thumb-wrap" style="cursor: pointer;" onclick="window.open('${escapeHtml(c.fileUrl || certThumb)}', '_blank')" title="Click to view full original certificate">
+              <img src="${escapeHtml(certThumb)}" alt="${escapeHtml(c.title)} Credential" loading="lazy" class="project-thumb" onerror="this.onerror=null; this.src='/cert_ibm_ai.jpg'" />
               <div class="project-thumb-overlay"></div>
-              <button type="button" class="btn-card-gen-img btn-cert-gen-img" data-cert-id="${c.id || idx}" data-cert-title="${escapeHtml(c.title)}" data-cert-cat="${escapeHtml(c.category || '')}" title="Generate AI Visual Badge According to Topic">
+              <button type="button" class="btn-card-gen-img btn-cert-gen-img" onclick="event.stopPropagation();" data-cert-id="${c.id || idx}" data-cert-title="${escapeHtml(c.title)}" data-cert-cat="${escapeHtml(c.category || '')}" title="Generate AI Visual Badge According to Topic">
                 <span>🎨</span>
                 <span>Topic Badge</span>
               </button>
@@ -574,12 +574,12 @@ export function resolveCertImage(c) {
   const cat = (c.category || '').toLowerCase();
   const full = `${idKey} ${title} ${issuer} ${cat}`;
 
-  if (full.includes('tcs') || full.includes('careeredge') || full.includes('career edge')) return '/cert_tcs_careeredge.svg';
-  if (full.includes('google') || full.includes('gemini')) return '/cert_google_gemini.svg';
-  if (full.includes('acmegrade') || full.includes('rendezvous') || full.includes('web dev')) return '/cert_acmegrade_webdev.svg';
-  if (full.includes('beeskilled') || (full.includes('python') && full.includes('internship'))) return '/cert_beeskilled_python.svg';
-  if (full.includes('ibm') || full.includes('skillsbuild') || /\bai\b/.test(full) || full.includes('artificial intelligence')) return '/cert_ibm_ai.svg';
-  return '/cert_ibm_ai.svg';
+  if (full.includes('tcs') || full.includes('careeredge') || full.includes('career edge')) return '/cert_tcs_careeredge.jpg';
+  if (full.includes('google') || full.includes('gemini')) return '/cert_google_gemini.jpg';
+  if (full.includes('acmegrade') || full.includes('rendezvous') || full.includes('web dev')) return '/cert_acmegrade_webdev.jpg';
+  if (full.includes('beeskilled') || (full.includes('python') && full.includes('internship'))) return '/cert_beeskilled_python.jpg';
+  if (full.includes('ibm') || full.includes('skillsbuild') || /\bai\b/.test(full) || full.includes('artificial intelligence')) return '/cert_ibm_ai.jpg';
+  return '/cert_ibm_ai.jpg';
 }
 
 function initMoreModals() {
@@ -958,8 +958,8 @@ function initMoreModals() {
           </a>`
         : '';
 
-      const fileBtn = (c.fileUrl && c.fileUrl.endsWith('.pdf'))
-        ? `<a href="${escapeHtml(c.fileUrl)}" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="View Document">
+      const fileBtn = c.fileUrl 
+        ? `<a href="${escapeHtml(c.fileUrl)}" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="View Full Original Certificate">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
               <polyline points="14 2 14 8 20 8"></polyline>
@@ -969,8 +969,8 @@ function initMoreModals() {
 
       return `
         <div class="project-card glass-panel cert-card" data-cert-id="${c.id || idx}">
-          <div class="project-thumb-wrap">
-            <img src="${escapeHtml(certThumb)}" alt="${escapeHtml(c.title)} Credential" loading="lazy" class="project-thumb" onerror="this.onerror=null; this.src='/cert_ibm_ai.svg'" />
+          <div class="project-thumb-wrap" style="cursor: pointer;" onclick="window.open('${escapeHtml(c.fileUrl || certThumb)}', '_blank')" title="Click to view full original certificate">
+            <img src="${escapeHtml(certThumb)}" alt="${escapeHtml(c.title)} Credential" loading="lazy" class="project-thumb" onerror="this.onerror=null; this.src='/cert_ibm_ai.jpg'" />
             <div class="project-thumb-overlay"></div>
           </div>
           <div class="project-body">

@@ -864,8 +864,8 @@
       "date": "2026-03-09",
       "category": "Artificial Intelligence",
       "verifyUrl": "https://www.credly.com/badges/7074f4f7-a252-4164-b4bf-b480e14a7589",
-      "image": "/cert_ibm_ai.svg",
-      "fileUrl": "/cert_ibm_ai.svg",
+      "image": "/cert_ibm_ai.jpg",
+      "fileUrl": "/cert_ibm_ai.jpg",
       "description": "Foundational introduction to Artificial Intelligence through IBM SkillsBuild.",
       "source": "IBM Credly Verified"
     },
@@ -877,8 +877,8 @@
       "category": "Professional Development",
       "verifyUrl": "https://g25.tcsion.com/LX/ecertificate/verification",
       "certId": "272697-30477454-1016",
-      "image": "/cert_tcs_careeredge.svg",
-      "fileUrl": "/cert_tcs_careeredge.svg",
+      "image": "/cert_tcs_careeredge.jpg",
+      "fileUrl": "/cert_tcs_careeredge.jpg",
       "description": "Communication skills, workplace thinking skills, presentation skills, soft skills, resume writing, group discussion, interview skills, business etiquette, email writing, problem-solving mindset, IT foundations and overview of Artificial Intelligence (Start Date: 11 Mar 2026, End Date: 28 Apr 2026, Cert ID: 272697-30477454-1016).",
       "source": "TCS iON Verified"
     },
@@ -889,8 +889,8 @@
       "date": "2026-03-09",
       "category": "Artificial Intelligence",
       "verifyUrl": "",
-      "image": "/cert_google_gemini.svg",
-      "fileUrl": "/cert_google_gemini.svg",
+      "image": "/cert_google_gemini.jpg",
+      "fileUrl": "/cert_google_gemini.jpg",
       "description": "Demonstrated knowledge, skills, and basic competencies needed to use Google AI tools and workflows (Valid through 09/03/2029).",
       "source": "Google for Education"
     },
@@ -901,8 +901,9 @@
       "date": "2025-10-09",
       "category": "Web Development",
       "verifyUrl": "",
-      "image": "/cert_acmegrade_webdev.svg",
-      "fileUrl": "/cert_acmegrade_webdev.svg",
+      "certId": "AGC25090253",
+      "image": "/cert_acmegrade_webdev.jpg",
+      "fileUrl": "/cert_acmegrade_webdev.jpg",
       "description": "Completed practical training in Web Development, covering fundamentals and hands-on development concepts (Training period: 9 Sep 2025 to 9 Oct 2025).",
       "source": "Acmegrade / IIT Delhi"
     },
@@ -913,8 +914,8 @@
       "date": "2026-07-30",
       "category": "Python Development",
       "verifyUrl": "",
-      "image": "/cert_beeskilled_python.svg",
-      "fileUrl": "/cert_beeskilled_python.svg",
+      "image": "/cert_beeskilled_python.jpg",
+      "fileUrl": "/cert_beeskilled_python.jpg",
       "description": "Completed the 6-Week online internship program in Python at BeeSkilled focusing on practical programming projects, script automation, and learning growth.",
       "source": "BeeSkilled Verified"
     }
@@ -956,6 +957,13 @@
     ]
   },
   "syncLogs": [
+    {
+      "id": "log-1790274987702",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T18:36:27.702Z"
+    },
     {
       "id": "log-1790274381239",
       "service": "GitHub Auto-Sync",
@@ -1298,19 +1306,12 @@
       "status": "SUCCESS",
       "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
       "timestamp": "2026-09-24T17:23:33.203Z"
-    },
-    {
-      "id": "log-1790270574933",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:22:54.933Z"
     }
   ],
   "syncStatus": {
     "github": {
       "connected": true,
-      "lastSync": "2026-09-24T18:26:21.239Z",
+      "lastSync": "2026-09-24T18:36:27.702Z",
       "account": "abhijeetmahakur",
       "repoCount": 14,
       "status": "Active & Synchronized",
