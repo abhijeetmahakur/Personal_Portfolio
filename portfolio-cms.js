@@ -6,7 +6,7 @@
 const API_BASE = ''; // Uses Vite proxy (/api) or falls back to http://localhost:3001
 
 export const HOMEPAGE_PROJECTS_COUNT = 5;
-export const HOMEPAGE_CERTS_COUNT = 6;
+export const HOMEPAGE_CERTS_COUNT = 5;
 
 export async function fetchPortfolioData(forceSync = false) {
   try {
@@ -414,10 +414,10 @@ export function hydratePortfolio(data) {
     if (Array.isArray(certificates) && certificates.length > 0) {
       const displayedCerts = certificates.slice(0, HOMEPAGE_CERTS_COUNT);
       const certCardsHtml = displayedCerts.map((c, idx) => {
+        const certThumb = resolveCertImage(c);
         const verifyBtn = c.verifyUrl 
-          ? `<a href="${escapeHtml(c.verifyUrl)}" target="_blank" rel="noopener noreferrer" class="cert-verify-link">
-              <span>Verify Credential</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          ? `<a href="${escapeHtml(c.verifyUrl)}" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="Verify Credential">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                 <polyline points="15 3 21 3 21 9"></polyline>
                 <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -425,37 +425,42 @@ export function hydratePortfolio(data) {
             </a>`
           : '';
 
-        const fileBtn = c.fileUrl 
-          ? `<a href="${escapeHtml(c.fileUrl)}" target="_blank" rel="noopener noreferrer" class="cert-doc-link" title="View Certificate Document">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        const fileBtn = (c.fileUrl && c.fileUrl.endsWith('.pdf'))
+          ? `<a href="${escapeHtml(c.fileUrl)}" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="View Document">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
               </svg>
-              <span>View Document</span>
             </a>`
           : '';
 
         return `
-          <div class="cert-card glass-panel" data-cert-id="${c.id || idx}">
-            <div class="cert-header">
-              <div class="cert-badge-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 15l-2 5l9-13h-6l2-5l-9 13h6z"/>
-                </svg>
+          <div class="project-card glass-panel cert-card">
+            <div class="project-thumb-wrap">
+              <img src="${escapeHtml(certThumb)}" alt="${escapeHtml(c.title)} Credential" loading="lazy" class="project-thumb" onerror="this.onerror=null; this.src='/cert_ibm_ai.svg'" />
+              <div class="project-thumb-overlay"></div>
+              <button type="button" class="btn-card-gen-img btn-cert-gen-img" data-cert-id="${c.id || idx}" data-cert-title="${escapeHtml(c.title)}" data-cert-cat="${escapeHtml(c.category || '')}" title="Generate AI Visual Badge According to Topic">
+                <span>🎨</span>
+                <span>Topic Badge</span>
+              </button>
+            </div>
+            <div class="project-body">
+              <div class="project-tag-row">
+                <span class="project-cat">${escapeHtml(c.category || 'Accredited Credential')}</span>
+                <div class="project-links">
+                  ${verifyBtn}
+                  ${fileBtn}
+                </div>
               </div>
-              <div class="cert-source-pill">${escapeHtml(c.source || 'Verified Credential')}</div>
-            </div>
-            <h3 class="cert-title">${escapeHtml(c.title)}</h3>
-            <div class="cert-meta">
-              <span class="cert-issuer">🏛️ ${escapeHtml(c.issuer || 'Accredited Issuer')}</span>
-              ${c.date ? `<span class="cert-date">📅 ${escapeHtml(String(c.date).slice(0, 10))}</span>` : ''}
-            </div>
-            ${c.description ? `<p class="cert-desc">${escapeHtml(c.description)}</p>` : ''}
-            <div class="cert-footer">
-              <span class="cert-cat">${escapeHtml(c.category || 'Computer Science')}</span>
-              <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                ${fileBtn}
-                ${verifyBtn}
+              <h3 class="project-title" style="font-size: 1.15rem; margin-bottom: 4px;">${escapeHtml(c.title)}</h3>
+              <div style="font-size: 0.84rem; color: #94a3b8; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <span style="color: #38bdf8; font-weight: 600;">🏛️ ${escapeHtml(c.issuer || 'Accredited Issuer')}</span>
+                ${c.date ? `<span>📅 ${escapeHtml(String(c.date).slice(0, 10))}</span>` : ''}
+              </div>
+              <p class="project-desc">${escapeHtml(c.description || '')}</p>
+              <div class="skill-tags">
+                <span class="skill-tag">${escapeHtml(c.source || 'LinkedIn Verified')}</span>
+                ${c.certId ? `<span class="skill-tag">ID: ${escapeHtml(c.certId)}</span>` : ''}
               </div>
             </div>
           </div>
@@ -463,18 +468,16 @@ export function hydratePortfolio(data) {
       }).join('');
 
       const moreCertCardHtml = `
-        <div class="cert-card glass-panel more-grid-card" id="btn-open-more-certs-card" role="button" tabindex="0" title="Click to view all certificates" onclick="if(window.openCertModal) window.openCertModal();">
+        <div class="project-card glass-panel more-grid-card" id="btn-open-more-certs-card" role="button" tabindex="0" title="Click to view all certificates" onclick="if(window.openCertModal) window.openCertModal();">
           <div class="more-grid-card-inner">
             <div class="more-card-icon-wrap icon-purple">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
               </svg>
             </div>
-            <span class="more-card-eyebrow">VERIFIED CREDENTIALS</span>
-            <h3 class="more-card-title">View More Certificates</h3>
+            <span class="more-card-eyebrow">CREDENTIAL VAULT</span>
+            <h3 class="more-card-title">View All Certificates</h3>
             <p class="more-card-desc">Browse full archive of accredited diplomas, professional badges, and course qualifications.</p>
             <div class="more-card-action-btn btn-purple">
               <span>Explore All Credentials</span>
@@ -560,6 +563,23 @@ function resolveProjectImage(proj, index) {
   if (titleKey.includes('localrepo')) return '/project_python.jpg';
   if (titleKey.includes('demo')) return '/project_webdevbasic.jpg';
   return fallbackImages[index % fallbackImages.length];
+}
+
+export function resolveCertImage(c) {
+  if (c.image) return c.image;
+  if (c.fileUrl && !c.fileUrl.endsWith('.pdf')) return c.fileUrl;
+  const idKey = (c.id || '').toLowerCase();
+  const title = (c.title || '').toLowerCase();
+  const issuer = (c.issuer || '').toLowerCase();
+  const cat = (c.category || '').toLowerCase();
+  const full = `${idKey} ${title} ${issuer} ${cat}`;
+
+  if (full.includes('tcs') || full.includes('careeredge') || full.includes('career edge')) return '/cert_tcs_careeredge.svg';
+  if (full.includes('google') || full.includes('gemini')) return '/cert_google_gemini.svg';
+  if (full.includes('acmegrade') || full.includes('rendezvous') || full.includes('web dev')) return '/cert_acmegrade_webdev.svg';
+  if (full.includes('beeskilled') || (full.includes('python') && full.includes('internship'))) return '/cert_beeskilled_python.svg';
+  if (full.includes('ibm') || full.includes('skillsbuild') || /\bai\b/.test(full) || full.includes('artificial intelligence')) return '/cert_ibm_ai.svg';
+  return '/cert_ibm_ai.svg';
 }
 
 function initMoreModals() {
@@ -802,11 +822,7 @@ function initMoreModals() {
   if (modalSyncLinkedinBtn && !modalSyncLinkedinBtn._hasListener) {
     modalSyncLinkedinBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (typeof window.openLinkedInSyncModal === 'function') {
-        window.openLinkedInSyncModal('certificate');
-      } else {
-        handleLinkedInSync(modalSyncLinkedinBtn);
-      }
+      handleLinkedInSync(modalSyncLinkedinBtn);
     });
     modalSyncLinkedinBtn._hasListener = true;
   }
@@ -815,11 +831,7 @@ function initMoreModals() {
   if (headerSyncLinkedinBtn && !headerSyncLinkedinBtn._hasListener) {
     headerSyncLinkedinBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (typeof window.openLinkedInSyncModal === 'function') {
-        window.openLinkedInSyncModal('certificate');
-      } else {
-        handleLinkedInSync(headerSyncLinkedinBtn);
-      }
+      handleLinkedInSync(headerSyncLinkedinBtn);
     });
     headerSyncLinkedinBtn._hasListener = true;
   }
@@ -910,8 +922,7 @@ function initMoreModals() {
     if (!grid) return;
 
     const query = (certSearchInput?.value || '').toLowerCase().trim();
-    // Exclude certificates currently shown on homepage; only display remaining in Explore All Credentials
-    const moreCerts = currentCertsData.slice(HOMEPAGE_CERTS_COUNT);
+    const moreCerts = currentCertsData;
     const filtered = moreCerts.filter(c => {
       const titleMatches = (c.title || '').toLowerCase().includes(query);
       const issuerMatches = (c.issuer || '').toLowerCase().includes(query);
@@ -936,10 +947,10 @@ function initMoreModals() {
     }
 
     grid.innerHTML = filtered.map((c, idx) => {
+      const certThumb = resolveCertImage(c);
       const verifyBtn = c.verifyUrl 
-        ? `<a href="${escapeHtml(c.verifyUrl)}" target="_blank" rel="noopener noreferrer" class="cert-verify-link">
-            <span>Verify Credential</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        ? `<a href="${escapeHtml(c.verifyUrl)}" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="Verify Credential">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
               <polyline points="15 3 21 3 21 9"></polyline>
               <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -947,37 +958,38 @@ function initMoreModals() {
           </a>`
         : '';
 
-      const fileBtn = c.fileUrl 
-        ? `<a href="${escapeHtml(c.fileUrl)}" target="_blank" rel="noopener noreferrer" class="cert-doc-link" title="View Certificate Document">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      const fileBtn = (c.fileUrl && c.fileUrl.endsWith('.pdf'))
+        ? `<a href="${escapeHtml(c.fileUrl)}" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="View Document">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
               <polyline points="14 2 14 8 20 8"></polyline>
             </svg>
-            <span>View Document</span>
           </a>`
         : '';
 
       return `
-        <div class="cert-card glass-panel" data-cert-id="${c.id || idx}">
-          <div class="cert-header">
-            <div class="cert-badge-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 15l-2 5l9-13h-6l2-5l-9 13h6z"/>
-              </svg>
+        <div class="project-card glass-panel cert-card" data-cert-id="${c.id || idx}">
+          <div class="project-thumb-wrap">
+            <img src="${escapeHtml(certThumb)}" alt="${escapeHtml(c.title)} Credential" loading="lazy" class="project-thumb" onerror="this.onerror=null; this.src='/cert_ibm_ai.svg'" />
+            <div class="project-thumb-overlay"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-tag-row">
+              <span class="project-cat">${escapeHtml(c.category || 'Accredited Credential')}</span>
+              <div class="project-links">
+                ${verifyBtn}
+                ${fileBtn}
+              </div>
             </div>
-            <div class="cert-source-pill">${escapeHtml(c.source || 'Verified Credential')}</div>
-          </div>
-          <h3 class="cert-title">${escapeHtml(c.title)}</h3>
-          <div class="cert-meta">
-            <span class="cert-issuer">🏛️ ${escapeHtml(c.issuer || 'Accredited Issuer')}</span>
-            ${c.date ? `<span class="cert-date">📅 ${escapeHtml(String(c.date).slice(0, 10))}</span>` : ''}
-          </div>
-          ${c.description ? `<p class="cert-desc">${escapeHtml(c.description)}</p>` : ''}
-          <div class="cert-footer">
-            <span class="cert-cat">${escapeHtml(c.category || 'Computer Science')}</span>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-              ${fileBtn}
-              ${verifyBtn}
+            <h3 class="project-title" style="font-size: 1.15rem; margin-bottom: 4px;">${escapeHtml(c.title)}</h3>
+            <div style="font-size: 0.84rem; color: #94a3b8; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <span style="color: #38bdf8; font-weight: 600;">🏛️ ${escapeHtml(c.issuer || 'Accredited Issuer')}</span>
+              ${c.date ? `<span>📅 ${escapeHtml(String(c.date).slice(0, 10))}</span>` : ''}
+            </div>
+            <p class="project-desc">${escapeHtml(c.description || '')}</p>
+            <div class="skill-tags">
+              <span class="skill-tag">${escapeHtml(c.source || 'LinkedIn Verified')}</span>
+              ${c.certId ? `<span class="skill-tag">ID: ${escapeHtml(c.certId)}</span>` : ''}
             </div>
           </div>
         </div>
@@ -1008,37 +1020,66 @@ export async function refreshPortfolio() {
 
 function wireUpLiveSyncBtn() {
   const btn = document.getElementById('btn-sync-github-now');
-  if (!btn || btn._hasSyncListener) return;
-  btn._hasSyncListener = true;
+  if (btn && !btn._hasSyncListener) {
+    btn._hasSyncListener = true;
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const icon = btn.querySelector('.sync-icon');
+      const text = btn.querySelector('.sync-text');
+      btn.disabled = true;
+      if (icon) icon.classList.add('spinning');
+      if (text) text.textContent = 'Checking GitHub...';
 
-  btn.addEventListener('click', async (e) => {
-    e.preventDefault();
-    const icon = btn.querySelector('.sync-icon');
-    const text = btn.querySelector('.sync-text');
-    btn.disabled = true;
-    if (icon) icon.classList.add('spinning');
-    if (text) text.textContent = 'Checking GitHub...';
+      try {
+        const res = await fetch('/api/sync/github', { method: 'POST' });
+        const data = await res.json();
+        await refreshPortfolio();
+        if (text) text.textContent = data.addedCount > 0 ? `✓ +${data.addedCount} New Added!` : '✓ Up to Date!';
+      } catch (err) {
+        if (text) text.textContent = 'Sync notice';
+      } finally {
+        if (icon) icon.classList.remove('spinning');
+        setTimeout(() => {
+          btn.disabled = false;
+          if (text) text.textContent = 'Live GitHub Sync';
+        }, 2500);
+      }
+    });
+  }
 
-    try {
-      const res = await fetch('/api/sync/github', { method: 'POST' });
-      const data = await res.json();
-      await refreshPortfolio();
-      if (text) text.textContent = data.addedCount > 0 ? `✓ +${data.addedCount} New Added!` : '✓ Up to Date!';
-    } catch (err) {
-      if (text) text.textContent = 'Sync notice';
-    } finally {
-      if (icon) icon.classList.remove('spinning');
-      setTimeout(() => {
-        btn.disabled = false;
-        if (text) text.textContent = 'Live GitHub Sync';
-      }, 2500);
-    }
-  });
+  const linkedinBtn = document.getElementById('btn-sync-linkedin-now');
+  if (linkedinBtn && !linkedinBtn._hasSyncListener) {
+    linkedinBtn._hasSyncListener = true;
+    linkedinBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const icon = linkedinBtn.querySelector('.sync-icon');
+      const text = linkedinBtn.querySelector('.sync-text');
+      linkedinBtn.disabled = true;
+      if (icon) icon.classList.add('spinning');
+      if (text) text.textContent = 'Checking LinkedIn...';
+
+      try {
+        const res = await fetch('/api/sync/linkedin', { method: 'POST' });
+        const data = await res.json();
+        await refreshPortfolio();
+        if (text) text.textContent = data.addedCount > 0 ? `✓ +${data.addedCount} New Added!` : '✓ Up to Date!';
+      } catch (err) {
+        if (text) text.textContent = 'Sync notice';
+      } finally {
+        if (icon) icon.classList.remove('spinning');
+        setTimeout(() => {
+          linkedinBtn.disabled = false;
+          if (text) text.textContent = 'Live LinkedIn Sync';
+        }, 2500);
+      }
+    });
+  }
 }
 
 // --- AI TOPIC IMAGE GENERATOR MODAL CONTROLLER ---
 function wireUpTopicImageGenerator() {
   const triggerBtn = document.getElementById('btn-open-topic-generator');
+  const certTopicBtn = document.getElementById('btn-open-cert-topic-generator');
   const modal = document.getElementById('modal-topic-image-generator');
   const backdrop = document.getElementById('topic-gen-backdrop');
   const closeBtn = document.getElementById('btn-close-topic-gen-modal');
@@ -1059,11 +1100,29 @@ function wireUpTopicImageGenerator() {
   function populateProjects(selectedId) {
     if (!projectSelect) return;
     const projects = window.cmsData?.projects || [];
-    projectSelect.innerHTML = projects.map(p => `
+    const certs = window.cmsData?.certificates || [];
+
+    const projOpts = projects.map(p => `
       <option value="${escapeHtml(p.id)}" ${p.id === selectedId ? 'selected' : ''}>
-        ${escapeHtml(p.title)} (${escapeHtml(p.category || 'Project')})
+        🚀 ${escapeHtml(p.title)} (${escapeHtml(p.category || 'Project')})
       </option>
-    `).join('') + `<option value="__custom__">✨ Custom Topic / New Application</option>`;
+    `).join('');
+
+    const certOpts = certs.map(c => `
+      <option value="${escapeHtml(c.id)}" ${c.id === selectedId ? 'selected' : ''}>
+        📜 ${escapeHtml(c.title)} (${escapeHtml(c.issuer || 'Certificate')})
+      </option>
+    `).join('');
+
+    projectSelect.innerHTML = `
+      <optgroup label="Featured Projects">
+        ${projOpts}
+      </optgroup>
+      <optgroup label="Certifications & Badges">
+        ${certOpts}
+      </optgroup>
+      <option value="__custom__">✨ Custom Topic / New Application</option>
+    `;
     
     syncSelectedProjectData();
   }
@@ -1071,7 +1130,9 @@ function wireUpTopicImageGenerator() {
   function syncSelectedProjectData() {
     const selectedId = projectSelect?.value;
     const projects = window.cmsData?.projects || [];
+    const certs = window.cmsData?.certificates || [];
     const proj = projects.find(p => p.id === selectedId);
+    const cert = certs.find(c => c.id === selectedId);
 
     if (proj) {
       const tech = Array.isArray(proj.technologies) ? proj.technologies.join(', ') : (proj.technologies || '');
@@ -1080,18 +1141,24 @@ function wireUpTopicImageGenerator() {
       const curImg = proj.image || proj.imageUrl || '/project_truckflow.jpg';
       previewImg.src = curImg;
       currentGeneratedUrl = curImg;
+    } else if (cert) {
+      keywordsInp.value = `${cert.title} accredited credential by ${cert.issuer || ''}. Domain: ${cert.category || 'Technology'}. ${cert.description || ''}`;
+      if (techPills) techPills.textContent = `Issuer: ${cert.issuer || 'Accredited'}`;
+      const curImg = cert.image || cert.fileUrl || '/cert_ibm_ai.svg';
+      previewImg.src = curImg;
+      currentGeneratedUrl = curImg;
     } else {
-      keywordsInp.value = 'Next-generation AI logistics and freight load matching platform with GPS route telemetry';
-      if (techPills) techPills.textContent = 'Custom Application';
-      previewImg.src = '/project_truckflow.jpg';
-      currentGeneratedUrl = '/project_truckflow.jpg';
+      keywordsInp.value = 'Professional technology credential and achievement badge';
+      if (techPills) techPills.textContent = 'Custom Item';
+      previewImg.src = '/cert_ibm_ai.svg';
+      currentGeneratedUrl = '/cert_ibm_ai.svg';
     }
   }
 
-  function openModal(projectId) {
+  function openModal(targetId) {
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    populateProjects(projectId);
+    populateProjects(targetId);
   }
 
   function closeModal() {
@@ -1104,6 +1171,15 @@ function wireUpTopicImageGenerator() {
     triggerBtn.addEventListener('click', (e) => {
       e.preventDefault();
       openModal();
+    });
+  }
+
+  if (certTopicBtn && !certTopicBtn._hasTopicListener) {
+    certTopicBtn._hasTopicListener = true;
+    certTopicBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const firstCert = window.cmsData?.certificates?.[0]?.id;
+      openModal(firstCert);
     });
   }
 
@@ -1132,13 +1208,13 @@ function wireUpTopicImageGenerator() {
     }
   });
 
-  // Attach card quick-action triggers
+  // Attach card quick-action triggers (both projects and certificates)
   document.querySelectorAll('.btn-card-gen-img').forEach(btn => {
     if (btn._hasTopicGenListener) return;
     btn._hasTopicGenListener = true;
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      openModal(btn.dataset.projId);
+      openModal(btn.dataset.projId || btn.dataset.certId);
     });
   });
 
@@ -1188,7 +1264,7 @@ function wireUpTopicImageGenerator() {
     });
   }
 
-  // Apply & Save to Project
+  // Apply & Save to Project or Certificate
   if (applyBtn && !applyBtn._hasApplyListener) {
     applyBtn._hasApplyListener = true;
     applyBtn.addEventListener('click', async () => {
@@ -1209,14 +1285,26 @@ function wireUpTopicImageGenerator() {
             p.imageUrl = currentGeneratedUrl;
           }
         }
+        if (window.cmsData?.certificates) {
+          const c = window.cmsData.certificates.find(x => x.id === selectedId);
+          if (c && currentGeneratedUrl) {
+            c.image = currentGeneratedUrl;
+            c.fileUrl = currentGeneratedUrl;
+          }
+        }
+        await fetch('/api/portfolio', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(window.cmsData)
+        });
         await refreshPortfolio();
-        showGlobalToast('✓ Cover image saved and published to Selected Work!');
+        showGlobalToast('✓ Visual cover saved and published!');
         closeModal();
       } catch (err) {
-        showGlobalToast('Error updating project: ' + err.message, true);
+        showGlobalToast('Error updating item: ' + err.message, true);
       } finally {
         applyBtn.disabled = false;
-        applyBtn.textContent = '✓ Save & Publish to Project';
+        applyBtn.textContent = '✓ Save & Publish';
       }
     });
   }

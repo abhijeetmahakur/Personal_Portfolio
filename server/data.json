@@ -864,6 +864,8 @@
       "date": "2026-03-09",
       "category": "Artificial Intelligence",
       "verifyUrl": "https://www.credly.com/badges/7074f4f7-a252-4164-b4bf-b480e14a7589",
+      "image": "/cert_ibm_ai.svg",
+      "fileUrl": "/cert_ibm_ai.svg",
       "description": "Foundational introduction to Artificial Intelligence through IBM SkillsBuild.",
       "source": "IBM Credly Verified"
     },
@@ -875,6 +877,8 @@
       "category": "Professional Development",
       "verifyUrl": "https://g25.tcsion.com/LX/ecertificate/verification",
       "certId": "272697-30477454-1016",
+      "image": "/cert_tcs_careeredge.svg",
+      "fileUrl": "/cert_tcs_careeredge.svg",
       "description": "Communication skills, workplace thinking skills, presentation skills, soft skills, resume writing, group discussion, interview skills, business etiquette, email writing, problem-solving mindset, IT foundations and overview of Artificial Intelligence (Start Date: 11 Mar 2026, End Date: 28 Apr 2026, Cert ID: 272697-30477454-1016).",
       "source": "TCS iON Verified"
     },
@@ -885,6 +889,8 @@
       "date": "2026-03-09",
       "category": "Artificial Intelligence",
       "verifyUrl": "",
+      "image": "/cert_google_gemini.svg",
+      "fileUrl": "/cert_google_gemini.svg",
       "description": "Demonstrated knowledge, skills, and basic competencies needed to use Google AI tools and workflows (Valid through 09/03/2029).",
       "source": "Google for Education"
     },
@@ -895,6 +901,8 @@
       "date": "2025-10-09",
       "category": "Web Development",
       "verifyUrl": "",
+      "image": "/cert_acmegrade_webdev.svg",
+      "fileUrl": "/cert_acmegrade_webdev.svg",
       "description": "Completed practical training in Web Development, covering fundamentals and hands-on development concepts (Training period: 9 Sep 2025 to 9 Oct 2025).",
       "source": "Acmegrade / IIT Delhi"
     },
@@ -905,6 +913,8 @@
       "date": "2026-07-30",
       "category": "Python Development",
       "verifyUrl": "",
+      "image": "/cert_beeskilled_python.svg",
+      "fileUrl": "/cert_beeskilled_python.svg",
       "description": "Completed the 6-Week online internship program in Python at BeeSkilled focusing on practical programming projects, script automation, and learning growth.",
       "source": "BeeSkilled Verified"
     }
@@ -946,6 +956,83 @@
     ]
   },
   "syncLogs": [
+    {
+      "id": "log-1790274381239",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T18:26:21.239Z"
+    },
+    {
+      "id": "log-1790274079015",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T18:21:19.015Z"
+    },
+    {
+      "id": "log-1790273471479",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T18:11:11.479Z"
+    },
+    {
+      "id": "log-1790273209597",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 5 certificates and 15 projects.",
+      "timestamp": "2026-09-24T18:06:49.597Z"
+    },
+    {
+      "id": "log-1790273195913",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 13.",
+      "timestamp": "2026-09-24T18:06:35.913Z"
+    },
+    {
+      "id": "log-1790273194221",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 5 certificates and 15 projects.",
+      "timestamp": "2026-09-24T18:06:34.221Z"
+    },
+    {
+      "id": "log-1790273194214",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 5 certificates and 15 projects.",
+      "timestamp": "2026-09-24T18:06:34.214Z"
+    },
+    {
+      "id": "log-1790273138471",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 5 certificates and 15 projects.",
+      "timestamp": "2026-09-24T18:05:38.471Z"
+    },
+    {
+      "id": "log-1790273138463",
+      "service": "LinkedIn Sync Hub",
+      "status": "SUCCESS",
+      "message": "LinkedIn sync station active (@abhijeet-mahakur-23bb983b6). Vault contains 5 certificates and 15 projects.",
+      "timestamp": "2026-09-24T18:05:38.463Z"
+    },
+    {
+      "id": "log-1790272576137",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:56:16.137Z"
+    },
+    {
+      "id": "log-1790272008865",
+      "service": "GitHub Auto-Sync",
+      "status": "SUCCESS",
+      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
+      "timestamp": "2026-09-24T17:46:48.865Z"
+    },
     {
       "id": "log-1790271383282",
       "service": "GitHub Auto-Sync",
@@ -1218,89 +1305,12 @@
       "status": "SUCCESS",
       "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
       "timestamp": "2026-09-24T17:22:54.933Z"
-    },
-    {
-      "id": "log-1790270545776",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:22:25.776Z"
-    },
-    {
-      "id": "log-1790270517183",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:21:57.183Z"
-    },
-    {
-      "id": "log-1790270485940",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:21:25.940Z"
-    },
-    {
-      "id": "log-1790270458059",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:20:58.059Z"
-    },
-    {
-      "id": "log-1790270425777",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:20:25.777Z"
-    },
-    {
-      "id": "log-1790270394207",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:19:54.207Z"
-    },
-    {
-      "id": "log-1790270383762",
-      "service": "LinkedIn Post Sync",
-      "status": "SUCCESS",
-      "message": "Ingested new project from LinkedIn: \"Excited to share our new Autonomous Drone Vision System built with ...\".",
-      "timestamp": "2026-09-24T17:19:43.762Z"
-    },
-    {
-      "id": "log-1790270364853",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:19:24.853Z"
-    },
-    {
-      "id": "log-1790270334748",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:18:54.748Z"
-    },
-    {
-      "id": "log-1790270305456",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:18:25.456Z"
-    },
-    {
-      "id": "log-1790270274254",
-      "service": "GitHub Auto-Sync",
-      "status": "SUCCESS",
-      "message": "Synced 14 repos from GitHub (@abhijeetmahakur). Added 0 new, updated 14.",
-      "timestamp": "2026-09-24T17:17:54.254Z"
     }
   ],
   "syncStatus": {
     "github": {
       "connected": true,
-      "lastSync": "2026-09-24T17:36:23.282Z",
+      "lastSync": "2026-09-24T18:26:21.239Z",
       "account": "abhijeetmahakur",
       "repoCount": 14,
       "status": "Active & Synchronized",
@@ -1308,7 +1318,7 @@
     },
     "linkedin": {
       "connected": true,
-      "lastSync": "2026-09-24T17:30:14.085Z",
+      "lastSync": "2026-09-24T18:06:49.597Z",
       "account": "abhijeet-mahakur-23bb983b6",
       "status": "Active & Ready for Ingestion",
       "profileUrl": "https://linkedin.com/in/abhijeet-mahakur-23bb983b6",

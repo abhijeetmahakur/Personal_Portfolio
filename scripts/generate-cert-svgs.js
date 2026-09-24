@@ -1,0 +1,148 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, '..');
+
+function createSvg({ title, issuer, category, color1, color2, extraText }) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${color1}"/>
+      <stop offset="100%" stop-color="${color2}"/>
+    </linearGradient>
+    <linearGradient id="goldSeal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="dropGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- Subtle Cyber Grid -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="160" y1="0" x2="160" y2="720"/>
+    <line x1="320" y1="0" x2="320" y2="720"/>
+    <line x1="480" y1="0" x2="480" y2="720"/>
+    <line x1="640" y1="0" x2="640" y2="720"/>
+    <line x1="800" y1="0" x2="800" y2="720"/>
+    <line x1="960" y1="0" x2="960" y2="720"/>
+    <line x1="1120" y1="0" x2="1120" y2="720"/>
+    <line x1="0" y1="180" x2="1280" y2="180"/>
+    <line x1="0" y1="360" x2="1280" y2="360"/>
+    <line x1="0" y1="540" x2="1280" y2="540"/>
+  </g>
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="200" cy="180" r="160" fill="${color1}" opacity="0.12" filter="url(#dropGlow)"/>
+  <circle cx="1080" cy="540" r="180" fill="${color2}" opacity="0.1" filter="url(#dropGlow)"/>
+
+  <!-- Outer Cyber Border -->
+  <rect x="36" y="36" width="1208" height="648" rx="24" fill="rgba(15,23,42,0.65)" stroke="url(#glowGrad)" stroke-width="2.5" filter="url(#dropGlow)"/>
+  <rect x="48" y="48" width="1184" height="624" rx="18" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <!-- Corner Tech Accents -->
+  <path d="M36 76 L76 36 M1208 36 L1244 72 M36 644 L72 684 M1208 684 L1244 648" stroke="${color1}" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Certificate Category Eyebrow -->
+  <g transform="translate(90, 110)">
+    <rect width="260" height="38" rx="19" fill="rgba(255,255,255,0.05)" stroke="url(#glowGrad)" stroke-width="1.2"/>
+    <text x="130" y="24" fill="${color1}" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" letter-spacing="2" text-anchor="middle">VERIFIED CREDENTIAL</text>
+  </g>
+
+  <!-- Title & Issuer -->
+  <text x="90" y="215" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" letter-spacing="-0.5">${title}</text>
+  <text x="90" y="275" fill="${color2}" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="600" letter-spacing="0.5">Issued by ${issuer}</text>
+  <text x="90" y="330" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="400">Domain: ${category} · ${extraText}</text>
+
+  <!-- Holographic Seal / Badge on Right -->
+  <g transform="translate(980, 270)">
+    <circle cx="0" cy="0" r="110" fill="rgba(15,23,42,0.85)" stroke="url(#glowGrad)" stroke-width="4" filter="url(#dropGlow)"/>
+    <circle cx="0" cy="0" r="92" fill="none" stroke="rgba(255,255,255,0.2)" stroke-dasharray="6,4" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="76" fill="url(#glowGrad)" opacity="0.15"/>
+    <!-- Badge Center -->
+    <path d="M-22 -32 L22 -32 L34 0 L0 38 L-34 0 Z" fill="url(#goldSeal)" stroke="#fff" stroke-width="1.2"/>
+    <circle cx="0" cy="-8" r="14" fill="#090d16"/>
+    <text x="0" y="66" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5" text-anchor="middle">ACCREDITED</text>
+  </g>
+
+  <!-- Security Verification Footer -->
+  <g transform="translate(90, 610)">
+    <text x="0" y="0" fill="#64748b" font-family="monospace" font-size="16" letter-spacing="1">AUTH://VERIFIED_STUDENT_CREDENTIAL · LINKEDIN_SYNC_STATION</text>
+  </g>
+</svg>`;
+}
+
+const certFiles = [
+  {
+    filename: 'cert_ibm_ai.svg',
+    title: 'Getting Started with AI',
+    issuer: 'IBM SkillsBuild',
+    category: 'Artificial Intelligence',
+    color1: '#00d4ff',
+    color2: '#38bdf8',
+    extraText: 'IBM Credly Verified Credential'
+  },
+  {
+    filename: 'cert_tcs_careeredge.svg',
+    title: 'TCS iON Career Edge',
+    issuer: 'Tata Consultancy Services',
+    category: 'Professional Leadership & IT',
+    color1: '#f59e0b',
+    color2: '#fbbf24',
+    extraText: 'TCS Verified Certification'
+  },
+  {
+    filename: 'cert_google_gemini.svg',
+    title: 'Gemini Certified Student',
+    issuer: 'Google for Education',
+    category: 'AI & Generative Workflows',
+    color1: '#a855f7',
+    color2: '#ec4899',
+    extraText: 'Google Verified Student Badge'
+  },
+  {
+    filename: 'cert_acmegrade_webdev.svg',
+    title: 'Web Development Training',
+    issuer: 'Acmegrade / IIT Delhi Rendezvous',
+    category: 'Modern Web Architecture',
+    color1: '#10b981',
+    color2: '#34d399',
+    extraText: 'IIT Delhi Technical Certification'
+  },
+  {
+    filename: 'cert_beeskilled_python.svg',
+    title: 'Python Internship Program',
+    issuer: 'BeeSkilled — Tech & Internships',
+    category: 'Python & Script Automation',
+    color1: '#38bdf8',
+    color2: '#6366f1',
+    extraText: 'BeeSkilled Verified Completion'
+  }
+];
+
+const publicDir = path.join(rootDir, 'public');
+const distDir = path.join(rootDir, 'dist');
+
+certFiles.forEach(c => {
+  const content = createSvg(c);
+  fs.writeFileSync(path.join(publicDir, c.filename), content, 'utf8');
+  if (fs.existsSync(distDir)) {
+    fs.writeFileSync(path.join(distDir, c.filename), content, 'utf8');
+  }
+  console.log('Saved SVG cover:', c.filename);
+});
+console.log('Done generating all certificate SVG covers!');

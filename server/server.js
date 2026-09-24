@@ -2719,10 +2719,11 @@ app.post(['/api/sync/linkedin', '/api/sync/linkedin/refresh'], async (req, res) 
 
   res.json({
     success: true,
-    message: `LinkedIn sync ready! Paste your post link or content to ingest immediately.`,
+    message: `LinkedIn credentials verified & up to date!`,
     syncStatus: store.syncStatus.linkedin,
     totalCertificates: store.certificates?.length || 0,
-    totalProjects: store.projects?.length || 0
+    totalProjects: store.projects?.length || 0,
+    addedCount: 0
   });
 });
 
