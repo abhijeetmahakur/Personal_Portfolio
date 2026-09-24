@@ -186,56 +186,62 @@ export function hydratePortfolio(data) {
     const projectsGrid = document.querySelector('.projects-grid');
     if (projectsGrid) {
       const projectImageRegistry = {
-        'truckflow': '/project_truckflow.jpg',
-        'truck_flow': '/project_truckflow.jpg',
-        'truck-flow': '/project_truckflow.jpg',
-        'truck': '/project_truckflow.jpg',
-        'ips': '/project_ips.jpg',
-        'spotify-clone': '/project_spotifyclone.jpg',
-        'spotify_clone': '/project_spotifyclone.jpg',
-        'spotify': '/project_spotifyclone.jpg',
-        'personal-portfolio': '/project_personalportfolio.jpg',
-        'personal_portfolio': '/project_personalportfolio.jpg',
-        'portfolio': '/project_personalportfolio.jpg',
-        'gravisphere': '/project_gravisphere.jpg',
-        'air-writing': '/project_airwriting.jpg',
-        'air_writing': '/project_airwriting.jpg',
-        'django-blog': '/project_djangoblog.jpg',
-        'django': '/project_djangoblog.jpg',
-        'attendanceapp': '/project_attendanceapp.jpg',
-        'thermax': '/project_thermax.jpg',
-        'amazon-clone': '/project_amazonclone.jpg',
-        'amazon_clone': '/project_amazonclone.jpg',
-        'webdevelopmentbasic': '/project_webdevbasic.jpg',
-        'python': '/project_python.jpg',
+        'truckflow': '/project_truckflow.svg',
+        'truck_flow': '/project_truckflow.svg',
+        'truck-flow': '/project_truckflow.svg',
+        'truck': '/project_truckflow.svg',
+        'ips': '/project_ips.svg',
+        'spotify-clone': '/project_spotifyclone.svg',
+        'spotify_clone': '/project_spotifyclone.svg',
+        'spotify': '/project_spotifyclone.svg',
+        'personal-portfolio': '/project_personalportfolio.svg',
+        'personal_portfolio': '/project_personalportfolio.svg',
+        'portfolio': '/project_personalportfolio.svg',
+        'gravisphere': '/project_gravisphere.svg',
+        'air-writing': '/project_airwriting.svg',
+        'air_writing': '/project_airwriting.svg',
+        'django-blog': '/project_djangoblog.svg',
+        'django': '/project_djangoblog.svg',
+        'attendanceapp': '/project_attendanceapp.svg',
+        'thermax': '/project_thermax.svg',
+        'amazon-clone': '/project_amazonclone.svg',
+        'amazon_clone': '/project_amazonclone.svg',
+        'webdevelopmentbasic': '/project_webdevbasic.svg',
+        'python': '/project_python.svg',
         'express': '/project_express.svg',
         'localrepo': '/project_localrepo.svg',
         'demo': '/project_demo.svg'
       };
 
       const fallbackImages = [
-        '/project_truckflow.jpg',
-        '/project_ips.jpg',
-        '/project_spotifyclone.jpg',
-        '/project_personalportfolio.jpg',
-        '/project_gravisphere.jpg',
-        '/project_airwriting.jpg',
-        '/project_djangoblog.jpg',
-        '/project_attendanceapp.jpg',
-        '/project_thermax.jpg',
-        '/project_amazonclone.jpg',
-        '/project_webdevbasic.jpg',
-        '/project_python.jpg',
+        '/project_truckflow.svg',
+        '/project_ips.svg',
+        '/project_spotifyclone.svg',
+        '/project_personalportfolio.svg',
+        '/project_gravisphere.svg',
+        '/project_airwriting.svg',
+        '/project_djangoblog.svg',
+        '/project_attendanceapp.svg',
+        '/project_thermax.svg',
+        '/project_amazonclone.svg',
+        '/project_webdevbasic.svg',
+        '/project_python.svg',
         '/project_express.svg',
         '/project_localrepo.svg',
         '/project_demo.svg'
       ];
 
       function resolveProjectImage(proj, index) {
+        // 1. Explicit image from database if valid and not legacy placeholder
+        const customImg = proj.image || proj.imageUrl || proj.thumbnail;
+        if (customImg && !customImg.includes('placeholder') && customImg !== '/project_webdevbasic.jpg') {
+          return customImg;
+        }
+
         const idKey = (proj.id || '').toLowerCase().replace(/[-_.]/g, '');
         const titleKey = (proj.title || '').toLowerCase();
 
-        // 1. Exact project registry lookup (prevents any cross-project image bleeding)
+        // 2. Exact project registry lookup
         for (const [key, imgPath] of Object.entries(projectImageRegistry)) {
           const normKey = key.replace(/[-_.]/g, '');
           if (idKey === normKey) {
@@ -243,19 +249,16 @@ export function hydratePortfolio(data) {
           }
         }
 
-        // 2. Explicit custom image if set and not generic placeholder
-        const customImg = proj.image || proj.imageUrl || proj.thumbnail;
-        if (customImg && customImg !== '/project_webdevbasic.jpg' && customImg !== '/project_gravisphere.jpg' && customImg !== '/project_ips.jpg') {
-          return customImg;
-        }
+        // 3. Direct topic matches for key projects
+        if (titleKey.includes('truck') || idKey.includes('truck')) return '/project_truckflow.svg';
+        if (titleKey.includes('ips') || idKey.includes('ips')) return '/project_ips.svg';
+        if (titleKey.includes('spotify') || idKey.includes('spotify')) return '/project_spotifyclone.svg';
+        if (titleKey.includes('portfolio') || idKey.includes('portfolio')) return '/project_personalportfolio.svg';
+        if (titleKey.includes('gravi') || idKey.includes('gravi')) return '/project_gravisphere.svg';
+        if (titleKey.includes('air') || idKey.includes('air')) return '/project_airwriting.svg';
+        if (titleKey.includes('blog') || idKey.includes('django')) return '/project_djangoblog.svg';
 
-        // 2. Direct topic matches for key projects
-        if (titleKey.includes('truck') || idKey.includes('truck')) return '/project_truckflow.jpg';
-        if (titleKey.includes('ips') || idKey.includes('ips')) return '/project_ips.jpg';
-        if (titleKey.includes('spotify') || idKey.includes('spotify')) return '/project_spotifyclone.jpg';
-        if (titleKey.includes('portfolio') || idKey.includes('portfolio')) return '/project_personalportfolio.jpg';
-
-        // 3. Registry lookup by normalized ID/title
+        // 4. Registry lookup by normalized ID/title
         for (const [key, imgPath] of Object.entries(projectImageRegistry)) {
           const normKey = key.replace(/[-_]/g, '');
           if (idKey.includes(normKey) || normKey.includes(idKey)) {
@@ -263,11 +266,11 @@ export function hydratePortfolio(data) {
           }
         }
 
-        // 4. Topic keyword fallbacks
-        if (titleKey.includes('attendance')) return '/project_attendanceapp.jpg';
-        if (titleKey.includes('thermax') || titleKey.includes('thermal')) return '/project_thermax.jpg';
-        if (titleKey.includes('amazon')) return '/project_amazonclone.jpg';
-        if (titleKey.includes('python')) return '/project_python.jpg';
+        // 5. Topic keyword fallbacks
+        if (titleKey.includes('attendance')) return '/project_attendanceapp.svg';
+        if (titleKey.includes('thermax') || titleKey.includes('thermal')) return '/project_thermax.svg';
+        if (titleKey.includes('amazon')) return '/project_amazonclone.svg';
+        if (titleKey.includes('python')) return '/project_python.svg';
         if (titleKey.includes('gravi')) return '/project_gravisphere.jpg';
         if (titleKey.includes('air') || titleKey.includes('gesture')) return '/project_airwriting.jpg';
         if (titleKey.includes('django') || titleKey.includes('blog')) return '/project_djangoblog.jpg';
@@ -511,61 +514,45 @@ let currentProjectsData = [];
 let currentCertsData = [];
 
 function resolveProjectImage(proj, index) {
+  // 1. Explicit image from database if valid and not legacy placeholder
+  const customImg = proj.image || proj.imageUrl || proj.thumbnail;
+  if (customImg && !customImg.includes('placeholder') && customImg !== '/project_webdevbasic.jpg') {
+    return customImg;
+  }
+
   const projectImageRegistry = {
-    'personal-portfolio': '/project_personalportfolio.jpg',
-    'personal_portfolio': '/project_personalportfolio.jpg',
-    'portfolio': '/project_personalportfolio.jpg',
-    'gravisphere': '/project_gravisphere.jpg',
-    'air-writing': '/project_airwriting.jpg',
-    'air_writing': '/project_airwriting.jpg',
-    'django-blog': '/project_djangoblog.jpg',
-    'django': '/project_djangoblog.jpg',
-    'attendanceapp': '/project_attendanceapp.jpg',
-    'thermax': '/project_thermax.jpg',
-    'amazon-clone': '/project_amazonclone.jpg',
-    'amazon_clone': '/project_amazonclone.jpg',
-    'webdevelopmentbasic': '/project_webdevbasic.jpg',
-    'python': '/project_python.jpg',
-    'express': '/project_webdevbasic.jpg',
-    'localrepo': '/project_python.jpg',
-    'demo': '/project_webdevbasic.jpg'
+    'personal-portfolio': '/project_personalportfolio.svg',
+    'personal_portfolio': '/project_personalportfolio.svg',
+    'portfolio': '/project_personalportfolio.svg',
+    'gravisphere': '/project_gravisphere.svg',
+    'air-writing': '/project_airwriting.svg',
+    'air_writing': '/project_airwriting.svg',
+    'django-blog': '/project_djangoblog.svg',
+    'django': '/project_djangoblog.svg',
+    'attendanceapp': '/project_attendanceapp.svg',
+    'thermax': '/project_thermax.svg',
+    'amazon-clone': '/project_amazonclone.svg',
+    'amazon_clone': '/project_amazonclone.svg',
+    'webdevelopmentbasic': '/project_webdevbasic.svg',
+    'python': '/project_python.svg',
+    'express': '/project_express.svg',
+    'localrepo': '/project_localrepo.svg',
+    'demo': '/project_demo.svg'
   };
 
-  const fallbackImages = [
-    '/project_personalportfolio.jpg',
-    '/project_gravisphere.jpg',
-    '/project_airwriting.jpg',
-    '/project_djangoblog.jpg',
-    '/project_attendanceapp.jpg',
-    '/project_thermax.jpg',
-    '/project_amazonclone.jpg',
-    '/project_webdevbasic.jpg',
-    '/project_python.jpg'
-  ];
-
-  if (proj.image && proj.image !== '/project_gravisphere.jpg') return proj.image;
   const idKey = (proj.id || '').toLowerCase().replace(/[-_]/g, '');
   const titleKey = (proj.title || '').toLowerCase();
-  if (titleKey.includes('portfolio') || idKey.includes('portfolio')) return '/project_personalportfolio.jpg';
-  if (proj.image) return proj.image;
-  if (proj.thumbnail) return proj.thumbnail;
+  if (titleKey.includes('portfolio') || idKey.includes('portfolio')) return '/project_personalportfolio.svg';
+  if (titleKey.includes('gravi') || idKey.includes('gravi')) return '/project_gravisphere.svg';
+  if (titleKey.includes('amazon') || idKey.includes('amazon')) return '/project_amazonclone.svg';
+  if (titleKey.includes('ips') || idKey.includes('ips')) return '/project_ips.svg';
+
   for (const [key, imgPath] of Object.entries(projectImageRegistry)) {
     if (idKey.includes(key.replace(/[-_]/g, '')) || key.replace(/[-_]/g, '').includes(idKey)) {
       return imgPath;
     }
   }
-  if (titleKey.includes('attendance')) return '/project_attendanceapp.jpg';
-  if (titleKey.includes('thermax') || titleKey.includes('thermal')) return '/project_thermax.jpg';
-  if (titleKey.includes('amazon')) return '/project_amazonclone.jpg';
-  if (titleKey.includes('web') || titleKey.includes('html')) return '/project_webdevbasic.jpg';
-  if (titleKey.includes('python')) return '/project_python.jpg';
-  if (titleKey.includes('gravi')) return '/project_gravisphere.jpg';
-  if (titleKey.includes('air') || titleKey.includes('gesture')) return '/project_airwriting.jpg';
-  if (titleKey.includes('django') || titleKey.includes('blog')) return '/project_djangoblog.jpg';
-  if (titleKey.includes('express')) return '/project_webdevbasic.jpg';
-  if (titleKey.includes('localrepo')) return '/project_python.jpg';
-  if (titleKey.includes('demo')) return '/project_webdevbasic.jpg';
-  return fallbackImages[index % fallbackImages.length];
+  return '/project_personalportfolio.svg';
 }
 
 export function resolveCertImage(c) {
