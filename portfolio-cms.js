@@ -308,12 +308,8 @@ export function hydratePortfolio(data) {
         return `
           <div class="project-card glass-panel" data-project-id="${p.id || idx}">
             <div class="project-thumb-wrap">
-              <img src="${escapeHtml(thumb)}" alt="${escapeHtml(p.title)} Preview" loading="lazy" class="project-thumb" onerror="this.onerror=null; this.src='/project_gravisphere.jpg'" />
+              <img src="${escapeHtml(thumb)}" alt="${escapeHtml(p.title)} Preview" loading="lazy" class="project-thumb" onerror="this.onerror=null; this.src='/project_gravisphere.svg'" />
               <div class="project-thumb-overlay"></div>
-              <button type="button" class="btn-card-gen-img" data-proj-id="${p.id || idx}" data-proj-title="${escapeHtml(p.title)}" title="Generate AI Cover Image According to Topic">
-                <span>🎨</span>
-                <span>Topic Image</span>
-              </button>
             </div>
             <div class="project-body">
               <div class="project-tag-row">
@@ -450,10 +446,6 @@ export function hydratePortfolio(data) {
             <div class="project-thumb-wrap" style="cursor: pointer;" onclick="window.open('${escapeHtml(c.fileUrl || certThumb)}', '_blank')" title="Click to view full original certificate">
               <img src="${escapeHtml(certThumb)}" alt="${escapeHtml(c.title)} Credential" loading="lazy" class="project-thumb" onerror="this.onerror=null; this.src='/cert_ibm_ai.jpg'" />
               <div class="project-thumb-overlay"></div>
-              <button type="button" class="btn-card-gen-img btn-cert-gen-img" onclick="event.stopPropagation();" data-cert-id="${c.id || idx}" data-cert-title="${escapeHtml(c.title)}" data-cert-cat="${escapeHtml(c.category || '')}" title="Generate AI Visual Badge According to Topic">
-                <span>🎨</span>
-                <span>Topic Badge</span>
-              </button>
             </div>
             <div class="project-body">
               <div class="project-tag-row">

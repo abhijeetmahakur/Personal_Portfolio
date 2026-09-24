@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050814"/>
+      <stop offset="50%" stop-color="#0c1326"/>
+      <stop offset="100%" stop-color="#02040a"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(15, 23, 42, 0.88)"/>
+      <stop offset="100%" stop-color="rgba(10, 15, 30, 0.94)"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- Subtle Cyber Grid -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="160" y1="0" x2="160" y2="720"/>
+    <line x1="320" y1="0" x2="320" y2="720"/>
+    <line x1="480" y1="0" x2="480" y2="720"/>
+    <line x1="640" y1="0" x2="640" y2="720"/>
+    <line x1="800" y1="0" x2="800" y2="720"/>
+    <line x1="960" y1="0" x2="960" y2="720"/>
+    <line x1="1120" y1="0" x2="1120" y2="720"/>
+    <line x1="0" y1="180" x2="1280" y2="180"/>
+    <line x1="0" y1="360" x2="1280" y2="360"/>
+    <line x1="0" y1="540" x2="1280" y2="540"/>
+  </g>
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="240" cy="180" r="220" fill="#38bdf8" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="1060" cy="500" r="260" fill="#f59e0b" opacity="0.08" filter="url(#glow)"/>
+
+  <!-- Top App Navigation Bar -->
+  <rect x="40" y="30" width="1200" height="60" rx="14" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <circle cx="70" cy="60" r="6" fill="#ef4444"/>
+  <circle cx="92" cy="60" r="6" fill="#f59e0b"/>
+  <circle cx="114" cy="60" r="6" fill="#10b981"/>
+  
+  <text x="145" y="66" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" letter-spacing="1">TRUCKFLOW // FREIGHT LOGISTICS &amp; ROUTE OPTIMIZATION AI</text>
+  <text x="1200" y="66" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="600" text-anchor="end">ABHIJEET MAHAKUR</text>
+
+  <!-- Content Body -->
+  
+  <rect x="40" y="110" width="460" height="570" rx="18" fill="url(#cardBg)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="70" y="155" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="22" font-weight="800">LIVE FLEET STATUS</text>
+  <text x="70" y="180" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="13">Real-time GPS Telemetry &amp; Load Matching</text>
+
+  <g transform="translate(65, 205)">
+    <!-- Truck 1 -->
+    <rect width="410" height="90" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+    <text x="20" y="34" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16" font-weight="700">🚛 Truck T-101 · Volvo FH16</text>
+    <text x="20" y="58" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Route: Mumbai ➔ Delhi | Load: 88%</text>
+    <text x="20" y="76" fill="#34d399" font-family="monospace" font-size="12">ACTIVE · Speed: 88 km/h · ETA: 03:14:22</text>
+    <rect x="320" y="24" width="70" height="26" rx="6" fill="rgba(16, 185, 129, 0.15)"/>
+    <text x="355" y="41" fill="#34d399" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">EN ROUTE</text>
+
+    <!-- Truck 2 -->
+    <g transform="translate(0, 105)">
+      <rect width="410" height="90" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(245, 158, 11, 0.25)" stroke-width="1"/>
+      <text x="20" y="34" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16" font-weight="700">🚛 Truck T-104 · Scania R500</text>
+      <text x="20" y="58" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Route: Kolkata ➔ Bhubaneswar | Load: 91%</text>
+      <text x="20" y="76" fill="#f59e0b" font-family="monospace" font-size="12">DELIVERING · Speed: 92 km/h · ETA: 02:45:10</text>
+      <rect x="320" y="24" width="70" height="26" rx="6" fill="rgba(245, 158, 11, 0.15)"/>
+      <text x="355" y="41" fill="#f59e0b" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">ON TRACK</text>
+    </g>
+
+    <!-- Truck 3 -->
+    <g transform="translate(0, 210)">
+      <rect width="410" height="90" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(168, 85, 247, 0.25)" stroke-width="1"/>
+      <text x="20" y="34" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16" font-weight="700">🚛 Truck T-109 · BharatBenz</text>
+      <text x="20" y="58" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Route: Chennai ➔ Bangalore | Round-Trip Match</text>
+      <text x="20" y="76" fill="#c084fc" font-family="monospace" font-size="12">OPTIMIZED · Zero Empty Kilometers</text>
+      <rect x="320" y="24" width="70" height="26" rx="6" fill="rgba(168, 85, 247, 0.15)"/>
+      <text x="355" y="41" fill="#c084fc" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">MATCHED</text>
+    </g>
+  </g>
+
+  <!-- Metrics row -->
+  <g transform="translate(65, 545)">
+    <rect width="195" height="110" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="20" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">FUEL EFFICIENCY</text>
+    <text x="20" y="66" fill="#38bdf8" font-family="monospace" font-size="26" font-weight="800">4.2 km/L</text>
+    <text x="20" y="92" fill="#34d399" font-family="monospace" font-size="12">+18% Profit Optimized</text>
+
+    <rect x="215" width="195" height="110" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="20" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">FLEET UTILIZATION</text>
+    <text x="20" y="66" fill="#f59e0b" font-family="monospace" font-size="26" font-weight="800">94.8%</text>
+    <text x="20" y="92" fill="#34d399" font-family="monospace" font-size="12">Proof of Delivery Active</text>
+  </g>
+
+  <!-- Right: GIS Map & Telemetry HUD -->
+  <rect x="525" y="110" width="715" height="570" rx="18" fill="url(#cardBg)" stroke="rgba(245, 158, 11, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="555" y="155" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="800">DYNAMIC ROUTE MAP &amp; GPS TELEMETRY</text>
+  <text x="555" y="180" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="13">Route ID: FLT-NY-104 · Distance: 612 km · Highway Corridor AI</text>
+
+  <!-- Simulated Map Vector Graphics -->
+  <g transform="translate(555, 210)">
+    <rect width="655" height="440" rx="14" fill="#070c18" stroke="rgba(255,255,255,0.06)"/>
+    <!-- Map grid paths -->
+    <path d="M 40 380 Q 200 320 280 200 T 520 80" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+    <path d="M 80 420 Q 220 280 380 240 T 600 160" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6 6"/>
+    
+    <!-- Waypoints -->
+    <circle cx="40" cy="380" r="12" fill="#10b981" filter="url(#glow)"/>
+    <text x="60" y="385" fill="#34d399" font-family="system-ui, sans-serif" font-size="14" font-weight="700">Origin Depot</text>
+
+    <circle cx="280" cy="200" r="10" fill="#f59e0b"/>
+    <text x="300" y="205" fill="#fde047" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Hub Waypoint (Mid-Trip Match)</text>
+
+    <circle cx="520" cy="80" r="14" fill="#ef4444" filter="url(#glow)"/>
+    <text x="540" y="85" fill="#f87171" font-family="system-ui, sans-serif" font-size="14" font-weight="700">Destination</text>
+
+    <!-- Telemetry Overlay Box -->
+    <rect x="30" y="30" width="220" height="90" rx="10" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(56, 189, 248, 0.3)"/>
+    <text x="45" y="55" fill="#38bdf8" font-family="monospace" font-size="13" font-weight="700">LIVE GPS: LOCK</text>
+    <text x="45" y="78" fill="#f8fafc" font-family="monospace" font-size="12">Lat: 19.0760 N</text>
+    <text x="45" y="98" fill="#f8fafc" font-family="monospace" font-size="12">Lng: 72.8777 E</text>
+  </g>
+
+</svg>

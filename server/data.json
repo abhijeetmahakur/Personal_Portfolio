@@ -130,8 +130,8 @@
         "Route Optimization"
       ],
       "category": "Freight Logistics & Route AI",
-      "image": "/project_truckflow.jpg",
-      "imageUrl": "/project_truckflow.jpg",
+      "image": "/project_truckflow.svg",
+      "imageUrl": "/project_truckflow.svg",
       "accentColor": "#0ea5e9",
       "glowColor": "rgba(14, 165, 233, 0.35)",
       "githubUrl": "https://github.com/abhijeetmahakur/TruckFlow",
@@ -156,7 +156,8 @@
           "github": "https://github.com/abhijeetmahakur/TruckFlow",
           "liveDemo": ""
         }
-      }
+      },
+      "coverStyle": "cyber-hud"
     },
     {
       "id": "spotify-clone",
@@ -171,8 +172,8 @@
         "Responsive UI"
       ],
       "category": "Audio Streaming Web App",
-      "image": "/project_spotifyclone.jpg",
-      "imageUrl": "/project_spotifyclone.jpg",
+      "image": "/project_spotifyclone.svg",
+      "imageUrl": "/project_spotifyclone.svg",
       "accentColor": "#22c55e",
       "glowColor": "rgba(34, 197, 94, 0.35)",
       "githubUrl": "https://github.com/abhijeetmahakur/Spotify_clone",
@@ -199,7 +200,8 @@
           "github": "https://github.com/abhijeetmahakur/Spotify_clone",
           "liveDemo": ""
         }
-      }
+      },
+      "coverStyle": "glass-cockpit"
     },
     {
       "id": "ips",
@@ -214,8 +216,8 @@
         "OOP Architecture"
       ],
       "category": "Core Java & Algorithm Architecture",
-      "image": "/project_ips.jpg",
-      "imageUrl": "/project_ips.jpg",
+      "image": "/project_ips.svg",
+      "imageUrl": "/project_ips.svg",
       "accentColor": "#a855f7",
       "glowColor": "rgba(168, 85, 247, 0.35)",
       "githubUrl": "https://github.com/abhijeetmahakur/IPS",
@@ -242,7 +244,8 @@
           "github": "https://github.com/abhijeetmahakur/IPS",
           "liveDemo": ""
         }
-      }
+      },
+      "coverStyle": "isometric-3d"
     },
     {
       "id": "personal-portfolio",
@@ -257,7 +260,7 @@
         "HTML5/CSS3"
       ],
       "category": "Full-Stack Web Development",
-      "image": "/project_personalportfolio.jpg",
+      "image": "/project_personalportfolio.svg",
       "accentColor": "#38bdf8",
       "glowColor": "rgba(56, 189, 248, 0.35)",
       "githubUrl": "https://github.com/abhijeetmahakur/Personal_Portfolio",
@@ -286,7 +289,8 @@
           "liveDemo": ""
         }
       },
-      "imageUrl": "/project_personalportfolio.jpg"
+      "imageUrl": "/project_personalportfolio.svg",
+      "coverStyle": "code-terminal"
     },
     {
       "id": "gravisphere",
@@ -326,8 +330,9 @@
         }
       },
       "stars": 0,
-      "image": "/project_gravisphere.jpg",
-      "imageUrl": "/project_gravisphere.jpg"
+      "image": "/project_gravisphere.svg",
+      "imageUrl": "/project_gravisphere.svg",
+      "coverStyle": "minimal-cyber"
     },
     {
       "id": "air-writing",
@@ -371,8 +376,9 @@
         }
       },
       "stars": 0,
-      "image": "/project_airwriting.jpg",
-      "imageUrl": "/project_airwriting.jpg"
+      "image": "/project_airwriting.svg",
+      "imageUrl": "/project_airwriting.svg",
+      "coverStyle": "cyber-hud"
     },
     {
       "id": "django-blog",
@@ -419,9 +425,10 @@
           "github": "https://github.com/abhijeetmahakur/Django"
         }
       },
-      "image": "/project_djangoblog.jpg",
+      "image": "/project_djangoblog.svg",
       "stars": 0,
-      "imageUrl": "/project_djangoblog.jpg"
+      "imageUrl": "/project_djangoblog.svg",
+      "coverStyle": "glass-cockpit"
     },
     {
       "id": "attendanceapp",
@@ -460,8 +467,9 @@
           "liveDemo": ""
         }
       },
-      "image": "/project_attendanceapp.jpg",
-      "imageUrl": "/project_attendanceapp.jpg"
+      "image": "/project_attendanceapp.svg",
+      "imageUrl": "/project_attendanceapp.svg",
+      "coverStyle": "isometric-3d"
     },
     {
       "id": "thermax",
@@ -499,8 +507,9 @@
           "liveDemo": ""
         }
       },
-      "image": "/project_thermax.jpg",
-      "imageUrl": "/project_thermax.jpg"
+      "image": "/project_thermax.svg",
+      "imageUrl": "/project_thermax.svg",
+      "coverStyle": "code-terminal"
     },
     {
       "id": "amazon-clone",
@@ -539,8 +548,9 @@
           "liveDemo": ""
         }
       },
-      "image": "/project_amazonclone.jpg",
-      "imageUrl": "/project_amazonclone.jpg"
+      "image": "/project_amazonclone.svg",
+      "imageUrl": "/project_amazonclone.svg",
+      "coverStyle": "minimal-cyber"
     },
     {
       "id": "webdevelopmentbasic",
@@ -579,8 +589,9 @@
           "liveDemo": ""
         }
       },
-      "image": "/project_webdevbasic.jpg",
-      "imageUrl": "/project_webdevbasic.jpg"
+      "image": "/project_webdevbasic.svg",
+      "imageUrl": "/project_webdevbasic.svg",
+      "coverStyle": "cyber-hud"
     },
     {
       "id": "python",
@@ -619,8 +630,9 @@
           "liveDemo": ""
         }
       },
-      "image": "/project_python.jpg",
-      "imageUrl": "/project_python.jpg"
+      "image": "/project_python.svg",
+      "imageUrl": "/project_python.svg",
+      "coverStyle": "glass-cockpit"
     },
     {
       "id": "express",

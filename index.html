@@ -437,10 +437,6 @@
               <h2 class="section-title">Selected Work & Applications</h2>
             </div>
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-              <button type="button" id="btn-open-topic-generator" class="header-link" title="Generate AI Cover Images according to project topic" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(56, 189, 248, 0.15)); border: 1px solid rgba(168, 85, 247, 0.45); color: #d8b4fe; cursor: pointer; padding: 7px 15px; border-radius: 9999px; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 7px; font-weight: 600; box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);">
-                <span style="font-size: 0.95rem;">🎨</span>
-                <span>Generate Topic Image</span>
-              </button>
               <button type="button" id="btn-sync-linkedin-post" class="header-link" title="Sync new post or project from LinkedIn" style="background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(14, 165, 233, 0.4); color: #38bdf8; cursor: pointer; padding: 7px 15px; border-radius: 9999px; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 7px; font-weight: 600;">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.59 1.59 0 1 0 0-3.18 1.59 1.59 0 0 0 0 3.18m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
@@ -615,10 +611,6 @@
               <h2 class="section-title">Certifications & Professional Badges</h2>
             </div>
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-              <button type="button" id="btn-open-cert-topic-generator" class="header-link" title="Generate AI visual badges according to certification topic" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(56, 189, 248, 0.15)); border: 1px solid rgba(168, 85, 247, 0.45); color: #d8b4fe; cursor: pointer; padding: 7px 15px; border-radius: 9999px; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 7px; font-weight: 600; box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);">
-                <span style="font-size: 0.95rem;">🎨</span>
-                <span>Generate Topic Badge</span>
-              </button>
               <button type="button" id="btn-sync-linkedin-now" class="header-link" title="Check LinkedIn for newly posted credentials" style="background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.35); color: #38bdf8; cursor: pointer; padding: 7px 14px; border-radius: 9999px; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px;">
                 <span class="sync-icon">🔄</span>
                 <span class="sync-text">Live LinkedIn Sync</span>
@@ -1087,104 +1079,6 @@
       </div>
     </div>
 
-    <!-- AI Topic Image Generator Studio Modal -->
-    <div id="modal-topic-image-generator" class="portfolio-modal" style="display: none;" aria-hidden="true" role="dialog" aria-labelledby="topic-gen-title">
-      <div class="portfolio-modal-backdrop" id="topic-gen-backdrop"></div>
-      <div class="portfolio-modal-card" style="max-width: 680px; width: 92%;">
-        <div class="modal-card-header">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #a855f7, #38bdf8); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
-              🎨
-            </div>
-            <div>
-              <h3 id="topic-gen-title" class="modal-card-title" style="margin: 0; font-size: 1.25rem;">AI Topic Image Generator</h3>
-              <p style="margin: 2px 0 0 0; font-size: 0.8rem; color: #94a3b8;">Generate aesthetic project covers tailored to the exact topic & tech stack</p>
-            </div>
-          </div>
-          <button type="button" class="cert-modal-close" id="btn-close-topic-gen-modal" aria-label="Close">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-
-        <div class="modal-card-body" style="padding: 20px 24px;">
-          <!-- Target Project Selector & Quick 1-Click Auto-Generate -->
-          <div style="margin-bottom: 16px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <label style="font-size: 0.82rem; font-weight: 600; color: #cbd5e1;">Select Project to Update</label>
-              <button type="button" id="btn-batch-gen-all" style="background: none; border: none; color: #38bdf8; font-size: 0.76rem; cursor: pointer; text-decoration: underline; padding: 0;">
-                ⚡ Auto-Generate for ALL Projects
-              </button>
-            </div>
-            <div style="display: flex; gap: 10px; align-items: center;">
-              <select id="sel-topic-gen-project" class="modal-search-input" style="flex: 1; border-radius: 10px; padding: 10px 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.9rem;">
-                <!-- Hydrated dynamically from window.cmsData.projects -->
-              </select>
-              <button type="button" id="btn-quick-auto-gen" class="btn-quick-auto-gen" style="padding: 10px 16px; font-size: 0.82rem; white-space: nowrap; background: linear-gradient(135deg, #8b5cf6, #06b6d4); border: none; border-radius: 10px; color: #fff; cursor: pointer; font-weight: 700; box-shadow: 0 0 15px rgba(139, 92, 246, 0.4); display: flex; align-items: center; gap: 6px;">
-                <span>⚡ Auto-Generate</span>
-              </button>
-            </div>
-            <div style="margin-top: 8px; display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: #94a3b8;">
-              <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                <input type="checkbox" id="chk-auto-gen-on-change" style="accent-color: #a855f7; cursor: pointer;" checked />
-                <span>Auto-generate & apply picture when project is selected</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Topic / Visual Prompt Input -->
-          <div style="margin-bottom: 14px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <label style="font-size: 0.82rem; font-weight: 600; color: #cbd5e1;">Topic Description / Visual Keywords</label>
-              <span id="topic-gen-tech-pills" style="font-size: 0.75rem; color: #38bdf8;"></span>
-            </div>
-            <textarea id="inp-topic-gen-keywords" rows="2" class="modal-search-input" style="width: 100%; border-radius: 10px; padding: 9px 12px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.85rem; resize: vertical; line-height: 1.4;" placeholder="e.g. Modern freight logistics dashboard, truck telemetry HUD..."></textarea>
-          </div>
-
-          <!-- Style Aesthetic Presets -->
-          <div style="margin-bottom: 14px;">
-            <label style="display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Aesthetic Style Preset</label>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="topic-style-chips">
-              <button type="button" class="modal-chip active" data-style="cyber-hud">⚡ Cyberpunk HUD</button>
-              <button type="button" class="modal-chip" data-style="glass-cockpit">💎 Dark Glassmorphism</button>
-              <button type="button" class="modal-chip" data-style="isometric-3d">🔮 3D Isometric</button>
-              <button type="button" class="modal-chip" data-style="code-editor">💻 Code & Algorithmic</button>
-            </div>
-          </div>
-
-          <!-- Live Image Preview Stage -->
-          <div style="margin-bottom: 8px;">
-            <label style="display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Generated Cover Preview</label>
-            <div id="topic-gen-preview-wrap" style="position: relative; border-radius: 12px; overflow: hidden; background: #090d16; border: 1px solid rgba(255, 255, 255, 0.1); height: 200px; max-height: 210px; display: flex; align-items: center; justify-content: center;">
-              <img id="topic-gen-preview-img" src="/project_truckflow.jpg" alt="Generated Preview" onerror="this.onerror=null; this.src='/project_personalportfolio.jpg';" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-              <div id="topic-gen-spinner" style="display: none; position: absolute; inset: 0; background: rgba(5, 7, 11, 0.85); flex-direction: column; align-items: center; justify-content: center; gap: 12px; z-index: 10;">
-                <div class="sync-icon spinning" style="font-size: 2rem; display: inline-block;">✨</div>
-                <div id="topic-gen-spinnerText" style="font-size: 0.9rem; font-weight: 600; color: #d8b4fe;">Generating topic-matched image with AI...</div>
-                <div style="font-size: 0.75rem; color: #94a3b8;">Synthesizing visual elements according to project keywords</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sticky Footer with Prominent Actions (Always Visible) -->
-        <div class="modal-card-footer">
-          <div style="font-size: 0.78rem; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
-            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22c55e;"></span>
-            <span id="topic-gen-status-indicator">AI Ready • Auto-Topic Synthesis</span>
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <button type="button" id="btn-do-generate-topic-img" class="btn-primary" style="padding: 10px 18px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #9333ea, #0284c7); border: none; border-radius: 10px; color: #fff; cursor: pointer; font-weight: 600; box-shadow: 0 4px 14px rgba(147, 51, 234, 0.35);">
-              <span>✨ Generate AI Picture</span>
-            </button>
-            <button type="button" id="btn-apply-topic-img" class="btn-primary" style="padding: 10px 18px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px; background: #059669; border: none; border-radius: 10px; color: #fff; cursor: pointer; font-weight: 600; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35);">
-              <span>✓ Save & Publish</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- LinkedIn Post Sync & Ingestion Modal -->
     <div id="modal-linkedin-sync" class="portfolio-modal" style="display: none;" aria-hidden="true" role="dialog" aria-labelledby="linkedin-sync-title">

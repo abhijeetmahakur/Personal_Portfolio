@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050814"/>
+      <stop offset="50%" stop-color="#0c1326"/>
+      <stop offset="100%" stop-color="#02040a"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(15, 23, 42, 0.88)"/>
+      <stop offset="100%" stop-color="rgba(10, 15, 30, 0.94)"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- Subtle Cyber Grid -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="160" y1="0" x2="160" y2="720"/>
+    <line x1="320" y1="0" x2="320" y2="720"/>
+    <line x1="480" y1="0" x2="480" y2="720"/>
+    <line x1="640" y1="0" x2="640" y2="720"/>
+    <line x1="800" y1="0" x2="800" y2="720"/>
+    <line x1="960" y1="0" x2="960" y2="720"/>
+    <line x1="1120" y1="0" x2="1120" y2="720"/>
+    <line x1="0" y1="180" x2="1280" y2="180"/>
+    <line x1="0" y1="360" x2="1280" y2="360"/>
+    <line x1="0" y1="540" x2="1280" y2="540"/>
+  </g>
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="240" cy="180" r="220" fill="#10b981" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="1060" cy="500" r="260" fill="#059669" opacity="0.08" filter="url(#glow)"/>
+
+  <!-- Top App Navigation Bar -->
+  <rect x="40" y="30" width="1200" height="60" rx="14" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <circle cx="70" cy="60" r="6" fill="#ef4444"/>
+  <circle cx="92" cy="60" r="6" fill="#f59e0b"/>
+  <circle cx="114" cy="60" r="6" fill="#10b981"/>
+  
+  <text x="145" y="66" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" letter-spacing="1">DJANGO BLOG WEBSITE // FULL-STACK WEB PLATFORM</text>
+  <text x="1200" y="66" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="600" text-anchor="end">ABHIJEET MAHAKUR</text>
+
+  <!-- Content Body -->
+  
+  <rect x="40" y="110" width="1200" height="570" rx="18" fill="url(#cardBg)" stroke="rgba(16, 185, 129, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="70" y="155" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="22" font-weight="800">DJANGO TECHBLOG // EDITORIAL WEB PLATFORM</text>
+  <text x="70" y="180" fill="#10b981" font-family="system-ui, sans-serif" font-size="13">Python · Django MVT · SQLite ORM · Responsive Article Feed</text>
+
+  <!-- Left: 2x2 Article Cards -->
+  <g transform="translate(70, 210)">
+    <!-- Article 1 -->
+    <rect width="360" height="210" rx="14" fill="rgba(255,255,255,0.02)" stroke="rgba(16, 185, 129, 0.25)" stroke-width="1"/>
+    <rect x="20" y="20" width="80" height="26" rx="6" fill="rgba(16, 185, 129, 0.15)"/>
+    <text x="60" y="37" fill="#10b981" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">DJANGO</text>
+    <text x="20" y="80" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="17" font-weight="700">Django MVT Architecture: Deep Dive</text>
+    <text x="20" y="105" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Understanding Models, Views &amp; Template flow in depth.</text>
+    <text x="20" y="145" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="12">⏱ 12 min read · Python</text>
+    <text x="20" y="175" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="600">✍️ by Abhijeet Mahakur</text>
+
+    <!-- Article 2 -->
+    <g transform="translate(390, 0)">
+      <rect width="360" height="210" rx="14" fill="rgba(255,255,255,0.02)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+      <rect x="20" y="20" width="80" height="26" rx="6" fill="rgba(56, 189, 248, 0.15)"/>
+      <text x="60" y="37" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">REST API</text>
+      <text x="20" y="80" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="17" font-weight="700">Building Robust REST APIs</text>
+      <text x="20" y="105" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Designing high-throughput endpoints with Django REST.</text>
+      <text x="20" y="145" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="12">⏱ 8 min read · Backend</text>
+      <text x="20" y="175" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="600">✍️ by Abhijeet Mahakur</text>
+    </g>
+
+    <!-- Article 3 -->
+    <g transform="translate(0, 230)">
+      <rect width="750" height="190" rx="14" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <text x="25" y="35" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16" font-weight="700">DATABASE INTEGRATION &amp; DJANGO ADMIN</text>
+      <text x="25" y="65" fill="#94a3b8" font-family="monospace" font-size="13">python manage.py makemigrations &amp;&amp; python manage.py migrate</text>
+      <text x="25" y="95" fill="#34d399" font-family="monospace" font-size="13">✓ Applied all migrations: auth, contenttypes, sessions, blog</text>
+      <text x="25" y="125" fill="#38bdf8" font-family="monospace" font-size="13">✓ Dynamic slug routing &amp; author roles active</text>
+    </g>
+  </g>
+
+  <!-- Right: Trending Topics Sidebar -->
+  <rect x="860" y="210" width="350" height="440" rx="14" fill="rgba(5, 10, 20, 0.85)" stroke="rgba(255,255,255,0.08)"/>
+  <text x="890" y="250" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="18" font-weight="800">TRENDING TOPICS</text>
+  
+  <g transform="translate(890, 280)">
+    
+      <g transform="translate(0, 0)">
+        <circle cx="10" cy="15" r="4" fill="#10b981"/>
+        <text x="25" y="20" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Celery Task Queues</text>
+        <text x="280" y="20" fill="#94a3b8" font-family="monospace" font-size="12" text-anchor="end">58k</text>
+        <line x1="0" y1="40" x2="280" y2="40" stroke="rgba(255,255,255,0.04)"/>
+      </g>
+    
+      <g transform="translate(0, 60)">
+        <circle cx="10" cy="15" r="4" fill="#10b981"/>
+        <text x="25" y="20" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">PostgreSQL Optimization</text>
+        <text x="280" y="20" fill="#94a3b8" font-family="monospace" font-size="12" text-anchor="end">23k</text>
+        <line x1="0" y1="40" x2="280" y2="40" stroke="rgba(255,255,255,0.04)"/>
+      </g>
+    
+      <g transform="translate(0, 120)">
+        <circle cx="10" cy="15" r="4" fill="#10b981"/>
+        <text x="25" y="20" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Django ORM Queries</text>
+        <text x="280" y="20" fill="#94a3b8" font-family="monospace" font-size="12" text-anchor="end">25k</text>
+        <line x1="0" y1="40" x2="280" y2="40" stroke="rgba(255,255,255,0.04)"/>
+      </g>
+    
+      <g transform="translate(0, 180)">
+        <circle cx="10" cy="15" r="4" fill="#10b981"/>
+        <text x="25" y="20" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Machine Learning in Python</text>
+        <text x="280" y="20" fill="#94a3b8" font-family="monospace" font-size="12" text-anchor="end">12k</text>
+        <line x1="0" y1="40" x2="280" y2="40" stroke="rgba(255,255,255,0.04)"/>
+      </g>
+    
+      <g transform="translate(0, 240)">
+        <circle cx="10" cy="15" r="4" fill="#10b981"/>
+        <text x="25" y="20" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">FastAPI vs Django</text>
+        <text x="280" y="20" fill="#94a3b8" font-family="monospace" font-size="12" text-anchor="end">8k</text>
+        <line x1="0" y1="40" x2="280" y2="40" stroke="rgba(255,255,255,0.04)"/>
+      </g>
+    
+  </g>
+
+</svg>

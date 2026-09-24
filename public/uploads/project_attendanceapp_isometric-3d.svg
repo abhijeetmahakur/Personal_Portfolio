@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="isoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040612"/>
+      <stop offset="50%" stop-color="#0a1226"/>
+      <stop offset="100%" stop-color="#020409"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#isoBg)"/>
+
+  <!-- Isometric Isometric Grid Lines -->
+  <g stroke="rgba(56, 189, 248, 0.08)" stroke-width="1">
+    
+      <line x1="100" y1="0" x2="400" y2="720"/>
+      <line x1="400" y1="0" x2="100" y2="720"/>
+    
+      <line x1="200" y1="0" x2="500" y2="720"/>
+      <line x1="500" y1="0" x2="200" y2="720"/>
+    
+      <line x1="300" y1="0" x2="600" y2="720"/>
+      <line x1="600" y1="0" x2="300" y2="720"/>
+    
+      <line x1="400" y1="0" x2="700" y2="720"/>
+      <line x1="700" y1="0" x2="400" y2="720"/>
+    
+      <line x1="500" y1="0" x2="800" y2="720"/>
+      <line x1="800" y1="0" x2="500" y2="720"/>
+    
+      <line x1="600" y1="0" x2="900" y2="720"/>
+      <line x1="900" y1="0" x2="600" y2="720"/>
+    
+      <line x1="700" y1="0" x2="1000" y2="720"/>
+      <line x1="1000" y1="0" x2="700" y2="720"/>
+    
+      <line x1="800" y1="0" x2="1100" y2="720"/>
+      <line x1="1100" y1="0" x2="800" y2="720"/>
+    
+      <line x1="900" y1="0" x2="1200" y2="720"/>
+      <line x1="1200" y1="0" x2="900" y2="720"/>
+    
+      <line x1="1000" y1="0" x2="1300" y2="720"/>
+      <line x1="1300" y1="0" x2="1000" y2="720"/>
+    
+      <line x1="1100" y1="0" x2="1400" y2="720"/>
+      <line x1="1400" y1="0" x2="1100" y2="720"/>
+    
+  </g>
+
+  <!-- Left Header Overlay -->
+  <g transform="translate(80, 80)">
+    <rect width="480" height="560" rx="20" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+    <text x="40" y="60" fill="#38bdf8" font-family="monospace" font-size="13" font-weight="700">ISOMETRIC 3D ARCHITECTURE</text>
+    <text x="40" y="105" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="32" font-weight="900">AttendanceApp</text>
+    <text x="40" y="135" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="14">Python Application &amp; Analytics</text>
+    
+    <text x="40" y="180" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="13" line-height="1.5">
+      <tspan x="40" dy="0">A desktop and web-integrated attendance management solu</tspan>
+      <tspan x="40" dy="24">tion featuring automated check-in logging, verification</tspan>
+      <tspan x="40" dy="24"> badges, and real-time attendance analytics.</tspan>
+    </text>
+
+    <!-- Stack Cards -->
+    <g transform="translate(40, 280)">
+      
+        <rect x="0" y="0" width="400" height="36" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(56, 189, 248, 0.2)"/>
+        <text x="20" y="23" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Python</text>
+        <text x="380" y="23" fill="#38bdf8" font-family="monospace" font-size="11" text-anchor="end">LAYER 01</text>
+      
+        <rect x="0" y="46" width="400" height="36" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(56, 189, 248, 0.2)"/>
+        <text x="20" y="69" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Database</text>
+        <text x="380" y="69" fill="#38bdf8" font-family="monospace" font-size="11" text-anchor="end">LAYER 02</text>
+      
+        <rect x="0" y="92" width="400" height="36" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(56, 189, 248, 0.2)"/>
+        <text x="20" y="115" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Analytics</text>
+        <text x="380" y="115" fill="#38bdf8" font-family="monospace" font-size="11" text-anchor="end">LAYER 03</text>
+      
+        <rect x="0" y="138" width="400" height="36" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(56, 189, 248, 0.2)"/>
+        <text x="20" y="161" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Automation</text>
+        <text x="380" y="161" fill="#38bdf8" font-family="monospace" font-size="11" text-anchor="end">LAYER 04</text>
+      
+    </g>
+
+    <text x="40" y="500" fill="#10b981" font-family="monospace" font-size="12">✓ 3D Axonometric Model Verified</text>
+  </g>
+
+  <!-- Right: 3D Isometric Layer Planes -->
+  <g transform="translate(900, 360)">
+    <!-- Layer 1 (Bottom Database) -->
+    <polygon points="0,-60 220,50 0,160 -220,50" fill="rgba(15, 23, 42, 0.9)" stroke="#38bdf8" stroke-width="2"/>
+    <text x="0" y="60" fill="#38bdf8" font-family="monospace" font-size="14" font-weight="700" text-anchor="middle">DATA LAYER // REPO</text>
+
+    <!-- Connecting Pillars -->
+    <line x1="-150" y1="20" x2="-150" y2="-60" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 4"/>
+    <line x1="150" y1="20" x2="150" y2="-60" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 4"/>
+
+    <!-- Layer 2 (Middle Service Logic) -->
+    <polygon points="0,-140 220,-30 0,80 -220,-30" fill="rgba(30, 41, 59, 0.9)" stroke="#818cf8" stroke-width="2"/>
+    <text x="0" y="-20" fill="#818cf8" font-family="monospace" font-size="14" font-weight="700" text-anchor="middle">LOGIC ENGINE // RUNTIME</text>
+
+    <!-- Connecting Pillars -->
+    <line x1="-150" y1="-60" x2="-150" y2="-140" stroke="#818cf8" stroke-width="2" stroke-dasharray="4 4"/>
+    <line x1="150" y1="-60" x2="150" y2="-140" stroke="#818cf8" stroke-width="2" stroke-dasharray="4 4"/>
+
+    <!-- Layer 3 (Top Interactive UI) -->
+    <polygon points="0,-220 220,-110 0,0 -220,-110" fill="rgba(56, 189, 248, 0.25)" stroke="#38bdf8" stroke-width="3"/>
+    <text x="0" y="-100" fill="#f8fafc" font-family="monospace" font-size="15" font-weight="800" text-anchor="middle">ATTENDANCEAPP</text>
+  </g>
+</svg>

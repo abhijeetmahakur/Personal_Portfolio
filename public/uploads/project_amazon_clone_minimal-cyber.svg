@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#04060c"/>
+  
+  <!-- Subtle Hairline Geometry -->
+  <line x1="100" y1="0" x2="100" y2="720" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <line x1="0" y1="100" x2="1280" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <line x1="0" y1="620" x2="1280" y2="620" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <line x1="1180" y1="0" x2="1180" y2="720" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+  <text x="140" y="70" fill="#94a3b8" font-family="monospace" font-size="12" letter-spacing="2">ABHIJEET MAHAKUR // SOFTWARE ENGINEER</text>
+  <text x="1140" y="70" fill="#f59e0b" font-family="monospace" font-size="12" text-anchor="end">SYS: 2026.PROD</text>
+
+  <!-- Giant Minimalist Title -->
+  <g transform="translate(140, 240)">
+    <text y="0" fill="#38bdf8" font-family="monospace" font-size="14" letter-spacing="3">// SELECTED WORK</text>
+    <text y="65" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="900" letter-spacing="-1">Amazon Clone</text>
+    <text y="115" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="18">Frontend Web Engineering</text>
+
+    <text y="175" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="16" line-height="1.6">
+      <tspan x="0" dy="0">A responsive full-featured e-commerce storefront inspired by Amazon, f</tspan>
+      <tspan x="0" dy="28">eaturing dynamic product grids, deal banners, star ratings, and shopping ca</tspan>
+    </text>
+
+    <!-- Minimalist Badges -->
+    <g transform="translate(0, 250)">
+      
+        <g transform="translate(0, 0)">
+          <line x1="0" y1="0" x2="110" y2="0" stroke="#f59e0b" stroke-width="2"/>
+          <text x="0" y="24" fill="#f8fafc" font-family="monospace" font-size="13" font-weight="700">HTML5</text>
+        </g>
+      
+        <g transform="translate(125, 0)">
+          <line x1="0" y1="0" x2="110" y2="0" stroke="#f59e0b" stroke-width="2"/>
+          <text x="0" y="24" fill="#f8fafc" font-family="monospace" font-size="13" font-weight="700">CSS3</text>
+        </g>
+      
+        <g transform="translate(250, 0)">
+          <line x1="0" y1="0" x2="110" y2="0" stroke="#f59e0b" stroke-width="2"/>
+          <text x="0" y="24" fill="#f8fafc" font-family="monospace" font-size="13" font-weight="700">JavaScript</text>
+        </g>
+      
+        <g transform="translate(375, 0)">
+          <line x1="0" y1="0" x2="110" y2="0" stroke="#f59e0b" stroke-width="2"/>
+          <text x="0" y="24" fill="#f8fafc" font-family="monospace" font-size="13" font-weight="700">Responsive Design</text>
+        </g>
+      
+        <g transform="translate(500, 0)">
+          <line x1="0" y1="0" x2="110" y2="0" stroke="#f59e0b" stroke-width="2"/>
+          <text x="0" y="24" fill="#f8fafc" font-family="monospace" font-size="13" font-weight="700">E-Commerce UI</text>
+        </g>
+      
+    </g>
+  </g>
+
+  <!-- Right Accent Frame -->
+  <g transform="translate(940, 220)">
+    <rect width="200" height="260" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <rect x="20" y="20" width="160" height="220" fill="none" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="100" y="130" fill="#f59e0b" font-family="monospace" font-size="24" font-weight="800" text-anchor="middle">60 FPS</text>
+    <text x="100" y="160" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">SMOOTH RENDERING</text>
+  </g>
+</svg>

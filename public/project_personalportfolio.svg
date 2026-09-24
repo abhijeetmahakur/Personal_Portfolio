@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050814"/>
+      <stop offset="50%" stop-color="#0c1326"/>
+      <stop offset="100%" stop-color="#02040a"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(15, 23, 42, 0.88)"/>
+      <stop offset="100%" stop-color="rgba(10, 15, 30, 0.94)"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- Subtle Cyber Grid -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="160" y1="0" x2="160" y2="720"/>
+    <line x1="320" y1="0" x2="320" y2="720"/>
+    <line x1="480" y1="0" x2="480" y2="720"/>
+    <line x1="640" y1="0" x2="640" y2="720"/>
+    <line x1="800" y1="0" x2="800" y2="720"/>
+    <line x1="960" y1="0" x2="960" y2="720"/>
+    <line x1="1120" y1="0" x2="1120" y2="720"/>
+    <line x1="0" y1="180" x2="1280" y2="180"/>
+    <line x1="0" y1="360" x2="1280" y2="360"/>
+    <line x1="0" y1="540" x2="1280" y2="540"/>
+  </g>
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="240" cy="180" r="220" fill="#38bdf8" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="1060" cy="500" r="260" fill="#818cf8" opacity="0.08" filter="url(#glow)"/>
+
+  <!-- Top App Navigation Bar -->
+  <rect x="40" y="30" width="1200" height="60" rx="14" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <circle cx="70" cy="60" r="6" fill="#ef4444"/>
+  <circle cx="92" cy="60" r="6" fill="#f59e0b"/>
+  <circle cx="114" cy="60" r="6" fill="#10b981"/>
+  
+  <text x="145" y="66" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" letter-spacing="1">PERSONAL PORTFOLIO &amp; CMS // ARCHITECTURE DASHBOARD</text>
+  <text x="1200" y="66" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="600" text-anchor="end">ABHIJEET MAHAKUR</text>
+
+  <!-- Content Body -->
+  
+  <rect x="40" y="110" width="580" height="570" rx="18" fill="url(#cardBg)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="70" y="155" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="22" font-weight="800">ABHIJEET MAHAKUR // PORTFOLIO</text>
+  <text x="70" y="180" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Full-Stack Software Developer &amp; AI Engineer · B.Tech CSE</text>
+
+  <g transform="translate(68, 205)">
+    <!-- TruckFlow -->
+    <rect width="524" height="74" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+    <text x="20" y="32" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16" font-weight="700">TruckFlow — Freight Logistics AI</text>
+    <text x="20" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Round-trip optimizer, GPS telemetry, route profit calculation</text>
+    <rect x="420" y="24" width="84" height="26" rx="6" fill="rgba(56, 189, 248, 0.15)"/>
+    <text x="462" y="41" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">PYTHON</text>
+
+    <!-- Spotify Clone -->
+    <g transform="translate(0, 86)">
+      <rect width="524" height="74" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(16, 185, 129, 0.25)" stroke-width="1"/>
+      <text x="20" y="32" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16" font-weight="700">Spotify Clone — Audio Streaming</text>
+      <text x="20" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Interactive song queue, glowing audio waveforms, modern UI</text>
+      <rect x="420" y="24" width="84" height="26" rx="6" fill="rgba(16, 185, 129, 0.15)"/>
+      <text x="462" y="41" fill="#34d399" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">WEB APP</text>
+    </g>
+
+    <!-- GraviSphere -->
+    <g transform="translate(0, 172)">
+      <rect width="524" height="74" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(168, 85, 247, 0.25)" stroke-width="1"/>
+      <text x="20" y="32" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16" font-weight="700">GraviSphere — Physics Simulation</text>
+      <text x="20" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Simulated gravity control, celestial orbital physics, 60 FPS</text>
+      <rect x="420" y="24" width="84" height="26" rx="6" fill="rgba(168, 85, 247, 0.15)"/>
+      <text x="462" y="41" fill="#c084fc" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">REACT</text>
+    </g>
+
+    <!-- Air Writing -->
+    <g transform="translate(0, 258)">
+      <rect width="524" height="74" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(234, 179, 8, 0.25)" stroke-width="1"/>
+      <text x="20" y="32" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16" font-weight="700">Air Writing — Computer Vision AI</text>
+      <text x="20" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">MediaPipe 21 landmark hand tracking, contactless mid-air canvas</text>
+      <rect x="420" y="24" width="84" height="26" rx="6" fill="rgba(234, 179, 8, 0.15)"/>
+      <text x="462" y="41" fill="#facc15" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">OPENCV</text>
+    </g>
+  </g>
+
+  <!-- Metrics row -->
+  <g transform="translate(68, 565)">
+    <rect width="160" height="90" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="20" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">FEATURED REPOS</text>
+    <text x="20" y="66" fill="#38bdf8" font-family="monospace" font-size="26" font-weight="800">15</text>
+
+    <rect x="180" y="0" width="160" height="90" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="200" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">CREDENTIALS</text>
+    <text x="200" y="66" fill="#34d399" font-family="monospace" font-size="26" font-weight="800">7 Verified</text>
+
+    <rect x="360" y="0" width="164" height="90" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="380" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">ARCHITECTURE</text>
+    <text x="380" y="66" fill="#c084fc" font-family="monospace" font-size="20" font-weight="800">Full-Stack</text>
+  </g>
+
+  <!-- Right Column: Dual-Auth CMS & Terminal Stream -->
+  <rect x="644" y="110" width="596" height="570" rx="18" fill="url(#cardBg)" stroke="rgba(168, 85, 247, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="674" y="155" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="800">HEADLESS CMS &amp; DUAL-AUTH SECURITY</text>
+  <text x="674" y="180" fill="#a78bfa" font-family="system-ui, sans-serif" font-size="13">Google OAuth 2.0 + Gmail OTP Multi-Factor Verification</text>
+
+  <g transform="translate(674, 210)">
+    <rect width="536" height="110" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <circle cx="45" cy="55" r="24" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="2"/>
+    <path d="M 37 55 L 43 61 L 55 47" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <text x="85" y="44" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16" font-weight="700">Authenticated Admin: abhijeetmahakur67@gmail.com</text>
+    <text x="85" y="68" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Session Status: ACTIVE · Multi-factor OTP Verified</text>
+    <text x="85" y="90" fill="#34d399" font-family="monospace" font-size="12">ENCRYPTION: AES-256 · JWT Bearer Signed</text>
+  </g>
+
+  <g transform="translate(674, 345)" font-family="monospace" font-size="14">
+    <rect width="536" height="310" rx="12" fill="rgba(5, 8, 18, 0.9)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="24" y="34" fill="#38bdf8">// Headless CMS Auto-Sync Engine</text>
+    <text x="24" y="64" fill="#f8fafc">const portfolio = await cms.getProfile({</text>
+    <text x="44" y="94" fill="#38bdf8">  developer: <tspan fill="#fde047">"Abhijeet Mahakur"</tspan>,</text>
+    <text x="44" y="124" fill="#38bdf8">  degree: <tspan fill="#fde047">"B.Tech CSE (ITER SOA University)"</tspan>,</text>
+    <text x="44" y="154" fill="#38bdf8">  autoSync: <tspan fill="#34d399">true</tspan>,</text>
+    <text x="44" y="184" fill="#38bdf8">  geminiTopicEngine: <tspan fill="#34d399">true</tspan>,</text>
+    <text x="44" y="214" fill="#38bdf8">  features: [<tspan fill="#fde047">"Lenis Canvas"</tspan>, <tspan fill="#fde047">"Vite"</tspan>, <tspan fill="#fde047">"Express API"</tspan>]</text>
+    <text x="24" y="244" fill="#f8fafc">});</text>
+    <text x="24" y="280" fill="#34d399">✓ 15 GitHub repositories synchronized in real-time</text>
+  </g>
+
+</svg>

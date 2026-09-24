@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050814"/>
+      <stop offset="50%" stop-color="#0c1326"/>
+      <stop offset="100%" stop-color="#02040a"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(15, 23, 42, 0.88)"/>
+      <stop offset="100%" stop-color="rgba(10, 15, 30, 0.94)"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- Subtle Cyber Grid -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="160" y1="0" x2="160" y2="720"/>
+    <line x1="320" y1="0" x2="320" y2="720"/>
+    <line x1="480" y1="0" x2="480" y2="720"/>
+    <line x1="640" y1="0" x2="640" y2="720"/>
+    <line x1="800" y1="0" x2="800" y2="720"/>
+    <line x1="960" y1="0" x2="960" y2="720"/>
+    <line x1="1120" y1="0" x2="1120" y2="720"/>
+    <line x1="0" y1="180" x2="1280" y2="180"/>
+    <line x1="0" y1="360" x2="1280" y2="360"/>
+    <line x1="0" y1="540" x2="1280" y2="540"/>
+  </g>
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="240" cy="180" r="220" fill="#38bdf8" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="1060" cy="500" r="260" fill="#6366f1" opacity="0.08" filter="url(#glow)"/>
+
+  <!-- Top App Navigation Bar -->
+  <rect x="40" y="30" width="1200" height="60" rx="14" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <circle cx="70" cy="60" r="6" fill="#ef4444"/>
+  <circle cx="92" cy="60" r="6" fill="#f59e0b"/>
+  <circle cx="114" cy="60" r="6" fill="#10b981"/>
+  
+  <text x="145" y="66" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" letter-spacing="1">ATTENDANCEAPP // SMART ATTENDANCE &amp; BIOMETRIC ANALYTICS</text>
+  <text x="1200" y="66" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="600" text-anchor="end">ABHIJEET MAHAKUR</text>
+
+  <!-- Content Body -->
+  
+  <rect x="40" y="110" width="1200" height="570" rx="18" fill="url(#cardBg)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="70" y="155" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="22" font-weight="800">SMART ATTENDANCE &amp; BIOMETRIC ANALYTICS</text>
+  <text x="70" y="180" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="13">Python GUI · Automated Verification · Analytics Dashboard</text>
+
+  <!-- Top KPI Cards -->
+  <g transform="translate(70, 210)">
+    <!-- KPI 1 -->
+    <rect width="210" height="100" rx="14" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.3)"/>
+    <text x="20" y="35" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">TOTAL STUDENTS</text>
+    <text x="20" y="75" fill="#f8fafc" font-family="monospace" font-size="34" font-weight="900">148</text>
+
+    <!-- KPI 2 -->
+    <g transform="translate(230, 0)">
+      <rect width="210" height="100" rx="14" fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.3)"/>
+      <text x="20" y="35" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">PRESENT TODAY</text>
+      <text x="20" y="75" fill="#34d399" font-family="monospace" font-size="34" font-weight="900">94%</text>
+    </g>
+
+    <!-- KPI 3 -->
+    <g transform="translate(460, 0)">
+      <rect width="210" height="100" rx="14" fill="rgba(239, 68, 68, 0.1)" stroke="rgba(239, 68, 68, 0.3)"/>
+      <text x="20" y="35" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">ABSENT</text>
+      <text x="20" y="75" fill="#f87171" font-family="monospace" font-size="34" font-weight="900">9</text>
+    </g>
+
+    <!-- KPI 4 -->
+    <g transform="translate(690, 0)">
+      <rect width="210" height="100" rx="14" fill="rgba(245, 158, 11, 0.1)" stroke="rgba(245, 158, 11, 0.3)"/>
+      <text x="20" y="35" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">LATE CHECK-IN</text>
+      <text x="20" y="75" fill="#fbbf24" font-family="monospace" font-size="34" font-weight="900">4</text>
+    </g>
+  </g>
+
+  <!-- Table Roster -->
+  <g transform="translate(70, 335)">
+    <rect width="780" height="315" rx="14" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="24" y="35" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="15" font-weight="700">RECENT ATTENDANCE LOGS</text>
+    
+    <!-- Table Header -->
+    <text x="24" y="70" fill="#94a3b8" font-family="monospace" font-size="12">ATTENDEE NAME</text>
+    <text x="230" y="70" fill="#94a3b8" font-family="monospace" font-size="12">ID</text>
+    <text x="360" y="70" fill="#94a3b8" font-family="monospace" font-size="12">TIMESTAMP</text>
+    <text x="520" y="70" fill="#94a3b8" font-family="monospace" font-size="12">VERIFICATION</text>
+    <text x="680" y="70" fill="#94a3b8" font-family="monospace" font-size="12">STATUS</text>
+    <line x1="20" y1="85" x2="760" y2="85" stroke="rgba(255,255,255,0.08)"/>
+
+    <!-- Rows -->
+    
+      <g transform="translate(24, 115)">
+        <text y="0" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Abhijeet Mahakur</text>
+        <text x="206" y="0" fill="#38bdf8" font-family="monospace" font-size="13">ITER-2024-01</text>
+        <text x="336" y="0" fill="#94a3b8" font-family="monospace" font-size="13">08:31:02 AM</text>
+        <rect x="496" y="-16" width="90" height="24" rx="6" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="541" y="0" fill="#34d399" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">VERIFIED</text>
+        <text x="656" y="0" fill="#34d399" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Present</text>
+      </g>
+    
+      <g transform="translate(24, 160)">
+        <text y="0" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Sarah Smith</text>
+        <text x="206" y="0" fill="#38bdf8" font-family="monospace" font-size="13">ITER-2024-02</text>
+        <text x="336" y="0" fill="#94a3b8" font-family="monospace" font-size="13">08:34:45 AM</text>
+        <rect x="496" y="-16" width="90" height="24" rx="6" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="541" y="0" fill="#34d399" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">VERIFIED</text>
+        <text x="656" y="0" fill="#34d399" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Present</text>
+      </g>
+    
+      <g transform="translate(24, 205)">
+        <text y="0" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Michael Brown</text>
+        <text x="206" y="0" fill="#38bdf8" font-family="monospace" font-size="13">ITER-2024-03</text>
+        <text x="336" y="0" fill="#94a3b8" font-family="monospace" font-size="13">09:15:20 AM</text>
+        <rect x="496" y="-16" width="90" height="24" rx="6" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="541" y="0" fill="#34d399" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">VERIFIED</text>
+        <text x="656" y="0" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Late</text>
+      </g>
+    
+      <g transform="translate(24, 250)">
+        <text y="0" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Emily Chen</text>
+        <text x="206" y="0" fill="#38bdf8" font-family="monospace" font-size="13">ITER-2024-04</text>
+        <text x="336" y="0" fill="#94a3b8" font-family="monospace" font-size="13">08:38:11 AM</text>
+        <rect x="496" y="-16" width="90" height="24" rx="6" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="541" y="0" fill="#34d399" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">VERIFIED</text>
+        <text x="656" y="0" fill="#34d399" font-family="system-ui, sans-serif" font-size="13" font-weight="700">Present</text>
+      </g>
+    
+  </g>
+
+  <!-- Right Weekly Circular Gauge -->
+  <g transform="translate(880, 210)">
+    <rect width="360" height="440" rx="14" fill="rgba(5, 10, 20, 0.85)" stroke="rgba(255,255,255,0.08)"/>
+    <text x="30" y="40" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16" font-weight="800">WEEKLY ACCURACY</text>
+    
+    <g transform="translate(180, 200)">
+      <circle cx="0" cy="0" r="100" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="16"/>
+      <circle cx="0" cy="0" r="100" fill="none" stroke="#38bdf8" stroke-width="16" stroke-dasharray="580" stroke-dashoffset="60" filter="url(#glow)"/>
+      <text x="0" y="10" fill="#f8fafc" font-family="monospace" font-size="38" font-weight="900" text-anchor="middle">94%</text>
+      <text x="0" y="38" fill="#38bdf8" font-family="monospace" font-size="12" text-anchor="middle">ATTENDANCE RATE</text>
+    </g>
+
+    <text x="180" y="370" fill="#34d399" font-family="monospace" font-size="13" font-weight="700" text-anchor="middle">✓ Automated CSV &amp; Excel Reports</text>
+  </g>
+
+</svg>

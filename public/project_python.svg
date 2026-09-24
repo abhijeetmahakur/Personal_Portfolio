@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050814"/>
+      <stop offset="50%" stop-color="#0c1326"/>
+      <stop offset="100%" stop-color="#02040a"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(15, 23, 42, 0.88)"/>
+      <stop offset="100%" stop-color="rgba(10, 15, 30, 0.94)"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#facc15"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- Subtle Cyber Grid -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="160" y1="0" x2="160" y2="720"/>
+    <line x1="320" y1="0" x2="320" y2="720"/>
+    <line x1="480" y1="0" x2="480" y2="720"/>
+    <line x1="640" y1="0" x2="640" y2="720"/>
+    <line x1="800" y1="0" x2="800" y2="720"/>
+    <line x1="960" y1="0" x2="960" y2="720"/>
+    <line x1="1120" y1="0" x2="1120" y2="720"/>
+    <line x1="0" y1="180" x2="1280" y2="180"/>
+    <line x1="0" y1="360" x2="1280" y2="360"/>
+    <line x1="0" y1="540" x2="1280" y2="540"/>
+  </g>
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="240" cy="180" r="220" fill="#38bdf8" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="1060" cy="500" r="260" fill="#facc15" opacity="0.08" filter="url(#glow)"/>
+
+  <!-- Top App Navigation Bar -->
+  <rect x="40" y="30" width="1200" height="60" rx="14" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <circle cx="70" cy="60" r="6" fill="#ef4444"/>
+  <circle cx="92" cy="60" r="6" fill="#f59e0b"/>
+  <circle cx="114" cy="60" r="6" fill="#10b981"/>
+  
+  <text x="145" y="66" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" letter-spacing="1">PYTHON // DATA STRUCTURES &amp; ALGORITHMS SUITE</text>
+  <text x="1200" y="66" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="600" text-anchor="end">ABHIJEET MAHAKUR</text>
+
+  <!-- Content Body -->
+  
+  <rect x="40" y="110" width="650" height="570" rx="18" fill="url(#cardBg)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="70" y="155" fill="#facc15" font-family="monospace" font-size="16" font-weight="700">algorithms.py // Python DSA Suite</text>
+
+  <g transform="translate(70, 195)" font-family="monospace" font-size="14">
+    <text y="0" fill="#60a5fa">class <tspan fill="#facc15">BinarySearchTree</tspan>:</text>
+    <text y="30" fill="#94a3b8">    def __init__(self):</text>
+    <text y="60" fill="#94a3b8">        self.root = None</text>
+    <text y="100" fill="#60a5fa">    def <tspan fill="#facc15">depth_first_search</tspan>(self, graph, start):</text>
+    <text y="130" fill="#94a3b8">        visited = set()</text>
+    <text y="160" fill="#94a3b8">        return self._dfs_recursive(graph, start, visited)</text>
+    <text y="200" fill="#60a5fa">    def <tspan fill="#facc15">knapsack_dp</tspan>(self, weights, values, capacity):</text>
+    <text y="230" fill="#94a3b8">        dp = [[0] * (capacity + 1) for _ in range(len(weights) + 1)]</text>
+    <text y="260" fill="#94a3b8">        # Solves 0/1 knapsack in O(nW) time</text>
+    <text y="290" fill="#a855f7">        return dp[len(weights)][capacity]</text>
+    <text y="340" fill="#34d399">✓ 42/42 Algorithms Verified with PyTest</text>
+  </g>
+
+  <!-- Right: Terminal Execution Runner -->
+  <rect x="715" y="110" width="525" height="570" rx="18" fill="#060913" stroke="rgba(250, 204, 21, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <rect x="715" y="110" width="525" height="48" rx="18" fill="rgba(15, 23, 42, 0.9)"/>
+  <text x="745" y="140" fill="#f8fafc" font-family="monospace" font-size="13" font-weight="700">TERMINAL // pytest execution</text>
+
+  <g transform="translate(745, 190)" font-family="monospace" font-size="13">
+    <text y="0" fill="#38bdf8">root@workstation:~/python$</text>
+    <text y="25" fill="#f8fafc">pytest -v test_algorithms.py</text>
+    <text y="65" fill="#94a3b8">==================== test session starts ====================</text>
+    <text y="90" fill="#94a3b8">platform linux -- Python 3.11.8, pytest-8.1.1</text>
+    <text y="130" fill="#34d399">test_algorithms.py::test_binary_search_tree PASSED     [ 25%]</text>
+    <text y="160" fill="#34d399">test_algorithms.py::test_graph_dfs_bfs      PASSED     [ 50%]</text>
+    <text y="190" fill="#34d399">test_algorithms.py::test_knapsack_dp        PASSED     [ 75%]</text>
+    <text y="220" fill="#34d399">test_algorithms.py::test_sorting_benchmarks PASSED     [100%]</text>
+    <text y="260" fill="#94a3b8">------------------------------------------------------------</text>
+    <text y="290" fill="#34d399">✓ 42 passed in 0.12s (Optimal Asymptotic Efficiency)</text>
+    <text y="340" fill="#38bdf8">root@workstation:~/python$</text>
+    <text y="365" fill="#facc15">_</text>
+  </g>
+
+</svg>

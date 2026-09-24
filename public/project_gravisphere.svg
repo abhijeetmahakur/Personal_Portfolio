@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050814"/>
+      <stop offset="50%" stop-color="#0c1326"/>
+      <stop offset="100%" stop-color="#02040a"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(15, 23, 42, 0.88)"/>
+      <stop offset="100%" stop-color="rgba(10, 15, 30, 0.94)"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- Subtle Cyber Grid -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="160" y1="0" x2="160" y2="720"/>
+    <line x1="320" y1="0" x2="320" y2="720"/>
+    <line x1="480" y1="0" x2="480" y2="720"/>
+    <line x1="640" y1="0" x2="640" y2="720"/>
+    <line x1="800" y1="0" x2="800" y2="720"/>
+    <line x1="960" y1="0" x2="960" y2="720"/>
+    <line x1="1120" y1="0" x2="1120" y2="720"/>
+    <line x1="0" y1="180" x2="1280" y2="180"/>
+    <line x1="0" y1="360" x2="1280" y2="360"/>
+    <line x1="0" y1="540" x2="1280" y2="540"/>
+  </g>
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="240" cy="180" r="220" fill="#a855f7" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="1060" cy="500" r="260" fill="#38bdf8" opacity="0.08" filter="url(#glow)"/>
+
+  <!-- Top App Navigation Bar -->
+  <rect x="40" y="30" width="1200" height="60" rx="14" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <circle cx="70" cy="60" r="6" fill="#ef4444"/>
+  <circle cx="92" cy="60" r="6" fill="#f59e0b"/>
+  <circle cx="114" cy="60" r="6" fill="#10b981"/>
+  
+  <text x="145" y="66" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" letter-spacing="1">GRAVISPHERE // 3D GRAVITY PHYSICS SIMULATION</text>
+  <text x="1200" y="66" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="600" text-anchor="end">ABHIJEET MAHAKUR</text>
+
+  <!-- Content Body -->
+  
+  <rect x="40" y="110" width="380" height="570" rx="18" fill="url(#cardBg)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="70" y="155" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="800">SIMULATION PARAMETERS</text>
+  <text x="70" y="180" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="12">Interactive Orbital Physics Engine</text>
+
+  <g transform="translate(70, 215)">
+    <text y="0" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Gravitational Constant G</text>
+    <line x1="0" y1="20" x2="320" y2="20" stroke="rgba(255,255,255,0.15)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="0" y1="20" x2="220" y2="20" stroke="#38bdf8" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="220" cy="20" r="10" fill="#38bdf8" filter="url(#glow)"/>
+  </g>
+
+  <g transform="translate(70, 285)">
+    <text y="0" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Force Multiplier (78%)</text>
+    <line x1="0" y1="20" x2="320" y2="20" stroke="rgba(255,255,255,0.15)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="0" y1="20" x2="250" y2="20" stroke="#06b6d4" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="250" cy="20" r="10" fill="#06b6d4" filter="url(#glow)"/>
+  </g>
+
+  <g transform="translate(70, 355)">
+    <text y="0" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13">Speed Scale (1.25x)</text>
+    <line x1="0" y1="20" x2="320" y2="20" stroke="rgba(255,255,255,0.15)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="0" y1="20" x2="160" y2="20" stroke="#a855f7" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="160" cy="20" r="10" fill="#a855f7" filter="url(#glow)"/>
+  </g>
+
+  <g transform="translate(70, 440)">
+    <rect width="320" height="210" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="20" y="32" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="14" font-weight="700">CELESTIAL COORDINATES</text>
+    <text x="20" y="65" fill="#38bdf8" font-family="monospace" font-size="13">Azimuth: 142.5°</text>
+    <text x="20" y="95" fill="#38bdf8" font-family="monospace" font-size="13">Elevation: 24.8°</text>
+    <text x="20" y="125" fill="#38bdf8" font-family="monospace" font-size="13">Kepler-18b: 29.8 km/s</text>
+    <text x="20" y="155" fill="#10b981" font-family="monospace" font-size="13">SIMULATION: 60 FPS STABLE</text>
+    <text x="20" y="185" fill="#94a3b8" font-family="monospace" font-size="12">GPU Load: 42% · Memory: 210MB</text>
+  </g>
+
+  <rect x="440" y="110" width="800" height="570" rx="18" fill="url(#cardBg)" stroke="rgba(168, 85, 247, 0.35)" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="470" y="155" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="800">ORION SYSTEM // ORBITAL MECHANICS SIMULATOR</text>
+  
+  <g transform="translate(840, 395)">
+    <ellipse cx="0" cy="0" rx="340" ry="170" fill="none" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.5" stroke-dasharray="8 6"/>
+    <ellipse cx="0" cy="0" rx="250" ry="125" fill="none" stroke="rgba(16, 185, 129, 0.3)" stroke-width="1.5"/>
+    <ellipse cx="0" cy="0" rx="160" ry="80" fill="none" stroke="rgba(168, 85, 247, 0.35)" stroke-width="1.5"/>
+
+    <circle cx="0" cy="0" r="38" fill="#fde047" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="48" fill="none" stroke="#facc15" stroke-width="3" opacity="0.6"/>
+
+    <circle cx="-130" cy="-45" r="14" fill="#a855f7" filter="url(#glow)"/>
+    <line x1="-130" y1="-45" x2="-80" y2="-90" stroke="#c084fc" stroke-width="2"/>
+    <text x="-80" y="-95" fill="#c084fc" font-family="monospace" font-size="11">Vector: 38.4 m/s²</text>
+
+    <circle cx="210" cy="65" r="18" fill="#10b981" filter="url(#glow)"/>
+    <circle cx="210" cy="65" r="28" fill="none" stroke="#34d399" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="235" y="70" fill="#34d399" font-family="monospace" font-size="12" font-weight="700">Terra-9</text>
+
+    <circle cx="-270" cy="100" r="26" fill="#38bdf8" filter="url(#glow)"/>
+    <ellipse cx="-270" cy="100" rx="42" ry="10" fill="none" stroke="#7dd3fc" stroke-width="3"/>
+    <text x="-310" y="145" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="700">Jovian-X</text>
+  </g>
+
+</svg>
