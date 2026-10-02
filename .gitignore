@@ -7,6 +7,7 @@
 !.env.example
 server/sessions.json
 sessions.json
+server/uploads/
 
 # Dependencies
 node_modules/

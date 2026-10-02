@@ -6,7 +6,7 @@
 
 ### **Next-Generation Full-Stack Engineering Portfolio with Embedded CMS & AI Assistant**
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-2563eb?style=for-the-badge&logo=google-chrome&logoColor=white)](https://github.com/abhijeetmahakur/Personal_Portfolio)
+Source: [GitHub repository](https://github.com/abhijeetmahakur/Personal_Portfolio)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Node.js](https://img.shields.io/badge/Node.js-Backend-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-Framework-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
@@ -153,14 +153,12 @@ GMAIL_APP_PASSWORD=your_gmail_app_password
 
 ---
 
-## 📬 Connect with Me
+## Contact
 
-- **GitHub:** [@abhijeetmahakur](https://github.com/abhijeetmahakur)
-- **LinkedIn:** [Abhijeet Mahakur](https://linkedin.com/in/abhijeet-mahakur-23bb983b6)
-- **Email:** [abhijeetmahakur67@gmail.com](mailto:abhijeetmahakur67@gmail.com)
+Use the GitHub profile for public project links. No personal contact details are included here.
 
 ---
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+No project-level `LICENSE` file is present. No reuse license is granted by this README. Confirm ownership and third-party asset/code rights before choosing a license.
