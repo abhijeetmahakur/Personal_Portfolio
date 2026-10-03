@@ -1,0 +1,13 @@
+node_modules
+dist
+dist-ssr
+.git
+.vscode
+frames_24fps_png
+frames_24fps_webp
+*.zip
+.env
+.env.*
+server/sessions.json
+sessions.json
+*.log
