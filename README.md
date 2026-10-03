@@ -1,9 +1,6 @@
 # ⚡ Abhijeet Mahakur — Personal Portfolio & CMS
 
 <div align="center">
-
-![Portfolio Banner](public/project_gravisphere.jpg)
-
 ### **Next-Generation Full-Stack Engineering Portfolio with Embedded CMS & AI Assistant**
 
 Source: [GitHub repository](https://github.com/abhijeetmahakur/Personal_Portfolio)
